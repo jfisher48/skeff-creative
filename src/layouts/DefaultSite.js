@@ -5,16 +5,14 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { NavLink} from 'react-router-dom';
-//import SideNavItem from '../components/SideNavItem';
-//import map from 'lodash/map';
 import siteRoutes from '../routes/routes';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
-import { ListItem, ListItemText } from '../../node_modules/@material-ui/core';
-//import { mailFolderListItems, otherMailFolderListItems } from './tileData';*
+import { List, ListItem, ListItemText } from '../../node_modules/@material-ui/core';
+
 
 const drawerWidth = 260;
 
@@ -76,12 +74,13 @@ class DefaultSite extends React.Component {
 
     const nav = (        
         siteRoutes.map((prop, key) => {
+            if (prop.redirect) return null;
             return (
             <NavLink
                 to={prop.path}
                 key={key}
             >
-                <ListItem button>
+                <ListItem button onClick={this.handleDrawerToggle}>
                     <ListItemText
                         primary={prop.sidebarName}
                         disableTypography={true}
@@ -148,7 +147,9 @@ class DefaultSite extends React.Component {
                     </Typography>
                 </div>                
                 <Divider />
+                <List>
                 {nav}
+                </List>
             </div>
           </Drawer>
         </Hidden>

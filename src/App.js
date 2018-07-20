@@ -1,37 +1,45 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import './App.css';
 import DefaultSite from './layouts/DefaultSite';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
+//import siteRoutes from './routes/routes';
 // import views
 import Dashboard from './views/Dashboard';
 import Calendar from './views/Calendar';
-import siteRoutes from './routes/routes';
+import Documents from './views/Documents';
+import Learning from './views/Learning';
+import Logos from './views/Logos';
+import News from './views/News';
+import People from './views/People';
+import Reminders from './views/Reminders';
+import Suppliers from './views/Suppliers';
 
-const switchRoutes = (
-  <Switch>
-    {siteRoutes.map((prop, key) => {
-      if (prop.redirect)
-        return <Redirect from={prop.path} to={prop.to} key={key} />;
-      else
-        return <Route path={prop.path} component={prop.component} key={key} />;
-    })}
-  </Switch>
-);
+
 
 class App extends Component {
   
   render() {
     return (      
       <DefaultSite>
-        {switchRoutes}
+        <Switch>
+          <Route exact path='/' component={Dashboard} title='Dashboard' />
+          <Route path='/logos' component={Logos} />
+          <Route path='/documents' component={Documents} />
+          <Route path='/calendar' component={Calendar} />
+          <Route path='/reminders' component={Reminders} />
+          <Route path='/news' component={News} />
+          <Route path='/people' component={People} />
+          <Route path='/suppliers' component={Suppliers} />
+          <Route path='/learning' component={Learning} />
+        </Switch>
       </DefaultSite>            
     );
   }
 }
 
-App.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+// App.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
 
 export default App;
