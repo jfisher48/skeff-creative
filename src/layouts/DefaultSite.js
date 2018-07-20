@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
+import logo from '../creative_logo.svg';
 import { List, ListItem, ListItemText } from '../../node_modules/@material-ui/core';
 
 
@@ -28,10 +29,10 @@ const styles = theme => ({
   },
   appBar: {
     position: 'absolute',
-    marginLeft: drawerWidth,
-    [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-    },
+    // marginLeft: drawerWidth,
+    // [theme.breakpoints.up('md')]: {
+    //   width: `calc(100% - ${drawerWidth}px)`,
+    //},
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
@@ -53,11 +54,19 @@ const styles = theme => ({
     margin: 'auto'
   },  
   content: {
+    [theme.breakpoints.down('md')]: {
+        marginTop: '56px'
+    },
     height: '100%',
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
+    paddingLeft: theme.spacing.unit * 3,
+    paddingRight: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3
   },
+  img: {
+      height: '60px'      
+  }
 });
 
 class DefaultSite extends React.Component {
@@ -95,7 +104,10 @@ class DefaultSite extends React.Component {
       <div className={classes.root}>
         <Hidden mdUp>
         <AppBar className={classes.appBar}>
-          <Toolbar>
+          <Toolbar>          
+            <Typography variant="title" color="inherit"  style={{flex:1}}>
+                Skeff Creative
+            </Typography>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
@@ -104,9 +116,7 @@ class DefaultSite extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
-              Skeff Creative
-            </Typography>
+            
           </Toolbar>
         </AppBar>
         </Hidden>
@@ -141,10 +151,11 @@ class DefaultSite extends React.Component {
             }}
           >
             <div>                
-                <div className={classes.drawerTitle}>
-                    <Typography variant="title" color="inherit" noWrap>
-                        Skeff Creative
-                    </Typography>
+                <div className={classes.drawerTitle}>                                                
+                    <Typography variant="title" color="inherit" >                    
+                    <img src={logo} alt="logo" className={classes.img} />
+                        Skeff Creative                        
+                    </Typography>                    
                 </div>                
                 <Divider />
                 <List>
