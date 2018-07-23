@@ -51,8 +51,45 @@ const styles = theme => ({
   drawerTitle: {
     position: 'relative',
     padding: '15px 15px',
-    margin: 'auto'
+    margin: 'auto',
+    "&:after": {
+        content: '""',
+        position: "absolute",
+        bottom: "0",
+  
+        height: "1px",
+        right: "15px",
+        width: "calc(100% - 30px)",
+        backgroundColor: "rgba(180, 180, 180, 0.3)"
+    }
+  },
+  brand: {
+    padding: "5px 0",
+    display: "block",
+    fontSize: "18px",
+    textAlign: "left",
+    fontWeight: "400",
+    lineHeight: "30px",
+    textDecoration: "none",
+    backgroundColor: "transparent",
+    "&,&:hover": {
+      color: "#FFFFFF"
+    }
+  },
+  brandImage: {
+    width: '40px',
+    display: 'inline-block',
+    maxHeight: '40px',
+    marginLeft: '10px',
+    marginRight: '15px'
   },  
+  img: {
+      width: '45px',
+      top: '10px',
+      position: 'absolute',
+      verticalAlign: 'middle',
+      border: '0'            
+  },
   content: {
     [theme.breakpoints.down('md')]: {
         marginTop: '56px'
@@ -63,10 +100,7 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
     paddingBottom: theme.spacing.unit * 3
-  },
-  img: {
-      height: '60px'      
-  }
+  }  
 });
 
 class DefaultSite extends React.Component {
@@ -151,13 +185,14 @@ class DefaultSite extends React.Component {
             }}
           >
             <div>                
-                <div className={classes.drawerTitle}>                                                
-                    <Typography variant="title" color="inherit" >                    
-                    <img src={logo} alt="logo" className={classes.img} />
-                        Skeff Creative                        
-                    </Typography>                    
+                <div className={classes.drawerTitle}>
+                    <div className={classes.brand}>                    
+                        <div className={classes.brandImage}>
+                        <img src={logo} alt="logo" className={classes.img} />
+                        </div>
+                        Skeff Creative                                        
+                    </div>
                 </div>                
-                <Divider />
                 <List>
                 {nav}
                 </List>
