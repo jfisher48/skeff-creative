@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import { Router, Route, Switch } from 'react-router-dom';
 import './index.css';
 //import App from './App';
-//import 'typeface-roboto';
+import 'typeface-roboto';
 //import registerServiceWorker from './registerServiceWorker';
 import indexRoutes from './routes/indexRoutes';
 
@@ -18,7 +18,22 @@ const theme = createMuiTheme({
         "fontWeightLight": 300,
         "fontWeightRegular": 400,
         "fontWeightMedium": 500
-       }
+       },
+       palette: {
+        primary: {
+          light: '#4f5b62',
+          main: '#263238',
+          dark: '#000a12',
+          contrastText: '#fff',
+        },
+        secondary: {
+          light: '#64c1ff',
+          main: '#0091ea',
+          dark: '#0064b7',
+          contrastText: '#fff',
+        },
+      },
+
 });
 
 ReactDOM.render(

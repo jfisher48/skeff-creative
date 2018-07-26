@@ -9,8 +9,8 @@ import siteRoutes from '../routes/routes';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
-import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import logo from '../creative_logo.svg';
 import { List, ListItem, ListItemText } from '../../node_modules/@material-ui/core';
 
@@ -39,16 +39,31 @@ const styles = theme => ({
       display: 'none',
     },
   },
-  toolbar: theme.mixins.toolbar,
+//   toolbar: theme.mixins.toolbar,
   drawerPaper: {
-    backgroundColor: '#3b3b3b',
+    backgroundColor: '#263238',
     color: '#ffffff',
     width: drawerWidth,
     [theme.breakpoints.up('md')]: {
-      position: 'relative',
-    },
+      position: 'relative',            
+    },    
   },
   drawerTitle: {
+    position: 'relative',
+    padding: '15px 15px',
+    margin: 'auto',
+    "&:after": {
+        content: '""',
+        position: "absolute",
+        bottom: "0",
+  
+        height: "1px",
+        right: "15px",
+        width: "calc(100% - 30px)",
+        backgroundColor: "rgba(180, 180, 180, 0.3)"
+    }
+  },
+  userBar: {
     position: 'relative',
     padding: '15px 15px',
     margin: 'auto',
@@ -97,8 +112,21 @@ const styles = theme => ({
       verticalAlign: 'middle',
       border: '0'            
   },
+  item: {
+      position: 'relative',
+      display: 'block',
+      textDecoration: 'none'
+  },
+  itemText: {
+      color: '#ffffff',
+      margin: '0',
+      lineHeight: '30px',
+      fontFamily: 'Roboto',
+      
+      fontSize: '1em'
+  },
   content: {
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
         marginTop: '56px'
     },
     height: '100%',
@@ -129,9 +157,10 @@ class DefaultSite extends React.Component {
             <NavLink
                 to={prop.path}
                 key={key}
+                className={classes.item}
             >
                 <ListItem button onClick={this.handleDrawerToggle}>
-                    <ListItemText
+                    <ListItemText className={classes.itemText}
                         primary={prop.sidebarName}
                         disableTypography={true}
                     />
@@ -164,21 +193,22 @@ class DefaultSite extends React.Component {
         <Hidden mdUp>
           <Drawer
             variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            anchor="right"
             open={this.state.mobileOpen}
             onClose={this.handleDrawerToggle}
             classes={{
-              paper: classes.drawerPaper,
+              paper: classes.drawerPaper 
             }}
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
             }}
           >
             <div>
-                <div className={classes.toolbar}>
-                    Menu
-                </div>
-                <Divider />
+                <div className={classes.userBar}>
+                    <IconButton color='inherit' onClick={this.handleDrawerToggle}>
+                        <ChevronRightIcon/>
+                    </IconButton>
+                </div>                
                 {nav}
             </div>
           </Drawer>
