@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import DefaultSite from './layouts/DefaultSite';
 import { Switch, Route} from 'react-router-dom';
-//import siteRoutes from './routes/routes';
+
 // import views
 import Dashboard from './views/Dashboard';
 import Calendar from './views/Calendar';
@@ -14,7 +14,6 @@ import News from './views/News';
 import People from './views/People';
 import Reminders from './views/Reminders';
 import Suppliers from './views/Suppliers';
-
 
 
 class App extends Component {

@@ -66,26 +66,33 @@ const styles = theme => ({
   brand: {
     padding: "5px 0",
     display: "block",
-    fontSize: "18px",
+    fontFamily: "Encode Sans Condensed",
+    fontSize: "28px",
+    color: "#848688",    
     textAlign: "left",
-    fontWeight: "400",
-    lineHeight: "30px",
+    fontWeight: "300",
+    lineHeight: "32px",
     textDecoration: "none",
     backgroundColor: "transparent",
-    "&,&:hover": {
-      color: "#FFFFFF"
-    }
+    // "&,&:hover": {
+    //   color: "#ffffff"
+    // }
+  },
+  brandFront: {
+      fontWeight: "600",
+      fontSize: "29px",
+      color: "#bdbfc1"
   },
   brandImage: {
     width: '40px',
-    display: 'inline-block',
+    display: 'inline-block',    
     maxHeight: '40px',
     marginLeft: '10px',
     marginRight: '15px'
   },  
   img: {
       width: '45px',
-      top: '10px',
+      top: '14px',
       position: 'absolute',
       verticalAlign: 'middle',
       border: '0'            
@@ -190,7 +197,7 @@ class DefaultSite extends React.Component {
                         <div className={classes.brandImage}>
                         <img src={logo} alt="logo" className={classes.img} />
                         </div>
-                        Skeff Creative                                        
+                        <span className={classes.brandFront}>skeff</span><span>creative</span>                                        
                     </div>
                 </div>                
                 <List>
