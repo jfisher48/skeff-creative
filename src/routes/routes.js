@@ -9,69 +9,79 @@ import People from '../views/People';
 import Reminders from '../views/Reminders';
 import Suppliers from '../views/Suppliers';
 
+import DashboardIco from '../dashboard.svg';
+import BrandIco from '../brand.svg';
+import CalendarIco from '../calendar.svg';
+import DocumentsIco from '../document.svg';
+import RemindersIco from '../reminders.svg';
+import NewsIco from '../news.svg';
+import PeopleIco from '../people.svg';
+import LearningIco from '../learning.svg';
+import SuppliersIco from '../suppliers.svg';
+
 
 const siteRoutes = [    
   {
     path: "/",
     sidebarName: "Dashboard",
     navbarName: "Dashboard",
-    // icon: Person,
+    icon: DashboardIco,
     component: Dashboard
   },
   {
     path: "/logos",
     sidebarName: "Logos",
     navbarName: "Logos",
-    // icon: ContentPaste,
+    icon: BrandIco,
     component: Logos
   },
   {
     path: "/documents",
     sidebarName: "Documents",
     navbarName: "Documents",
-    // icon: ContentPaste,
+    icon: DocumentsIco,
     component: Documents
   },
   {
     path: "/calendar",
     sidebarName: "Calendar",
     navbarName: "Calendar",
-    // icon: ContentPaste,
+    icon: CalendarIco,
     component: Calendar
   },
   {
     path: "/reminders",
     sidebarName: "Reminders",
     navbarName: "Reminders",
-    // icon: ContentPaste,
+    icon: RemindersIco,
     component: Reminders
   },
   {
     path: "/news",
     sidebarName: "News",
     navbarName: "News",
-    // icon: ContentPaste,
+    icon: NewsIco,
     component: News
   },
   {
     path: "/people",
     sidebarName: "People",
     navbarName: "People",
-    // icon: ContentPaste,
+    icon: PeopleIco,
     component: People
   },
   {
     path: "/suppliers",
     sidebarName: "Suppliers",
     navbarName: "Suppliers",
-    // icon: ContentPaste,
+    icon: SuppliersIco,
     component: Suppliers
   },
   {
     path: "/learning",
     sidebarName: "Learning",
     navbarName: "Learning",
-    // icon: ContentPaste,
+    icon: LearningIco,
     component: Learning
   },
 

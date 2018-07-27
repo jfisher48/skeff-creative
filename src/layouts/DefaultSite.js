@@ -12,7 +12,7 @@ import Hidden from '@material-ui/core/Hidden';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import logo from '../creative_logo.svg';
-import { List, ListItem, ListItemText } from '../../node_modules/@material-ui/core';
+import { List, ListItem, ListItemText, ListItemIcon } from '../../node_modules/@material-ui/core';
 
 
 const drawerWidth = 260;
@@ -145,6 +145,14 @@ const styles = theme => ({
     padding: "10px 15px",
     backgroundColor: "transparent"    
   },
+  icon: {    
+    maxHeight: "30px",
+    maxWidth: "40px",
+    float: "left",
+    marginRight: "15px",
+    textAlign: "center",
+    verticalAlign: "middle"               
+  },
   itemText: {
       color: '#ffffff',
       margin: '0',
@@ -187,6 +195,7 @@ class DefaultSite extends React.Component {
                 className={classes.item}
             >
                 <ListItem className={classes.itemLink} button onClick={this.handleDrawerToggle}>
+            <img src={prop.icon} alt={prop.sidebarName} className={classes.icon} />
                     <ListItemText className={classes.itemText}
                         primary={prop.sidebarName}
                         disableTypography={true}
