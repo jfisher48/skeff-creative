@@ -19,18 +19,28 @@ const theme = createMuiTheme({
         "fontWeightRegular": 400,
         "fontWeightMedium": 500
        },
-       palette: {
+    palette: {
         primary: {
-          light: '#4f5b62',
-          main: '#263238',
-          dark: '#000a12',
-          contrastText: '#fff',
+            light: '#4f5b62',
+            main: '#263238',
+            dark: '#000a12',
+            contrastText: '#fff',
         },
         secondary: {
-          light: '#64c1ff',
-          main: '#0091ea',
-          dark: '#0064b7',
-          contrastText: '#fff',
+            light: '#64c1ff',
+            main: '#0091ea',
+            dark: '#0064b7',
+            contrastText: '#fff',
+        }        
+    },
+    overrides: {
+        // Name of the component ⚛️
+        MuiTouchRipple: {
+          // The properties to apply
+          ripple: {
+              color: 'white'
+          }
+          // No more ripple, on the whole application 💣!
         },
       },
 
