@@ -89,6 +89,9 @@ const styles = theme => ({
     lineHeight: "32px",
     textDecoration: "none",
     backgroundColor: "transparent",
+    [theme.breakpoints.down('md')]: {
+      flex: '1'
+    },
     // "&,&:hover": {
     //   color: "#ffffff"
     // }
@@ -110,19 +113,43 @@ const styles = theme => ({
       top: '14px',
       position: 'absolute',
       verticalAlign: 'middle',
-      border: '0'            
+      border: '0',
+      [theme.breakpoints.down('md')]: {
+        top: '.56rem'
+      },
+      [theme.breakpoints.down('sm')]: {
+        top: '5px'
+      },           
+  },
+  list: {
+      marginTop: "15px",
+      paddingLeft: "0",
+      paddingTop: "0",
+      paddingBottom: "0",
+      marginBottom: "0",
+      listStyle: "none",
+      position: "unset"
   },
   item: {
       position: 'relative',
       display: 'block',
       textDecoration: 'none'
   },
+  itemLink: {
+    width: "auto",
+    transition: "all 300ms linear",
+    margin: "10px 15px 0",
+    borderRadius: "3px",
+    position: "relative",
+    display: "block",
+    padding: "10px 15px",
+    backgroundColor: "transparent"    
+  },
   itemText: {
       color: '#ffffff',
       margin: '0',
       lineHeight: '30px',
-      fontFamily: 'Roboto',
-      
+      fontFamily: 'Roboto',      
       fontSize: '1em'
   },
   content: {
@@ -148,9 +175,9 @@ class DefaultSite extends React.Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes  } = this.props;
 
-    const nav = (        
+    const nav = (              
         siteRoutes.map((prop, key) => {
             if (prop.redirect) return null;
             return (
@@ -159,7 +186,7 @@ class DefaultSite extends React.Component {
                 key={key}
                 className={classes.item}
             >
-                <ListItem button onClick={this.handleDrawerToggle}>
+                <ListItem className={classes.itemLink} button onClick={this.handleDrawerToggle}>
                     <ListItemText className={classes.itemText}
                         primary={prop.sidebarName}
                         disableTypography={true}
@@ -167,7 +194,7 @@ class DefaultSite extends React.Component {
                 </ListItem>
             </NavLink>
             )
-        })         
+        })               
     );
 
     return (
@@ -175,9 +202,12 @@ class DefaultSite extends React.Component {
         <Hidden mdUp>
         <AppBar className={classes.appBar}>
           <Toolbar>          
-            <Typography variant="title" color="inherit"  style={{flex:1}}>
-                Skeff Creative
-            </Typography>
+            <div className={classes.brand}>                    
+              <div className={classes.brandImage}>
+                <img src={logo} alt="logo" className={classes.img} />
+              </div>
+              <span className={classes.brandFront}>skeff</span><span>creative</span>                                        
+            </div>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
@@ -208,8 +238,10 @@ class DefaultSite extends React.Component {
                     <IconButton color='inherit' onClick={this.handleDrawerToggle}>
                         <ChevronRightIcon/>
                     </IconButton>
-                </div>                
-                {nav}
+                </div>
+                <List className={classes.list}>                
+                  {nav}
+                </List>
             </div>
           </Drawer>
         </Hidden>
@@ -230,7 +262,7 @@ class DefaultSite extends React.Component {
                         <span className={classes.brandFront}>skeff</span><span>creative</span>                                        
                     </div>
                 </div>                
-                <List>
+                <List className={classes.list}>
                 {nav}
                 </List>
             </div>
