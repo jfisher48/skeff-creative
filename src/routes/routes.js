@@ -9,6 +9,17 @@ import People from '../views/People';
 import Reminders from '../views/Reminders';
 import Suppliers from '../views/Suppliers';
 
+import dashboardButton from '../themes/dashboardButton';
+import logosButton from '../themes/logosButton';
+import documentsButton from '../themes/documentsButton';
+import calendarButton from '../themes/calendarButton';
+import remindersButton from '../themes/remindersButton';
+import newsButton from '../themes/newsButton';
+import peopleButton from '../themes/peopleButton';
+import suppliersButton from '../themes/suppliersButton';
+import learningButton from '../themes/learningButton';
+
+
 import DashboardIco from '../dashboard.svg';
 import BrandIco from '../brand.svg';
 import CalendarIco from '../calendar.svg';
@@ -26,63 +37,74 @@ const siteRoutes = [
     sidebarName: "Dashboard",
     navbarName: "Dashboard",
     icon: DashboardIco,
-    component: Dashboard
+    component: Dashboard,
+    btn: dashboardButton,
+    color: "grey"
   },
   {
     path: "/logos",
     sidebarName: "Logos",
     navbarName: "Logos",
     icon: BrandIco,
-    component: Logos
+    component: Logos, 
+    btn: logosButton
   },
   {
     path: "/documents",
     sidebarName: "Documents",
     navbarName: "Documents",
     icon: DocumentsIco,
-    component: Documents
+    component: Documents,
+    btn: documentsButton,
+    color: "manilla"
   },
   {
     path: "/calendar",
     sidebarName: "Calendar",
     navbarName: "Calendar",
     icon: CalendarIco,
-    component: Calendar
+    component: Calendar,
+    btn: calendarButton
   },
   {
     path: "/reminders",
     sidebarName: "Reminders",
     navbarName: "Reminders",
     icon: RemindersIco,
-    component: Reminders
+    component: Reminders,
+    btn: remindersButton
   },
   {
     path: "/news",
     sidebarName: "News",
     navbarName: "News",
     icon: NewsIco,
-    component: News
+    component: News,
+    btn: newsButton
   },
   {
     path: "/people",
     sidebarName: "People",
     navbarName: "People",
     icon: PeopleIco,
-    component: People
+    component: People,
+    btn: peopleButton
   },
   {
     path: "/suppliers",
     sidebarName: "Suppliers",
     navbarName: "Suppliers",
     icon: SuppliersIco,
-    component: Suppliers
+    component: Suppliers,
+    btn: suppliersButton
   },
   {
     path: "/learning",
     sidebarName: "Learning",
     navbarName: "Learning",
     icon: LearningIco,
-    component: Learning
+    component: Learning, 
+    btn: learningButton
   },
 
   { redirect: true, path: "/", to: "/dashboard", navbarName: "Redirect" }

@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -12,7 +13,7 @@ import Hidden from '@material-ui/core/Hidden';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import logo from '../creative_logo.svg';
-import { List, ListItem, ListItemText, ListItemIcon } from '../../node_modules/@material-ui/core';
+import { List, ListItem, ListItemText, ListItemIcon, MuiThemeProvider, createMuiTheme } from '../../node_modules/@material-ui/core';
 
 
 const drawerWidth = 260;
@@ -133,21 +134,26 @@ const styles = theme => ({
   item: {
       position: 'relative',
       display: 'block',
-      textDecoration: 'none'
-  },
-  itemLink: {
+      textDecoration: 'none'            
+  },   
+  itemLink: {  
     width: "auto",
-    transition: "all 300ms linear",
+    transition: "all 200ms linear",
     margin: "10px 15px 0",
     borderRadius: "3px",
     position: "relative",
     display: "block",
     padding: "10px 15px",
-    backgroundColor: "transparent"    
+    backgroundColor: "transparent"       
   },
+  current: {
+    itemLink: {
+  backgroundColor: "white"
+    }
+  },    
   icon: {    
-    maxHeight: "30px",
-    maxWidth: "40px",
+    maxHeight: "38px",
+    maxWidth: "30px",
     float: "left",
     marginRight: "15px",
     textAlign: "center",
@@ -188,19 +194,22 @@ class DefaultSite extends React.Component {
     const nav = (              
         siteRoutes.map((prop, key) => {
             if (prop.redirect) return null;
-            return (
+            var buttonColor=classNames(prop.color);                                                 
+            return (                
             <NavLink
                 to={prop.path}
                 key={key}
-                className={classes.item}
-            >
-                <ListItem className={classes.itemLink} button onClick={this.handleDrawerToggle}>
-            <img src={prop.icon} alt={prop.sidebarName} className={classes.icon} />
-                    <ListItemText className={classes.itemText}
-                        primary={prop.sidebarName}
-                        disableTypography={true}
-                    />
-                </ListItem>
+                activeClassName={classes.current}
+                className={classes.item}>
+                <MuiThemeProvider theme={prop.btn}>
+                    <ListItem className={classNames(classes.itemLink, classes.buttonColor)} button onClick={this.handleDrawerToggle}>
+                        <img src={prop.icon} alt={prop.sidebarName} className={classes.icon} />
+                        <ListItemText className={classes.itemText}
+                            primary={prop.sidebarName}
+                            disableTypography={true}
+                        />
+                    </ListItem>
+                </MuiThemeProvider>
             </NavLink>
             )
         })               

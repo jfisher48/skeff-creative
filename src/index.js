@@ -32,18 +32,7 @@ const theme = createMuiTheme({
             dark: '#0064b7',
             contrastText: '#fff',
         }        
-    },
-    overrides: {
-        // Name of the component ⚛️
-        MuiTouchRipple: {
-          // The properties to apply
-          ripple: {
-              color: 'white'
-          }
-          // No more ripple, on the whole application 💣!
-        },
-      },
-
+    }
 });
 
 ReactDOM.render(
