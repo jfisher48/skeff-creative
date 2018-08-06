@@ -5,7 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { NavLink} from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 import siteRoutes from '../routes/routes';
 //import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,7 +14,7 @@ import Hidden from '@material-ui/core/Hidden';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import logo from '../creative_logo.svg';
-import { List, ListItem, ListItemText, ListItemIcon, MuiThemeProvider, createMuiTheme } from '../../node_modules/@material-ui/core';
+import { MenuItem, MenuList, ListItemText, MuiThemeProvider } from '../../node_modules/@material-ui/core';
 
 
 const drawerWidth = 260;
@@ -135,27 +136,22 @@ const styles = theme => ({
       position: 'relative',
       display: 'block',
       textDecoration: 'none'            
-  },   
+  },     
   itemLink: {  
     width: "auto",
     transition: "all 200ms linear",
     margin: "10px 15px 0",
     borderRadius: "3px",
     position: "relative",
-    display: "block",
-    padding: "10px 15px",
-    backgroundColor: "transparent"       
-  },
-  current: {
-    itemLink: {
-  backgroundColor: "white"
-    }
+    //display: "block",
+    padding: ".81em .94em",
+    backgroundColor: "transparent"   
   },    
   icon: {    
     maxHeight: "38px",
     maxWidth: "30px",
     float: "left",
-    marginRight: "15px",
+    //marginRight: "15px",
     textAlign: "center",
     verticalAlign: "middle"               
   },
@@ -189,26 +185,27 @@ class DefaultSite extends React.Component {
   };
 
   render() {
-    const { classes  } = this.props;
+    const { classes, location: {pathname}  } = this.props;
 
     const nav = (              
         siteRoutes.map((prop, key) => {
             if (prop.redirect) return null;
-            var buttonColor=classNames(prop.color);                                                 
+            //var buttonColor=classNames(prop.color);                                                 
             return (                
             <NavLink
                 to={prop.path}
                 key={key}
                 activeClassName={classes.current}
-                className={classes.item}>
+                className={classes.item}
+                >
                 <MuiThemeProvider theme={prop.btn}>
-                    <ListItem className={classNames(classes.itemLink, classes.buttonColor)} button onClick={this.handleDrawerToggle}>
+                    <MenuItem selected={prop.path === pathname} className={classNames(classes.itemLink, classes.buttonColor)} button onClick={this.handleDrawerToggle}>
                         <img src={prop.icon} alt={prop.sidebarName} className={classes.icon} />
                         <ListItemText className={classes.itemText}
                             primary={prop.sidebarName}
                             disableTypography={true}
                         />
-                    </ListItem>
+                    </MenuItem>
                 </MuiThemeProvider>
             </NavLink>
             )
@@ -218,7 +215,8 @@ class DefaultSite extends React.Component {
     return (
       <div className={classes.root}>
         <Hidden mdUp>
-        <AppBar className={classes.appBar}>
+        <AppBar className={classes.appBar}
+        position="fixed">
           <Toolbar>          
             <div className={classes.brand}>                    
               <div className={classes.brandImage}>
@@ -257,9 +255,9 @@ class DefaultSite extends React.Component {
                         <ChevronRightIcon/>
                     </IconButton>
                 </div>
-                <List className={classes.list}>                
+                <MenuList className={classes.list}>                
                   {nav}
-                </List>
+                </MenuList>
             </div>
           </Drawer>
         </Hidden>
@@ -280,9 +278,9 @@ class DefaultSite extends React.Component {
                         <span className={classes.brandFront}>skeff</span><span>creative</span>                                        
                     </div>
                 </div>                
-                <List className={classes.list}>
+                <MenuList className={classes.list}>
                 {nav}
-                </List>
+                </MenuList>
             </div>
           </Drawer>
         </Hidden>
@@ -299,4 +297,6 @@ DefaultSite.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(DefaultSite);
+export default compose(
+  withRouter,
+  withStyles(styles, {withTheme: true}))(DefaultSite)

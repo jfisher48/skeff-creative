@@ -1,7 +1,14 @@
 import { createMuiTheme } from '../../node_modules/@material-ui/core';
 
 export default createMuiTheme({
-    overrides: {        
+    overrides: {
+        MuiMenuItem: {
+            root: {
+                backgroundColor: "transparent",
+                '&$selected': {
+                backgroundColor: "#2196f3"
+            }}
+        },        
         MuiListItem: {
             button: {
         '&:hover': {

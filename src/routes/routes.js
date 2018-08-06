@@ -47,7 +47,8 @@ const siteRoutes = [
     navbarName: "Logos",
     icon: BrandIco,
     component: Logos, 
-    btn: logosButton
+    btn: logosButton,
+    color: "blue"
   },
   {
     path: "/documents",
