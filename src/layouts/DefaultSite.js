@@ -15,7 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import logo from '../creative_logo.svg';
 import { MenuItem, MenuList, ListItemText, MuiThemeProvider } from '../../node_modules/@material-ui/core';
-
+import Footer from '../components/Footer'
 
 const drawerWidth = 260;
 
@@ -30,7 +30,8 @@ const styles = theme => ({
     width: '100%',
   },
   appBar: {
-    position: 'absolute',
+    position: 'fixed',
+    zIndex: '1100'
     // marginLeft: drawerWidth,
     // [theme.breakpoints.up('md')]: {
     //   width: `calc(100% - ${drawerWidth}px)`,
@@ -284,8 +285,9 @@ class DefaultSite extends React.Component {
           </Drawer>
         </Hidden>
         <main className={classes.content}>
-            {this.props.children}          
-        </main>
+            {this.props.children}
+            <Footer />          
+        </main>        
       </div>
     );
   }
