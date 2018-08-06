@@ -189,8 +189,7 @@ class DefaultSite extends React.Component {
 
     const nav = (              
         siteRoutes.map((prop, key) => {
-            if (prop.redirect) return null;
-            //var buttonColor=classNames(prop.color);                                                 
+            if (prop.redirect) return null;                                                             
             return (                
             <NavLink
                 to={prop.path}
@@ -199,7 +198,7 @@ class DefaultSite extends React.Component {
                 className={classes.item}
                 >
                 <MuiThemeProvider theme={prop.btn}>
-                    <MenuItem selected={prop.path === pathname} className={classNames(classes.itemLink, classes.buttonColor)} button onClick={this.handleDrawerToggle}>
+                    <MenuItem selected={prop.path === pathname} className={classes.itemLink} button onClick={this.handleDrawerToggle}>
                         <img src={prop.icon} alt={prop.sidebarName} className={classes.icon} />
                         <ListItemText className={classes.itemText}
                             primary={prop.sidebarName}

@@ -14,5 +14,11 @@ export default createMuiTheme({
         '&:hover': {
             backgroundColor: "#009688",
         }}        
-    }}
+        },
+        MuiTouchRipple: {            
+            ripple: {
+                color: 'white'
+            }            
+        }
+    }
 });
