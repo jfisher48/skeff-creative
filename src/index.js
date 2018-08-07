@@ -13,7 +13,7 @@ const hist = createBrowserHistory();
 
 const theme = createMuiTheme({
     typography: {
-        "fontFamily": "\"Encode Sans Condensed\", \"Helvetica\", \"Arial\", sans-serif",
+        "fontFamily": "Roboto, Helvetica, Arial, sans-serif",
         "fontSize": 14,
         "fontWeightLight": 300,
         "fontWeightRegular": 400,

@@ -23,11 +23,12 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     height: "100vh",
-    zIndex: 1,
+    //zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
     width: '100%',
+    top: "0"
   },
   appBar: {
     position: 'fixed',
@@ -50,6 +51,13 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       position: 'relative',            
     },    
+  },
+  navWrap :{
+    height:"100%",
+    width: drawerWidth,
+    overflow: "visible",
+    overflowY: "scroll",
+    overflowScrolling: "touch"
   },
   drawerTitle: {
     position: 'relative',
@@ -231,8 +239,7 @@ class DefaultSite extends React.Component {
               className={classes.navIconHide}
             >
               <MenuIcon />
-            </IconButton>
-            
+            </IconButton>            
           </Toolbar>
         </AppBar>
         </Hidden>
@@ -249,7 +256,7 @@ class DefaultSite extends React.Component {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            <div>
+            <div className={classes.navWrap}>
                 <div className={classes.userBar}>
                     <IconButton color='inherit' onClick={this.handleDrawerToggle}>
                         <ChevronRightIcon/>
