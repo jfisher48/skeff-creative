@@ -2,24 +2,9 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { List, ListItem} from '@material-ui/core';
+import footerStyle from '../themes/footerStyle';
 
-const styles = theme => ({
-  pageHeading: {
-    //width: '100%',
-    position: 'relative',
-    //padding: '15px 30px',
-    //backgroundColor: '#fff',
-    //borderBottom: '1px solid #fff',
-    margin: '-1px -24px 24px',
-    paddingTop: theme.spacing.unit * 2.5,
-    paddingBottom: theme.spacing.unit * 2.5,
-    paddingLeft: theme.spacing.unit * 3.0,
-    paddingRight: theme.spacing.unit * 3.0,
-    color: '#202020',
-    //marginBottom: theme.spacing.unit * 2
-  }
 
-})
 
 class Footer extends Component {
   state={}
@@ -27,38 +12,44 @@ class Footer extends Component {
   render (){
     const classes = this.props.classes
     return(
-      <footer className={classes.pageHeading}>
+      <footer className={classes.footer}>
         <div className={classes.container}>
-            <div className={classes.left}>
+            <div className={classes.footerLeft}>
                 <List className={classes.list}>
-                    <ListItem className={classes.inlineBlock}>
+                    <ListItem className={classes.footerItems}>
                         <a href="#home" className={classes.block}>
                             Home
                         </a>
                     </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                        <a href="#company" className={classes.block}>
-                            Company
+                    <ListItem className={classes.footerItems}>
+                        <a href="http://skeffdist.com" className={classes.block}>
+                            Skeffdist.com
                         </a>
                     </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                        <a href="#portfolio" className={classes.block}>
-                            Portfolio
+                    <ListItem className={classes.footerItems}>
+                        <a href="http://www.abmarketing.com" className={classes.block}>
+                            ABMarketing.com
                         </a>
                     </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                        <a href="#blog" className={classes.block}>
-                            Blog
+                    <ListItem className={classes.footerItems}>
+                        <a href="https://51229.mobilitysellsbeer.net" className={classes.block}>
+                            Mobility
                         </a>
                     </ListItem>
                 </List>
-                </div>
-            <div className={classes.right}>
-            </div>
+            </div>            
+            <p className={classes.footerRight}>
+                <span className={classes.copyright}>
+                    &copy; {1900 + new Date().getYear()}{" "}
+                    <a href="http://www.trueborncreative.com" className={classes.a}>
+                    Trueborn Creative
+                    </a>, for Skeff Distributing, Inc.
+                </span>
+            </p>            
         </div>
       </footer>
   )
   }
 }
 
-export default withStyles(styles)(Footer)
+export default withStyles(footerStyle)(Footer)

@@ -7,7 +7,7 @@ export default createMuiTheme({
             root: {
                 backgroundColor: "transparent",
                 '&$selected': {
-                backgroundColor: "#9e9e9e"
+                backgroundColor: "rgba(158, 158, 158, 0.2)"
             }}
         },     
         MuiListItem: {            

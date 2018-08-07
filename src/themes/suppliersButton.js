@@ -6,7 +6,7 @@ export default createMuiTheme({
             root: {
                 backgroundColor: "transparent",
                 '&$selected': {
-                backgroundColor: "#673ab7"
+                backgroundColor: "rgba(158, 158, 158, 0.2)"
             }}
         },        
         MuiListItem: {
@@ -17,7 +17,7 @@ export default createMuiTheme({
         },
         MuiTouchRipple: {            
             ripple: {
-                color: 'white'
+                color: 'grey'
             }            
         }
     }
