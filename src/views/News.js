@@ -8,14 +8,14 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import NewsIco from '../news.svg';
 
 const styles = theme => ({
     title: {
       fontSize: "29.25px",
       lineHeight: "1.25"
-    }
+    } 
 })
-
 
 class News extends Component {
   state = {}
@@ -26,7 +26,7 @@ class News extends Component {
         <Helmet>
             <title>News and Announcements | Skeff Creative Services</title>
         </Helmet>
-        <PageHeading>
+        <PageHeading className={classes.pageHeading} headingIcon={NewsIco}>
           News and Announcements
         </PageHeading>
         <Grid container spacing={16}>

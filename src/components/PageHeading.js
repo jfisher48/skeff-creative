@@ -14,16 +14,7 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 1.875,
     paddingRight: theme.spacing.unit * 1.875,
     minHeight: "75px"
-  },
-
-  pageHeading: {
-    //width: '100%',
-    position: 'relative',    
-    paddingTop: theme.spacing.unit * 3,
-    paddingBottom: theme.spacing.unit * 3,
-    paddingLeft: theme.spacing.unit * 1.875,
-    paddingRight: theme.spacing.unit * 1.875    
-  },  
+  }    
 })
 
 class PageHeading extends Component {
@@ -35,6 +26,7 @@ class PageHeading extends Component {
       <div className={classes.root}>
         <AppBar className={classes.appBar} position="static" color="default">
           <Toolbar className={classes.toolBar}>
+            <img src={this.props.headingIcon} alt={this.props.children} width="30"/>
             <Typography variant="title">
               {this.props.children}
             </Typography>
