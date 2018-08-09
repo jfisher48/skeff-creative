@@ -32,6 +32,7 @@ const footerStyle = theme => ({
     },
     footer: {
       bottom: "0",
+      marginTop: "35px",
       borderTop: "1px solid #e7e7e7",
       padding: "15px 0",
       fontFamily: "Roboto",

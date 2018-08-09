@@ -24,7 +24,7 @@ const styles = theme => ({
     flexGrow: 1,
     height: "100vh",
     //zIndex: 1,
-    overflow: 'hidden',
+    //overflow: 'hidden',
     position: 'relative',
     display: 'flex',
     width: '100%',
@@ -97,18 +97,12 @@ const styles = theme => ({
     backgroundColor: "transparent",
     [theme.breakpoints.down('md')]: {
       flex: '1'
-    },
-    // "&:hover": {
-    //   color: "#ffffff"
-    // }
+    }    
   },
   brandFront: {
       fontWeight: "600",
       fontSize: "29px",
-      color: "#bdbfc1",
-      // "&:hover": {
-      //   color: "#fff"
-      // }
+      color: "#bdbfc1",      
   }, 
   brandImage: {
     width: '40px',
