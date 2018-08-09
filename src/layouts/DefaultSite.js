@@ -32,30 +32,25 @@ const styles = theme => ({
   },
   appBar: {
     position: 'fixed',
-    zIndex: '1100'
-    // marginLeft: drawerWidth,
-    // [theme.breakpoints.up('md')]: {
-    //   width: `calc(100% - ${drawerWidth}px)`,
-    //},
+    zIndex: '1100'    
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
-//   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     backgroundColor: '#263238',
     color: '#ffffff',
     width: drawerWidth,
+    position: "fixed",    
     [theme.breakpoints.up('md')]: {
       position: 'relative',            
     },    
   },
-  navWrap :{
-    height:"100%",
-    width: drawerWidth,
-    overflow: "visible",
+  navWrap :{    
+    height:"calc(100% - 30px)",
+    width: drawerWidth,    
     overflowY: "scroll",
     overflowScrolling: "touch"
   },
@@ -103,15 +98,18 @@ const styles = theme => ({
     [theme.breakpoints.down('md')]: {
       flex: '1'
     },
-    // "&,&:hover": {
+    // "&:hover": {
     //   color: "#ffffff"
     // }
   },
   brandFront: {
       fontWeight: "600",
       fontSize: "29px",
-      color: "#bdbfc1"
-  },
+      color: "#bdbfc1",
+      // "&:hover": {
+      //   color: "#fff"
+      // }
+  }, 
   brandImage: {
     width: '40px',
     display: 'inline-block',    
@@ -177,7 +175,7 @@ const styles = theme => ({
     },
     height: '100%',
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: "#f5f5f5",
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
     paddingBottom: theme.spacing.unit * 3

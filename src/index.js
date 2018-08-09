@@ -13,11 +13,15 @@ const hist = createBrowserHistory();
 
 const theme = createMuiTheme({
     typography: {
-        "fontFamily": "Roboto, Helvetica, Arial, sans-serif",
-        "fontSize": 14,
-        "fontWeightLight": 300,
-        "fontWeightRegular": 400,
-        "fontWeightMedium": 500
+        fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+        fontSize: "0.875em",
+        fontWeightLight: 300,
+        fontWeightRegular: 400,
+        fontWeightMedium: 500,
+        title: {
+            color: "rgb(85,85,85)",
+            fontSize: "1.4em"
+        }        
        },
     palette: {
         primary: {

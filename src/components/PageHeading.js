@@ -1,23 +1,29 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
+  appBar: {
+    boxShadow: "none",
+    width:"100%",
+    minHeight: "75px"    
+  },
+  toolBar: {
+    paddingLeft: theme.spacing.unit * 1.875,
+    paddingRight: theme.spacing.unit * 1.875,
+    minHeight: "75px"
+  },
+
   pageHeading: {
     //width: '100%',
-    position: 'relative',
-    //padding: '15px 30px',
-    //backgroundColor: '#fff',
-    //borderBottom: '1px solid #fff',
-    margin: '-1px -24px 24px',
-    paddingTop: theme.spacing.unit * 2.5,
-    paddingBottom: theme.spacing.unit * 2.5,
-    paddingLeft: theme.spacing.unit * 3.0,
-    paddingRight: theme.spacing.unit * 3.0,
-    color: '#202020',
-    //marginBottom: theme.spacing.unit * 2
-  }
-
+    position: 'relative',    
+    paddingTop: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit * 3,
+    paddingLeft: theme.spacing.unit * 1.875,
+    paddingRight: theme.spacing.unit * 1.875    
+  },  
 })
 
 class PageHeading extends Component {
@@ -26,12 +32,16 @@ class PageHeading extends Component {
   render (){
     const classes = this.props.classes
     return(
-      <section className={classes.pageHeading}>
-        <Typography type='title' component='h3' color='inherit'>
-          {this.props.children}
-        </Typography>
-      </section>
-  )
+      <div className={classes.root}>
+        <AppBar className={classes.appBar} position="static" color="default">
+          <Toolbar className={classes.toolBar}>
+            <Typography variant="title">
+              {this.props.children}
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </div>
+  );
   }
 }
 

@@ -10,13 +10,13 @@ const footerStyle = theme => ({
       position: "relative",
       display: "block",      
       fontWeight: "500",
-      fontSize: "12px",
+      fontSize: "0.875rem",
       [theme.breakpoints.down('sm')]: {
         padding: "5px 15px"
         },
     },
     footerLeft: {
-      display: "block",
+      display: "block",      
       [theme.breakpoints.up('lg')]: {
         float: "left!important"
         },      
@@ -54,11 +54,13 @@ const footerStyle = theme => ({
       paddingTop: "0px",
       paddingLeft: "0px",
       width: "auto",
+      color: "rgb(85,85,85)",
       [theme.breakpoints.down('md')]: {
         padding:"0 12px;"
         },
     },
     copyright: {
+        color: "rgb(85,85,85)",
         [theme.breakpoints.up('lg')]: {
             paddingRight: "15px"
             }
