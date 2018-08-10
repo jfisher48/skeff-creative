@@ -14,7 +14,8 @@ const styles = theme => ({
     paddingLeft: theme.spacing.unit * 1.875,
     paddingRight: theme.spacing.unit * 1.875,
     minHeight: "75px"
-  }    
+  }
+     
 })
 
 class PageHeading extends Component {
