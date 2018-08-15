@@ -1,5 +1,3 @@
-import { createMuiTheme } from "../../node_modules/@material-ui/core";
-
 const footerStyle = theme => ({
     block: {
       color: "inherit",

@@ -38,8 +38,7 @@ const siteRoutes = [
     navbarName: "Dashboard",
     icon: DashboardIco,
     component: Dashboard,
-    btn: dashboardButton,
-    color: "grey"
+    btn: dashboardButton    
   },
   {
     path: "/logos",
@@ -47,8 +46,7 @@ const siteRoutes = [
     navbarName: "Logos",
     icon: BrandIco,
     component: Logos, 
-    btn: logosButton,
-    color: "blue"
+    btn: logosButton    
   },
   {
     path: "/documents",
@@ -56,8 +54,7 @@ const siteRoutes = [
     navbarName: "Documents",
     icon: DocumentsIco,
     component: Documents,
-    btn: documentsButton,
-    color: "manilla"
+    btn: documentsButton    
   },
   {
     path: "/calendar",
