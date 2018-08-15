@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PageHeading from '../components/PageHeading.js'
+import LogosIco from '../icons/brand_b.svg';
 import Helmet from 'react-helmet';
 
 class Logos extends Component {
@@ -10,7 +11,7 @@ class Logos extends Component {
         <Helmet>
             <title>Logos | Skeff Creative Services</title>
         </Helmet>
-        <PageHeading>
+        <PageHeading headingIcon={LogosIco}>
           Logos
         </PageHeading>
       </div>

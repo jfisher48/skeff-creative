@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import PageHeading from '../components/PageHeading.js'
+import PageHeading from '../components/PageHeading.js';
+import PeopleIco from '../icons/people_b.svg';
 import Helmet from 'react-helmet';
 
 class People extends Component {
@@ -10,7 +11,7 @@ class People extends Component {
         <Helmet>
             <title>People | Skeff Creative Services</title>
         </Helmet>
-        <PageHeading>
+        <PageHeading headingIcon={PeopleIco}>
           People
         </PageHeading>
       </div>

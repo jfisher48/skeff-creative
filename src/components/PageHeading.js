@@ -11,9 +11,17 @@ const styles = theme => ({
     minHeight: "75px"    
   },
   toolBar: {
-    paddingLeft: theme.spacing.unit * 1.875,
+    paddingLeft: theme.spacing.unit * 0,
     paddingRight: theme.spacing.unit * 1.875,
     minHeight: "75px"
+  },
+  headingIcon: {
+    width: "40px", 
+    marginRight: "15px",
+    [theme.breakpoints.down('xs')]: {
+      marginRight: '8px',
+      width: "35px"
+  },
   }
      
 })
@@ -27,7 +35,7 @@ class PageHeading extends Component {
       <div className={classes.root}>
         <AppBar className={classes.appBar} position="static" color="default">
           <Toolbar className={classes.toolBar}>
-            <img src={this.props.headingIcon} alt={this.props.children} width="30"/>
+            <img src={this.props.headingIcon} className={classes.headingIcon} alt={this.props.children}/>
             <Typography variant="title">
               {this.props.children}
             </Typography>

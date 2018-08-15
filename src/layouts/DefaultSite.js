@@ -15,7 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import logo from '../creative_logo.svg';
 import { MenuItem, MenuList, ListItemText, MuiThemeProvider } from '../../node_modules/@material-ui/core';
-import Footer from '../components/Footer'
+import Footer from '../components/Footer';
 
 const drawerWidth = 260;
 
@@ -172,7 +172,7 @@ const styles = theme => ({
     backgroundColor: "#f5f5f5",
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
-    paddingBottom: theme.spacing.unit * 3
+    //paddingBottom: theme.spacing.unit * 3
   }  
 });
 

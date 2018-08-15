@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PageHeading from '../components/PageHeading.js'
+import DashboardIco from '../icons/dashboard_b.svg';
 import Helmet from 'react-helmet';
 
 class Dashboard extends Component {
@@ -10,7 +11,7 @@ class Dashboard extends Component {
         <Helmet>
             <title>Dashboard | Skeff Creative Services</title>
         </Helmet>
-        <PageHeading>
+        <PageHeading headingIcon={DashboardIco}>
           Dashboard
         </PageHeading>
       </div>
