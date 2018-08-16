@@ -4,9 +4,9 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
 import "./index.css";
-//import App from './App';
+//import App from './App'
 import "typeface-roboto";
-//import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker'
 import indexRoutes from "./routes/indexRoutes";
 
 const hist = createBrowserHistory();

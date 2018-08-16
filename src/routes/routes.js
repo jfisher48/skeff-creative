@@ -1,52 +1,50 @@
 // core components/views
-import Dashboard from '../views/Dashboard';
-import Calendar from '../views/Calendar';
-import Documents from '../views/Documents';
-import Learning from '../views/Learning';
-import Logos from '../views/Logos';
-import News from '../views/News';
-import People from '../views/People';
-import Reminders from '../views/Reminders';
-import Suppliers from '../views/Suppliers';
+import Dashboard from "../views/Dashboard";
+import Calendar from "../views/Calendar";
+import Documents from "../views/Documents";
+import Learning from "../views/Learning";
+import Logos from "../views/Logos";
+import News from "../views/News";
+import People from "../views/People";
+import Reminders from "../views/Reminders";
+import Suppliers from "../views/Suppliers";
 
-import dashboardButton from '../themes/dashboardButton';
-import logosButton from '../themes/logosButton';
-import documentsButton from '../themes/documentsButton';
-import calendarButton from '../themes/calendarButton';
-import remindersButton from '../themes/remindersButton';
-import newsButton from '../themes/newsButton';
-import peopleButton from '../themes/peopleButton';
-import suppliersButton from '../themes/suppliersButton';
-import learningButton from '../themes/learningButton';
+import dashboardButton from "../themes/dashboardButton";
+import logosButton from "../themes/logosButton";
+import documentsButton from "../themes/documentsButton";
+import calendarButton from "../themes/calendarButton";
+import remindersButton from "../themes/remindersButton";
+import newsButton from "../themes/newsButton";
+import peopleButton from "../themes/peopleButton";
+import suppliersButton from "../themes/suppliersButton";
+import learningButton from "../themes/learningButton";
 
+import DashboardIco from "../dashboard.svg";
+import BrandIco from "../brand.svg";
+import CalendarIco from "../calendar.svg";
+import DocumentsIco from "../document.svg";
+import RemindersIco from "../reminders.svg";
+import NewsIco from "../news.svg";
+import PeopleIco from "../people.svg";
+import LearningIco from "../learning.svg";
+import SuppliersIco from "../suppliers.svg";
 
-import DashboardIco from '../dashboard.svg';
-import BrandIco from '../brand.svg';
-import CalendarIco from '../calendar.svg';
-import DocumentsIco from '../document.svg';
-import RemindersIco from '../reminders.svg';
-import NewsIco from '../news.svg';
-import PeopleIco from '../people.svg';
-import LearningIco from '../learning.svg';
-import SuppliersIco from '../suppliers.svg';
-
-
-const siteRoutes = [    
+const siteRoutes = [
   {
     path: "/",
     sidebarName: "Dashboard",
     navbarName: "Dashboard",
     icon: DashboardIco,
     component: Dashboard,
-    btn: dashboardButton    
+    btn: dashboardButton
   },
   {
     path: "/logos",
     sidebarName: "Logos",
     navbarName: "Logos",
     icon: BrandIco,
-    component: Logos, 
-    btn: logosButton    
+    component: Logos,
+    btn: logosButton
   },
   {
     path: "/documents",
@@ -54,7 +52,7 @@ const siteRoutes = [
     navbarName: "Documents",
     icon: DocumentsIco,
     component: Documents,
-    btn: documentsButton    
+    btn: documentsButton
   },
   {
     path: "/calendar",
@@ -101,7 +99,7 @@ const siteRoutes = [
     sidebarName: "Learning",
     navbarName: "Learning",
     icon: LearningIco,
-    component: Learning, 
+    component: Learning,
     btn: learningButton
   },
 
