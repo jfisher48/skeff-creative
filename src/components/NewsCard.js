@@ -55,7 +55,7 @@ class NewsCard extends Component {
         <CardMedia />
         <CardContent className={classes.postContent}>
           <Typography className={classes.postTitle}>
-            <a href="/news">{this.props.slug}</a>
+            <a href="/news">{this.props.title}</a>
           </Typography>
           <Typography className={classes.postDesc} component="p">
             {this.props.content}
