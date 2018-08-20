@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //import PropTypes from 'prop-types'
-import "./App.css";
+import "./styles/App.css";
 import DefaultSite from "./layouts/DefaultSite";
 import { Switch, Route } from "react-router-dom";
 

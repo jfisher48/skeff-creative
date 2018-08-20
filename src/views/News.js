@@ -12,45 +12,7 @@ import NewsIco from "../icons/news_b.svg";
 import NewsCard from "../components/NewsCard.js";
 import newsData from "../data/newsData";
 
-const styles = theme => ({
-  postCard: {
-    marginBottom: "16px"
-  },
-  postContent: {
-    paddingBottom: "22px",
-    paddingRight: "40px",
-    paddingLeft: "40px",
-    paddingTop: "40px"
-  },
-  postTitle: {
-    fontSize: "2.25em",
-    lineHeight: "1.25",
-    color: "#2a2f43",
-    "& a": {
-      color: "#2a2f43",
-      textDecoration: "none",
-      "&:hover": {
-        color: theme.palette.secondary.main
-      }
-    }
-  },
-  postDesc: {
-    color: "#7f828f",
-    marginTop: "25px",
-    fontSize: "1em",
-    lineHeight: "24px"
-  },
-  postActions: {
-    paddingBottom: "40px",
-    paddingLeft: "40px",
-    padddingRight: "40px"
-  },
-  postButton: {
-    boxShadow: "none",
-    fontSize: "0.75",
-    margin: 0
-  }
-});
+const styles = theme => ({});
 
 class News extends Component {
   state = {};

@@ -9,25 +9,25 @@ import People from "../views/People";
 import Reminders from "../views/Reminders";
 import Suppliers from "../views/Suppliers";
 
-import dashboardButton from "../themes/dashboardButton";
-import logosButton from "../themes/logosButton";
-import documentsButton from "../themes/documentsButton";
-import calendarButton from "../themes/calendarButton";
-import remindersButton from "../themes/remindersButton";
-import newsButton from "../themes/newsButton";
-import peopleButton from "../themes/peopleButton";
-import suppliersButton from "../themes/suppliersButton";
-import learningButton from "../themes/learningButton";
+import dashboardButton from "../styles/dashboardButton";
+import logosButton from "../styles/logosButton";
+import documentsButton from "../styles/documentsButton";
+import calendarButton from "../styles/calendarButton";
+import remindersButton from "../styles/remindersButton";
+import newsButton from "../styles/newsButton";
+import peopleButton from "../styles/peopleButton";
+import suppliersButton from "../styles/suppliersButton";
+import learningButton from "../styles/learningButton";
 
-import DashboardIco from "../dashboard.svg";
-import BrandIco from "../brand.svg";
-import CalendarIco from "../calendar.svg";
-import DocumentsIco from "../document.svg";
-import RemindersIco from "../reminders.svg";
-import NewsIco from "../news.svg";
-import PeopleIco from "../people.svg";
-import LearningIco from "../learning.svg";
-import SuppliersIco from "../suppliers.svg";
+import DashboardIco from "../icons/dashboard.svg";
+import BrandIco from "../icons/brand.svg";
+import CalendarIco from "../icons/calendar.svg";
+import DocumentsIco from "../icons/document.svg";
+import RemindersIco from "../icons/reminders.svg";
+import NewsIco from "../icons/news.svg";
+import PeopleIco from "../icons/people.svg";
+import LearningIco from "../icons/learning.svg";
+import SuppliersIco from "../icons/suppliers.svg";
 
 const siteRoutes = [
   {

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
-import "./index.css";
+import "./styles/index.css";
 //import App from './App'
 import "typeface-roboto";
 //import registerServiceWorker from './registerServiceWorker'
