@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { List, ListItem } from "@material-ui/core";
-import footerStyle from "../themes/footerStyle";
+import footerStyle from "../styles/footerStyle";
 
 class Footer extends Component {
   state = {};
