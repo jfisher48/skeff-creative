@@ -17,7 +17,8 @@ const styles = theme => ({
   widgetTitle: {
     fontSize: "1.5em",
     fontWeight: "500",
-    marginBottom: "20px"
+    marginBottom: "20px",
+    lineHeight: "1"
   },
   widgetList: {
     padding: "0"

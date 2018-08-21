@@ -8,9 +8,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
-  postCard: {
-    marginBottom: "16px"
-  },
   postContent: {
     paddingBottom: "22px",
     paddingRight: "40px",

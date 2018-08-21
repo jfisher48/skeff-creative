@@ -34,40 +34,69 @@ class News extends Component {
         </Helmet>
         <PageHeading headingIcon={NewsIco}>News and Announcements</PageHeading>
         <Grid container spacing={16}>
-          <Grid item xs={12} lg={8} container>
-            {news}
-          </Grid>
-          <Grid item xs={12} lg={4} container spacing={16}>
-            <Grid item xs={12} lg={12} xl={6}>
-              <ListWidget
-                className={classes.card}
-                list={catData}
-                title="Categories"
-              />
+          <Grid item xs={12} lg={8} xl={7}>
+            <Grid container spacing={16}>
+              {news}
             </Grid>
-            <Grid item xs={12} lg={12} xl={6}>
-              <Card className={classes.card}>
-                <CardContent>
-                  <Typography
-                    className={classes.postTitle}
-                    color="textSecondary"
-                  >
-                    Word of the Day
-                  </Typography>
-                  <Typography variant="headline" component="h2" />
-                  <Typography className={classes.pos} color="textSecondary">
-                    adjective
-                  </Typography>
-                  <Typography component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">Learn More</Button>
-                </CardActions>
-              </Card>
+          </Grid>
+          <Grid item xs={12} lg={4} xl={5}>
+            <Grid container spacing={16}>
+              <Grid item xs={12} sm={6} lg={12} xl={6}>
+                <Grid container spacing={16}>
+                  <Grid item xs={12}>
+                    <ListWidget
+                      className={classes.card}
+                      list={catData}
+                      title="Categories"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <ListWidget
+                      className={classes.card}
+                      list={catData}
+                      title="Categories"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <ListWidget
+                      className={classes.card}
+                      list={catData}
+                      title="Categories"
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12} sm={6} lg={12} xl={6}>
+                <Grid container spacing={16}>
+                  <Grid item xs={12}>
+                    <Card className={classes.card}>
+                      <CardContent>
+                        <Typography
+                          className={classes.postTitle}
+                          color="textSecondary"
+                        >
+                          Word of the Day
+                        </Typography>
+                        <Typography variant="headline" component="h2" />
+                        <Typography
+                          className={classes.pos}
+                          color="textSecondary"
+                        >
+                          adjective
+                        </Typography>
+                        <Typography component="p">
+                          well meaning and kindly.
+                          <br />
+                          {'"a benevolent smile"'}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button size="small">Learn More</Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
