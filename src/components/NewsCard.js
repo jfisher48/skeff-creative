@@ -41,6 +41,10 @@ const styles = theme => ({
     boxShadow: "none",
     fontSize: "0.75",
     margin: 0
+  },
+  media: {
+    minHeight: "200px",
+    objectFit: "cover"
   }
 });
 
@@ -49,7 +53,12 @@ class NewsCard extends Component {
     const classes = this.props.classes;
     return (
       <Card className={classes.postCard}>
-        <CardMedia />
+        <CardMedia
+          component="img"
+          title={this.props.alt}
+          image={this.props.pic}
+          className={classes.media}
+        />
         <CardContent className={classes.postContent}>
           <Typography className={classes.postTitle}>
             <a href="/news">{this.props.title}</a>

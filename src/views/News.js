@@ -23,7 +23,12 @@ class News extends Component {
     const news = newsData.map((prop, key) => {
       return (
         <Grid item xs={12}>
-          <NewsCard title={prop.title} content={prop.content} />
+          <NewsCard
+            title={prop.title}
+            alt={prop.title}
+            content={prop.content}
+            pic={prop.picture}
+          />
         </Grid>
       );
     });
