@@ -1,21 +1,21 @@
 const catData = [
   {
-    category: "Signmaking Themes"
+    itemName: "Signmaking Themes"
   },
   {
-    category: "Materials"
+    itemName: "Materials"
   },
   {
-    category: "Web Design"
+    itemName: "Web Design"
   },
   {
-    category: "Mobile Apps"
+    itemName: "Mobile Apps"
   },
   {
-    category: "Mobility 360"
+    itemName: "Mobility 360"
   },
   {
-    category: "Uncategorized"
+    itemName: "Uncategorized"
   }
 ];
 

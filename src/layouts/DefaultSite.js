@@ -172,6 +172,9 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       marginTop: "56px"
     },
+    [theme.breakpoints.up("md")]: {
+      overflowY: "scroll"
+    },
     height: "100%",
     flexGrow: 1,
     backgroundColor: "#f5f5f5",
