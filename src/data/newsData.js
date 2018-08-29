@@ -1,9 +1,9 @@
 import BudMLB from "../Bud_MLB.jpg";
-
+import Illinois from "../illinois_fb.png";
 const newsData = [
   {
     title: "2018 Illinois Football Schedules Available",
-    picture: BudMLB,
+    picture: Illinois,
     slug: "2018-illinois-football-schedules-available",
     content:
       "2018 Illinois Schedules are available for order in Mobility.  At this time 2x3 is the only available size.  More to follow."
