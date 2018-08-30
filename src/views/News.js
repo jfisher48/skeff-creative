@@ -11,8 +11,9 @@ import Typography from "@material-ui/core/Typography";
 import NewsIco from "../icons/news_b.svg";
 import NewsCard from "../components/NewsCard.js";
 import ListWidget from "../components/ListWidget";
-import newsData from "../data/newsData";
+//import newsData from "../data/newsData";
 import catData from "../data/catData";
+import "isomorphic-fetch";
 
 const styles = theme => ({});
 
