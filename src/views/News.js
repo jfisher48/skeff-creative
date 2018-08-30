@@ -17,21 +17,50 @@ import catData from "../data/catData";
 const styles = theme => ({});
 
 class News extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: []
+    };
+  }
+  componentDidMount() {
+    let postsURL = "http://blog.skeffcreative.com/wp-json/wp/v2/posts?_embed";
+    fetch(postsURL)
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          posts: response
+        });
+      });
+  }
+
   render() {
     const classes = this.props.classes;
-    const news = newsData.map((prop, key) => {
+    let posts = this.state.posts.map((post, index) => {
       return (
         <Grid item xs={12}>
           <NewsCard
-            title={prop.title}
-            alt={prop.title}
-            content={prop.content}
-            pic={prop.picture}
+            key={index}
+            title={post.title.rendered}
+            alt={post._embedded["wp:featuredmedia"]["0"].source_url}
+            excerpt={post.excerpt.rendered}
+            pic={post._embedded["wp:featuredmedia"]["0"].source_url}
           />
         </Grid>
       );
     });
+    // const news = newsData.map((prop, key) => {
+    //   return (
+    //     <Grid item xs={12}>
+    //       <NewsCard
+    //         title={prop.title}
+    //         alt={prop.title}
+    //         content={prop.content}
+    //         pic={prop.picture}
+    //       />
+    //     </Grid>
+    //   );
+    // });
     return (
       <div>
         <Helmet>
@@ -41,7 +70,7 @@ class News extends Component {
         <Grid container spacing={16}>
           <Grid item xs={12} lg={8} xl={7}>
             <Grid container spacing={16}>
-              {news}
+              {posts}
             </Grid>
           </Grid>
           <Grid item xs={12} lg={4} xl={5}>
@@ -66,7 +95,7 @@ class News extends Component {
                     <ListWidget
                       className={classes.card}
                       list={catData}
-                      title="Categories"
+                      title="Archives"
                     />
                   </Grid>
                 </Grid>
