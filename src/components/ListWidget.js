@@ -46,9 +46,9 @@ const styles = theme => ({
 class ListWidget extends Component {
   render() {
     const classes = this.props.classes;
-    const list = this.props.list.map((prop, key) => {
+    const list = this.props.list.map((prop, index) => {
       return (
-        <ListItem className={classes.widgetListItem}>
+        <ListItem className={classes.widgetListItem} key={index}>
           <ListItemIcon>
             <PlayArrow style={{ fontSize: 13 }} />
           </ListItemIcon>

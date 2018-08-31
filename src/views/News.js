@@ -11,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import NewsIco from "../icons/news_b.svg";
 import NewsCard from "../components/NewsCard.js";
 import ListWidget from "../components/ListWidget";
-//import newsData from "../data/newsData";
 import catData from "../data/catData";
 import "isomorphic-fetch";
 
@@ -39,9 +38,8 @@ class News extends Component {
     const classes = this.props.classes;
     let posts = this.state.posts.map((post, index) => {
       return (
-        <Grid item xs={12}>
+        <Grid item xs={12} key={index}>
           <NewsCard
-            key={index}
             title={post.title.rendered}
             alt={post._embedded["wp:featuredmedia"]["0"].source_url}
             excerpt={post.excerpt.rendered}
@@ -50,18 +48,6 @@ class News extends Component {
         </Grid>
       );
     });
-    // const news = newsData.map((prop, key) => {
-    //   return (
-    //     <Grid item xs={12}>
-    //       <NewsCard
-    //         title={prop.title}
-    //         alt={prop.title}
-    //         content={prop.content}
-    //         pic={prop.picture}
-    //       />
-    //     </Grid>
-    //   );
-    // });
     return (
       <div>
         <Helmet>
