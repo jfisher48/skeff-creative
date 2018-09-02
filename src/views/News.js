@@ -24,7 +24,7 @@ class News extends Component {
     };
   }
   componentDidMount() {
-    let postsURL = "http://blog.skeffcreative.com/wp-json/wp/v2/posts?_embed";
+    let postsURL = "https://admin.skeffcreative.com/wp-json/wp/v2/posts?_embed";
     fetch(postsURL)
       .then(response => response.json())
       .then(response => {
@@ -39,12 +39,19 @@ class News extends Component {
     let posts = this.state.posts.map((post, index) => {
       return (
         <Grid item xs={12} key={index}>
-          <NewsCard
-            title={post.title.rendered}
-            alt={post._embedded["wp:featuredmedia"]["0"].source_url}
-            excerpt={post.excerpt.rendered}
-            pic={post._embedded["wp:featuredmedia"]["0"].source_url}
-          />
+          {post._embedded["wp:featuredmedia"] ? (
+            <NewsCard
+              title={post.title.rendered}
+              alt={post._embedded["wp:featuredmedia"]["0"].source_url}
+              excerpt={post.excerpt.rendered}
+              pic={post._embedded["wp:featuredmedia"]["0"].source_url}
+            />
+          ) : (
+            <NewsCard
+              title={post.title.rendered}
+              excerpt={post.excerpt.rendered}
+            />
+          )}
         </Grid>
       );
     });

@@ -53,12 +53,16 @@ class NewsCard extends Component {
     const classes = this.props.classes;
     return (
       <Card className={classes.postCard}>
-        <CardMedia
-          component="img"
-          title={this.props.alt}
-          image={this.props.pic}
-          className={classes.media}
-        />
+        {this.props.pic ? (
+          <CardMedia
+            component="img"
+            title={this.props.alt}
+            image={this.props.pic}
+            className={classes.media}
+          />
+        ) : (
+          ""
+        )}
         <CardContent className={classes.postContent}>
           <Typography className={classes.postTitle}>
             <a href="/news">{this.props.title}</a>
