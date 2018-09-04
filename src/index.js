@@ -36,6 +36,13 @@ const theme = createMuiTheme({
       dark: "#0064b7",
       contrastText: "#fff"
     }
+  },
+  overrides: {
+    MuiCardActions: {
+      action: {
+        margin: 0
+      }
+    }
   }
 });
 

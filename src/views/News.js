@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import NewsIco from "../icons/news_b.svg";
 import NewsCard from "../components/NewsCard.js";
+import CategoryWidget from "../components/CategoryWidget";
 import ListWidget from "../components/ListWidget";
 import catData from "../data/catData";
 import "isomorphic-fetch";
@@ -45,11 +46,13 @@ class News extends Component {
               alt={post._embedded["wp:featuredmedia"]["0"].source_url}
               excerpt={post.excerpt.rendered}
               pic={post._embedded["wp:featuredmedia"]["0"].source_url}
+              link={"/news/" + post.id}
             />
           ) : (
             <NewsCard
               title={post.title.rendered}
               excerpt={post.excerpt.rendered}
+              link={"/news/" + post.id}
             />
           )}
         </Grid>
@@ -72,11 +75,7 @@ class News extends Component {
               <Grid item xs={12} sm={6} lg={12} xl={6}>
                 <Grid container spacing={16}>
                   <Grid item xs={12}>
-                    <ListWidget
-                      className={classes.card}
-                      list={catData}
-                      title="Categories"
-                    />
+                    <CategoryWidget className={classes.card} />
                   </Grid>
                   <Grid item xs={12}>
                     <ListWidget
