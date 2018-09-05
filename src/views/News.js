@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import NewsIco from "../icons/news_b.svg";
 import NewsCard from "../components/NewsCard.js";
 import CategoryWidget from "../components/CategoryWidget";
+import TagWidget from "../components/TagWidget";
 import ListWidget from "../components/ListWidget";
 import catData from "../data/catData";
 import "isomorphic-fetch";
@@ -78,11 +79,7 @@ class News extends Component {
                     <CategoryWidget className={classes.card} />
                   </Grid>
                   <Grid item xs={12}>
-                    <ListWidget
-                      className={classes.card}
-                      list={catData}
-                      title="Categories"
-                    />
+                    <TagWidget className={classes.card} />
                   </Grid>
                   <Grid item xs={12}>
                     <ListWidget

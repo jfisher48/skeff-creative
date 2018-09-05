@@ -74,7 +74,7 @@ class NewsCard extends Component {
         )}
         <CardContent className={classes.postContainer}>
           <Typography className={classes.postTitle}>
-            <a href="/news">{this.props.title}</a>
+            <a href={this.props.link}>{this.props.title}</a>
           </Typography>
           <Typography className={classes.postContent}>
             {this.props.excerpt}
