@@ -22,7 +22,7 @@ import {
 } from "../../node_modules/@material-ui/core";
 import Footer from "../components/Footer";
 
-const drawerWidth = 260;
+const drawerWidth = 270;
 
 const styles = theme => ({
   root: {

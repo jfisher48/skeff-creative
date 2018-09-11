@@ -66,12 +66,12 @@ class News extends Component {
         </Helmet>
         <PageHeading headingIcon={NewsIco}>News and Announcements</PageHeading>
         <Grid container spacing={16}>
-          <Grid item xs={12} lg={8} xl={7}>
+          <Grid item xs={12} lg={7} xl={6}>
             <Grid container spacing={16}>
               {posts}
             </Grid>
           </Grid>
-          <Grid item xs={12} lg={4} xl={5}>
+          <Grid item xs={12} lg={5} xl={6}>
             <Grid container spacing={16}>
               <Grid item xs={12} sm={6} lg={12} xl={6}>
                 <Grid container spacing={16}>
