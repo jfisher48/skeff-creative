@@ -52,6 +52,7 @@ class TagWidget extends Component {
     let tags = this.state.tags.map((tag, index) => {
       return (
         <Chip
+          key={index}
           label={tag.name}
           className={classes.tagChip}
           component="a"

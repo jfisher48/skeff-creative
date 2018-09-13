@@ -14,6 +14,8 @@ import CategoryWidget from "../components/CategoryWidget";
 import TagWidget from "../components/TagWidget";
 import ListWidget from "../components/ListWidget";
 import catData from "../data/catData";
+import { Switch, Route } from "react-router-dom";
+import Article from "../components/Article";
 import "isomorphic-fetch";
 
 const styles = theme => ({});
@@ -44,7 +46,7 @@ class News extends Component {
           {post._embedded["wp:featuredmedia"] ? (
             <NewsCard
               title={post.title.rendered}
-              alt={post._embedded["wp:featuredmedia"]["0"].source_url}
+              alt={post._embedded["wp:featuredmedia"]["0"].alt_text}
               excerpt={post.excerpt.rendered}
               pic={post._embedded["wp:featuredmedia"]["0"].source_url}
               link={"/news/" + post.id}
@@ -68,7 +70,20 @@ class News extends Component {
         <Grid container spacing={16}>
           <Grid item xs={12} lg={7} xl={6}>
             <Grid container spacing={16}>
-              {posts}
+              <Switch>
+                <Route path="/news" render={() => posts} exact />
+                {this.state.posts.map((post, index) => {
+                  let postID = post.id;
+                  return (
+                    <Route
+                      key={index}
+                      path={"/news/" + postID}
+                      render={props => <Article id={postID} />}
+                      exact
+                    />
+                  );
+                })}
+              </Switch>
             </Grid>
           </Grid>
           <Grid item xs={12} lg={5} xl={6}>
