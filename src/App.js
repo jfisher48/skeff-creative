@@ -19,17 +19,17 @@ class App extends Component {
   render() {
     return (
       <DefaultSite>
-        <Switch>
-          <Route exact path="/" component={Dashboard} title="Dashboard" />
-          <Route path="/logos" component={Logos} />
-          <Route path="/documents" component={Documents} />
-          <Route path="/calendar" component={Calendar} />
-          <Route path="/reminders" component={Reminders} />
-          <Route path="/news" component={News} />
-          <Route path="/people" component={People} />
-          <Route path="/suppliers" component={Suppliers} />
-          <Route path="/learning" component={Learning} />
-        </Switch>
+        {/* <Switch> */}
+        <Route path="/" exact component={Dashboard} title="Dashboard" />
+        <Route path="/logos" component={Logos} />
+        <Route path="/documents" component={Documents} />
+        <Route path="/calendar" component={Calendar} />
+        <Route path="/reminders" component={Reminders} />
+        <Route path="/news" component={News} />
+        <Route path="/people" component={People} />
+        <Route path="/suppliers" component={Suppliers} />
+        <Route path="/learning" component={Learning} />
+        {/* </Switch> */}
       </DefaultSite>
     );
   }

@@ -9,7 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import NewsIco from "../icons/news_b.svg";
-import NewsCard from "../components/NewsCard.js";
+import NewsList from "../components/NewsList.js";
 import CategoryWidget from "../components/CategoryWidget";
 import TagWidget from "../components/TagWidget";
 import ListWidget from "../components/ListWidget";
@@ -40,27 +40,27 @@ class News extends Component {
 
   render() {
     const classes = this.props.classes;
-    let posts = this.state.posts.map((post, index) => {
-      return (
-        <Grid item xs={12} key={index}>
-          {post._embedded["wp:featuredmedia"] ? (
-            <NewsCard
-              title={post.title.rendered}
-              alt={post._embedded["wp:featuredmedia"]["0"].alt_text}
-              excerpt={post.excerpt.rendered}
-              pic={post._embedded["wp:featuredmedia"]["0"].source_url}
-              link={"/news/" + post.id}
-            />
-          ) : (
-            <NewsCard
-              title={post.title.rendered}
-              excerpt={post.excerpt.rendered}
-              link={"/news/" + post.id}
-            />
-          )}
-        </Grid>
-      );
-    });
+    // let posts = this.state.posts.map((post, index) => {
+    //   return (
+    //     <Grid item xs={12} key={index}>
+    //       {post._embedded["wp:featuredmedia"] ? (
+    //         <NewsCard
+    //           title={post.title.rendered}
+    //           alt={post._embedded["wp:featuredmedia"]["0"].alt_text}
+    //           excerpt={post.excerpt.rendered}
+    //           pic={post._embedded["wp:featuredmedia"]["0"].source_url}
+    //           link={"/news/" + post.id}
+    //         />
+    //       ) : (
+    //         <NewsCard
+    //           title={post.title.rendered}
+    //           excerpt={post.excerpt.rendered}
+    //           link={"/news/" + post.id}
+    //         />
+    //       )}
+    //     </Grid>
+    //   );
+    // });
     return (
       <div>
         <Helmet>
@@ -69,22 +69,20 @@ class News extends Component {
         <PageHeading headingIcon={NewsIco}>News and Announcements</PageHeading>
         <Grid container spacing={16}>
           <Grid item xs={12} lg={7} xl={6}>
-            <Grid container spacing={16}>
-              <Switch>
-                <Route path="/news" render={() => posts} exact />
-                {this.state.posts.map((post, index) => {
-                  let postID = post.id;
-                  return (
-                    <Route
-                      key={index}
-                      path={"/news/" + postID}
-                      render={props => <Article id={postID} />}
-                      exact
-                    />
-                  );
-                })}
-              </Switch>
-            </Grid>
+            <Switch>
+              <Route exact path="/news" component={NewsList} />
+              {this.state.posts.map((post, index) => {
+                let postID = post.id;
+                return (
+                  <Route
+                    key={index}
+                    path={"/news/" + postID}
+                    render={props => <Article id={postID} />}
+                    exact
+                  />
+                );
+              })}
+            </Switch>
           </Grid>
           <Grid item xs={12} lg={5} xl={6}>
             <Grid container spacing={16}>
