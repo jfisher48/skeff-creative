@@ -9,6 +9,7 @@ import {
   ListItemIcon
 } from "../../node_modules/@material-ui/core";
 import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
+import jsonPrefix from "../data/jsonPrefix";
 
 const styles = theme => ({
   widgetContent: {
@@ -30,6 +31,7 @@ const styles = theme => ({
   },
   widgetAnchor: {
     flex: "1",
+    color: "rgb(42,47,67)",
     textDecoration: "none",
     fontFamily: "Roboto",
     fontWeight: "500",
@@ -59,7 +61,7 @@ class CategoryWidget extends Component {
   }
   componentDidMount() {
     let categoriesURL =
-      "https://admin.skeffcreative.com/wp-json/wp/v2/categories";
+      jsonPrefix + "categories?per_page=100&filter[orderby]=name&order=asc";
     fetch(categoriesURL)
       .then(response => response.json())
       .then(response => {
@@ -79,7 +81,7 @@ class CategoryWidget extends Component {
               style={{ fontSize: 10, color: "rgb(0, 145, 234)" }}
             />
           </ListItemIcon>
-          <a className={classes.widgetAnchor} href="/">
+          <a className={classes.widgetAnchor} href={"/news/" + category.slug}>
             {category.name}
           </a>
           <span className={classes.count}>{category.count}</span>

@@ -4,6 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
+import jsonPrefix from "../data/jsonPrefix";
 
 const styles = theme => ({
   widgetContent: {
@@ -37,7 +38,7 @@ class TagWidget extends Component {
     };
   }
   componentDidMount() {
-    let tagsURL = "https://admin.skeffcreative.com/wp-json/wp/v2/tags";
+    let tagsURL = jsonPrefix + "tags?per_page=100&orderby=count&order=desc";
     fetch(tagsURL)
       .then(response => response.json())
       .then(response => {
@@ -56,7 +57,7 @@ class TagWidget extends Component {
           label={tag.name}
           className={classes.tagChip}
           component="a"
-          href="/news"
+          href={"/news/" + tag.slug}
           clickable
         />
       );

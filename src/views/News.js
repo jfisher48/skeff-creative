@@ -16,6 +16,7 @@ import ListWidget from "../components/ListWidget";
 import catData from "../data/catData";
 import { Switch, Route } from "react-router-dom";
 import Article from "../components/Article";
+import jsonPrefix from "../data/jsonPrefix";
 import "isomorphic-fetch";
 
 const styles = theme => ({});
@@ -28,7 +29,7 @@ class News extends Component {
     };
   }
   componentDidMount() {
-    let postsURL = "https://admin.skeffcreative.com/wp-json/wp/v2/posts?_embed";
+    let postsURL = jsonPrefix + "posts?_embed";
     fetch(postsURL)
       .then(response => response.json())
       .then(response => {
@@ -40,27 +41,7 @@ class News extends Component {
 
   render() {
     const classes = this.props.classes;
-    // let posts = this.state.posts.map((post, index) => {
-    //   return (
-    //     <Grid item xs={12} key={index}>
-    //       {post._embedded["wp:featuredmedia"] ? (
-    //         <NewsCard
-    //           title={post.title.rendered}
-    //           alt={post._embedded["wp:featuredmedia"]["0"].alt_text}
-    //           excerpt={post.excerpt.rendered}
-    //           pic={post._embedded["wp:featuredmedia"]["0"].source_url}
-    //           link={"/news/" + post.id}
-    //         />
-    //       ) : (
-    //         <NewsCard
-    //           title={post.title.rendered}
-    //           excerpt={post.excerpt.rendered}
-    //           link={"/news/" + post.id}
-    //         />
-    //       )}
-    //     </Grid>
-    //   );
-    // });
+
     return (
       <div>
         <Helmet>
