@@ -66,22 +66,11 @@ class ArticleCard extends Component {
           <Typography className={classes.postTitle}>
             {this.props.title}
           </Typography>
-          <Typography className={classes.postContent}>
-            {this.props.content}
-          </Typography>
+          <Typography
+            dangerouslySetInnerHTML={{ __html: this.props.content }}
+            className={classes.postContent}
+          />
         </CardContent>
-        {/* <CardActions className={classes.postActions}>
-          <NavLink to = {this.props.link}>
-          <Button
-            className={classes.postButton}
-            variant="contained"
-            size="large"
-            color="secondary"
-          >
-            Learn More
-          </Button>
-          </NavLink>
-        </CardActions> */}
       </Card>
     );
   }

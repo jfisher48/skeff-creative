@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ArticleCard from "../components/ArticleCard.js";
+import jsonPrefix from "../data/jsonPrefix";
 import "isomorphic-fetch";
 
 const styles = theme => ({});
@@ -14,10 +15,7 @@ class Article extends Component {
     };
   }
   componentDidMount() {
-    let postURL =
-      "https://admin.skeffcreative.com/wp-json/wp/v2/posts/" +
-      this.props.id +
-      "?_embed";
+    let postURL = jsonPrefix + "/posts/" + this.props.id + "?_embed";
     fetch(postURL)
       .then(response => response.json())
       .then(response => {

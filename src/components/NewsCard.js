@@ -76,9 +76,10 @@ class NewsCard extends Component {
           <Typography className={classes.postTitle}>
             <a href={this.props.link}>{this.props.title}</a>
           </Typography>
-          <Typography className={classes.postContent}>
-            {this.props.excerpt}
-          </Typography>
+          <Typography
+            dangerouslySetInnerHTML={{ __html: this.props.excerpt }}
+            className={classes.postContent}
+          />
         </CardContent>
         <CardActions className={classes.postActions}>
           <NavLink to={this.props.link} className="postLink">
