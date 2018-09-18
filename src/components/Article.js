@@ -15,7 +15,7 @@ class Article extends Component {
     };
   }
   componentDidMount() {
-    let postURL = jsonPrefix + "/posts/" + this.props.id + "?_embed";
+    let postURL = jsonPrefix + "posts/" + this.props.id + "?_embed";
     fetch(postURL)
       .then(response => response.json())
       .then(response => {
