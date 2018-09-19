@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import { NavLink } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import {
   List,
@@ -81,9 +82,12 @@ class CategoryWidget extends Component {
               style={{ fontSize: 10, color: "rgb(0, 145, 234)" }}
             />
           </ListItemIcon>
-          <a className={classes.widgetAnchor} href={"/news/" + category.slug}>
+          <NavLink
+            className={classes.widgetAnchor}
+            to={"/news/" + category.slug}
+          >
             {category.name}
-          </a>
+          </NavLink>
           <span className={classes.count}>{category.count}</span>
         </ListItem>
       );

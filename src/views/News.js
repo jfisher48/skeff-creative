@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import NewsIco from "../icons/news_b.svg";
 import NewsList from "../components/NewsList.js";
+import CategoryList from "../components/CategoryList.js";
 import CategoryWidget from "../components/CategoryWidget";
 import TagWidget from "../components/TagWidget";
 import ListWidget from "../components/ListWidget";
@@ -25,16 +26,26 @@ class News extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [],
+      categories: []
     };
   }
   componentDidMount() {
     let postsURL = jsonPrefix + "posts?_embed";
+    let categoriesURL =
+      jsonPrefix + "categories?per_page=100&filter[orderby]=name&order=asc";
     fetch(postsURL)
       .then(response => response.json())
       .then(response => {
         this.setState({
           posts: response
+        });
+      });
+    fetch(categoriesURL)
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          categories: response
         });
       });
   }
@@ -57,8 +68,19 @@ class News extends Component {
                 return (
                   <Route
                     key={index}
-                    path={"/news/" + postID}
+                    path={"/news/" + post.slug}
                     render={props => <Article id={postID} />}
+                    exact
+                  />
+                );
+              })}
+              {this.state.categories.map((category, index) => {
+                let categoryID = category.id;
+                return (
+                  <Route
+                    key={index}
+                    path={"/news/" + category.slug}
+                    render={props => <CategoryList catID={categoryID} />}
                     exact
                   />
                 );

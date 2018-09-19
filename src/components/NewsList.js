@@ -34,14 +34,14 @@ class NewsList extends Component {
               alt={post._embedded["wp:featuredmedia"]["0"].alt_text}
               excerpt={post.excerpt.rendered}
               pic={post._embedded["wp:featuredmedia"]["0"].source_url}
-              link={"/news/" + post.id}
+              link={"/news/" + post.slug}
             />
           ) : (
             <NewsCard
               key={index}
               title={post.title.rendered}
               excerpt={post.excerpt.rendered}
-              link={"/news/" + post.id}
+              link={"/news/" + post.slug}
             />
           )}
         </Grid>
