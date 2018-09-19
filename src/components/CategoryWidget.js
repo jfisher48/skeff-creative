@@ -45,6 +45,15 @@ const styles = theme => ({
       color: theme.palette.secondary.main
     }
   },
+  widgetDisabled: {
+    flex: "1",
+    color: "rgba(0,0,0,0.40)",
+    textDecoration: "none",
+    fontFamily: "Roboto",
+    fontWeight: "500",
+    fontSize: ".95em",
+    lineHeight: "1.5em"
+  },
   count: {
     fontWeight: "600",
     fontSize: "13px",
@@ -82,13 +91,23 @@ class CategoryWidget extends Component {
               style={{ fontSize: 10, color: "rgb(0, 145, 234)" }}
             />
           </ListItemIcon>
-          <NavLink
-            className={classes.widgetAnchor}
-            to={"/news/" + category.slug}
-          >
-            {category.name}
-          </NavLink>
-          <span className={classes.count}>{category.count}</span>
+          {category.count != 0 ? (
+            <NavLink
+              className={classes.widgetAnchor}
+              to={"/news/" + category.slug}
+            >
+              {category.name}
+            </NavLink>
+          ) : (
+            <Typography className={classes.widgetDisabled}>
+              {category.name}
+            </Typography>
+          )}
+          {category.count != 0 ? (
+            <span className={classes.count}>{category.count}</span>
+          ) : (
+            ""
+          )}
         </ListItem>
       );
     });
