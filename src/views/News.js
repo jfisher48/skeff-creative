@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import NewsIco from "../icons/news_b.svg";
 import NewsList from "../components/NewsList.js";
 import CategoryList from "../components/CategoryList.js";
+import TagList from "../components/TagList.js";
 import CategoryWidget from "../components/CategoryWidget";
 import TagWidget from "../components/TagWidget";
 import ListWidget from "../components/ListWidget";
@@ -27,13 +28,15 @@ class News extends Component {
     super(props);
     this.state = {
       posts: [],
-      categories: []
+      categories: [],
+      tags: []
     };
   }
   componentDidMount() {
     let postsURL = jsonPrefix + "posts?_embed";
     let categoriesURL =
       jsonPrefix + "categories?per_page=100&filter[orderby]=name&order=asc";
+    let tagsURL = jsonPrefix + "tags?per_page=100&orderby=count&order=desc";
     fetch(postsURL)
       .then(response => response.json())
       .then(response => {
@@ -46,6 +49,13 @@ class News extends Component {
       .then(response => {
         this.setState({
           categories: response
+        });
+      });
+    fetch(tagsURL)
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          tags: response
         });
       });
   }
@@ -81,6 +91,17 @@ class News extends Component {
                     key={index}
                     path={"/news/" + category.slug}
                     render={props => <CategoryList catID={categoryID} />}
+                    exact
+                  />
+                );
+              })}
+              {this.state.tags.map((tag, index) => {
+                let tagID = tag.id;
+                return (
+                  <Route
+                    key={index}
+                    path={"/news/" + tag.slug}
+                    render={props => <TagList tagID={tagID} />}
                     exact
                   />
                 );
