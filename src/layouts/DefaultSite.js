@@ -210,7 +210,9 @@ class DefaultSite extends React.Component {
         >
           <MuiThemeProvider theme={prop.btn}>
             <MenuItem
-              selected={prop.path === pathname}
+              selected={
+                prop.path === pathname || pathname.match(prop.path + "/")
+              }
               className={classes.itemLink}
               button
               onClick={this.handleDrawerToggle}
