@@ -37,11 +37,15 @@ class Article extends Component {
               pic={
                 this.state.post._embedded["wp:featuredmedia"]["0"].source_url
               }
+              author={this.state.post._embedded["author"]["0"].name}
+              category={this.state.post.categories}
             />
           ) : (
             <ArticleCard
               title={this.state.post.title.rendered}
               content={this.state.post.content.rendered}
+              author={this.state.post._embedded["author"]["0"].name}
+              category={this.state.post.categories}
             />
           )}
         </Grid>

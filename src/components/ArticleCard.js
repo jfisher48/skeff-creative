@@ -5,6 +5,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 //import {NavLink} from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
+import CategoryLink from "../components/CategoryLink";
+import Moment from "react-moment";
 
 const styles = theme => ({
   postContainer: {
@@ -14,6 +16,7 @@ const styles = theme => ({
     paddingTop: "40px"
   },
   postTitle: {
+    marginBottom: "15px",
     fontSize: "2.25em",
     lineHeight: "1.25",
     color: "#2a2f43",
@@ -22,6 +25,18 @@ const styles = theme => ({
       textDecoration: "none",
       "&:hover": {
         color: theme.palette.secondary.main
+      }
+    }
+  },
+  postInfo: {
+    color: "#7f828f",
+    fontSize: "0.75em",
+    fontWeight: "600",
+    "& a": {
+      color: "rgb(0,145,234)",
+      textDecoration: "none",
+      "&:hover": {
+        color: "#0064b7"
       }
     }
   },
@@ -65,6 +80,10 @@ class ArticleCard extends Component {
         <CardContent className={classes.postContainer}>
           <Typography className={classes.postTitle}>
             {this.props.title}
+          </Typography>
+          <Typography className={classes.postInfo}>
+            <Moment format="MMMM Do, YYYY">{this.props.date}</Moment> by{" "}
+            {this.props.author} in <CategoryLink id={this.props.category} />
           </Typography>
           <Typography
             dangerouslySetInnerHTML={{ __html: this.props.content }}

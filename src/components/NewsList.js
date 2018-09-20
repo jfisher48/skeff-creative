@@ -35,6 +35,9 @@ class NewsList extends Component {
               excerpt={post.excerpt.rendered}
               pic={post._embedded["wp:featuredmedia"]["0"].source_url}
               link={"/news/" + post.slug}
+              date={post.date}
+              author={post._embedded["author"]["0"].name}
+              category={post.categories}
             />
           ) : (
             <NewsCard
@@ -42,6 +45,8 @@ class NewsList extends Component {
               title={post.title.rendered}
               excerpt={post.excerpt.rendered}
               link={"/news/" + post.slug}
+              author={post._embedded["author"]["0"].name}
+              category={post.categories}
             />
           )}
         </Grid>

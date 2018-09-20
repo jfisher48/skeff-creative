@@ -37,6 +37,9 @@ class CategoryList extends Component {
                 excerpt={post.excerpt.rendered}
                 pic={post._embedded["wp:featuredmedia"]["0"].source_url}
                 link={"/news/" + post.slug}
+                date={post.date}
+                author={post._embedded["author"]["0"].name}
+                category={post.categories}
               />
             ) : (
               <NewsCard
