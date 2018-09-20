@@ -3,11 +3,11 @@ import { withStyles } from "@material-ui/core/styles";
 import PageHeading from "../components/PageHeading.js";
 import Helmet from "react-helmet";
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+// import Card from "@material-ui/core/Card";
+// import CardActions from "@material-ui/core/CardActions";
+// import CardContent from "@material-ui/core/CardContent";
+// import Button from "@material-ui/core/Button";
+// import Typography from "@material-ui/core/Typography";
 import NewsIco from "../icons/news_b.svg";
 import NewsList from "../components/NewsList.js";
 import CategoryList from "../components/CategoryList.js";
@@ -15,7 +15,7 @@ import TagList from "../components/TagList.js";
 import CategoryWidget from "../components/CategoryWidget";
 import TagWidget from "../components/TagWidget";
 import ListWidget from "../components/ListWidget";
-import catData from "../data/catData";
+import archiveData from "../data/archiveData";
 import { Switch, Route } from "react-router-dom";
 import Article from "../components/Article";
 import jsonPrefix from "../data/jsonPrefix";
@@ -121,7 +121,7 @@ class News extends Component {
                   <Grid item xs={12}>
                     <ListWidget
                       className={classes.card}
-                      list={catData}
+                      list={archiveData}
                       title="Archives"
                     />
                   </Grid>
@@ -130,7 +130,7 @@ class News extends Component {
               <Grid item xs={12} sm={6} lg={12} xl={6}>
                 <Grid container spacing={16}>
                   <Grid item xs={12}>
-                    <Card className={classes.card}>
+                    {/* <Card className={classes.card}>
                       <CardContent>
                         <Typography
                           className={classes.postTitle}
@@ -154,7 +154,7 @@ class News extends Component {
                       <CardActions>
                         <Button size="small">Learn More</Button>
                       </CardActions>
-                    </Card>
+                    </Card> */}
                   </Grid>
                 </Grid>
               </Grid>
