@@ -39,10 +39,17 @@ const theme = createMuiTheme({
   },
   overrides: {
     MuiCardActions: {
+      root: {
+        padding: "15px"
+      },
       action: {
         margin: 0
       }
     }
+    // MuiSvgIcon: {
+    //   root: {
+    //     fontSize: "20px"
+    // }}
   }
 });
 
