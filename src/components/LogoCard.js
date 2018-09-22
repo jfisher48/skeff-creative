@@ -67,6 +67,17 @@ const styles = theme => ({
     marginLeft: "5px",
     textDecoration: "none"
   },
+  buttonText: {
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
+  },
+  rightIcon: {
+    marginLeft: "10px",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "20px"
+    }
+  },
   media: {
     minHeight: "100px",
     objectFit: "cover"
@@ -77,7 +88,7 @@ class LogoCard extends Component {
   render() {
     const classes = this.props.classes;
     return (
-      <Grid item xs={12} lg={3}>
+      <Grid item xs={12} sm={6} lg={3} xl={4}>
         <Card>
           <CardMedia
             component="img"
@@ -99,6 +110,7 @@ class LogoCard extends Component {
                   color="primary"
                   className={classes.cardButton}
                 >
+                  <span className={classes.buttonText}>Download</span>
                   <CloudDownloadIcon className={classes.rightIcon} />
                 </Button>
               </Tooltip>
@@ -111,6 +123,7 @@ class LogoCard extends Component {
                   color="primary"
                   className={classes.cardButton}
                 >
+                  <span className={classes.buttonText}>Share</span>
                   <ShareIcon className={classes.rightIcon} />
                 </Button>
               </Tooltip>
