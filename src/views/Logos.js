@@ -5,7 +5,7 @@ import LogosIco from "../icons/brand_b.svg";
 import Helmet from "react-helmet";
 import Grid from "@material-ui/core/Grid";
 import LogoCard from "../components/LogoCard";
-import bud_light from "../images/bud_light.png";
+import bud_light from "../images/bud_light.svg";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";

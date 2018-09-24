@@ -91,7 +91,7 @@ class LogoCard extends Component {
   render() {
     const classes = this.props.classes;
     return (
-      <Grid item xs={12} sm={6} lg={3} xl={4}>
+      <Grid item xs={12} sm={6} lg={4} xl={3}>
         <Card>
           <CardMedia
             component="img"
