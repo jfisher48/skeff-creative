@@ -5,6 +5,7 @@ import LogosIco from "../icons/brand_b.svg";
 import Helmet from "react-helmet";
 import Grid from "@material-ui/core/Grid";
 import LogoCard from "../components/LogoCard";
+import jsonPrefix from "../data/jsonPrefix";
 import bud_light from "../images/bud_light.svg";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -16,8 +17,35 @@ import { Switch, Route } from "react-router-dom";
 const styles = theme => ({});
 
 class Logos extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      logos: []
+    };
+  }
+  componentDidMount() {
+    let logosURL = jsonPrefix + "logos?_embed&filter[orderby]=slug&order=asc";
+    fetch(logosURL)
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          logos: response
+        });
+      });
+  }
+
   render() {
+    let logos = this.state.logos.map((logo, index) => {
+      return (
+        <LogoCard
+          key={index}
+          alt={logo.title.rendered}
+          linkID={logo.acf.file_id}
+          title={logo.title.rendered}
+          pic={logo._embedded["wp:featuredmedia"]["0"].source_url}
+        />
+      );
+    });
     return (
       <div>
         <Helmet>
@@ -26,18 +54,19 @@ class Logos extends Component {
         <PageHeading headingIcon={LogosIco}>Logos</PageHeading>
         <Grid container spacing={16}>
           <Grid item container spacing={16} xs={12} lg={8} xl={7}>
-            <LogoCard link="/logos" title="Bud Light" pic={bud_light} />
-            <LogoCard link="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard link="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard link="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard link="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard link="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard link="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard link="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard link="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard link="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard link="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard link="/logos" title="Brand Name" pic={bud_light} />
+            {logos}
+            {/* <LogoCard linkID="1I83Nheftkh2mVSxjfiX6alN_bLz-umCb" title="Bud Light" pic={bud_light} /> */}
+            {/* <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
+            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
+            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
+            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
+            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
+            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
+            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
+            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
+            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
+            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
+            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} /> */}
           </Grid>
           <Grid item xs={12} lg={4} xl={5}>
             <Grid container spacing={16}>

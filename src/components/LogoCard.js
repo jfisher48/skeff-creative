@@ -12,6 +12,8 @@ import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
+import googleDownload from "../data/googleDownload";
+import googleShare from "../data/googleShare";
 import CategoryLink from "../components/CategoryLink";
 import Moment from "react-moment";
 
@@ -105,7 +107,7 @@ class LogoCard extends Component {
             </Typography>
           </CardContent>
           <CardActions className={classes.cardActions}>
-            <NavLink to={this.props.link} className="cardLink">
+            <a href={googleDownload + this.props.linkID} className="cardLink">
               <Tooltip title="Download Logo Package">
                 <Button
                   variant="outlined"
@@ -117,8 +119,8 @@ class LogoCard extends Component {
                   <CloudDownloadIcon className={classes.rightIcon} />
                 </Button>
               </Tooltip>
-            </NavLink>
-            <NavLink to={this.props.link} className="cardLink">
+            </a>
+            <a href={googleShare + this.props.linkID} className="cardLink">
               <Tooltip title="Share Download Link">
                 <Button
                   variant="outlined"
@@ -130,7 +132,7 @@ class LogoCard extends Component {
                   <ShareIcon className={classes.rightIcon} />
                 </Button>
               </Tooltip>
-            </NavLink>
+            </a>
             {/* <NavLink to={this.props.link} className="cardLink">
             <Button
               className={classes.cardButton}
