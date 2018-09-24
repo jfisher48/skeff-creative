@@ -65,7 +65,10 @@ const styles = theme => ({
     margin: 0,
     marginRight: "5px",
     marginLeft: "5px",
-    textDecoration: "none"
+    textDecoration: "none",
+    [theme.breakpoints.down("xs")]: {
+      width: "120px"
+    }
   },
   buttonText: {
     [theme.breakpoints.up("sm")]: {
@@ -73,7 +76,7 @@ const styles = theme => ({
     }
   },
   rightIcon: {
-    marginLeft: "10px",
+    marginLeft: "6px",
     [theme.breakpoints.down("xs")]: {
       fontSize: "20px"
     }
