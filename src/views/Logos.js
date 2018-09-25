@@ -17,7 +17,9 @@ class Logos extends Component {
     };
   }
   componentDidMount() {
-    let logosURL = jsonPrefix + "logos?_embed&filter[orderby]=slug&order=asc";
+    let logosURL =
+      jsonPrefix +
+      "logos?_embed&per_page=100&filter[orderby]=menu_order&order=asc";
     fetch(logosURL)
       .then(response => response.json())
       .then(response => {
