@@ -50,18 +50,6 @@ class Logos extends Component {
         <Grid container spacing={16}>
           <Grid item container spacing={16} xs={12} lg={8} xl={7}>
             {logos}
-            {/* <LogoCard linkID="1I83Nheftkh2mVSxjfiX6alN_bLz-umCb" title="Bud Light" pic={bud_light} /> */}
-            {/* <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} />
-            <LogoCard linkID="/logos" title="Brand Name" pic={bud_light} /> */}
           </Grid>
           <Grid item xs={12} lg={4} xl={5}>
             <Grid container spacing={16}>
