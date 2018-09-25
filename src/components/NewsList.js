@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import NewsCard from "../components/NewsCard.js";
 import jsonPrefix from "../data/jsonPrefix";
@@ -26,10 +25,9 @@ class NewsList extends Component {
   render() {
     let posts = this.state.posts.map((post, index) => {
       return (
-        <Grid item xs={12}>
+        <Grid item xs={12} key={index}>
           {post._embedded["wp:featuredmedia"] ? (
             <NewsCard
-              key={index}
               title={post.title.rendered}
               alt={post._embedded["wp:featuredmedia"]["0"].alt_text}
               excerpt={post.excerpt.rendered}
@@ -41,7 +39,6 @@ class NewsList extends Component {
             />
           ) : (
             <NewsCard
-              key={index}
               title={post.title.rendered}
               excerpt={post.excerpt.rendered}
               link={"/news/" + post.slug}

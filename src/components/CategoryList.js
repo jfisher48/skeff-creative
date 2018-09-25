@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import NewsCard from "../components/NewsCard.js";
 import jsonPrefix from "../data/jsonPrefix";

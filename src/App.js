@@ -2,8 +2,7 @@ import React, { Component } from "react";
 //import PropTypes from 'prop-types'
 import "./styles/App.css";
 import DefaultSite from "./layouts/DefaultSite";
-import { Switch, Route } from "react-router-dom";
-
+import { Route } from "react-router-dom";
 // import views
 import Dashboard from "./views/Dashboard";
 import Calendar from "./views/Calendar";

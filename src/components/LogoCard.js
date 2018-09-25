@@ -5,8 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import { NavLink } from "react-router-dom";
-import IconButton from "@material-ui/core/IconButton";
 import ShareIcon from "@material-ui/icons/Share";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import Button from "@material-ui/core/Button";
@@ -14,8 +12,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import googleDownload from "../data/googleDownload";
 import googleShare from "../data/googleShare";
-import CategoryLink from "../components/CategoryLink";
-import Moment from "react-moment";
 
 const styles = theme => ({
   cardContainer: {
@@ -90,6 +86,9 @@ const styles = theme => ({
 });
 
 class LogoCard extends Component {
+  componentWillMount() {
+    this.sharelink = encodeURI(googleShare + this.props.linkID);
+  }
   render() {
     const classes = this.props.classes;
     return (
@@ -120,7 +119,15 @@ class LogoCard extends Component {
                 </Button>
               </Tooltip>
             </a>
-            <a href={googleShare + this.props.linkID} className="cardLink">
+            <a
+              href={
+                "mailto:?subject=Your%20Requested%20" +
+                this.props.title +
+                "%20Logo Package&body=Here%20are%20the%20logos%20you%20requested%3A%20" +
+                this.sharelink
+              }
+              className="cardLink"
+            >
               <Tooltip title="Share Download Link">
                 <Button
                   variant="outlined"
@@ -133,16 +140,6 @@ class LogoCard extends Component {
                 </Button>
               </Tooltip>
             </a>
-            {/* <NavLink to={this.props.link} className="cardLink">
-            <Button
-              className={classes.cardButton}
-              variant="contained"
-              size="large"
-              color="secondary"
-            >
-              Download
-            </Button>
-          </NavLink> */}
           </CardActions>
         </Card>
       </Grid>

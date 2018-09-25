@@ -3,8 +3,6 @@ import jsonPrefix from "../data/jsonPrefix";
 import { NavLink } from "react-router-dom";
 import "isomorphic-fetch";
 
-const styles = theme => ({});
-
 class CategoryLink extends Component {
   constructor(props) {
     super(props);

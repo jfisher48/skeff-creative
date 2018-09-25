@@ -91,7 +91,7 @@ class CategoryWidget extends Component {
               style={{ fontSize: 10, color: "rgb(0, 145, 234)" }}
             />
           </ListItemIcon>
-          {category.count != 0 ? (
+          {category.count !== 0 ? (
             <NavLink
               className={classes.widgetAnchor}
               to={"/news/" + category.slug}
@@ -103,7 +103,7 @@ class CategoryWidget extends Component {
               {category.name}
             </Typography>
           )}
-          {category.count != 0 ? (
+          {category.count !== 0 ? (
             <span className={classes.count}>{category.count}</span>
           ) : (
             ""
