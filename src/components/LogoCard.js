@@ -123,7 +123,7 @@ class LogoCard extends Component {
               href={
                 "mailto:?subject=Your%20Requested%20" +
                 this.props.title +
-                "%20Logo Package&body=Here%20are%20the%20logos%20you%20requested%3A%20" +
+                "%20Logo Package&body=Here%20is%20a%20link%20to%20the%20logos%20you%20requested%3A%20" +
                 this.sharelink
               }
               className="cardLink"
