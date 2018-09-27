@@ -48,10 +48,10 @@ class Logos extends Component {
         </Helmet>
         <PageHeading headingIcon={LogosIco}>Logos</PageHeading>
         <Grid container spacing={16}>
-          <Grid item container spacing={16} xs={12} lg={8} xl={7}>
+          <Grid item container spacing={16} xs={12} sm={8} xl={7}>
             {logos}
           </Grid>
-          <Grid item xs={12} lg={4} xl={5}>
+          <Grid item xs={12} sm={4} xl={5}>
             <Grid container spacing={16}>
               <Grid item xs={12} sm={6} lg={12} xl={6}>
                 <Grid container spacing={16}>
