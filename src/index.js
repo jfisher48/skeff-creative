@@ -6,7 +6,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import "./styles/index.css";
 //import App from './App'
 import "typeface-roboto";
-//import registerServiceWorker from './registerServiceWorker'
+import registerServiceWorker from "./registerServiceWorker";
 import indexRoutes from "./routes/indexRoutes";
 
 const hist = createBrowserHistory();
@@ -68,4 +68,4 @@ ReactDOM.render(
   </MuiThemeProvider>,
   document.getElementById("root")
 );
-//registerServiceWorker();
+registerServiceWorker();
