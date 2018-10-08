@@ -126,7 +126,7 @@ class ResponsiveDrawer extends React.Component {
           >
             <div>
               <div className={classes.drawerTitle}>
-                <Typography variant="title" color="inherit" noWrap>
+                <Typography variant="subtitle1" color="inherit" noWrap>
                   Skeff Creative
                 </Typography>
               </div>

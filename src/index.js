@@ -18,9 +18,10 @@ const theme = createMuiTheme({
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
-    title: {
+    subtitle1: {
       color: "rgb(85,85,85)",
-      fontSize: "1.4em"
+      fontSize: "1.4em",
+      fontWeight: "500"
     }
   },
   palette: {

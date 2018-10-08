@@ -39,7 +39,7 @@ class PageHeading extends Component {
               className={classes.headingIcon}
               alt={this.props.children}
             />
-            <Typography variant="title">{this.props.children}</Typography>
+            <Typography variant="subtitle1">{this.props.children}</Typography>
           </Toolbar>
         </AppBar>
       </div>
