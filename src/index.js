@@ -5,7 +5,7 @@ import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
 import "./styles/index.css";
 //import App from './App'
-import "typeface-roboto";
+//import "typeface-roboto";
 import registerServiceWorker from "./registerServiceWorker";
 import indexRoutes from "./routes/indexRoutes";
 

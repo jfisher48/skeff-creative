@@ -33,7 +33,7 @@ const styles = theme => ({
   postInfo: {
     color: "#7f828f",
     fontSize: "0.75em",
-    fontWeight: "600",
+    fontWeight: "700",
     "& a": {
       color: "rgb(0,145,234)",
       textDecoration: "none",

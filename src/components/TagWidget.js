@@ -21,7 +21,7 @@ const styles = theme => ({
     margin: "0 4px 4px 0",
     borderRadius: "4px",
     fontSize: "11px",
-    fontWeight: "600",
+    fontWeight: "700",
     color: "white",
     textTransform: "uppercase",
     "&:hover": {
