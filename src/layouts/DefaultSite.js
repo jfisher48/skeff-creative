@@ -10,6 +10,7 @@ import siteRoutes from "../routes/routes";
 import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 import MenuIcon from "@material-ui/icons/Menu";
+import SvgIcon from "@material-ui/core/SvgIcon";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import logo from "../icons/creative_logo.svg";
 import {
@@ -158,13 +159,13 @@ const styles = theme => ({
     float: "left",
     //marginRight: "15px",
     textAlign: "center",
-    verticalAlign: "middle"
+    verticalAlign: "middle",
+    color: "#fff"
   },
   itemText: {
     color: "#ffffff",
     margin: "0",
     lineHeight: "30px",
-    fontFamily: "Roboto",
     fontSize: "1em"
   },
   content: {
@@ -216,11 +217,18 @@ class DefaultSite extends React.Component {
               button
               onClick={this.handleDrawerToggle}
             >
-              <img
+              {/* <img
                 src={prop.icon}
                 alt={prop.sidebarName}
                 className={classes.icon}
-              />
+              /> */}
+              <SvgIcon
+                className={classes.icon}
+                viewBox={prop.svgbox}
+                fontSize="large"
+              >
+                <path d={prop.svgpath} />
+              </SvgIcon>
               <ListItemText
                 className={classes.itemText}
                 primary={prop.sidebarName}
