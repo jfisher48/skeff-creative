@@ -13,6 +13,7 @@ import News from "./views/News";
 import People from "./views/People";
 import Reminders from "./views/Reminders";
 import Suppliers from "./views/Suppliers";
+import WorkOrders from "./views/WorkOrders";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 
@@ -30,6 +31,7 @@ class App extends Component {
         <Route path="/people" component={People} />
         <Route path="/suppliers" component={Suppliers} />
         <Route path="/learning" component={Learning} />
+        <Route path="/workorders" component={WorkOrders} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
         {/* </Switch> */}
