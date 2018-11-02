@@ -12,9 +12,11 @@ const WorkOrderList = ({ workorders }) => {
               workorder={workorder}
               key={workorder.id}
               account={workorder.account}
-              requestor={workorder.requestor}
+              requestor={
+                workorder.requesterFirstName + " " + workorder.requesterLastName
+              }
               content={workorder.content}
-              link="#"
+              link={"/workorders/" + workorder.id}
             />
           );
         })}

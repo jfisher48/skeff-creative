@@ -10,6 +10,9 @@ import Typography from "@material-ui/core/Typography";
 //import CategoryLink from "../components/CategoryLink";
 import Moment from "react-moment";
 import { Grid } from "@material-ui/core";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
 const styles = theme => ({
   orderContainer: {
@@ -76,27 +79,25 @@ const styles = theme => ({
 class WorkOrderDetail extends Component {
   render() {
     const classes = this.props.classes;
-    const id = this.props.match.params.id;
-    return (
-      <Grid container spacing={16}>
-        <Grid item xs={12}>
-          <Card className={classes.orderCard}>
-            <CardContent className={classes.orderContainer}>
-              <Typography className={classes.orderTitle}>
-                <a href={this.props.link}>
-                  {this.props.account} WO
-                  {id}
-                </a>
-              </Typography>
-              <Typography className={classes.orderInfo}>
-                <Moment format="MMMM Do, YYYY">{this.props.date}</Moment> by{" "}
-                {this.props.requestor}
-              </Typography>
-              <Typography className={classes.orderContent}>
-                {this.props.content}
-              </Typography>
-            </CardContent>
-            {/* <CardActions className={classes.orderActions}>
+    const { workorder } = this.props;
+    if (workorder) {
+      return (
+        <Grid container spacing={16}>
+          <Grid item xs={12}>
+            <Card className={classes.orderCard}>
+              <CardContent className={classes.orderContainer}>
+                <Typography className={classes.orderTitle}>
+                  {workorder.account} {this.props.match.params.id}
+                </Typography>
+                <Typography className={classes.orderInfo}>
+                  <Moment format="MMMM Do, YYYY">{this.props.date}</Moment> by{" "}
+                  {workorder.requesterFirstName} {workorder.requesterLastName}
+                </Typography>
+                <Typography className={classes.orderContent}>
+                  {workorder.content}
+                </Typography>
+              </CardContent>
+              {/* <CardActions className={classes.orderActions}>
             <NavLink to={this.props.link} className="postLink">
               <Button
                 className={classes.orderButton}
@@ -108,11 +109,28 @@ class WorkOrderDetail extends Component {
               </Button>
             </NavLink>
           </CardActions> */}
-          </Card>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
-    );
+      );
+    } else {
+      return <div>Loading...</div>;
+    }
   }
 }
 
-export default withStyles(styles)(WorkOrderDetail);
+const mapStateToProps = (state, ownProps) => {
+  console.log(state);
+  const id = ownProps.match.params.id;
+  const workorders = state.firestore.data.workorders;
+  const workorder = workorders ? workorders[id] : null;
+  return {
+    workorder: workorder
+  };
+};
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: "workorders" }])
+)(WorkOrderDetail);
