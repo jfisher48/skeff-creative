@@ -20,6 +20,7 @@ import {
   MuiThemeProvider
 } from "../../node_modules/@material-ui/core";
 import Footer from "../components/Footer";
+import { connect } from "react-redux";
 
 const drawerWidth = 270;
 
@@ -322,7 +323,13 @@ DefaultSite.propTypes = {
   theme: PropTypes.object.isRequired
 };
 
+const mapStateToProps = state => {
+  console.log(state);
+  return {};
+};
+
 export default compose(
+  connect(mapStateToProps),
   withRouter,
   withStyles(styles, { withTheme: true })
 )(DefaultSite);

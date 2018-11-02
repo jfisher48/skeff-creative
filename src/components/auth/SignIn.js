@@ -4,6 +4,9 @@ import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { connect } from "react-redux";
+import { signIn } from "../../store/actions/authActions";
+import { compose } from "redux";
 
 const styles = theme => ({
   container: {
@@ -32,11 +35,12 @@ class SignIn extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.signIn(this.state);
   };
 
   render() {
     const classes = this.props;
+    const { authError } = this.props;
     return (
       <div>
         <form className={classes.container} onSubmit={this.handleSubmit}>
@@ -70,10 +74,29 @@ class SignIn extends Component {
           >
             Login
           </Button>
+          <div>{authError ? <p>{authError}</p> : null}</div>
         </form>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(SignIn);
+const mapStateToProps = state => {
+  return {
+    authError: state.auth.authError
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signIn: creds => dispatch(signIn(creds))
+  };
+};
+
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(SignIn);
