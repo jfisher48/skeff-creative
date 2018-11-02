@@ -10,6 +10,9 @@ import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { compose } from "recompose";
+import { connect } from "react-redux";
+import { createWorkorder } from "../../store/actions/workorderActions";
 
 const styles = theme => ({
   container: {
@@ -30,11 +33,11 @@ const scemployees = ["Jay Fisher", "Luke Wells", "Bayleigh Harshbarger"];
 
 class CreateWorkOrder extends Component {
   state = {
-    salesman: "",
+    //salesman: "",
     account: "",
-    comments: "",
-    items: [],
-    scemployee: ""
+    comments: ""
+    //items: [],
+    //scemployee: ""
   };
 
   handleChange = e => {
@@ -44,7 +47,8 @@ class CreateWorkOrder extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    //console.log(this.state);
+    this.props.createWorkorder(this.state);
   };
 
   render() {
@@ -53,7 +57,7 @@ class CreateWorkOrder extends Component {
       <div>
         <form className={classes.container} onSubmit={this.handleSubmit}>
           <Typography variant="h2">Create Work Order</Typography>
-          <TextField
+          {/* <TextField
             required
             name="salesman"
             type="text"
@@ -62,7 +66,7 @@ class CreateWorkOrder extends Component {
             margin="normal"
             fullWidth
             onChange={this.handleChange}
-          />
+          /> */}
           <TextField
             required
             name="account"
@@ -84,7 +88,7 @@ class CreateWorkOrder extends Component {
             margin="normal"
             onChange={this.handleChange}
           />
-          <TextField
+          {/* <TextField
             required
             name="items"
             type="text"
@@ -93,8 +97,8 @@ class CreateWorkOrder extends Component {
             margin="normal"
             fullWidth
             onChange={this.handleChange}
-          />
-          <FormControl fullWidth>
+          /> */}
+          {/* <FormControl fullWidth>
             <InputLabel htmlFor="scemployee">Assign To</InputLabel>
             <Select
               value={this.state.scemployee}
@@ -107,7 +111,7 @@ class CreateWorkOrder extends Component {
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>
+          </FormControl> */}
 
           <Button
             type="submit"
@@ -123,4 +127,16 @@ class CreateWorkOrder extends Component {
   }
 }
 
-export default withStyles(styles)(CreateWorkOrder);
+const mapDispatchToProps = dispatch => {
+  return {
+    createWorkorder: workorder => dispatch(createWorkorder(workorder))
+  };
+};
+
+export default compose(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  withStyles(styles)
+)(CreateWorkOrder);

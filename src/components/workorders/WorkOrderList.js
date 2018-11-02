@@ -1,31 +1,23 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import WorkOrderCard from "./WorkOrderCard";
+import WorkOrderSummary from "./WorkOrderSummary";
 
-const WorkOrderList = () => {
+const WorkOrderList = ({ workorders }) => {
   return (
     <Grid container spacing={16}>
-      <WorkOrderCard
-        account="Casey's Paris"
-        date="2018-10-31"
-        requestor="Tim Crawley"
-        content="Can I get a Case Card"
-        link="#"
-      />
-      <WorkOrderCard
-        account="Casey's Paris"
-        date="2018-10-31"
-        requestor="Tim Crawley"
-        content="Can I get a Case Card"
-        link="#"
-      />
-      <WorkOrderCard
-        account="Casey's Paris"
-        date="2018-10-31"
-        requestor="Tim Crawley"
-        content="Can I get a Case Card"
-        link="#"
-      />
+      {workorders &&
+        workorders.map(workorder => {
+          return (
+            <WorkOrderSummary
+              workorder={workorder}
+              key={workorder.id}
+              account={workorder.account}
+              requestor={workorder.requestor}
+              content={workorder.content}
+              link="#"
+            />
+          );
+        })}
     </Grid>
   );
 };

@@ -8,6 +8,22 @@ import "./styles/index.css";
 //import "typeface-roboto";
 import registerServiceWorker from "./registerServiceWorker";
 import indexRoutes from "./routes/indexRoutes";
+import { createStore, applyMiddleware, compose } from "redux";
+import rootReducer from "./store/reducers/rootReducer";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import { reduxFirestore, getFirestore } from "redux-firestore";
+import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
+import fbConfig from "./config/fbConfig";
+
+const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+    reduxFirestore(fbConfig),
+    reactReduxFirebase(fbConfig)
+  )
+);
 
 const hist = createBrowserHistory();
 
@@ -55,17 +71,19 @@ const theme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <MuiThemeProvider theme={theme}>
-    <Router history={hist}>
-      <Switch>
-        {indexRoutes.map((prop, key) => {
-          return (
-            <Route path={prop.path} component={prop.component} key={key} />
-          );
-        })}
-      </Switch>
-    </Router>
-  </MuiThemeProvider>,
+  <Provider store={store}>
+    <MuiThemeProvider theme={theme}>
+      <Router history={hist}>
+        <Switch>
+          {indexRoutes.map((prop, key) => {
+            return (
+              <Route path={prop.path} component={prop.component} key={key} />
+            );
+          })}
+        </Switch>
+      </Router>
+    </MuiThemeProvider>
+  </Provider>,
   document.getElementById("root")
 );
 registerServiceWorker();

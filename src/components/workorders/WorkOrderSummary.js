@@ -73,7 +73,7 @@ const styles = theme => ({
   }
 });
 
-class WorkOrderCard extends Component {
+class WorkOrderSummary extends Component {
   render() {
     const classes = this.props.classes;
     return (
@@ -84,11 +84,8 @@ class WorkOrderCard extends Component {
               <a href={this.props.link}>{this.props.account}</a>
             </Typography>
             <Typography className={classes.orderInfo}>
-              <Moment format="MMMM Do, YYYY">{this.props.date}</Moment> by{" "}
-              {this.props.requestor}
-            </Typography>
-            <Typography className={classes.orderContent}>
-              {this.props.content}
+              Created <Moment format="MMMM Do, YYYY">{this.props.date}</Moment>{" "}
+              by {this.props.requestor}
             </Typography>
           </CardContent>
           <CardActions className={classes.orderActions}>
@@ -109,4 +106,4 @@ class WorkOrderCard extends Component {
   }
 }
 
-export default withStyles(styles)(WorkOrderCard);
+export default withStyles(styles)(WorkOrderSummary);
