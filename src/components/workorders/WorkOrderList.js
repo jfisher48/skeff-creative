@@ -11,12 +11,15 @@ const WorkOrderList = ({ workorders }) => {
             <WorkOrderSummary
               workorder={workorder}
               key={workorder.id}
+              orderNumber={workorder.id}
               account={workorder.account}
-              requestor={
+              orderType="Standard POS"
+              requester={
                 workorder.requesterFirstName + " " + workorder.requesterLastName
               }
               content={workorder.content}
               link={"/workorders/" + workorder.id}
+              date={workorder.createdAt.toDate()}
             />
           );
         })}

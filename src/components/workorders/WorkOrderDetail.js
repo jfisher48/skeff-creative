@@ -90,8 +90,11 @@ class WorkOrderDetail extends Component {
                   {workorder.account} {this.props.match.params.id}
                 </Typography>
                 <Typography className={classes.orderInfo}>
-                  <Moment format="MMMM Do, YYYY">{this.props.date}</Moment> by{" "}
-                  {workorder.requesterFirstName} {workorder.requesterLastName}
+                  <Moment format="M.DD.YY [at] h:mm A">
+                    {workorder.createdAt.toDate()}
+                  </Moment>{" "}
+                  by {workorder.requesterFirstName}{" "}
+                  {workorder.requesterLastName}
                 </Typography>
                 <Typography className={classes.orderContent}>
                   {workorder.content}

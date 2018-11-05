@@ -29,6 +29,7 @@ const hist = createBrowserHistory();
 
 const theme = createMuiTheme({
   typography: {
+    useNextVariants: true,
     fontFamily: "Roboto, Helvetica, Arial, sans-serif",
     fontSize: "0.875em",
     fontWeightLight: 300,
@@ -62,12 +63,22 @@ const theme = createMuiTheme({
       action: {
         margin: 0
       }
+    },
+    MuiCardHeader: {
+      root: {
+        color: "#000",
+        paddingRight: "40px",
+        paddingLeft: "40px"
+      },
+      subheader: {
+        float: "right"
+      }
     }
-    // MuiSvgIcon: {
-    //   root: {
-    //     fontSize: "20px"
-    // }}
   }
+  // MuiSvgIcon: {
+  //   root: {
+  //     fontSize: "20px"
+  // }}
 });
 
 ReactDOM.render(
