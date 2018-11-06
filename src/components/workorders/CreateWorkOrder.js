@@ -35,9 +35,9 @@ class CreateWorkOrder extends Component {
   state = {
     //salesman: "",
     account: "",
-    comments: ""
+    comments: "",
     //items: [],
-    //scemployee: ""
+    dueDate: new Date(Date.now() + 172800000)
   };
 
   handleChange = e => {

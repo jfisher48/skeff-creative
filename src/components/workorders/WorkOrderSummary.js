@@ -10,17 +10,20 @@ import { Grid } from "@material-ui/core";
 import SummaryHeader from "./SummaryHeader";
 
 const styles = theme => ({
-  // orderContainer: {
-  //   padding: "20px 26px"
-  // },
-  // cardHeader: {
-  //   backgroundColor: "#b1adaa",
-  //   width: "100%"
-  // },
+  orderContainer: {
+    padding: "20px 26px"
+  },
+  cardHeader: {
+    backgroundColor: "#b1adaa",
+    width: "100%"
+  },
   orderTitle: {
     marginBottom: "15px",
     color: "#2a2f43",
     fontWeight: "500"
+  },
+  orderLabel: {
+    lineHeight: "1.5"
   },
   orderInfo: {
     color: "#2a2f43",
@@ -60,30 +63,30 @@ class WorkOrderSummary extends Component {
   render() {
     const classes = this.props.classes;
     return (
-      <Grid item xs={12} xl={6}>
+      <Grid item xs={12} sm={6}>
         <Link to={this.props.link}>
           <Card className={classes.orderCard}>
             <SummaryHeader
               orderNumber={this.props.orderNumber}
-              dueDate="11.30.2018"
+              dueDate={this.props.dueDate}
             />
             <CardContent className={classes.orderContainer}>
               <Typography variant="h3" className={classes.orderTitle}>
                 {this.props.account}
               </Typography>
-              <Typography variant="h4">
+              <Typography className={classes.orderLabel} variant="h4">
                 WO TYPE:{" "}
                 <span className={classes.orderInfo}>
                   {this.props.orderType}
                 </span>
               </Typography>
-              <Typography variant="h4">
+              <Typography className={classes.orderLabel} variant="h4">
                 CREATED BY:{" "}
                 <span className={classes.orderInfo}>
                   {this.props.requester}
                 </span>
               </Typography>
-              <Typography variant="h4">
+              <Typography className={classes.orderLabel} variant="h4">
                 CREATED ON:{" "}
                 <span className={classes.orderInfo}>
                   <Moment format="M.DD.YY [at] h:mm A">
@@ -91,7 +94,7 @@ class WorkOrderSummary extends Component {
                   </Moment>
                 </span>
               </Typography>
-              <Typography variant="h4">
+              <Typography className={classes.orderLabel} variant="h4">
                 ASSIGNED TO:{" "}
                 <span className={classes.orderInfo}>Jay Fisher</span>
               </Typography>

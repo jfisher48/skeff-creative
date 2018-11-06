@@ -20,6 +20,7 @@ const WorkOrderList = ({ workorders }) => {
               content={workorder.content}
               link={"/workorders/" + workorder.id}
               date={workorder.createdAt.toDate()}
+              dueDate={workorder.dueDate.toDate()}
             />
           );
         })}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import Moment from "react-moment";
 
 const styles = theme => ({
   header: {
@@ -34,7 +35,7 @@ class SummaryHeader extends Component {
             {this.props.orderNumber}
           </Typography>
           <Typography variant="h4" className={classes.dueDate}>
-            {this.props.dueDate}
+            <Moment format="M.DD.YY">{this.props.dueDate}</Moment>
           </Typography>
         </div>
       </div>

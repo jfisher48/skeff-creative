@@ -22,7 +22,7 @@ class WorkOrders extends Component {
         </Helmet>
         <PageHeading headingIcon={DashboardIco}>Work Orders</PageHeading>
         <Grid container spacing={16}>
-          <Grid item xs={12} sm={8} md={7} xl={6}>
+          <Grid item xs={12} sm={8}>
             <Switch>
               <Route
                 exact
@@ -37,7 +37,7 @@ class WorkOrders extends Component {
               <Route path="/workorders/:id" component={WorkOrderDetail} />
             </Switch>
           </Grid>
-          <Grid item xs={12} sm={4} md={5} xl={6} />
+          <Grid item xs={12} sm={4} />
         </Grid>
       </div>
     );
