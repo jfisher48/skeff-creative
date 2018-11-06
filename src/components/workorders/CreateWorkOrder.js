@@ -3,11 +3,11 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import Input from "@material-ui/core/Input";
-import MenuItem from "@material-ui/core/MenuItem";
+//import FormControl from "@material-ui/core/FormControl";
+//import InputLabel from "@material-ui/core/InputLabel";
+//import Select from "@material-ui/core/Select";
+//import Input from "@material-ui/core/Input";
+//import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { compose } from "recompose";
@@ -29,7 +29,7 @@ const styles = theme => ({
   }
 });
 
-const scemployees = ["Jay Fisher", "Luke Wells", "Bayleigh Harshbarger"];
+//const scemployees = ["Jay Fisher", "Luke Wells", "Bayleigh Harshbarger"];
 
 class CreateWorkOrder extends Component {
   state = {

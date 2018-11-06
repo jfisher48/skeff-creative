@@ -13,13 +13,15 @@ import { Grid } from "@material-ui/core";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import SummaryHeader from "./SummaryHeader";
 
 const styles = theme => ({
   orderContainer: {
-    paddingBottom: "22px",
-    paddingRight: "40px",
-    paddingLeft: "40px",
-    paddingTop: "40px"
+    padding: "20px 26px"
+  },
+  cardHeader: {
+    backgroundColor: "#b1adaa",
+    width: "100%"
   },
   orderTitle: {
     marginBottom: "15px",
@@ -85,9 +87,13 @@ class WorkOrderDetail extends Component {
         <Grid container spacing={16}>
           <Grid item xs={12}>
             <Card className={classes.orderCard}>
+              <SummaryHeader
+                orderNumber={this.props.match.params.id}
+                dueDate="11.30.2018"
+              />
               <CardContent className={classes.orderContainer}>
                 <Typography className={classes.orderTitle}>
-                  {workorder.account} {this.props.match.params.id}
+                  {workorder.account}
                 </Typography>
                 <Typography className={classes.orderInfo}>
                   <Moment format="M.DD.YY [at] h:mm A">
@@ -100,18 +106,6 @@ class WorkOrderDetail extends Component {
                   {workorder.content}
                 </Typography>
               </CardContent>
-              {/* <CardActions className={classes.orderActions}>
-            <NavLink to={this.props.link} className="postLink">
-              <Button
-                className={classes.orderButton}
-                variant="contained"
-                size="large"
-                color="secondary"
-              >
-                View / Edit
-              </Button>
-            </NavLink>
-          </CardActions> */}
             </Card>
           </Grid>
         </Grid>

@@ -10,13 +10,13 @@ import { Grid } from "@material-ui/core";
 import SummaryHeader from "./SummaryHeader";
 
 const styles = theme => ({
-  orderContainer: {
-    padding: "20px 26px"
-  },
-  cardHeader: {
-    backgroundColor: "#b1adaa",
-    width: "100%"
-  },
+  // orderContainer: {
+  //   padding: "20px 26px"
+  // },
+  // cardHeader: {
+  //   backgroundColor: "#b1adaa",
+  //   width: "100%"
+  // },
   orderTitle: {
     marginBottom: "15px",
     color: "#2a2f43",
@@ -60,7 +60,7 @@ class WorkOrderSummary extends Component {
   render() {
     const classes = this.props.classes;
     return (
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} xl={6}>
         <Link to={this.props.link}>
           <Card className={classes.orderCard}>
             <SummaryHeader
