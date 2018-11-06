@@ -19,15 +19,16 @@ const styles = theme => ({
   },
   orderTitle: {
     marginBottom: "15px",
-    color: "#2a2f43",
+    color: "rgba(0,0,0,0.87)",
     fontWeight: "500"
   },
   orderLabel: {
+    color: "rgba(0,0,0,0.54)",
     lineHeight: "1.5"
   },
   orderInfo: {
-    color: "#2a2f43",
-    fontWeight: "500"
+    color: "rgba(0,0,0,0.87)",
+    fontWeight: "400"
   },
   orderContent: {
     color: "#7f828f",

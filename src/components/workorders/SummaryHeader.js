@@ -5,7 +5,7 @@ import Moment from "react-moment";
 
 const styles = theme => ({
   header: {
-    backgroundColor: "#0091ea",
+    backgroundColor: "#e7e7e7",
     width: "100%"
   },
   headerContainer: {
@@ -15,13 +15,13 @@ const styles = theme => ({
   orderNumber: {
     float: "left",
     fontWeight: "500",
-    color: "white"
+    color: "#707070"
   },
   dueDate: {
     float: "right",
     fontWeight: "500",
     lineHeight: "1.2168",
-    color: "white"
+    color: "#707070"
   }
 });
 
@@ -35,7 +35,7 @@ class SummaryHeader extends Component {
             {this.props.orderNumber}
           </Typography>
           <Typography variant="h4" className={classes.dueDate}>
-            <Moment format="M.DD.YY">{this.props.dueDate}</Moment>
+            <Moment format="MMM DD">{this.props.dueDate}</Moment>
           </Typography>
         </div>
       </div>
