@@ -44,7 +44,7 @@ class WorkOrders extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  //console.log(state);
   return {
     workorders: state.firestore.ordered.workorders
   };

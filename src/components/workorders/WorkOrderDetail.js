@@ -89,7 +89,7 @@ class WorkOrderDetail extends Component {
             <Card className={classes.orderCard}>
               <SummaryHeader
                 orderNumber={this.props.match.params.id}
-                dueDate="11.30.2018"
+                dueDate={workorder.dueDate.toDate()}
               />
               <CardContent className={classes.orderContainer}>
                 <Typography className={classes.orderTitle}>
@@ -117,7 +117,7 @@ class WorkOrderDetail extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
+  //console.log(state);
   const id = ownProps.match.params.id;
   const workorders = state.firestore.data.workorders;
   const workorder = workorders ? workorders[id] : null;
