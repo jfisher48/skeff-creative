@@ -40,7 +40,7 @@ const styles = theme => ({
     zIndex: "1100"
   },
   navIconHide: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("lg")]: {
       display: "none"
     }
   },
@@ -50,7 +50,7 @@ const styles = theme => ({
     color: "#ffffff",
     width: drawerWidth,
     position: "fixed",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("lg")]: {
       position: "relative"
     }
   },
@@ -243,7 +243,7 @@ class DefaultSite extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Hidden mdUp>
+        <Hidden lgUp>
           <AppBar className={classes.appBar} position="fixed">
             <Toolbar>
               <div className={classes.brand}>
@@ -264,7 +264,7 @@ class DefaultSite extends React.Component {
             </Toolbar>
           </AppBar>
         </Hidden>
-        <Hidden mdUp>
+        <Hidden lgUp>
           <Drawer
             variant="temporary"
             anchor="right"
@@ -287,7 +287,7 @@ class DefaultSite extends React.Component {
             </div>
           </Drawer>
         </Hidden>
-        <Hidden smDown implementation="css">
+        <Hidden mdDown implementation="css">
           <Drawer
             variant="permanent"
             open

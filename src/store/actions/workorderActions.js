@@ -1,7 +1,7 @@
 export const createWorkorder = workorder => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    const dueDate = new Date(Date.now() + 172800000);
+    //const dueDate = new Date(Date.now() + 172800000);
     firestore
       .collection("workorders")
       .add({

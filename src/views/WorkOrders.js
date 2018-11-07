@@ -4,7 +4,7 @@ import DashboardIco from "../icons/dashboard_b.svg";
 import Helmet from "react-helmet";
 import CreateWorkOrder from "../components/workorders/CreateWorkOrder.js";
 import { Route, Switch } from "react-router-dom";
-import { Grid } from "@material-ui/core";
+import { Grid, Modal } from "@material-ui/core";
 import WorkOrderList from "../components/workorders/WorkOrderList.js";
 import WorkOrderDetail from "../components/workorders/WorkOrderDetail.js";
 import { connect } from "react-redux";
@@ -22,22 +22,21 @@ class WorkOrders extends Component {
         </Helmet>
         <PageHeading headingIcon={DashboardIco}>Work Orders</PageHeading>
         <Grid container spacing={16}>
-          <Grid item xs={12} sm={8}>
-            <Switch>
-              <Route
-                exact
-                path="/workorders"
-                render={() => <WorkOrderList workorders={workorders} />}
-              />
-              <Route
-                exact
-                path="/workorders/create"
-                component={CreateWorkOrder}
-              />
-              <Route path="/workorders/:id" component={WorkOrderDetail} />
-            </Switch>
+          <Grid item xs={12} lg={8}>
+            {/* <Switch> */}
+            <Route
+              path="/workorders"
+              render={() => <WorkOrderList workorders={workorders} />}
+            />
+            <Route
+              exact
+              path="/workorders/create"
+              component={CreateWorkOrder}
+            />
+            <Route path="/workorders/:id" component={WorkOrderDetail} />
+            {/* </Switch> */}
           </Grid>
-          <Grid item xs={12} sm={4} />
+          <Grid item xs={12} lg={4} />
         </Grid>
       </div>
     );
