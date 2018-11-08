@@ -10,6 +10,8 @@ import WorkOrderDetail from "../components/workorders/WorkOrderDetail.js";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import { ModalContainer, ModalRoute } from "react-router-modal";
+import "react-router-modal/css/react-router-modal.css";
 
 class WorkOrders extends Component {
   render() {
@@ -33,11 +35,16 @@ class WorkOrders extends Component {
               path="/workorders/create"
               component={CreateWorkOrder}
             />
-            <Route path="/workorders/:id" component={WorkOrderDetail} />
+            <ModalRoute
+              path="/workorders/:id"
+              parentPath="/workorders"
+              component={WorkOrderDetail}
+            />
             {/* </Switch> */}
           </Grid>
           <Grid item xs={12} lg={4} />
         </Grid>
+        <ModalContainer />
       </div>
     );
   }
