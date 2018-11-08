@@ -17,7 +17,20 @@ import SummaryHeader from "./SummaryHeader";
 
 const styles = theme => ({
   orderContainer: {
-    padding: "20px 26px"
+    padding: "20px 26px",
+    overflowY: "auto",
+    [theme.breakpoints.down("sm")]: {
+      width: "65vw",
+      maxHeight: "55vh"
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: "75vw",
+      maxHeight: "65vh"
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "50vw",
+      maxHeight: "75vh"
+    }
   },
   cardHeader: {
     backgroundColor: "#b1adaa",

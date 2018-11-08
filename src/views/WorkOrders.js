@@ -3,7 +3,7 @@ import PageHeading from "../components/PageHeading.js";
 import DashboardIco from "../icons/dashboard_b.svg";
 import Helmet from "react-helmet";
 import CreateWorkOrder from "../components/workorders/CreateWorkOrder.js";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import WorkOrderList from "../components/workorders/WorkOrderList.js";
 import WorkOrderDetail from "../components/workorders/WorkOrderDetail.js";
@@ -25,26 +25,28 @@ class WorkOrders extends Component {
         <PageHeading headingIcon={DashboardIco}>Work Orders</PageHeading>
         <Grid container spacing={16}>
           <Grid item xs={12} lg={8}>
+            <WorkOrderList workorders={workorders} />
             {/* <Switch> */}
-            <Route
+            {/* <Route
               path="/workorders"
               render={() => <WorkOrderList workorders={workorders} />}
-            />
-            <Route
-              exact
-              path="/workorders/create"
-              component={CreateWorkOrder}
-            />
-            <ModalRoute
-              path="/workorders/:id"
-              parentPath="/workorders"
-              component={WorkOrderDetail}
-            />
-            {/* </Switch> */}
+            /> */}
+            <Switch>
+              <ModalRoute
+                path="/workorders/create"
+                parentPath="/workorders"
+                component={CreateWorkOrder}
+              />
+              <ModalRoute
+                path="/workorders/:id"
+                parentPath="/workorders"
+                component={WorkOrderDetail}
+              />
+            </Switch>
           </Grid>
           <Grid item xs={12} lg={4} />
+          <ModalContainer />
         </Grid>
-        <ModalContainer />
       </div>
     );
   }
