@@ -3,8 +3,8 @@ import PageHeading from "../components/PageHeading.js";
 import RemindersIco from "../icons/reminders_b.svg";
 import Helmet from "react-helmet";
 import CreateWorkOrder from "../components/workorders/CreateWorkOrder.js";
-import { Switch, Link } from "react-router-dom";
-import { Grid, Button, Typography } from "@material-ui/core";
+import { Switch, NavLink } from "react-router-dom";
+import { Grid, Button } from "@material-ui/core";
 import WorkOrderList from "../components/workorders/WorkOrderList.js";
 import WorkOrderDetail from "../components/workorders/WorkOrderDetail.js";
 import { connect } from "react-redux";
@@ -27,7 +27,7 @@ class WorkOrders extends Component {
           <Grid item xs={12} lg={8}>
             <Grid container spacing={16}>
               <Grid item xs={12}>
-                <Link to="workorders/create">
+                <NavLink to="workorders/create">
                   <Button
                     style={{ float: "right" }}
                     variant="outlined"
@@ -36,7 +36,7 @@ class WorkOrders extends Component {
                   >
                     New Order
                   </Button>
-                </Link>
+                </NavLink>
               </Grid>
               <Grid item xs={12}>
                 <WorkOrderList workorders={workorders} />

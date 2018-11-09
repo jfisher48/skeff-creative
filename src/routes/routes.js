@@ -6,7 +6,7 @@ import Learning from "../views/Learning";
 import Logos from "../views/Logos";
 import News from "../views/News";
 import People from "../views/People";
-import Reminders from "../views/Reminders";
+//import Reminders from "../views/Reminders";
 import Suppliers from "../views/Suppliers";
 import WorkOrders from "../views/WorkOrders";
 

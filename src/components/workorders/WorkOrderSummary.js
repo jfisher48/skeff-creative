@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 //import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Moment from "react-moment";
 import { Grid } from "@material-ui/core";
@@ -65,7 +65,7 @@ class WorkOrderSummary extends Component {
     const classes = this.props.classes;
     return (
       <Grid item xs={12} sm={6}>
-        <Link to={this.props.link}>
+        <NavLink to={this.props.link}>
           <Card className={classes.orderCard}>
             <SummaryHeader
               orderNumber={this.props.orderNumber}
@@ -113,7 +113,7 @@ class WorkOrderSummary extends Component {
             </Link>
           </CardActions> */}
           </Card>
-        </Link>
+        </NavLink>
       </Grid>
     );
   }
