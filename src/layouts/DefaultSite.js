@@ -201,7 +201,10 @@ class DefaultSite extends React.Component {
     } = this.props;
 
     const nav = siteRoutes.map((prop, key) => {
+      var isSelected = false;
       if (prop.redirect) return null;
+      if (prop.path === pathname || pathname.match(prop.path + "/"))
+        isSelected = false;
       return (
         <NavLink
           to={prop.path}
@@ -211,9 +214,7 @@ class DefaultSite extends React.Component {
         >
           <MuiThemeProvider theme={prop.btn}>
             <MenuItem
-              selected={
-                prop.path === pathname || pathname.match(prop.path + "/")
-              }
+              selected={isSelected}
               className={classes.itemLink}
               button
               onClick={this.handleDrawerToggle}
