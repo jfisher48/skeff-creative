@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import ScheduleIcon from "@material-ui/icons/Schedule";
 import Moment from "react-moment";
 
 const styles = theme => ({
@@ -19,9 +20,22 @@ const styles = theme => ({
   },
   dueDate: {
     float: "right",
-    fontWeight: "500",
-    lineHeight: "1.2168",
     color: "#707070"
+  },
+  leftIcon: {
+    lineHeight: "30px",
+    fontWeight: "500",
+    float: "left",
+    marginRight: "3px",
+    marginTop: "-1px",
+    textAlign: "center",
+    verticalAlign: "middle"
+  },
+  dueDateText: {
+    color: "#707070",
+    float: "right",
+    fontWeight: "500",
+    lineHeight: "20px"
   }
 });
 
@@ -34,9 +48,12 @@ class SummaryHeader extends Component {
           <Typography variant="h3" className={classes.orderNumber}>
             {this.props.orderNumber}
           </Typography>
-          <Typography variant="h4" className={classes.dueDate}>
-            <Moment format="MMM DD">{this.props.dueDate}</Moment>
-          </Typography>
+          <span className={classes.dueDate}>
+            <ScheduleIcon fontSize="small" className={classes.leftIcon} />
+            <Typography variant="h4" className={classes.dueDateText}>
+              <Moment format="MMM DD">{this.props.dueDate}</Moment>
+            </Typography>
+          </span>
         </div>
       </div>
     );
