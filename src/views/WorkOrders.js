@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+//import { withStyles } from "@material-ui/core/styles";
 import PageHeading from "../components/PageHeading.js";
 import RemindersIco from "../icons/reminders_b.svg";
 import Helmet from "react-helmet";
@@ -11,7 +12,16 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { ModalContainer, ModalRoute } from "react-router-modal";
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
 import "react-router-modal/css/react-router-modal.css";
+
+const styles = {
+  createIcon: {
+    fontSize: 15,
+    marginRight: "5px"
+  }
+};
 
 class WorkOrders extends Component {
   render() {
@@ -34,6 +44,7 @@ class WorkOrders extends Component {
                     size="large"
                     color="secondary"
                   >
+                    <AddIcon style={styles.createIcon} />
                     New Order
                   </Button>
                 </NavLink>
@@ -76,6 +87,7 @@ const mapStateToProps = state => {
 };
 
 export default compose(
+  //withStyles(styles),
   connect(mapStateToProps),
   firestoreConnect([{ collection: "workorders" }])
 )(WorkOrders);
