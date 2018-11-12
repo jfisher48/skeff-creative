@@ -1,32 +1,26 @@
 import React, { Component } from "react";
-//import { withStyles } from "@material-ui/core/styles";
-import PageHeading from "../components/PageHeading.js";
-import RemindersIco from "../icons/reminders_b.svg";
+import { withStyles } from "@material-ui/core/styles";
+import PageHeading from "../../components/PageHeading.js";
+import RemindersIco from "../../icons/reminders_b.svg";
 import Helmet from "react-helmet";
-import CreateWorkOrder from "../components/workorders/CreateWorkOrder.js";
+import CreateWorkOrder from "../../components/workorders/CreateWorkOrder.js";
 import { Switch, NavLink } from "react-router-dom";
 import { Grid, Button } from "@material-ui/core";
-import WorkOrderList from "../components/workorders/WorkOrderList.js";
-import WorkOrderDetail from "../components/workorders/WorkOrderDetail.js";
+import WorkOrderList from "../../components/workorders/WorkOrderList.js";
+import WorkOrderDetail from "../../components/workorders/WorkOrderDetail/WorkOrderDetail.js";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { ModalContainer, ModalRoute } from "react-router-modal";
-import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 import "react-router-modal/css/react-router-modal.css";
-
-const styles = {
-  createIcon: {
-    fontSize: 15,
-    marginRight: "5px"
-  }
-};
+import styles from "./styleWorkOrders.js";
 
 class WorkOrders extends Component {
   render() {
     //console.log(this.props);
     const { workorders } = this.props;
+    const classes = this.props.classes;
     return (
       <div>
         <Helmet>
@@ -39,12 +33,12 @@ class WorkOrders extends Component {
               <Grid item xs={12}>
                 <NavLink to="workorders/create">
                   <Button
-                    style={{ float: "right" }}
+                    className={classes.createButton}
                     variant="outlined"
                     size="large"
                     color="secondary"
                   >
-                    <AddIcon style={styles.createIcon} />
+                    <AddIcon className={classes.createIcon} />
                     New Order
                   </Button>
                 </NavLink>
@@ -52,11 +46,6 @@ class WorkOrders extends Component {
               <Grid item xs={12}>
                 <WorkOrderList workorders={workorders} />
               </Grid>
-              {/* <Switch> */}
-              {/* <Route
-              path="/workorders"
-              render={() => <WorkOrderList workorders={workorders} />}
-            /> */}
               <Switch>
                 <ModalRoute
                   path="/workorders/create"
@@ -87,7 +76,7 @@ const mapStateToProps = state => {
 };
 
 export default compose(
-  //withStyles(styles),
+  withStyles(styles),
   connect(mapStateToProps),
   firestoreConnect([{ collection: "workorders" }])
 )(WorkOrders);

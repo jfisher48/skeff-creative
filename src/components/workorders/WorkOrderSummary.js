@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Moment from "react-moment";
 import { Grid } from "@material-ui/core";
-import SummaryHeader from "./SummaryHeader";
+import SummaryHeader from "./SummaryHeader/SummaryHeader";
 
 const styles = theme => ({
   orderContainer: {

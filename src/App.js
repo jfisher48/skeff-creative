@@ -13,7 +13,7 @@ import News from "./views/News";
 import People from "./views/People";
 import Reminders from "./views/Reminders";
 import Suppliers from "./views/Suppliers";
-import WorkOrders from "./views/WorkOrders";
+import WorkOrders from "./views/WorkOrders/WorkOrders.js";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 
