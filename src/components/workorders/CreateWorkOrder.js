@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import { createWorkorder } from "../../store/actions/workorderActions";
+import { Checkbox } from "@material-ui/core";
 
 const styles = theme => ({
   container: {
@@ -35,9 +36,10 @@ class CreateWorkOrder extends Component {
   state = {
     //salesman: "",
     account: "",
-    comments: ""
+    comments: "",
+    isRush: false,
     //items: [],
-    //dueDate: new Date(Date.now() + 172800000)
+    dueDate: new Date(Date.now() + 172800000)
   };
 
   handleChange = e => {
@@ -45,9 +47,17 @@ class CreateWorkOrder extends Component {
       [e.target.name]: e.target.value
     });
   };
+
+  handleRushToggle = () => {
+    this.setState(state => ({ isRush: !state.isRush }));
+  };
+
   handleSubmit = e => {
     e.preventDefault();
-    //console.log(this.state);
+    this.setState({
+      dueDate: setDueDate(this.state.isRush)
+    });
+    console.log(this.state);
     this.props.createWorkorder(this.state);
   };
 
@@ -67,6 +77,11 @@ class CreateWorkOrder extends Component {
             fullWidth
             onChange={this.handleChange}
           /> */}
+          <Checkbox
+            checked={this.state.isRush}
+            onChange={this.handleRushToggle}
+            value="isRush"
+          />
           <TextField
             required
             name="account"
@@ -132,6 +147,27 @@ const mapDispatchToProps = dispatch => {
     createWorkorder: workorder => dispatch(createWorkorder(workorder))
   };
 };
+
+function setDueDate(check) {
+  var dueDate;
+  var d = new Date();
+  var n = d.getDay();
+  if (n === (1 || n === 2 || n === 3) && check === false) {
+    dueDate = new Date(Date.now() + 172800000);
+  } else if (n === 4 && check === false) {
+    dueDate = new Date(Date.now() + 345600000);
+  } else if (n === 5 && check === false) {
+    dueDate = new Date(Date.now() + 432000000);
+  } else if (n === 6 && check === false) {
+    dueDate = new Date(Date.now() + 432000000);
+  } else if (n === 0 && check === false) {
+    dueDate = new Date(Date.now() + 345600000);
+  } else {
+    dueDate = new Date(Date.now() + 86400000);
+  }
+
+  return dueDate;
+}
 
 export default compose(
   connect(
