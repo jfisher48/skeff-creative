@@ -14,7 +14,13 @@ class SummaryHeader extends Component {
           <Typography variant="h3" className={classes.orderNumber}>
             {this.props.orderNumber}
           </Typography>
-          <span className={classes.dueDate}>
+          <span
+            className={
+              this.props.dueDate - Date.now() >= 86400000
+                ? classes.dueDate
+                : classes.dueDateUrgent
+            }
+          >
             <ScheduleIcon fontSize="small" className={classes.leftIcon} />
             <Typography variant="h4" className={classes.dueDateText}>
               <Moment format="MMM DD">{this.props.dueDate}</Moment>

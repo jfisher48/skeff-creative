@@ -16,9 +16,16 @@ const styles = theme => ({
     float: "right",
     color: "#707070"
   },
+  dueDateUrgent: {
+    float: "right",
+    color: "#fff",
+    backgroundColor: "#e1313c",
+    padding: "5px 7px",
+    borderRadius: "4px"
+  },
   leftIcon: {
     lineHeight: "20px",
-    fontSize: "17px",
+    fontSize: "18px",
     fontWeight: "700",
     float: "left",
     marginRight: "5px",
@@ -27,7 +34,7 @@ const styles = theme => ({
     verticalAlign: "middle"
   },
   dueDateText: {
-    color: "#707070",
+    color: "inherit",
     float: "right",
     fontSize: "0.95rem",
     fontWeight: "500",
