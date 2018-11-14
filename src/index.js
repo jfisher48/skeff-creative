@@ -65,6 +65,12 @@ const theme = createMuiTheme({
         margin: 0
       }
     },
+    MuiButton: {
+      root: {
+        fontSize: "14px",
+        fontWeight: "600"
+      }
+    },
     MuiCardHeader: {
       root: {
         color: "#000",
