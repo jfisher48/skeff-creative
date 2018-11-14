@@ -11,9 +11,11 @@ class SummaryHeader extends Component {
     return (
       <div className={classes.header}>
         <div className={classes.headerContainer}>
-          <Typography variant="h3" className={classes.orderNumber}>
-            {this.props.orderNumber}
-          </Typography>
+          <span className={classes.orderNumber}>
+            <Typography variant="h3" className={classes.orderNumberText}>
+              {this.props.orderNumber}
+            </Typography>
+          </span>
           <span
             className={
               this.props.dueDate - Date.now() >= 86400000

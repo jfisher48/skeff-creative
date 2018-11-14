@@ -204,7 +204,7 @@ class DefaultSite extends React.Component {
       var isSelected = false;
       if (prop.redirect) return null;
       if (prop.path === pathname || pathname.match(prop.path + "/"))
-        isSelected = false;
+        isSelected = true;
       return (
         <NavLink
           to={prop.path}

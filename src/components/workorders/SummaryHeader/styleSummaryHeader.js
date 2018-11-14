@@ -5,33 +5,45 @@ const styles = theme => ({
   },
   headerContainer: {
     padding: "16px 26px",
-    overflow: "hidden"
+    overflow: "hidden",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexWrap: "wrap"
   },
   orderNumber: {
-    float: "left",
+    flexGrow: 1
+  },
+  orderNumberText: {
     fontWeight: "500",
     color: "#707070"
   },
   dueDate: {
-    float: "right",
-    color: "#707070"
+    color: "#707070",
+    padding: "5px 7px",
+    borderRadius: "4px",
+    display: "inline-block",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "5px",
+      paddingLeft: "0px"
+    }
   },
   dueDateUrgent: {
-    float: "right",
     color: "#fff",
     backgroundColor: "#e1313c",
     padding: "5px 7px",
-    borderRadius: "4px"
+    borderRadius: "4px",
+    display: "inline-block",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "7px"
+    }
   },
   leftIcon: {
-    lineHeight: "20px",
-    fontSize: "18px",
-    fontWeight: "700",
+    position: "relative",
+    top: "2px",
+    fontSize: "17px",
     float: "left",
-    marginRight: "5px",
-    marginTop: "1px",
-    textAlign: "center",
-    verticalAlign: "middle"
+    marginRight: "5px"
   },
   dueDateText: {
     color: "inherit",
