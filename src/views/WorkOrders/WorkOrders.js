@@ -10,7 +10,7 @@ import WorkOrderList from "../../components/workorders/WorkOrderList.js";
 import WorkOrderDetail from "../../components/workorders/WorkOrderDetail/WorkOrderDetail.js";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
+import { compose } from "recompose";
 import { ModalContainer, ModalRoute } from "react-router-modal";
 import AddIcon from "@material-ui/icons/Add";
 import "react-router-modal/css/react-router-modal.css";
@@ -19,8 +19,9 @@ import styles from "./styleWorkOrders.js";
 class WorkOrders extends Component {
   render() {
     //console.log(this.props);
-    const { workorders } = this.props;
     const classes = this.props.classes;
+    const { workorders } = this.props;
+    //const classes = this.props.classes;
     return (
       <div>
         <Helmet>
@@ -69,14 +70,15 @@ class WorkOrders extends Component {
 }
 
 const mapStateToProps = state => {
-  //console.log(state);
+  console.log(state);
   return {
     workorders: state.firestore.ordered.workorders
   };
 };
 
+const styledComponent = withStyles(styles)(WorkOrders);
+
 export default compose(
-  withStyles(styles),
   connect(mapStateToProps),
   firestoreConnect([{ collection: "workorders" }])
-)(WorkOrders);
+)(styledComponent);

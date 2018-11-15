@@ -3,6 +3,10 @@ import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import { Hidden } from "@material-ui/core";
+import SignedInLinks from "./SignedInLinks/SignedInLinks";
+import { connect } from "react-redux";
+import { compose } from "recompose";
 
 const styles = theme => ({
   appBar: {
@@ -13,7 +17,9 @@ const styles = theme => ({
   toolBar: {
     paddingLeft: theme.spacing.unit * 0,
     paddingRight: theme.spacing.unit * 1.875,
-    minHeight: "75px"
+    minHeight: "75px",
+    display: "flex",
+    alignItems: "center"
   },
   headingIcon: {
     width: "40px",
@@ -22,6 +28,9 @@ const styles = theme => ({
       marginRight: "8px",
       width: "35px"
     }
+  },
+  headingText: {
+    flexGrow: 1
   }
 });
 
@@ -29,6 +38,7 @@ class PageHeading extends Component {
   state = {};
 
   render() {
+    const { auth } = this.props;
     const classes = this.props.classes;
     return (
       <div className={classes.root}>
@@ -39,7 +49,13 @@ class PageHeading extends Component {
               className={classes.headingIcon}
               alt={this.props.children}
             />
-            <Typography variant="subtitle1">{this.props.children}</Typography>
+            <Typography className={classes.headingText} variant="subtitle1">
+              {this.props.children}
+            </Typography>
+            <Hidden xsDown>
+              <SignedInLinks />
+              {/* <SignedOutLinks /> */}
+            </Hidden>
           </Toolbar>
         </AppBar>
       </div>
@@ -47,4 +63,12 @@ class PageHeading extends Component {
   }
 }
 
-export default withStyles(styles)(PageHeading);
+const styledComponent = withStyles(styles)(PageHeading);
+
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  };
+};
+
+export default connect(mapStateToProps)(styledComponent);

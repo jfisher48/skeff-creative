@@ -169,10 +169,11 @@ function setDueDate(check) {
   return dueDate;
 }
 
+const styledComponent = withStyles(styles)(CreateWorkOrder);
+
 export default compose(
   connect(
     null,
     mapDispatchToProps
-  ),
-  withStyles(styles)
-)(CreateWorkOrder);
+  )
+)(styledComponent);

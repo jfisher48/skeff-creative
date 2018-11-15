@@ -328,9 +328,9 @@ const mapStateToProps = state => {
   //console.log(state);
   return {};
 };
+const styledComponent = withStyles(styles, { withTheme: true })(DefaultSite);
 
 export default compose(
   connect(mapStateToProps),
-  withRouter,
-  withStyles(styles, { withTheme: true })
-)(DefaultSite);
+  withRouter
+)(styledComponent);

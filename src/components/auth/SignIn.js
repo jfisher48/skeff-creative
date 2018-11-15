@@ -93,10 +93,11 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const styledComponent = withStyles(styles)(SignIn);
+
 export default compose(
-  withStyles(styles),
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(SignIn);
+)(styledComponent);

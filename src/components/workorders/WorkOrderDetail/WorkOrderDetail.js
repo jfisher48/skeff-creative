@@ -7,7 +7,7 @@ import Moment from "react-moment";
 import { Grid, IconButton } from "@material-ui/core";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
+import { compose } from "recompose";
 import SummaryHeader from "../SummaryHeader/SummaryHeader";
 import CloseIcon from "@material-ui/icons/Close";
 import styles from "./styleWorkOrderDetail";
@@ -69,8 +69,9 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+const styledComponent = withStyles(styles)(WorkOrderDetail);
+
 export default compose(
-  withStyles(styles),
   connect(mapStateToProps),
   firestoreConnect([{ collection: "workorders" }])
-)(WorkOrderDetail);
+)(styledComponent);
