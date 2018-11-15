@@ -4,7 +4,7 @@ const styles = theme => ({
     width: "100%"
   },
   headerContainer: {
-    padding: "16px 26px",
+    padding: "1em 1.625em",
     overflow: "hidden",
     display: "flex",
     justifyContent: "space-between",
@@ -12,45 +12,40 @@ const styles = theme => ({
     flexWrap: "wrap"
   },
   orderNumber: {
-    flexGrow: 1
-  },
-  orderNumberText: {
+    flexGrow: 1,
+    fontFamily: "Roboto",
+    fontSize: "1.25em",
     fontWeight: "500",
     color: "#707070"
   },
   dueDate: {
+    display: "flex",
+    alignItems: "center",
     color: "#707070",
-    padding: "5px 7px",
-    borderRadius: "4px",
-    display: "inline-block",
+    padding: ".44em",
+    borderRadius: ".25em",
     [theme.breakpoints.down("xs")]: {
-      marginTop: "5px",
-      paddingLeft: "0px"
+      marginTop: ".3em",
+      paddingLeft: 0
     }
   },
   dueDateUrgent: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
     color: "#fff",
     backgroundColor: "#e1313c",
-    padding: "5px 7px",
-    borderRadius: "4px",
-    display: "inline-block",
-    [theme.breakpoints.down("xs")]: {
-      marginTop: "7px"
-    }
+    padding: ".44em",
+    borderRadius: ".25em"
   },
   leftIcon: {
-    position: "relative",
-    top: "2px",
-    fontSize: "17px",
-    float: "left",
-    marginRight: "5px"
+    fontSize: "1em",
+    marginRight: ".3em"
   },
   dueDateText: {
     color: "inherit",
-    float: "right",
-    fontSize: "0.95rem",
-    fontWeight: "500",
-    lineHeight: "20px"
+    fontSize: "0.875rem",
+    fontWeight: "500"
   }
 });
 

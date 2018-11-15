@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import Moment from "react-moment";
 import styles from "./styleSummaryHeader";
@@ -11,11 +10,7 @@ class SummaryHeader extends Component {
     return (
       <div className={classes.header}>
         <div className={classes.headerContainer}>
-          <span className={classes.orderNumber}>
-            <Typography variant="h3" className={classes.orderNumberText}>
-              {this.props.orderNumber}
-            </Typography>
-          </span>
+          <span className={classes.orderNumber}>{this.props.orderNumber}</span>
           <span
             className={
               this.props.dueDate - Date.now() >= 86400000
@@ -24,10 +19,11 @@ class SummaryHeader extends Component {
             }
           >
             <ScheduleIcon fontSize="small" className={classes.leftIcon} />
-            <Typography variant="h4" className={classes.dueDateText}>
+            <span className={classes.dueDateText}>
               <Moment format="MMM DD">{this.props.dueDate}</Moment>
-            </Typography>
+            </span>
           </span>
+          {this.props.children}
         </div>
       </div>
     );

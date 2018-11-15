@@ -1,19 +1,15 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-//import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-//import CardMedia from "@material-ui/core/CardMedia";
-//import { NavLink } from "react-router-dom";
-//import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-//import CategoryLink from "../components/CategoryLink";
 import Moment from "react-moment";
-import { Grid } from "@material-ui/core";
+import { Grid, IconButton } from "@material-ui/core";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import SummaryHeader from "../SummaryHeader/SummaryHeader";
+import CloseIcon from "@material-ui/icons/Close";
 import styles from "./styleWorkOrderDetail";
 
 class WorkOrderDetail extends Component {
@@ -28,7 +24,16 @@ class WorkOrderDetail extends Component {
               <SummaryHeader
                 orderNumber={this.props.match.params.id}
                 dueDate={workorder.dueDate.toDate()}
-              />
+              >
+                <IconButton
+                  onClick={this.props.history.goBack}
+                  className={classes.closeButton}
+                  color="inherit"
+                  aria-label="Close"
+                >
+                  <CloseIcon />
+                </IconButton>
+              </SummaryHeader>
               <CardContent className={classes.orderContainer}>
                 <Typography className={classes.orderTitle}>
                   {workorder.account}

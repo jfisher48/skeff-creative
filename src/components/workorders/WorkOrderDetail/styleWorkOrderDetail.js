@@ -19,6 +19,9 @@ const styles = theme => ({
     backgroundColor: "#b1adaa",
     width: "100%"
   },
+  closeButton: {
+    marginLeft: "1em"
+  },
   orderTitle: {
     marginBottom: "15px",
     fontSize: "2.25em",
