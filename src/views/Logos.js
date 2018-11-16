@@ -6,6 +6,8 @@ import Helmet from "react-helmet";
 import Grid from "@material-ui/core/Grid";
 import LogoCard from "../components/LogoCard";
 import jsonPrefix from "../data/jsonPrefix";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 const styles = theme => ({});
 
@@ -30,6 +32,9 @@ class Logos extends Component {
   }
 
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
+
     let logos = this.state.logos.map((logo, index) => {
       return (
         <LogoCard
@@ -99,4 +104,13 @@ class Logos extends Component {
   }
 }
 
-export default withStyles(styles)(Logos);
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth
+  };
+};
+
+const styledComponent = withStyles(styles)(Logos);
+
+export default connect(mapStateToProps)(styledComponent);

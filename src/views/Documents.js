@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import PageHeading from "../components/PageHeading.js";
 import DocumentsIco from "../icons/documents_b.svg";
 import Helmet from "react-helmet";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 class Documents extends Component {
   state = {};
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div>
         <Helmet>
@@ -17,4 +21,11 @@ class Documents extends Component {
   }
 }
 
-export default Documents;
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth
+  };
+};
+
+export default connect(mapStateToProps)(Documents);

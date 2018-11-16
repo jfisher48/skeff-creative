@@ -16,26 +16,30 @@ import Suppliers from "./views/Suppliers";
 import WorkOrders from "./views/WorkOrders/WorkOrders.js";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
+import Authenticated from "./components/auth/Authenticated";
+import UnAuthenticated from "./components/auth/UnAuthenticated";
+import { connect } from "react-redux";
 
 class App extends Component {
   render() {
+    const { auth } = this.props;
+    const layout = auth.uid ? <Authenticated /> : <UnAuthenticated />;
     return (
-      <DefaultSite>
-        {/* <Switch> */}
-        <Route path="/" exact component={Dashboard} title="Dashboard" />
-        <Route path="/logos" component={Logos} />
-        <Route path="/documents" component={Documents} />
-        <Route path="/calendar" component={Calendar} />
-        <Route path="/reminders" component={Reminders} />
-        <Route path="/news" component={News} />
-        <Route path="/people" component={People} />
-        <Route path="/suppliers" component={Suppliers} />
-        <Route path="/learning" component={Learning} />
-        <Route path="/workorders" component={WorkOrders} />
-        <Route path="/signin" component={SignIn} />
-        <Route path="/signup" component={SignUp} />
-        {/* </Switch> */}
-      </DefaultSite>
+      // <DefaultSite>
+      //   <Route path="/" exact component={Dashboard} title="Dashboard" />
+      //   <Route path="/logos" component={Logos} />
+      //   <Route path="/documents" component={Documents} />
+      //   <Route path="/calendar" component={Calendar} />
+      //   <Route path="/reminders" component={Reminders} />
+      //   <Route path="/news" component={News} />
+      //   <Route path="/people" component={People} />
+      //   <Route path="/suppliers" component={Suppliers} />
+      //   <Route path="/learning" component={Learning} />
+      //   <Route path="/workorders" component={WorkOrders} />
+      //   <Route path="/signin" component={SignIn} />
+      //   <Route path="/signup" component={SignUp} />
+      // </DefaultSite>
+      <div>{layout}</div>
     );
   }
 }
@@ -43,5 +47,10 @@ class App extends Component {
 // App.propTypes = {
 //   classes: PropTypes.object.isRequired
 // };
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  };
+};
 
-export default App;
+export default connect(mapStateToProps)(App);

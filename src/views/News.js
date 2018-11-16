@@ -20,6 +20,8 @@ import { Switch, Route } from "react-router-dom";
 import Article from "../components/Article";
 import jsonPrefix from "../data/jsonPrefix";
 import "isomorphic-fetch";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 const styles = theme => ({});
 
@@ -62,6 +64,8 @@ class News extends Component {
 
   render() {
     const classes = this.props.classes;
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
 
     return (
       <div>
@@ -166,4 +170,13 @@ class News extends Component {
   }
 }
 
-export default withStyles(styles)(News);
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth
+  };
+};
+
+const styledComponent = withStyles(styles)(News);
+
+export default connect(mapStateToProps)(styledComponent);

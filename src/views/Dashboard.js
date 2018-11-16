@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import PageHeading from "../components/PageHeading.js";
 import DashboardIco from "../icons/dashboard_b.svg";
 import Helmet from "react-helmet";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 class Dashboard extends Component {
   state = {};
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div>
         <Helmet>
@@ -17,4 +21,11 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard);
