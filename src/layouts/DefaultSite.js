@@ -17,7 +17,8 @@ import {
   MenuItem,
   MenuList,
   ListItemText,
-  MuiThemeProvider
+  MuiThemeProvider,
+  Avatar
 } from "../../node_modules/@material-ui/core";
 import Footer from "../components/Footer";
 import { connect } from "react-redux";
@@ -284,6 +285,14 @@ class DefaultSite extends React.Component {
                   <ChevronRightIcon />
                 </IconButton>
               </div>
+              <div className={classes.userBar}>
+                <NavLink to="/">
+                  <IconButton>
+                    <Avatar>JF</Avatar>
+                  </IconButton>
+                  Jay Fisher
+                </NavLink>
+              </div>
               <MenuList className={classes.list}>{nav}</MenuList>
             </div>
           </Drawer>
@@ -305,6 +314,14 @@ class DefaultSite extends React.Component {
                   <span className={classes.brandFront}>skeff</span>
                   <span>creative</span>
                 </div>
+              </div>
+              <div className={classes.userBar}>
+                <NavLink to="/">
+                  <IconButton>
+                    <Avatar>JF</Avatar>
+                  </IconButton>
+                  Jay Fisher
+                </NavLink>
               </div>
               <MenuList className={classes.list}>{nav}</MenuList>
             </div>

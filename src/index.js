@@ -16,15 +16,6 @@ import { reduxFirestore, getFirestore } from "redux-firestore";
 import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
 import fbConfig from "./config/fbConfig";
 
-const store = createStore(
-  rootReducer,
-  compose(
-    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
-    reduxFirestore(fbConfig),
-    reactReduxFirebase(fbConfig)
-  )
-);
-
 const hist = createBrowserHistory();
 
 const theme = createMuiTheme({
@@ -88,20 +79,31 @@ const theme = createMuiTheme({
   // }}
 });
 
-ReactDOM.render(
-  <Provider store={store}>
-    <MuiThemeProvider theme={theme}>
-      <Router history={hist}>
-        <Switch>
-          {indexRoutes.map((prop, key) => {
-            return (
-              <Route path={prop.path} component={prop.component} key={key} />
-            );
-          })}
-        </Switch>
-      </Router>
-    </MuiThemeProvider>
-  </Provider>,
-  document.getElementById("root")
+const store = createStore(
+  rootReducer,
+  compose(
+    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+    reduxFirestore(fbConfig),
+    reactReduxFirebase(fbConfig, { attachAuthIsReady: true })
+  )
 );
-registerServiceWorker();
+
+store.firebaseAuthIsReady.then(() => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <MuiThemeProvider theme={theme}>
+        <Router history={hist}>
+          <Switch>
+            {indexRoutes.map((prop, key) => {
+              return (
+                <Route path={prop.path} component={prop.component} key={key} />
+              );
+            })}
+          </Switch>
+        </Router>
+      </MuiThemeProvider>
+    </Provider>,
+    document.getElementById("root")
+  );
+  registerServiceWorker();
+});

@@ -5,8 +5,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { Hidden } from "@material-ui/core";
 import SignedInLinks from "./SignedInLinks/SignedInLinks";
+import SignedOutLinks from "./SignedOutLinks/SignedOutLinks";
 import { connect } from "react-redux";
-import { compose } from "recompose";
+//import { compose } from "recompose";
 
 const styles = theme => ({
   appBar: {
@@ -39,7 +40,9 @@ class PageHeading extends Component {
 
   render() {
     const { auth } = this.props;
+    //console.log(auth);
     const classes = this.props.classes;
+    const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
     return (
       <div className={classes.root}>
         <AppBar className={classes.appBar} position="static" color="default">
@@ -52,10 +55,7 @@ class PageHeading extends Component {
             <Typography className={classes.headingText} variant="subtitle1">
               {this.props.children}
             </Typography>
-            <Hidden xsDown>
-              <SignedInLinks />
-              {/* <SignedOutLinks /> */}
-            </Hidden>
+            <Hidden xsDown>{links}</Hidden>
           </Toolbar>
         </AppBar>
       </div>
