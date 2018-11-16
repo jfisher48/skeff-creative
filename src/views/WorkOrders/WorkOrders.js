@@ -22,7 +22,7 @@ class WorkOrders extends Component {
     //console.log(this.props);
     const classes = this.props.classes;
     const { workorders, auth } = this.props;
-    if (!auth.uid) return <Redirect to="/signin" />;
+    if (!auth.uid) return <Redirect to="/login" />;
 
     return (
       <div>

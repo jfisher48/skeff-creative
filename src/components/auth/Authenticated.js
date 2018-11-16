@@ -12,7 +12,7 @@ import People from "../../views/People";
 import Reminders from "../../views/Reminders";
 import Suppliers from "../../views/Suppliers";
 import WorkOrders from "../../views/WorkOrders/WorkOrders.js";
-import SignIn from "./SignIn";
+import LogIn from "./LogIn/LogIn";
 import SignUp from "./SignUp";
 
 const Authenticated = () => {
@@ -28,7 +28,7 @@ const Authenticated = () => {
       <Route path="/suppliers" component={Suppliers} />
       <Route path="/learning" component={Learning} />
       <Route path="/workorders" component={WorkOrders} />
-      <Route path="/signin" component={SignIn} />
+      <Route path="/login" component={LogIn} />
       <Route path="/signup" component={SignUp} />
     </DefaultSite>
   );

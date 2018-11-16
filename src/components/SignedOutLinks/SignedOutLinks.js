@@ -5,7 +5,7 @@ import { Button } from "@material-ui/core";
 const SignedOutLinks = () => {
   return (
     <div>
-      <NavLink to="/signin">
+      <NavLink to="/login">
         <Button size="large">Log In</Button>
       </NavLink>
     </div>

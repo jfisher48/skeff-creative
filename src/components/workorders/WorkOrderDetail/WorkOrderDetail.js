@@ -17,7 +17,7 @@ class WorkOrderDetail extends Component {
   render() {
     const classes = this.props.classes;
     const { workorder, auth } = this.props;
-    if (!auth.uid) return <Redirect to="/signin" />;
+    if (!auth.uid) return <Redirect to="/login" />;
     if (workorder) {
       return (
         <Grid container spacing={16}>

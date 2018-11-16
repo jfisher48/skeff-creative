@@ -9,7 +9,7 @@ class People extends Component {
   state = {};
   render() {
     const { auth } = this.props;
-    if (!auth.uid) return <Redirect to="/signin" />;
+    if (!auth.uid) return <Redirect to="/login" />;
     return (
       <div>
         <Helmet>

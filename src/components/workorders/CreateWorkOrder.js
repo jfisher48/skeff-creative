@@ -65,7 +65,7 @@ class CreateWorkOrder extends Component {
   render() {
     const classes = this.props.classes;
     const { auth } = this.props;
-    if (!auth.uid) return <Redirect to="/signin" />;
+    if (!auth.uid) return <Redirect to="/login" />;
     return (
       <div>
         <form className={classes.container} onSubmit={this.handleSubmit}>

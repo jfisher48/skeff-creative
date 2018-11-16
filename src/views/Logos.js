@@ -33,7 +33,7 @@ class Logos extends Component {
 
   render() {
     const { auth } = this.props;
-    if (!auth.uid) return <Redirect to="/signin" />;
+    if (!auth.uid) return <Redirect to="/login" />;
 
     let logos = this.state.logos.map((logo, index) => {
       return (
