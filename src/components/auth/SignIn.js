@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
 import { compose } from "redux";
+import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
   container: {
@@ -40,7 +41,8 @@ class SignIn extends Component {
 
   render() {
     const classes = this.props;
-    const { authError } = this.props;
+    const { authError, auth } = this.props;
+    if (auth.uid) return <Redirect to="/" />;
     return (
       <div>
         <form className={classes.container} onSubmit={this.handleSubmit}>
@@ -83,7 +85,8 @@ class SignIn extends Component {
 
 const mapStateToProps = state => {
   return {
-    authError: state.auth.authError
+    authError: state.auth.authError,
+    auth: state.firebase.auth
   };
 };
 

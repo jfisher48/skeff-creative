@@ -15,13 +15,15 @@ import { ModalContainer, ModalRoute } from "react-router-modal";
 import AddIcon from "@material-ui/icons/Add";
 import "react-router-modal/css/react-router-modal.css";
 import styles from "./styleWorkOrders.js";
+import { Redirect } from "react-router-dom";
 
 class WorkOrders extends Component {
   render() {
     //console.log(this.props);
     const classes = this.props.classes;
-    const { workorders } = this.props;
-    //const classes = this.props.classes;
+    const { workorders, auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
+
     return (
       <div>
         <Helmet>
@@ -72,7 +74,8 @@ class WorkOrders extends Component {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    workorders: state.firestore.ordered.workorders
+    workorders: state.firestore.ordered.workorders,
+    auth: state.firebase.auth
   };
 };
 

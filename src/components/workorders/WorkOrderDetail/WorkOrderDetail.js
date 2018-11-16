@@ -11,11 +11,13 @@ import { compose } from "recompose";
 import SummaryHeader from "../SummaryHeader/SummaryHeader";
 import CloseIcon from "@material-ui/icons/Close";
 import styles from "./styleWorkOrderDetail";
+import { Redirect } from "react-router-dom";
 
 class WorkOrderDetail extends Component {
   render() {
-    const { workorder } = this.props;
     const classes = this.props.classes;
+    const { workorder, auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
     if (workorder) {
       return (
         <Grid container spacing={16}>
@@ -65,7 +67,8 @@ const mapStateToProps = (state, ownProps) => {
   const workorders = state.firestore.data.workorders;
   const workorder = workorders ? workorders[id] : null;
   return {
-    workorder: workorder
+    workorder: workorder,
+    auth: state.firebase.auth
   };
 };
 

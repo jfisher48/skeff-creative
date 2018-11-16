@@ -4,6 +4,8 @@ import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   container: {
@@ -38,7 +40,9 @@ class SignUp extends Component {
   };
 
   render() {
-    const classes = this.props;
+    const classes = this.props.classes;
+    const { auth } = this.props;
+    if (auth.uid) return <Redirect to="/" />;
     return (
       <div>
         <form className={classes.container} onSubmit={this.handleSubmit}>
@@ -99,4 +103,12 @@ class SignUp extends Component {
   }
 }
 
-export default withStyles(styles)(SignUp);
+const styledComponent = withStyles(styles)(SignUp);
+
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  };
+};
+
+export default connect(mapStateToProps)(styledComponent);

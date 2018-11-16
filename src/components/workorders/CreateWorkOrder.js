@@ -14,6 +14,7 @@ import { compose } from "recompose";
 import { connect } from "react-redux";
 import { createWorkorder } from "../../store/actions/workorderActions";
 import { Checkbox } from "@material-ui/core";
+import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
   container: {
@@ -62,7 +63,9 @@ class CreateWorkOrder extends Component {
   };
 
   render() {
-    const classes = this.props;
+    const classes = this.props.classes;
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div>
         <form className={classes.container} onSubmit={this.handleSubmit}>
@@ -142,6 +145,12 @@ class CreateWorkOrder extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     createWorkorder: workorder => dispatch(createWorkorder(workorder))
@@ -173,7 +182,7 @@ const styledComponent = withStyles(styles)(CreateWorkOrder);
 
 export default compose(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )
 )(styledComponent);
