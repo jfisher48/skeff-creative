@@ -13,7 +13,7 @@ import Reminders from "../../views/Reminders";
 import Suppliers from "../../views/Suppliers";
 import WorkOrders from "../../views/WorkOrders/WorkOrders.js";
 import LogIn from "./LogIn/LogIn";
-import SignUp from "./SignUp";
+import SignUp from "./SignUp/SignUp";
 
 const Authenticated = () => {
   return (

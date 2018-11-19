@@ -4,19 +4,18 @@ import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { connect } from "react-redux";
-import { signIn } from "../../../store/actions/authActions";
-import { compose } from "redux";
 import { Redirect } from "react-router-dom";
-import styles from "./styleLogIn";
-import { Card, CardContent, Avatar, Typography } from "@material-ui/core";
+import { connect } from "react-redux";
+import styles from "./styleSignUp";
+import { Card, Avatar, CardContent } from "@material-ui/core";
 import logo from "../../../icons/creative_logo.svg";
-import { Link } from "react-router-dom";
 
-class LogIn extends Component {
+class SignUp extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    firstName: "",
+    lastName: ""
   };
   handleChange = e => {
     this.setState({
@@ -25,16 +24,16 @@ class LogIn extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.signIn(this.state);
+    console.log(this.state);
   };
 
   render() {
     const classes = this.props.classes;
-    const { authError, auth } = this.props;
+    const { auth } = this.props;
     if (auth.uid) return <Redirect to="/" />;
     return (
       <div>
-        <Card className={classes.loginCard}>
+        <Card className={classes.signupCard}>
           <Avatar className={classes.logo}>
             <img src={logo} alt="logo" className={classes.img} />
           </Avatar>
@@ -61,19 +60,35 @@ class LogIn extends Component {
                 margin="normal"
                 onChange={this.handleChange}
               />
+              <TextField
+                required
+                id="firstName"
+                type="text"
+                label="First Name"
+                className={classNames(classes.textField, classes.dense)}
+                fullWidth
+                margin="normal"
+                onChange={this.handleChange}
+              />
+              <TextField
+                required
+                id="lastName"
+                type="text"
+                label="Last Name"
+                className={classNames(classes.textField, classes.dense)}
+                fullWidth
+                margin="normal"
+                onChange={this.handleChange}
+              />
+
               <Button
                 type="submit"
                 variant="contained"
-                size="large"
                 color="secondary"
                 className={classes.button}
               >
-                Login
+                Sign Up
               </Button>
-              <div>{authError ? <p>{authError}</p> : null}</div>
-              <Typography>
-                Don't Have an Account? <Link to="/signup">Create One.</Link>
-              </Typography>
             </form>
           </CardContent>
         </Card>
@@ -82,24 +97,12 @@ class LogIn extends Component {
   }
 }
 
+const styledComponent = withStyles(styles)(SignUp);
+
 const mapStateToProps = state => {
   return {
-    authError: state.auth.authError,
     auth: state.firebase.auth
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    signIn: creds => dispatch(signIn(creds))
-  };
-};
-
-const styledComponent = withStyles(styles)(LogIn);
-
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(styledComponent);
+export default connect(mapStateToProps)(styledComponent);
