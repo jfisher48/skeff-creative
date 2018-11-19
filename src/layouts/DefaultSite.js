@@ -11,7 +11,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Hidden from "@material-ui/core/Hidden";
 import MenuIcon from "@material-ui/icons/Menu";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import logo from "../icons/creative_logo.svg";
 import {
   MenuItem,
@@ -20,6 +19,7 @@ import {
   MuiThemeProvider,
   Avatar
 } from "../../node_modules/@material-ui/core";
+import AccountPanel from "../components/menu/AccountPanel/AccountPanel";
 import Footer from "../components/Footer";
 import { connect } from "react-redux";
 
@@ -281,17 +281,7 @@ class DefaultSite extends React.Component {
           >
             <div className={classes.navWrap}>
               <div className={classes.userBar}>
-                <IconButton color="inherit" onClick={this.handleDrawerToggle}>
-                  <ChevronRightIcon />
-                </IconButton>
-              </div>
-              <div className={classes.userBar}>
-                <NavLink to="/">
-                  <IconButton>
-                    <Avatar>JF</Avatar>
-                  </IconButton>
-                  Jay Fisher
-                </NavLink>
+                <AccountPanel />
               </div>
               <MenuList className={classes.list}>{nav}</MenuList>
             </div>
@@ -316,12 +306,7 @@ class DefaultSite extends React.Component {
                 </div>
               </div>
               <div className={classes.userBar}>
-                <NavLink to="/">
-                  <IconButton>
-                    <Avatar>JF</Avatar>
-                  </IconButton>
-                  Jay Fisher
-                </NavLink>
+                <AccountPanel />
               </div>
               <MenuList className={classes.list}>{nav}</MenuList>
             </div>

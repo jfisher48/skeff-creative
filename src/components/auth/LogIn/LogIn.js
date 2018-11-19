@@ -9,7 +9,7 @@ import { signIn } from "../../../store/actions/authActions";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import styles from "./styleLogIn";
-import { Card, CardContent, CardHeader, Avatar } from "@material-ui/core";
+import { Card, CardContent, Avatar } from "@material-ui/core";
 import logo from "../../../icons/creative_logo.svg";
 
 class LogIn extends Component {
