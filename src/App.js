@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import PropTypes from 'prop-types'
 import "./styles/App.css";
 import Authenticated from "./components/auth/Authenticated";
 import UnAuthenticated from "./components/auth/UnAuthenticated";
@@ -13,9 +12,6 @@ class App extends Component {
   }
 }
 
-// App.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
 const mapStateToProps = state => {
   return {
     auth: state.firebase.auth

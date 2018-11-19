@@ -1,5 +1,5 @@
 import React from "react";
-import DefaultSite from "../../layouts/DefaultSite";
+import DefaultSite from "../../layouts/DefaultSite/DefaultSite";
 import { Route } from "react-router-dom";
 // import views
 import Dashboard from "../../views/Dashboard";

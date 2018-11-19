@@ -39,10 +39,10 @@ class PageHeading extends Component {
   state = {};
 
   render() {
-    const { auth } = this.props;
+    //const { auth } = this.props;
     //console.log(auth);
     const classes = this.props.classes;
-    const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
+    //const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
     return (
       <div className={classes.root}>
         <AppBar className={classes.appBar} position="static" color="default">
@@ -55,7 +55,7 @@ class PageHeading extends Component {
             <Typography className={classes.headingText} variant="subtitle1">
               {this.props.children}
             </Typography>
-            <Hidden xsDown>{links}</Hidden>
+            {/* <Hidden xsDown>{links}</Hidden> */}
           </Toolbar>
         </AppBar>
       </div>
@@ -65,10 +65,10 @@ class PageHeading extends Component {
 
 const styledComponent = withStyles(styles)(PageHeading);
 
-const mapStateToProps = state => {
-  return {
-    auth: state.firebase.auth
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     auth: state.firebase.auth
+//   };
+// }; connect(mapStateToProps)
 
-export default connect(mapStateToProps)(styledComponent);
+export default styledComponent;

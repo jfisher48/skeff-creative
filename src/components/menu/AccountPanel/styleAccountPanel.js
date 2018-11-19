@@ -4,7 +4,7 @@ const styles = theme => ({
     boxShadow: "none"
   },
   accountSummary: {
-    padding: "0",
+    padding: "0 0 0 10px",
     flexDirection: "row",
     alignItems: "center",
     content: {
@@ -22,6 +22,26 @@ const styles = theme => ({
   },
   expand: {
     color: "#fff"
+  },
+  panelDetails: {
+    padding: "0"
+  },
+  logoutButton: {
+    width: "100%",
+    textAlign: "left",
+    margin: "0",
+    padding: "0",
+    fontSize: "1em",
+    display: "flex",
+    justifyContent: "stretch"
+  },
+  buttonText: {
+    flexGrow: "1",
+    color: "#fff",
+    textTransform: "none",
+    lineHeight: "30px",
+    padding: "10px 0 10px 60px",
+    fontWeight: "400"
   }
 });
 

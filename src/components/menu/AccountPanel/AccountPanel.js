@@ -6,7 +6,9 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import styles from "./styleAccountPanel";
-import { Avatar } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
+import { connect } from "react-redux";
+import { signOut } from "../../../store/actions/authActions";
 
 class AccountPanel extends Component {
   state = {
@@ -36,11 +38,14 @@ class AccountPanel extends Component {
           <Avatar>JF</Avatar>
           <Typography className={classes.userName}>Jay Fisher</Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-            Aliquam eget maximus est, id dignissim quam.
-          </Typography>
+        <ExpansionPanelDetails className={classes.panelDetails}>
+          <Button
+            size="large"
+            className={classes.logoutButton}
+            onClick={this.props.signOut}
+          >
+            <span className={classes.buttonText}>Log Out</span>
+          </Button>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );
@@ -49,4 +54,13 @@ class AccountPanel extends Component {
 
 const styledComponent = withStyles(styles)(AccountPanel);
 
-export default styledComponent;
+const mapDispatchToProps = dispatch => {
+  return {
+    signOut: () => dispatch(signOut())
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(styledComponent);
