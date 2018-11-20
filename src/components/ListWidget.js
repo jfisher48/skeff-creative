@@ -30,7 +30,7 @@ const styles = theme => ({
   },
   widgetAnchor: {
     textDecoration: "none",
-    fontFamily: "Roboto",
+    //fontFamily: "Roboto",
     fontWeight: "500",
     fontSize: ".95em",
     lineHeight: "1.5em",

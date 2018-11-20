@@ -33,7 +33,7 @@ const footerStyle = theme => ({
     marginTop: "35px",
     borderTop: "1px solid #e7e7e7",
     padding: "15px 0",
-    fontFamily: "Roboto",
+    //fontFamily: "Roboto",
     [theme.breakpoints.down("md")]: {
       textAlign: "center"
     }

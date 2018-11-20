@@ -35,7 +35,7 @@ class AccountPanel extends Component {
           className={classes.accountSummary}
           expandIcon={<ExpandMoreIcon className={classes.expand} />}
         >
-          <Avatar>JF</Avatar>
+          <Avatar className={classes.userAvatar}>JF</Avatar>
           <Typography className={classes.userName}>Jay Fisher</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.panelDetails}>

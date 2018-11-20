@@ -34,7 +34,7 @@ const styles = theme => ({
     flex: "1",
     color: "rgb(42,47,67)",
     textDecoration: "none",
-    fontFamily: "Roboto",
+    //fontFamily: "Roboto",
     fontWeight: "500",
     fontSize: ".95em",
     lineHeight: "1.5em",
@@ -49,7 +49,7 @@ const styles = theme => ({
     flex: "1",
     color: "rgba(0,0,0,0.40)",
     textDecoration: "none",
-    fontFamily: "Roboto",
+    //fontFamily: "Roboto",
     fontWeight: "500",
     fontSize: ".95em",
     lineHeight: "1.5em"

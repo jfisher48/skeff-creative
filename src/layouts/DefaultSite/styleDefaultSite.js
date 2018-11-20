@@ -143,7 +143,9 @@ const styles = theme => ({
     color: "#ffffff",
     margin: "0",
     lineHeight: "30px",
-    fontSize: "1em"
+    fontSize: "1em",
+    fontFamily:
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
   },
   content: {
     [theme.breakpoints.down("sm")]: {

@@ -3,10 +3,10 @@ import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { Hidden } from "@material-ui/core";
-import SignedInLinks from "./SignedInLinks/SignedInLinks";
-import SignedOutLinks from "./SignedOutLinks/SignedOutLinks";
-import { connect } from "react-redux";
+//import { Hidden } from "@material-ui/core";
+//import SignedInLinks from "./SignedInLinks/SignedInLinks";
+//import SignedOutLinks from "./SignedOutLinks/SignedOutLinks";
+//import { connect } from "react-redux";
 //import { compose } from "recompose";
 
 const styles = theme => ({

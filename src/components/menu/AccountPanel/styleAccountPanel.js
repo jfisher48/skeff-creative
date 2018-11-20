@@ -14,6 +14,10 @@ const styles = theme => ({
       justifyContent: "space-between"
     }
   },
+  // userAvatar: {
+  //   width: "32px",
+  //   height: "32px"
+  // },
   userName: {
     color: "#fff",
     //display: "inline-flex",
