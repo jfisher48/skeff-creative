@@ -4,7 +4,7 @@ const styles = theme => ({
     boxShadow: "none"
   },
   accountSummary: {
-    padding: "0 0 0 10px",
+    padding: "0 0 0 15px",
     flexDirection: "row",
     alignItems: "center",
     content: {
@@ -14,15 +14,16 @@ const styles = theme => ({
       justifyContent: "space-between"
     }
   },
-  // userAvatar: {
-  //   width: "32px",
-  //   height: "32px"
-  // },
+  userAvatar: {
+    width: "32px",
+    height: "32px"
+  },
   userName: {
-    color: "#fff",
-    //display: "inline-flex",
-    marginLeft: "20px",
-    lineHeight: "40px"
+    color: "#bdbfc1",
+    display: "inline-flex",
+    padding: "0 16px",
+    lineHeight: "32px",
+    fontWeight: "500"
   },
   expand: {
     color: "#fff"
@@ -45,7 +46,7 @@ const styles = theme => ({
     textTransform: "none",
     lineHeight: "30px",
     padding: "10px 0 10px 60px",
-    fontWeight: "400"
+    fontWeight: "500"
   }
 });
 
