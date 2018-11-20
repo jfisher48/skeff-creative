@@ -1,3 +1,12 @@
+html {
+  background: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: #263238;
+}
+
 body {
   margin: 0;
   padding: 0;

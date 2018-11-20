@@ -24,6 +24,7 @@ class AccountPanel extends Component {
   render() {
     const classes = this.props.classes;
     const { expanded } = this.state;
+    const { profile } = this.props;
 
     return (
       <ExpansionPanel
@@ -35,8 +36,10 @@ class AccountPanel extends Component {
           className={classes.accountSummary}
           expandIcon={<ExpandMoreIcon className={classes.expand} />}
         >
-          <Avatar className={classes.userAvatar}>JF</Avatar>
-          <Typography className={classes.userName}>Jay Fisher</Typography>
+          <Avatar className={classes.userAvatar}>{profile.initials}</Avatar>
+          <Typography className={classes.userName}>
+            {profile.firstName} {profile.lastName}
+          </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.panelDetails}>
           <Button
@@ -54,6 +57,12 @@ class AccountPanel extends Component {
 
 const styledComponent = withStyles(styles)(AccountPanel);
 
+const mapStateToProps = state => {
+  return {
+    profile: state.firebase.profile
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     signOut: () => dispatch(signOut())
@@ -61,6 +70,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(styledComponent);

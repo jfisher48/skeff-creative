@@ -1,13 +1,16 @@
 const styles = theme => ({
   loginCard: {
     //maxHeight: "50vh",
-    maxWidth: "75vw",
+    maxWidth: "80vw",
     marginTop: "100px",
     position: "relative",
     display: "flex",
     flexDirection: "column",
     overflow: "visible",
-    alignItems: "center"
+    alignItems: "center",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "60px"
+    }
   },
   // header: {
   //     display: "block",
@@ -19,12 +22,18 @@ const styles = theme => ({
     marginTop: "-100px",
     height: "200px",
     width: "200px",
-    backgroundColor: "#263238"
-    //display: "block",
-    //flex: "none"
+    backgroundColor: "#263238",
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "-63px",
+      height: "126px",
+      width: "126px"
+    }
   },
   img: {
-    width: "180px"
+    width: "180px",
+    [theme.breakpoints.down("xs")]: {
+      width: "114px"
+    }
   },
   textField: {
     marginLeft: theme.spacing.unit,

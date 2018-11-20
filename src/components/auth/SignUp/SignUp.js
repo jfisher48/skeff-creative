@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import styles from "./styleSignUp";
 import { Card, Avatar, CardContent } from "@material-ui/core";
 import logo from "../../../icons/creative_logo.svg";
+import { signUp } from "../../../store/actions/authActions";
 
 class SignUp extends Component {
   state = {
@@ -24,12 +25,12 @@ class SignUp extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.signUp(this.state);
   };
 
   render() {
     const classes = this.props.classes;
-    const { auth } = this.props;
+    const { auth, authError } = this.props;
     if (auth.uid) return <Redirect to="/" />;
     return (
       <div>
@@ -89,6 +90,7 @@ class SignUp extends Component {
               >
                 Sign Up
               </Button>
+              {authError ? <p>{authError}</p> : null}
             </form>
           </CardContent>
         </Card>
@@ -101,8 +103,18 @@ const styledComponent = withStyles(styles)(SignUp);
 
 const mapStateToProps = state => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    authError: state.auth.authError
   };
 };
 
-export default connect(mapStateToProps)(styledComponent);
+const mapDispatchToProps = dispatch => {
+  return {
+    signUp: newUser => dispatch(signUp(newUser))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(styledComponent);
