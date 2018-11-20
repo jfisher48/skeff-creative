@@ -51,15 +51,13 @@ class CreateWorkOrder extends Component {
 
   handleRushToggle = () => {
     this.setState(state => ({ isRush: !state.isRush }));
+    this.setState({ dueDate: setDueDate(this.state.isRush) });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.setState({
-      dueDate: setDueDate(this.state.isRush)
-    });
-    console.log(this.state);
     this.props.createWorkorder(this.state);
+    this.props.history.push("/workorders");
   };
 
   render() {

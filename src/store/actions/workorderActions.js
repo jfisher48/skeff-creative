@@ -1,6 +1,8 @@
 export const createWorkorder = workorder => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
+    const profile = getState().firebase.profile;
+    const authorId = getState().firebase.auth.uid;
     // var d = new Date();
     // var dueDate = setDueDate(d, getState.isRush);
 
@@ -8,8 +10,9 @@ export const createWorkorder = workorder => {
       .collection("workorders")
       .add({
         ...workorder,
-        requesterFirstName: "Tim",
-        requesterLastName: "Crawley",
+        requesterFirstName: profile.firstName,
+        requesterLastName: profile.lastName,
+        requesterId: authorId,
         createdAt: new Date()
         //dueDate: dueDate
       })
