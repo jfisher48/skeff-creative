@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import PageHeading from "../components/PageHeading.js";
-import LogosIco from "../icons/brand_b.svg";
+import PageHeading from "../../components/PageHeading.js";
+import LogosIco from "../../icons/brand_b.svg";
 import Helmet from "react-helmet";
 import Grid from "@material-ui/core/Grid";
-import LogoCard from "../components/LogoCard";
-import jsonPrefix from "../data/jsonPrefix";
+import LogoCard from "../../components/LogoCard";
+import jsonPrefix from "../../data/jsonPrefix";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-
-const styles = theme => ({});
+import styles from "./styleLogos";
 
 class Logos extends Component {
   constructor(props) {
@@ -51,7 +50,7 @@ class Logos extends Component {
         <Helmet>
           <title>Logos | Skeff Creative Services</title>
         </Helmet>
-        <PageHeading headingIcon={LogosIco}>Logos</PageHeading>
+        <PageHeading headingIcon={LogosIco} pageTitle="Logos" />
         <Grid container spacing={16}>
           <Grid item container spacing={16} xs={12} sm={8} xl={7}>
             {logos}

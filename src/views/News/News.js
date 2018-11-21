@@ -1,29 +1,23 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import PageHeading from "../components/PageHeading.js";
+import PageHeading from "../../components/PageHeading.js";
 import Helmet from "react-helmet";
 import Grid from "@material-ui/core/Grid";
-// import Card from "@material-ui/core/Card";
-// import CardActions from "@material-ui/core/CardActions";
-// import CardContent from "@material-ui/core/CardContent";
-// import Button from "@material-ui/core/Button";
-// import Typography from "@material-ui/core/Typography";
-import NewsIco from "../icons/news_b.svg";
-import NewsList from "../components/NewsList.js";
-import CategoryList from "../components/CategoryList.js";
-import TagList from "../components/TagList.js";
-import CategoryWidget from "../components/CategoryWidget";
-import TagWidget from "../components/TagWidget";
-import ListWidget from "../components/ListWidget";
-import archiveData from "../data/archiveData";
+import NewsIco from "../../icons/news_b.svg";
+import NewsList from "../../components/NewsList.js";
+import CategoryList from "../../components/CategoryList.js";
+import TagList from "../../components/TagList.js";
+import CategoryWidget from "../../components/CategoryWidget";
+import TagWidget from "../../components/TagWidget";
+//import ListWidget from "../../components/ListWidget";
+//import archiveData from "../../data/archiveData";
 import { Switch, Route } from "react-router-dom";
-import Article from "../components/Article";
-import jsonPrefix from "../data/jsonPrefix";
+import Article from "../../components/Article";
+import jsonPrefix from "../../data/jsonPrefix";
 import "isomorphic-fetch";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-
-const styles = theme => ({});
+import styles from "./styleNews";
 
 class News extends Component {
   constructor(props) {
@@ -72,7 +66,7 @@ class News extends Component {
         <Helmet>
           <title>News and Announcements | Skeff Creative Services</title>
         </Helmet>
-        <PageHeading headingIcon={NewsIco}>News and Announcements</PageHeading>
+        <PageHeading headingIcon={NewsIco} pageTitle="News and Announcements" />
         <Grid container spacing={16}>
           <Grid item xs={12} lg={7} xl={6}>
             <Switch>
@@ -122,13 +116,13 @@ class News extends Component {
                   <Grid item xs={12}>
                     <TagWidget className={classes.card} />
                   </Grid>
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <ListWidget
                       className={classes.card}
                       list={archiveData}
                       title="Archives"
                     />
-                  </Grid>
+                  </Grid> */}
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={6} lg={12} xl={6}>

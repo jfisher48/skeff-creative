@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import PageHeading from "../components/PageHeading.js";
+import PageHeading from "../../components/PageHeading.js";
 import Helmet from "react-helmet";
-import SuppliersIco from "../icons/suppliers_b.svg";
+import SuppliersIco from "../../icons/suppliers_b.svg";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -15,7 +15,7 @@ class Suppliers extends Component {
         <Helmet>
           <title>Suppliers | Skeff Creative Services</title>
         </Helmet>
-        <PageHeading headingIcon={SuppliersIco}>Suppliers</PageHeading>
+        <PageHeading headingIcon={SuppliersIco} pageTitle="Suppliers" />
       </div>
     );
   }

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import PageHeading from "../components/PageHeading.js";
-import CalendarIco from "../icons/calendar_b.svg";
+import PageHeading from "../../components/PageHeading.js";
+import DashboardIco from "../../icons/dashboard_b.svg";
 import Helmet from "react-helmet";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-class Calendar extends Component {
+class Dashboard extends Component {
   state = {};
   render() {
     const { auth } = this.props;
@@ -13,9 +13,9 @@ class Calendar extends Component {
     return (
       <div>
         <Helmet>
-          <title>Calendar | Skeff Creative Services</title>
+          <title>Dashboard | Skeff Creative Services</title>
         </Helmet>
-        <PageHeading headingIcon={CalendarIco}>Calendar</PageHeading>
+        <PageHeading headingIcon={DashboardIco} pageTitle="Dashboard" />
       </div>
     );
   }
@@ -28,4 +28,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Calendar);
+export default connect(mapStateToProps)(Dashboard);

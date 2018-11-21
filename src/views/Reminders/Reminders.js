@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import PageHeading from "../components/PageHeading.js";
-import DashboardIco from "../icons/dashboard_b.svg";
+import PageHeading from "../../components/PageHeading.js";
+import RemindersIco from "../../icons/reminders_b.svg";
 import Helmet from "react-helmet";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-class Dashboard extends Component {
+class Reminders extends Component {
   state = {};
   render() {
     const { auth } = this.props;
@@ -13,9 +13,9 @@ class Dashboard extends Component {
     return (
       <div>
         <Helmet>
-          <title>Dashboard | Skeff Creative Services</title>
+          <title>Reminders | Skeff Creative Services</title>
         </Helmet>
-        <PageHeading headingIcon={DashboardIco}>Dashboard</PageHeading>
+        <PageHeading headingIcon={RemindersIco} pageTitle="Reminders" />
       </div>
     );
   }
@@ -28,4 +28,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(Reminders);

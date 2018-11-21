@@ -1,13 +1,13 @@
 // core components/views
-import Dashboard from "../views/Dashboard";
-import Calendar from "../views/Calendar";
-import Documents from "../views/Documents";
-import Learning from "../views/Learning";
-import Logos from "../views/Logos";
-import News from "../views/News";
-import People from "../views/People";
-//import Reminders from "../views/Reminders";
-import Suppliers from "../views/Suppliers";
+import Dashboard from "../views/Dashboard/Dashboard";
+import Calendar from "../views/Calendar/Calendar";
+import Documents from "../views/Documents/Documents";
+import Learning from "../views/Learning/Learning";
+import Logos from "../views/Logos/Logos";
+import News from "../views/News/News";
+import People from "../views/People/People";
+//import Reminders from "../views/Reminders/Reminders";
+import Suppliers from "../views/Suppliers/Suppliers";
 import WorkOrders from "../views/WorkOrders/WorkOrders.js";
 
 import dashboardButton from "../styles/dashboardButton";

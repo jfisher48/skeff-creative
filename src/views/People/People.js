@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import PageHeading from "../components/PageHeading.js";
-import LearningIco from "../icons/learning_b.svg";
+import PageHeading from "../../components/PageHeading.js";
+import PeopleIco from "../../icons/people_b.svg";
 import Helmet from "react-helmet";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-class Learning extends Component {
+class People extends Component {
   state = {};
   render() {
     const { auth } = this.props;
@@ -13,9 +13,9 @@ class Learning extends Component {
     return (
       <div>
         <Helmet>
-          <title>Learning | Skeff Creative Services</title>
+          <title>People | Skeff Creative Services</title>
         </Helmet>
-        <PageHeading headingIcon={LearningIco}>Learning</PageHeading>
+        <PageHeading headingIcon={PeopleIco} pageTitle="People" />
       </div>
     );
   }
@@ -28,4 +28,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Learning);
+export default connect(mapStateToProps)(People);

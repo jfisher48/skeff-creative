@@ -17,7 +17,7 @@ const styles = theme => ({
   },
   toolBar: {
     paddingLeft: theme.spacing.unit * 0,
-    paddingRight: theme.spacing.unit * 1.875,
+    paddingRight: 0,
     minHeight: "75px",
     display: "flex",
     alignItems: "center"
@@ -53,8 +53,9 @@ class PageHeading extends Component {
               alt={this.props.children}
             />
             <Typography className={classes.headingText} variant="subtitle1">
-              {this.props.children}
+              {this.props.pageTitle}
             </Typography>
+            {this.props.children}
             {/* <Hidden xsDown>{links}</Hidden> */}
           </Toolbar>
         </AppBar>
