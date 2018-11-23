@@ -1,6 +1,9 @@
 const styles = theme => ({
+  root: {
+    height: "100%"
+  },
   container: {
-    height: "100vh",
+    height: "100%",
     position: "relative",
     display: "flex",
     flexFlow: "column",

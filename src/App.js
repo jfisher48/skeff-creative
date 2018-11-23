@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     const { auth } = this.props;
     const layout = auth.uid ? <Authenticated /> : <UnAuthenticated />;
-    return <div>{layout}</div>;
+    return <div className="outer">{layout}</div>;
   }
 }
 
