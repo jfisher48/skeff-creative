@@ -23,6 +23,7 @@
     "redux": "^4.0.1",
     "redux-firestore": "^0.5.8",
     "redux-thunk": "^2.3.0",
+    "sprintf-js": "^1.1.1",
     "typeface-roboto": "0.0.54",
     "url-parse": "^1.4.4"
   },

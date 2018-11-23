@@ -38,9 +38,9 @@ class CreateWorkOrder extends Component {
     //salesman: "",
     account: "",
     comments: "",
-    isRush: false,
+    isRush: false
     //items: [],
-    dueDate: new Date(Date.now() + 172800000)
+    //dueDate: new Date(Date.now() + 172800000)
   };
 
   handleChange = e => {
@@ -159,7 +159,7 @@ function setDueDate(check) {
   var dueDate;
   var d = new Date();
   var n = d.getDay();
-  if (n === (1 || n === 2 || n === 3) && check === false) {
+  if ((n === 1 || n === 2 || n === 3) && check === false) {
     dueDate = new Date(Date.now() + 172800000);
   } else if (n === 4 && check === false) {
     dueDate = new Date(Date.now() + 345600000);

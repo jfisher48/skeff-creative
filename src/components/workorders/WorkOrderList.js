@@ -11,7 +11,7 @@ const WorkOrderList = ({ workorders }) => {
             <WorkOrderSummary
               workorder={workorder}
               key={workorder.id}
-              orderNumber="#703000001"
+              orderNumber={workorder.workorderNumber}
               account={workorder.account}
               orderType="Standard POS"
               requester={

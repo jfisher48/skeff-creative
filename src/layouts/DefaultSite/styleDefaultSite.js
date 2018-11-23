@@ -28,6 +28,9 @@ const styles = theme => ({
     position: "fixed",
     [theme.breakpoints.up("lg")]: {
       position: "relative"
+    },
+    [theme.breakpoints.up("sm")]: {
+      height: "100%"
     }
   },
   navWrap: {

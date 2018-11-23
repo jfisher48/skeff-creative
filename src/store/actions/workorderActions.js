@@ -1,3 +1,5 @@
+import sprintf from "sprintf-js";
+
 export const createWorkorder = workorder => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
@@ -10,6 +12,10 @@ export const createWorkorder = workorder => {
       .collection("workorders")
       .add({
         ...workorder,
+        workorderNumber:
+          "#" +
+          profile.routeNumber +
+          ("0000000" + (profile.createdOrderCount + 1)).slice(-7),
         requesterFirstName: profile.firstName,
         requesterLastName: profile.lastName,
         requesterId: authorId,

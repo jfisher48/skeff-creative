@@ -71,6 +71,11 @@ const theme = createMuiTheme({
       subheader: {
         float: "right"
       }
+    },
+    MuiDrawer: {
+      docked: {
+        height: "100%"
+      }
     }
   }
   // MuiSvgIcon: {
