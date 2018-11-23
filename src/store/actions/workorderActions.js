@@ -1,5 +1,3 @@
-import sprintf from "sprintf-js";
-
 export const createWorkorder = workorder => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
@@ -8,14 +6,14 @@ export const createWorkorder = workorder => {
     // var d = new Date();
     // var dueDate = setDueDate(d, getState.isRush);
 
+    let newCount = profile.createdOrderCount + 1;
+
     firestore
       .collection("workorders")
       .add({
         ...workorder,
         workorderNumber:
-          "#" +
-          profile.routeNumber +
-          ("0000000" + (profile.createdOrderCount + 1)).slice(-7),
+          "#" + profile.routeNumber + ("0000000" + newCount).slice(-7),
         requesterFirstName: profile.firstName,
         requesterLastName: profile.lastName,
         requesterId: authorId,
@@ -27,7 +25,15 @@ export const createWorkorder = workorder => {
       })
       .catch(err => {
         dispatch({ type: "CREATE_WORKORDER_ERROR", err });
-      });
+      })
+      .then(
+        firestore
+          .collection("users")
+          .doc(authorId)
+          .update({
+            createdOrderCount: newCount
+          })
+      );
 
     // function setDueDate(date, check) {
     //   var n = date.getDay();

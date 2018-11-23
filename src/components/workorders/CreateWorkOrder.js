@@ -45,13 +45,13 @@ class CreateWorkOrder extends Component {
 
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      dueDate: setDueDate(this.state.isRush)
     });
   };
 
   handleRushToggle = () => {
     this.setState(state => ({ isRush: !state.isRush }));
-    this.setState({ dueDate: setDueDate(this.state.isRush) });
   };
 
   handleSubmit = e => {
@@ -164,11 +164,13 @@ function setDueDate(check) {
   } else if (n === 4 && check === false) {
     dueDate = new Date(Date.now() + 345600000);
   } else if (n === 5 && check === false) {
-    dueDate = new Date(Date.now() + 432000000);
-  } else if (n === 6 && check === false) {
-    dueDate = new Date(Date.now() + 432000000);
-  } else if (n === 0 && check === false) {
     dueDate = new Date(Date.now() + 345600000);
+  } else if (n === 6 && check === false) {
+    dueDate = new Date(Date.now() + 345600000);
+  } else if (n === 0 && check === false) {
+    dueDate = new Date(Date.now() + 259200000);
+  } else if (n === 5 && check === true) {
+    dueDate = new Date(Date.now() + 259200000);
   } else {
     dueDate = new Date(Date.now() + 86400000);
   }

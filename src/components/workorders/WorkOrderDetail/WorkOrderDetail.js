@@ -24,7 +24,7 @@ class WorkOrderDetail extends Component {
           <Grid item xs={12}>
             <Card className={classes.orderCard}>
               <SummaryHeader
-                orderNumber={this.props.match.params.id}
+                orderNumber={workorder.workorderNumber}
                 dueDate={workorder.dueDate.toDate()}
               >
                 <IconButton
