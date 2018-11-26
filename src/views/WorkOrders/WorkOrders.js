@@ -131,11 +131,12 @@ class WorkOrders extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  // console.log(state);
   return {
     workorders: state.firestore.ordered.workorders,
     auth: state.firebase.auth,
-    notifications: state.firestore.ordered.notifications
+    notifications: state.firestore.ordered.notifications,
+    profile: state.firebase.profile
   };
 };
 
@@ -143,8 +144,25 @@ const styledComponent = withStyles(styles)(WorkOrders);
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([
-    { collection: "workorders", orderBy: ["dueDate", "asc"] },
-    { collection: "notifications", limit: 5, orderBy: ["time", "desc"] }
-  ])
+  firestoreConnect(props => {
+    if (!props.auth.uid) return [];
+    if (props.profile.role === "graphics") {
+      return [
+        {
+          collection: "workorders",
+          where: [["assignedTo", "==", props.auth.uid]],
+          orderBy: ["dueDate", "asc"]
+        },
+        { collection: "notifications", limit: 5, orderBy: ["time", "desc"] }
+      ];
+    } else
+      return [
+        {
+          collection: "workorders",
+          where: [["requesterId", "==", props.auth.uid]],
+          orderBy: ["dueDate", "asc"]
+        },
+        { collection: "notifications", limit: 5, orderBy: ["time", "desc"] }
+      ];
+  })
 )(styledComponent);

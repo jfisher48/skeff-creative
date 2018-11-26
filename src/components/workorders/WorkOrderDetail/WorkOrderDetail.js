@@ -68,7 +68,8 @@ const mapStateToProps = (state, ownProps) => {
   const workorder = workorders ? workorders[id] : null;
   return {
     workorder: workorder,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   };
 };
 
@@ -76,5 +77,21 @@ const styledComponent = withStyles(styles)(WorkOrderDetail);
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: "workorders" }])
+  firestoreConnect(props => {
+    if (!props.auth.uid) return [];
+    if (props.profile.role === "graphics") {
+      return [
+        {
+          collection: "workorders",
+          where: [["assignedTo", "==", props.auth.uid]]
+        }
+      ];
+    } else
+      return [
+        {
+          collection: "workorders",
+          where: [["requesterId", "==", props.auth.uid]]
+        }
+      ];
+  })
 )(styledComponent);
