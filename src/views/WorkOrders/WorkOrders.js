@@ -9,6 +9,7 @@ import {
   Grid,
   Button,
   Card,
+  CardHeader,
   CardContent,
   Typography,
   List,
@@ -27,6 +28,7 @@ import "react-router-modal/css/react-router-modal.css";
 import styles from "./styleWorkOrders.js";
 import { Redirect } from "react-router-dom";
 import Moment from "react-moment";
+import WorkOrderTotalWidget from "../../components/workorders/WorkOrderTotalWidget/WorkOrderTotalWidget.js";
 
 class WorkOrders extends Component {
   render() {
@@ -88,40 +90,55 @@ class WorkOrders extends Component {
             </Grid>
           </Grid>
           <Grid item xs={12} lg={4}>
-            {/* when i move this to its own component, remember to pass props down */}
-            <Card className={classes.card}>
-              <CardContent className={classes.widgetContent}>
-                <Typography
-                  className={classes.widgetTitle}
-                  color="textSecondary"
-                >
-                  Notifications
-                </Typography>
-                <List className={classes.widgetList}>
-                  {notifications &&
-                    notifications.map(item => {
-                      return (
-                        <ListItem
-                          className={classes.widgetListItem}
-                          key={item.id}
-                        >
-                          <Typography>
-                            <span className={classes.notificationUser}>
-                              {item.user}{" "}
-                            </span>
-                            <span className={classes.notificationContent}>
-                              {item.content}{" "}
-                            </span>
-                          </Typography>
-                          <div className={classes.notificationTime}>
-                            <Moment fromNow>{item.time.toDate()}</Moment>
-                          </div>
-                        </ListItem>
-                      );
-                    })}
-                </List>
-              </CardContent>
-            </Card>
+            <Grid container spacing={16}>
+              <Grid item xs={12} md={6} xl={12}>
+                <WorkOrderTotalWidget
+                  totalIncomplete={workorders && workorders.length}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} xl={12}>
+                {/* when i move this to its own component, remember to pass props down */}
+                <Card className={classes.card}>
+                  <CardHeader
+                    className={classes.widgetHeader}
+                    disableTypography
+                    title={
+                      <Typography
+                        color="textSecondary"
+                        className={classes.widgetTitle}
+                      >
+                        Notifications
+                      </Typography>
+                    }
+                  />
+                  <CardContent className={classes.widgetContent}>
+                    <List className={classes.widgetList}>
+                      {notifications &&
+                        notifications.map(item => {
+                          return (
+                            <ListItem
+                              className={classes.widgetListItem}
+                              key={item.id}
+                            >
+                              <Typography>
+                                <span className={classes.notificationUser}>
+                                  {item.user}{" "}
+                                </span>
+                                <span className={classes.notificationContent}>
+                                  {item.content}{" "}
+                                </span>
+                              </Typography>
+                              <div className={classes.notificationTime}>
+                                <Moment fromNow>{item.time.toDate()}</Moment>
+                              </div>
+                            </ListItem>
+                          );
+                        })}
+                    </List>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
           </Grid>
           <ModalContainer />
         </Grid>
@@ -153,7 +170,7 @@ export default compose(
           where: [["assignedTo", "==", props.auth.uid]],
           orderBy: ["dueDate", "asc"]
         },
-        { collection: "notifications", limit: 5, orderBy: ["time", "desc"] }
+        { collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
       ];
     } else
       return [
@@ -162,7 +179,7 @@ export default compose(
           where: [["requesterId", "==", props.auth.uid]],
           orderBy: ["dueDate", "asc"]
         },
-        { collection: "notifications", limit: 5, orderBy: ["time", "desc"] }
+        { collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
       ];
   })
 )(styledComponent);

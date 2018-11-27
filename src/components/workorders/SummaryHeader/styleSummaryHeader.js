@@ -1,6 +1,10 @@
 const styles = theme => ({
   header: {
-    backgroundColor: "#e7e7e7",
+    backgroundColor: "#CFB6C8",
+    width: "100%"
+  },
+  headerSoon: {
+    backgroundColor: "rgb(236, 204, 36)",
     width: "100%"
   },
   headerContainer: {
@@ -16,12 +20,12 @@ const styles = theme => ({
     fontFamily: "Roboto",
     fontSize: "1.25em",
     fontWeight: "500",
-    color: "#707070"
+    color: "rgb(0,0,0,0.65)"
   },
   dueDate: {
     display: "flex",
     alignItems: "center",
-    color: "#707070",
+    color: "rgb(0,0,0,0.65)",
     padding: ".44em",
     borderRadius: ".25em",
     [theme.breakpoints.down("xs")]: {
@@ -29,15 +33,14 @@ const styles = theme => ({
       paddingLeft: 0
     }
   },
-  dueDateUrgent: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    color: "#fff",
-    backgroundColor: "#e1313c",
-    padding: ".44em",
-    borderRadius: ".25em"
-  },
+  // dueDateSoon: {
+  //   display: "flex",
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   color: "#fff",
+  //   padding: ".44em",
+  //   borderRadius: ".25em"
+  // },
   leftIcon: {
     fontSize: "1em",
     marginRight: ".3em"

@@ -12,14 +12,20 @@ const styles = theme => ({
       fontWeight: "500"
     }
   },
+  widgetHeader: {
+    paddingTop: "16px",
+    paddingBottom: "16px",
+    lineHeight: "33.06px",
+    backgroundColor: "#a94e93"
+  },
   widgetContent: {
-    padding: "30px"
+    padding: "24px 26px"
   },
   widgetTitle: {
     fontSize: "1.5em",
     fontWeight: "500",
-    marginBottom: "20px",
-    lineHeight: "1"
+    lineHeight: "33.06px",
+    color: "rgb(0,0,0,0.65)"
   },
   widgetList: {
     padding: "0"

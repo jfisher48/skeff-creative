@@ -21,6 +21,7 @@ const WorkOrderList = ({ workorders }) => {
               link={"/workorders/" + workorder.id}
               date={workorder.createdAt.toDate()}
               dueDate={workorder.dueDate.toDate()}
+              isRush={workorder.isRush}
             />
           );
         })}

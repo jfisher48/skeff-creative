@@ -79,6 +79,7 @@ class WorkOrderSummary extends Component {
                 WO TYPE:{" "}
                 <span className={classes.orderInfo}>
                   {this.props.orderType}
+                  {this.props.isRush ? <span> - Please Rush</span> : null}
                 </span>
               </Typography>
               <Typography className={classes.orderLabel} variant="h4">
