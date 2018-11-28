@@ -71,32 +71,28 @@ class WorkOrders extends Component {
         </PageHeading>
         <Grid container spacing={16}>
           <Grid item xs={12} lg={8}>
-            <Grid container spacing={16}>
-              <Grid item xs={12}>
-                <WorkOrderList workorders={workorders} />
-              </Grid>
-              <Switch>
-                <ModalRoute
-                  path="/workorders/create"
-                  parentPath="/workorders"
-                  component={CreateWorkOrder}
-                />
-                <ModalRoute
-                  path="/workorders/:id"
-                  parentPath="/workorders"
-                  component={WorkOrderDetail}
-                />
-              </Switch>
-            </Grid>
+            <WorkOrderList workorders={workorders} />
+
+            <Switch>
+              <ModalRoute
+                path="/workorders/create"
+                parentPath="/workorders"
+                component={CreateWorkOrder}
+              />
+              <ModalRoute
+                path="/workorders/:id"
+                parentPath="/workorders"
+                component={WorkOrderDetail}
+              />
+            </Switch>
           </Grid>
           <Grid item xs={12} lg={4}>
             <Grid container spacing={16}>
-              <Grid item xs={12} md={6} xl={12}>
-                <WorkOrderTotalWidget
-                  totalIncomplete={workorders && workorders.length}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={12}>
+              <WorkOrderTotalWidget
+                totalIncomplete={workorders && workorders.length}
+              />
+
+              <Grid item xs={12} sm={6} lg={12}>
                 {/* when i move this to its own component, remember to pass props down */}
                 <Card className={classes.card}>
                   <CardHeader
@@ -140,8 +136,8 @@ class WorkOrders extends Component {
               </Grid>
             </Grid>
           </Grid>
-          <ModalContainer />
         </Grid>
+        <ModalContainer />
       </div>
     );
   }

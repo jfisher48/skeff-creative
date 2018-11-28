@@ -101,18 +101,6 @@ class WorkOrderSummary extends Component {
                 <span className={classes.orderInfo}>Jay Fisher</span>
               </Typography>
             </CardContent>
-            {/* <CardActions className={classes.orderActions}>
-            <Link to={this.props.link} className="postLink">
-              <Button
-                className={classes.orderButton}
-                variant="contained"
-                size="large"
-                color="secondary"
-              >
-                View / Edit
-              </Button>
-            </Link>
-          </CardActions> */}
           </Card>
         </NavLink>
       </Grid>

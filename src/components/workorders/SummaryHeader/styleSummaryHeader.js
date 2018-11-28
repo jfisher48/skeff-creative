@@ -20,12 +20,12 @@ const styles = theme => ({
     fontFamily: "Roboto",
     fontSize: "1.25em",
     fontWeight: "500",
-    color: "rgb(0,0,0,0.65)"
+    color: "rgba(0,0,0,0.65)"
   },
   dueDate: {
     display: "flex",
     alignItems: "center",
-    color: "rgb(0,0,0,0.65)",
+    color: "rgba(0,0,0,0.65)",
     padding: ".44em",
     borderRadius: ".25em",
     [theme.breakpoints.down("xs")]: {

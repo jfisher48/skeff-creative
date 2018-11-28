@@ -1,7 +1,6 @@
 const styles = theme => ({
   widgetHeader: {
-    paddingTop: "16px",
-    paddingBottom: "16px",
+    padding: "16px 26px",
     lineHeight: "33.06px",
     backgroundColor: "#a94e93"
   },
@@ -9,23 +8,29 @@ const styles = theme => ({
     fontSize: "1.5em",
     fontWeight: "500",
     lineHeight: "33.06px",
-    color: "rgb(0,0,0,0.65)"
+    color: "rgba(0,0,0,0.65)"
   },
   widgetContent: {
     display: "flex",
-    padding: "24px 35px",
+    padding: "24px 26px",
     justifyContent: "space-between"
   },
   totalWrap: {},
   totalNumber: {
     fontSize: "5em",
-    lineHeight: ".90"
+    lineHeight: ".90",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "4.5em"
+    }
   },
   totalText: {
-    fontSize: "1.2em",
+    fontSize: "1em",
     fontWeight: "500",
     lineHeight: "1",
-    color: "rgb(0,0,0,0.54)"
+    color: "rgba(0,0,0,0.54)",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9em"
+    }
   }
 });
 

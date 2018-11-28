@@ -13,7 +13,7 @@ class WorkOrderTotalWidget extends Component {
   render() {
     const classes = this.props.classes;
     return (
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={6} lg={12}>
         <Card>
           <CardHeader
             className={classes.widgetHeader}
