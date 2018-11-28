@@ -13,8 +13,16 @@ import Typography from "@material-ui/core/Typography";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import { createWorkorder } from "../../store/actions/workorderActions";
-import { Checkbox } from "@material-ui/core";
+import {
+  Checkbox,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Input
+} from "@material-ui/core";
 import { Redirect } from "react-router-dom";
+import { firestoreConnect } from "react-redux-firebase";
 
 const styles = theme => ({
   container: {
@@ -26,6 +34,12 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 200
   },
+  assignSelect: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
+  },
+
   dense: {
     marginTop: 19
   }
@@ -38,20 +52,23 @@ class CreateWorkOrder extends Component {
     //salesman: "",
     account: "",
     comments: "",
-    isRush: false
+    isRush: false,
+    assignedTo: "",
     //items: [],
-    //dueDate: new Date(Date.now() + 172800000)
+    dueDate: new Date(Date.now() + 172800000)
   };
 
   handleChange = e => {
     this.setState({
-      [e.target.name]: e.target.value,
-      dueDate: setDueDate(this.state.isRush)
+      [e.target.name]: e.target.value
+      //dueDate: setDueDate(this.state.isRush)
     });
   };
 
   handleRushToggle = () => {
-    this.setState(state => ({ isRush: !state.isRush }));
+    this.setState({ isRush: !this.state.isRush }, () => {
+      this.setState({ dueDate: setDueDate(this.state.isRush) });
+    });
   };
 
   handleSubmit = e => {
@@ -62,7 +79,7 @@ class CreateWorkOrder extends Component {
 
   render() {
     const classes = this.props.classes;
-    const { auth } = this.props;
+    const { auth, users } = this.props;
     if (!auth.uid) return <Redirect to="/login" />;
     return (
       <div>
@@ -114,20 +131,21 @@ class CreateWorkOrder extends Component {
             fullWidth
             onChange={this.handleChange}
           /> */}
-          {/* <FormControl fullWidth>
-            <InputLabel htmlFor="scemployee">Assign To</InputLabel>
+          <FormControl className={classes.assignSelect}>
+            <InputLabel htmlFor="assignedTo">Assign To</InputLabel>
             <Select
-              value={this.state.scemployee}
+              value={this.state.assignedTo}
               onChange={this.handleChange}
-              input={<Input name="scemployee" />}
+              input={<Input name="assignedTo" />}
             >
-              {scemployees.map(name => (
-                <MenuItem key={name} value={name}>
-                  {name}
-                </MenuItem>
-              ))}
+              {users &&
+                users.map(user => (
+                  <MenuItem key={user.id} value={user.id}>
+                    {user.firstName} {user.lastName}
+                  </MenuItem>
+                ))}
             </Select>
-          </FormControl> */}
+          </FormControl>
 
           <Button
             type="submit"
@@ -145,7 +163,8 @@ class CreateWorkOrder extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    users: state.firestore.ordered.users
   };
 };
 
@@ -182,5 +201,6 @@ export default compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )
+  ),
+  firestoreConnect([{ collection: "users", where: ["role", "==", "graphics"] }])
 )(styledComponent);

@@ -3,8 +3,6 @@ export const createWorkorder = workorder => {
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
     const authorId = getState().firebase.auth.uid;
-    // var d = new Date();
-    // var dueDate = setDueDate(d, getState.isRush);
 
     let newCount = profile.createdOrderCount + 1;
 
@@ -18,7 +16,6 @@ export const createWorkorder = workorder => {
         requesterLastName: profile.lastName,
         requesterId: authorId,
         createdAt: new Date()
-        //dueDate: dueDate
       })
       .then(() => {
         dispatch({ type: "CREATE_WORKORDER", workorder });
@@ -34,24 +31,5 @@ export const createWorkorder = workorder => {
             createdOrderCount: newCount
           })
       );
-
-    // function setDueDate(date, check) {
-    //   var n = date.getDay();
-    //   if (n === (1 || n === 2 || n === 3) && check === false) {
-    //     dueDate = new Date(Date.now() + 172800000);
-    //   } else if (n === 4 && check === false) {
-    //     dueDate = new Date(Date.now() + 345600000);
-    //   } else if (n === 5 && check === false) {
-    //     dueDate = new Date(Date.now() + 432000000);
-    //   } else if (n === 6 && check === false) {
-    //     dueDate = new Date(Date.now() + 432000000);
-    //   } else if (n === 0 && check === false) {
-    //     dueDate = new Date(Date.now() + 345600000);
-    //   } else {
-    //     dueDate = new Date(Date.now() + 86400000);
-    //   }
-
-    //   return dueDate;
-    // };
   };
 };

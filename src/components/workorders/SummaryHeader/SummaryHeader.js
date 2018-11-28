@@ -12,7 +12,9 @@ class SummaryHeader extends Component {
         className={
           this.props.dueDate - Date.now() >= 43200000
             ? classes.header
-            : classes.headerSoon
+            : this.props.dueDate < Date.now()
+              ? classes.headerLate
+              : classes.headerSoon
         }
       >
         <div className={classes.headerContainer}>

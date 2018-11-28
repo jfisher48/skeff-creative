@@ -1,10 +1,14 @@
 const styles = theme => ({
   header: {
-    backgroundColor: "#CFB6C8",
+    backgroundColor: "#e7e7e7",
     width: "100%"
   },
   headerSoon: {
     backgroundColor: "rgb(236, 204, 36)",
+    width: "100%"
+  },
+  headerLate: {
+    backgroundColor: "#E1313C",
     width: "100%"
   },
   headerContainer: {
@@ -26,21 +30,8 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     color: "rgba(0,0,0,0.65)",
-    padding: ".44em",
-    borderRadius: ".25em",
-    [theme.breakpoints.down("xs")]: {
-      marginTop: ".3em",
-      paddingLeft: 0
-    }
+    padding: ".44em"
   },
-  // dueDateSoon: {
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   color: "#fff",
-  //   padding: ".44em",
-  //   borderRadius: ".25em"
-  // },
   leftIcon: {
     fontSize: "1em",
     marginRight: ".3em"

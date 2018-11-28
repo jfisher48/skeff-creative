@@ -29,9 +29,7 @@ class WorkOrderTotalWidget extends Component {
               <Typography className={classes.totalNumber}>
                 {this.props.totalIncomplete}
               </Typography>
-              <Typography className={classes.totalText}>
-                Incomplete Orders
-              </Typography>
+              <Typography className={classes.totalText}>Open Orders</Typography>
             </div>
             <div style={{ textAlign: "center" }} className={classes.totalWrap}>
               <Typography className={classes.totalNumber}>0</Typography>
@@ -41,9 +39,7 @@ class WorkOrderTotalWidget extends Component {
             </div>
             <div style={{ textAlign: "right" }} className={classes.totalWrap}>
               <Typography className={classes.totalNumber}>0</Typography>
-              <Typography className={classes.totalText}>
-                Quarantined Orders
-              </Typography>
+              <Typography className={classes.totalText}>Held Orders</Typography>
             </div>
           </CardContent>
         </Card>

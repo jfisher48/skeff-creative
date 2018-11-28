@@ -74,12 +74,12 @@ class WorkOrderSummary extends Component {
             <CardContent className={classes.orderContainer}>
               <Typography variant="h3" className={classes.orderTitle}>
                 {this.props.account}
+                {this.props.isRush ? <span> - Please Rush</span> : null}
               </Typography>
               <Typography className={classes.orderLabel} variant="h4">
                 WO TYPE:{" "}
                 <span className={classes.orderInfo}>
                   {this.props.orderType}
-                  {this.props.isRush ? <span> - Please Rush</span> : null}
                 </span>
               </Typography>
               <Typography className={classes.orderLabel} variant="h4">

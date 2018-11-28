@@ -20,13 +20,14 @@ const styles = theme => ({
     fontSize: "5em",
     lineHeight: ".90",
     [theme.breakpoints.down("xs")]: {
-      fontSize: "4.5em"
+      fontSize: "4.5em",
+      lineHeight: "1"
     }
   },
   totalText: {
     fontSize: "1em",
     fontWeight: "500",
-    lineHeight: "1",
+    lineHeight: "1.2",
     color: "rgba(0,0,0,0.54)",
     [theme.breakpoints.down("xs")]: {
       fontSize: ".9em"
