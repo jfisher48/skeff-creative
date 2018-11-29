@@ -20,7 +20,7 @@ class WorkOrderTotalWidget extends Component {
             disableTypography
             title={
               <Typography color="textSecondary" className={classes.widgetTitle}>
-                Total Workorders
+                Total Work Orders
               </Typography>
             }
           />
