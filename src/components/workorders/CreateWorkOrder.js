@@ -54,7 +54,7 @@ class CreateWorkOrder extends Component {
     assignedTo: "unassigned",
     assignedToName: "Unassigned",
     //items: [],
-    dueDate: new Date(Date.now() + 172800000)
+    dueDate: setDueDate(this.isRush)
   };
 
   setAssignedToName = checkId => {
@@ -80,9 +80,7 @@ class CreateWorkOrder extends Component {
   };
 
   handleRushToggle = () => {
-    this.setState({ isRush: !this.state.isRush }, () => {
-      this.setState({ dueDate: setDueDate(this.state.isRush) });
-    });
+    this.setState({ isRush: !this.state.isRush });
   };
 
   handleNameSelect = e => {
@@ -90,8 +88,13 @@ class CreateWorkOrder extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.assignedTo !== prevState.assignedTo) {
+    if (
+      this.state.assignedTo !== prevState.assignedTo ||
+      this.state.isRush !== prevState.isRush
+    ) {
+      console.log(this.state.isRush);
       this.setAssignedToName(this.state.assignedTo);
+      this.setState({ dueDate: setDueDate(this.state.isRush) });
     }
   }
 
