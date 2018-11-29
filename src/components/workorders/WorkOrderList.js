@@ -22,6 +22,7 @@ const WorkOrderList = ({ workorders }) => {
               date={workorder.createdAt.toDate()}
               dueDate={workorder.dueDate.toDate()}
               isRush={workorder.isRush}
+              assignedToName={workorder.assignedToName}
             />
           );
         })}

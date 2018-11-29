@@ -23,6 +23,7 @@ import {
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
+import { getFirestore } from "redux-firestore";
 
 const styles = theme => ({
   container: {
@@ -45,23 +46,36 @@ const styles = theme => ({
   }
 });
 
-//const scemployees = ["Jay Fisher", "Luke Wells", "Bayleigh Harshbarger"];
-
 class CreateWorkOrder extends Component {
   state = {
-    //salesman: "",
     account: "",
     comments: "",
     isRush: false,
-    assignedTo: "",
+    assignedTo: "unassigned",
+    assignedToName: "Unassigned",
     //items: [],
     dueDate: new Date(Date.now() + 172800000)
+  };
+
+  setAssignedToName = checkId => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection("users")
+      .doc(checkId)
+      .get()
+      .then(results => {
+        var assignedTo = results.data();
+        console.log(assignedTo);
+        var name = assignedTo.firstName + " " + assignedTo.lastName;
+        console.log(name);
+        this.setState({ assignedToName: name });
+      });
   };
 
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
-      //dueDate: setDueDate(this.state.isRush)
     });
   };
 
@@ -70,6 +84,16 @@ class CreateWorkOrder extends Component {
       this.setState({ dueDate: setDueDate(this.state.isRush) });
     });
   };
+
+  handleNameSelect = e => {
+    this.setState({ assignedTo: e.target.value });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.assignedTo !== prevState.assignedTo) {
+      this.setAssignedToName(this.state.assignedTo);
+    }
+  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -135,7 +159,7 @@ class CreateWorkOrder extends Component {
             <InputLabel htmlFor="assignedTo">Assign To</InputLabel>
             <Select
               value={this.state.assignedTo}
-              onChange={this.handleChange}
+              onChange={this.handleNameSelect}
               input={<Input name="assignedTo" />}
             >
               {users &&

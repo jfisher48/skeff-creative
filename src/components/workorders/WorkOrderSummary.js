@@ -98,7 +98,9 @@ class WorkOrderSummary extends Component {
               </Typography>
               <Typography className={classes.orderLabel} variant="h4">
                 ASSIGNED TO:{" "}
-                <span className={classes.orderInfo}>Jay Fisher</span>
+                <span className={classes.orderInfo}>
+                  {this.props.assignedToName}
+                </span>
               </Typography>
             </CardContent>
           </Card>
