@@ -23,7 +23,8 @@ import {
   Card,
   CardHeader,
   CardContent,
-  FormControlLabel
+  FormControlLabel,
+  Grid
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
@@ -43,8 +44,8 @@ const styles = theme => ({
     color: "rgba(0,0,0,0.65)"
   },
   formContent: {
-    padding: "24px 26px",
-    overflowY: "scroll",
+    padding: "24px 30px",
+    overflowY: "auto",
     [theme.breakpoints.down("sm")]: {
       width: "65vw",
       maxHeight: "55vh"
@@ -59,24 +60,25 @@ const styles = theme => ({
     }
   },
   container: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    flexWrap: "wrap"
+    //display: "flex",
+    //flexDirection: "row",
+    //justifyContent: "space-between",
+    //flexWrap: "wrap"
   },
   headingText: {
     marginBottom: "20px"
   },
   textField: {
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-    //width: 200
+    marginRight: theme.spacing.unit,
+    width: "100%",
+    justifyContent: "stretch"
   },
   assignSelect: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    //width: 200,
-    flex: "1 1 auto"
+    width: "100%"
+    //flex: "1 1 auto"
   },
 
   dense: {
@@ -159,62 +161,75 @@ class CreateWorkOrder extends Component {
         />
         <CardContent className={classes.formContent}>
           <form className={classes.container} onSubmit={this.handleSubmit}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.isRush}
-                  onChange={this.handleRushToggle}
-                  value="isRush"
+            <Grid container spacing={16}>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={this.state.isRush}
+                      onChange={this.handleRushToggle}
+                      value="isRush"
+                    />
+                  }
+                  label="Rush Order"
                 />
-              }
-              label="Rush Order"
-            />
-            <AccountSelect style={{ width: "200px" }} />
-            <FormControl className={classes.assignSelect}>
-              <InputLabel htmlFor="assignedTo">Assign To</InputLabel>
-              <Select
-                value={this.state.assignedTo}
-                onChange={this.handleNameSelect}
-                input={<Input name="assignedTo" />}
-              >
-                {users &&
-                  users.map(user => (
-                    <MenuItem key={user.id} value={user.id}>
-                      {user.firstName} {user.lastName}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </FormControl>
-            <TextField
-              required
-              name="account"
-              type="text"
-              label="Account"
-              className={classNames(classes.textField, classes.dense)}
-              margin="normal"
-              fullWidth
-              onChange={this.handleChange}
-            />
-            <TextField
-              required
-              name="comments"
-              multiline
-              rowsMax="4"
-              label="Comments"
-              className={classNames(classes.textField, classes.dense)}
-              fullWidth
-              margin="normal"
-              onChange={this.handleChange}
-            />
-
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              Create Order
-            </Button>
+              </Grid>
+              <Grid item xs={12} lg={6}>
+                <AccountSelect style={{ width: "200px" }} />
+              </Grid>
+              <Grid item xs={12} lg={6}>
+                <FormControl className={classes.assignSelect}>
+                  <InputLabel htmlFor="assignedTo">Assign To</InputLabel>
+                  <Select
+                    value={this.state.assignedTo}
+                    onChange={this.handleNameSelect}
+                    input={<Input name="assignedTo" />}
+                  >
+                    {users &&
+                      users.map(user => (
+                        <MenuItem key={user.id} value={user.id}>
+                          {user.firstName} {user.lastName}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  name="account"
+                  type="text"
+                  label="Account"
+                  className={classNames(classes.textField, classes.dense)}
+                  margin="normal"
+                  fullWidth
+                  onChange={this.handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  name="comments"
+                  multiline
+                  rowsMax="4"
+                  label="Comments"
+                  className={classNames(classes.textField, classes.dense)}
+                  fullWidth
+                  margin="normal"
+                  onChange={this.handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  Create Order
+                </Button>
+              </Grid>
+            </Grid>
           </form>
         </CardContent>
       </Card>
