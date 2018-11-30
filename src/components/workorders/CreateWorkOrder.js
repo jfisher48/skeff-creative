@@ -43,7 +43,20 @@ const styles = theme => ({
     color: "rgba(0,0,0,0.65)"
   },
   formContent: {
-    padding: "24px 26px"
+    padding: "24px 26px",
+    overflowY: "scroll",
+    [theme.breakpoints.down("sm")]: {
+      width: "65vw",
+      maxHeight: "55vh"
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: "75vw",
+      maxHeight: "65vh"
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "50vw",
+      maxHeight: "75vh"
+    }
   },
   container: {
     display: "flex",
