@@ -35,6 +35,7 @@ class WorkOrders extends Component {
     //console.log(this.props);
     const classes = this.props.classes;
     const { workorders, auth, notifications } = this.props;
+
     if (!auth.uid) return <Redirect to="/login" />;
 
     return (
@@ -163,8 +164,7 @@ export default compose(
       return [
         {
           collection: "workorders",
-          where: [["assignedTo", "==", props.auth.uid]],
-          orderBy: ["dueDate", "asc"]
+          where: [["assignedTo", "==", props.auth.uid]]
         },
         { collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
       ];
@@ -172,8 +172,7 @@ export default compose(
       return [
         {
           collection: "workorders",
-          where: [["requesterId", "==", props.auth.uid]],
-          orderBy: ["dueDate", "asc"]
+          where: [["requesterId", "==", props.auth.uid]]
         },
         { collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
       ];
