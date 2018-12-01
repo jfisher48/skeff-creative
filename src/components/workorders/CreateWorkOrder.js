@@ -3,11 +3,6 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-//import FormControl from "@material-ui/core/FormControl";
-//import InputLabel from "@material-ui/core/InputLabel";
-//import Select from "@material-ui/core/Select";
-//import Input from "@material-ui/core/Input";
-//import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { compose } from "recompose";
@@ -97,6 +92,11 @@ class CreateWorkOrder extends Component {
     dueDate: setDueDate(this.isRush)
   };
 
+  constructor(props) {
+    super(props);
+    this.onChangeAccount = this.onChangeAccount.bind(this);
+  }
+
   setAssignedToName = checkId => {
     const firestore = getFirestore();
 
@@ -123,6 +123,10 @@ class CreateWorkOrder extends Component {
     this.setState({ isRush: !this.state.isRush });
   };
 
+  onChangeAccount(newAccount) {
+    this.setState({ account: newAccount.label });
+  }
+
   handleNameSelect = e => {
     this.setState({ assignedTo: e.target.value });
   };
@@ -132,7 +136,7 @@ class CreateWorkOrder extends Component {
       this.state.assignedTo !== prevState.assignedTo ||
       this.state.isRush !== prevState.isRush
     ) {
-      console.log(this.state.isRush);
+      console.log(this.state.account);
       this.setAssignedToName(this.state.assignedTo);
       this.setState({ dueDate: setDueDate(this.state.isRush) });
     }
@@ -175,7 +179,7 @@ class CreateWorkOrder extends Component {
                 />
               </Grid>
               <Grid item xs={12} lg={6}>
-                <AccountSelect style={{ width: "200px" }} />
+                <AccountSelect onChangeAccount={this.onChangeAccount} />
               </Grid>
               <Grid item xs={12} lg={6}>
                 <FormControl className={classes.assignSelect}>
@@ -194,7 +198,7 @@ class CreateWorkOrder extends Component {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   required
                   name="account"
@@ -205,7 +209,7 @@ class CreateWorkOrder extends Component {
                   fullWidth
                   onChange={this.handleChange}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   required

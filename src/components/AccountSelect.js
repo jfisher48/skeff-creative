@@ -5,15 +5,15 @@ import CreatableSelect from "react-select/lib/Creatable";
 
 const styles = {
   container: () => ({
-    flexGrow: 1.5,
-    display: "inline-flex",
+    //flexGrow: 1.5,
+    //display: "inline-flex",
     margin: "0 8px",
     border: 0,
     padding: 0,
     position: "relative",
-    minWidth: "0",
-    flexDirection: "row",
-    verticalAlign: "top"
+    width: "100%"
+    //flexDirection: "row",
+    //verticalAlign: "top"
   }),
   option: (provided, state) => ({
     ...provided,
@@ -30,7 +30,7 @@ const styles = {
     border: 0,
     padding: 0,
     position: "relative",
-    minWidth: "0",
+    width: "100%",
     flexDirection: "row",
     verticalAlign: "top"
   }),
@@ -88,17 +88,18 @@ class AccountSelect extends Component<*, State> {
     }, 1000);
   };
   render() {
-    const classes = this.props.classes;
+    //const classes = this.props.classes;
     const { isLoading, options, value } = this.state;
     return (
       <CreatableSelect
         isClearable
         isDisabled={isLoading}
         isLoading={isLoading}
-        onChange={this.handleChange}
+        onChange={this.props.onChangeAccount}
         onCreateOption={this.handleCreate}
         options={options}
         value={value}
+        state={this.state}
         styles={styles}
       />
     );
