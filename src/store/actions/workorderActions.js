@@ -1,27 +1,3 @@
-export const addAccountToStore = option => {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
-    const firestore = getFirestore();
-
-    const profile = getState().firebase.profile;
-    const authorId = getState().firebase.auth.uid;
-    console.log(option);
-    console.log(authorId);
-
-    firestore
-      .collection("accounts_" + authorId)
-      .add({
-        id: option.value,
-        name: option.label
-      })
-      .then(() => {
-        dispatch({ type: "ADD_ACCOUNT", option });
-      })
-      .catch(err => {
-        dispatch({ type: "ADD_ACCOUNT_ERROR", err });
-      });
-  };
-};
-
 export const createWorkorder = workorder => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();

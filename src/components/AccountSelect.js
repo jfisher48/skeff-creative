@@ -2,10 +2,13 @@ import React, { Component } from "react";
 //import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import CreatableSelect from "react-select/lib/Creatable";
-import { getFirestore } from "redux-firestore";
-import { getFirebase } from "react-redux-firebase";
+import { compose } from "recompose";
 import { connect } from "react-redux";
-import { addAccountToStore } from "../store/actions/workorderActions";
+import { getFirebase, firestoreConnect } from "react-redux-firebase";
+import { getFirestore } from "redux-firestore";
+
+const firebase = getFirebase;
+const firestore = getFirestore;
 
 const styles = {
   container: () => ({
@@ -92,6 +95,29 @@ class AccountSelect extends Component<*, State> {
     });
   };
 
+  loadOptions = () => {
+    // const firestore = getFirestore();
+    // const firebase = getFirebase();
+    console.log(this.props.accounts);
+
+    // const authorId = this.props.auth;
+    // firestore
+    //   .collection("accounts_" + authorId)
+    //   .orderBy("id")
+    //   .get()
+    //   .then(results => {
+    //     var options = results.data();
+    //     console.log(options);
+    //     var loadedOptions = [options];
+    //     console.log(loadedOptions);
+    //     this.setState({ options: loadedOptions });
+    //   });
+  };
+
+  componentDidMount() {
+    this.loadOptions();
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state.value && this.state.value !== prevState) {
       var value = this.state.value.value;
@@ -103,10 +129,13 @@ class AccountSelect extends Component<*, State> {
   }
 
   render() {
-    //console.log(this.state);
+    //console.log(this.state.options);
     //const classes = this.props.classes;
     const { options, value } = this.state;
-    const { auth } = this.props;
+    console.log(this.state.options);
+    const { accounts, auth } = this.props;
+    console.log(accounts);
+
     return (
       <CreatableSelect
         isClearable
@@ -126,9 +155,12 @@ class AccountSelect extends Component<*, State> {
 const styledComponent = withStyles(styles)(AccountSelect);
 
 const mapStateToProps = state => {
+  console.log(state);
+  const authorId = state.firebase.auth.uid;
+  var accountsById = "state.firestore.ordered_" + authorId;
   return {
     auth: state.firebase.auth,
-    users: state.firestore.ordered.users
+    accounts: state.firebase.ordered_$[authorId]
   };
 };
 
@@ -138,7 +170,14 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect(props => {
+    return [
+      { collection: "accounts_" + props.auth.uid, orderBy: ["name", "asc"] }
+    ];
+  })
 )(styledComponent);
