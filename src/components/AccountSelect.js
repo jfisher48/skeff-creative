@@ -2,6 +2,10 @@ import React, { Component } from "react";
 //import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import CreatableSelect from "react-select/lib/Creatable";
+import { getFirestore } from "redux-firestore";
+import { getFirebase } from "react-redux-firebase";
+import { connect } from "react-redux";
+import { addAccountToStore } from "../store/actions/workorderActions";
 
 const styles = {
   container: () => ({
@@ -60,10 +64,11 @@ const defaultOptions = [
 
 class AccountSelect extends Component<*, State> {
   state = {
-    isLoading: false,
+    //isLoading: false,
     options: defaultOptions,
     value: undefined
   };
+
   handleChange = (newValue: any, actionMeta: any) => {
     console.group("Value Changed");
     console.log(newValue);
@@ -72,33 +77,46 @@ class AccountSelect extends Component<*, State> {
     this.setState({ value: newValue });
   };
   handleCreate = (inputValue: any) => {
-    this.setState({ isLoading: true });
+    //this.setState({ isLoading: true });
     console.group("Option created");
     console.log("Wait a moment...");
-    setTimeout(() => {
-      const { options } = this.state;
-      const newOption = createOption(inputValue);
-      console.log(newOption);
-      console.groupEnd();
-      this.setState({
-        isLoading: false,
-        options: [...options, newOption],
-        value: newOption
-      });
-    }, 1000);
+
+    const { options } = this.state;
+    const newOption = createOption(inputValue);
+    console.log(newOption);
+    console.groupEnd();
+    this.setState({
+      //isLoading: false,
+      options: [...options, newOption],
+      value: newOption
+    });
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.value && this.state.value !== prevState) {
+      var value = this.state.value.value;
+      var label = this.state.value.label;
+      console.log(this.state.value);
+      console.log(this.state.options);
+      this.props.onSelectAccount(value, label);
+    }
+  }
+
   render() {
+    //console.log(this.state);
     //const classes = this.props.classes;
-    const { isLoading, options, value } = this.state;
+    const { options, value } = this.state;
+    const { auth } = this.props;
     return (
       <CreatableSelect
         isClearable
-        isDisabled={isLoading}
-        isLoading={isLoading}
-        onChange={this.props.onChangeAccount}
+        //isDisabled={isLoading}
+        //isLoading={isLoading}
+        onChange={this.handleChange}
         onCreateOption={this.handleCreate}
         options={options}
         value={value}
+        name="account"
         state={this.state}
         styles={styles}
       />
@@ -107,4 +125,20 @@ class AccountSelect extends Component<*, State> {
 }
 const styledComponent = withStyles(styles)(AccountSelect);
 
-export default styledComponent;
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth,
+    users: state.firestore.ordered.users
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    //addAccountToStore: (option) => dispatch(addAccountToStore(option))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(styledComponent);

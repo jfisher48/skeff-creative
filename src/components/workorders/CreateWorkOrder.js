@@ -84,6 +84,7 @@ const styles = theme => ({
 class CreateWorkOrder extends Component {
   state = {
     account: "",
+    accountId: "",
     comments: "",
     isRush: false,
     assignedTo: "unassigned",
@@ -92,10 +93,10 @@ class CreateWorkOrder extends Component {
     dueDate: setDueDate(this.isRush)
   };
 
-  constructor(props) {
-    super(props);
-    this.onChangeAccount = this.onChangeAccount.bind(this);
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.onChangeAccount = this.onChangeAccount.bind(this);
+  // }
 
   setAssignedToName = checkId => {
     const firestore = getFirestore();
@@ -123,9 +124,13 @@ class CreateWorkOrder extends Component {
     this.setState({ isRush: !this.state.isRush });
   };
 
-  onChangeAccount(newAccount) {
-    this.setState({ account: newAccount.label });
-  }
+  handleAccount = (accountId, account) => {
+    if (accountId != null)
+      this.setState({
+        accountId: accountId,
+        account: account
+      });
+  };
 
   handleNameSelect = e => {
     this.setState({ assignedTo: e.target.value });
@@ -179,7 +184,7 @@ class CreateWorkOrder extends Component {
                 />
               </Grid>
               <Grid item xs={12} lg={6}>
-                <AccountSelect onChangeAccount={this.onChangeAccount} />
+                <AccountSelect onSelectAccount={this.handleAccount} />
               </Grid>
               <Grid item xs={12} lg={6}>
                 <FormControl className={classes.assignSelect}>
