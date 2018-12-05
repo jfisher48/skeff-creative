@@ -25,9 +25,17 @@ import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
 import { getFirestore } from "redux-firestore";
 import AccountSelect from "../AccountSelect";
+import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounded";
 
 const styles = theme => ({
+  formCard: {
+    display: "flex",
+    position: "relative",
+    overflowY: "auto",
+    flexDirection: "column"
+  },
   formHeader: {
+    flex: "0 0 auto",
     padding: "16px 26px",
     lineHeight: "33.06px",
     backgroundColor: "#e7e7e7"
@@ -39,7 +47,7 @@ const styles = theme => ({
     color: "rgba(0,0,0,0.65)"
   },
   formContent: {
-    padding: "24px 30px",
+    padding: "24px 26px",
     overflowY: "auto",
     [theme.breakpoints.down("sm")]: {
       width: "65vw",
@@ -55,6 +63,8 @@ const styles = theme => ({
     }
   },
   container: {
+    margin: 10
+    //padding: "24px 30px",
     //display: "flex",
     //flexDirection: "row",
     //justifyContent: "space-between",
@@ -63,19 +73,28 @@ const styles = theme => ({
   headingText: {
     marginBottom: "20px"
   },
+  rushCheck: {
+    float: "right",
+    marginRight: "0"
+  },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    //marginLeft: theme.spacing.unit,
+    //marginRight: theme.spacing.unit,
     width: "100%",
     justifyContent: "stretch"
   },
-  assignSelect: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+  formSelect: {
+    //marginLeft: theme.spacing.unit,
+    //marginRight: theme.spacing.unit,
     width: "100%"
     //flex: "1 1 auto"
   },
-
+  input: {
+    padding: "2px 8px"
+  },
+  button: {
+    boxShadow: "none"
+  },
   dense: {
     marginTop: 19
   }
@@ -159,7 +178,7 @@ class CreateWorkOrder extends Component {
     if (!auth.uid) return <Redirect to="/login" />;
 
     return (
-      <Card>
+      <Card className={classes.formCard}>
         <CardHeader
           className={classes.formHeader}
           disableTypography
@@ -171,9 +190,10 @@ class CreateWorkOrder extends Component {
         />
         <CardContent className={classes.formContent}>
           <form className={classes.container} onSubmit={this.handleSubmit}>
-            <Grid container spacing={16}>
+            <Grid container spacing={24}>
               <Grid item xs={12}>
                 <FormControlLabel
+                  className={classes.rushCheck}
                   control={
                     <Checkbox
                       checked={this.state.isRush}
@@ -184,19 +204,29 @@ class CreateWorkOrder extends Component {
                   label="Rush Order"
                 />
               </Grid>
-              <Grid item xs={12} lg={6}>
-                <AccountSelect
-                  accounts={accounts}
-                  onSelectAccount={this.handleAccount}
-                />
+              <Grid item xs={12} xl={6}>
+                <FormControl className={classes.formSelect}>
+                  <InputLabel shrink required htmlFor="account">
+                    Account
+                  </InputLabel>
+                  <AccountSelect
+                    accounts={accounts}
+                    onSelectAccount={this.handleAccount}
+                  />
+                </FormControl>
               </Grid>
-              <Grid item xs={12} lg={6}>
-                <FormControl className={classes.assignSelect}>
-                  <InputLabel htmlFor="assignedTo">Assign To</InputLabel>
+              <Grid item xs={12} xl={6}>
+                <FormControl className={classes.formSelect}>
+                  <InputLabel required htmlFor="assignedTo">
+                    Assign To
+                  </InputLabel>
                   <Select
                     value={this.state.assignedTo}
                     onChange={this.handleNameSelect}
-                    input={<Input name="assignedTo" />}
+                    IconComponent={KeyboardArrowDownRounded}
+                    input={
+                      <Input className={classes.input} name="assignedTo" />
+                    }
                   >
                     {users &&
                       users.map(user => (
@@ -236,7 +266,7 @@ class CreateWorkOrder extends Component {
                 <Button
                   type="submit"
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   className={classes.button}
                 >
                   Create Order

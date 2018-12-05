@@ -2,19 +2,19 @@ import React, { Component } from "react";
 //import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import CreatableSelect from "react-select/lib/Creatable";
-import { compose } from "recompose";
-import { connect } from "react-redux";
-import { getFirebase, firestoreConnect } from "react-redux-firebase";
-import { getFirestore } from "redux-firestore";
+//import { compose } from "recompose";
+//import { connect } from "react-redux";
+//import { getFirebase, firestoreConnect } from "react-redux-firebase";
+//import { getFirestore } from "redux-firestore";
 
-const firebase = getFirebase;
-const firestore = getFirestore;
+//const firebase = getFirebase;
+//const firestore = getFirestore;
 
 const styles = {
   container: () => ({
     //flexGrow: 1.5,
     //display: "inline-flex",
-    margin: "0 8px",
+    //margin: "0 8px",
     border: 0,
     padding: 0,
     position: "relative",
@@ -25,7 +25,7 @@ const styles = {
   option: (provided, state) => ({
     ...provided,
     borderBottom: "none",
-    color: state.isSelected ? "red" : "blue",
+    //color: state.isSelected ? "red" : "blue",
     padding: 20,
     width: "100%"
   }),
@@ -33,13 +33,41 @@ const styles = {
     // none of react-select's styles are passed to <Control />
     //width: "400px",
     display: "inline-flex",
-    margin: "0 8px",
+    //margin: "0 8px",
     border: 0,
+    marginTop: "16px",
+    lineHeight: " 1.1875em",
     padding: 0,
     position: "relative",
     width: "100%",
     flexDirection: "row",
-    verticalAlign: "top"
+    verticalAlign: "top",
+    alignItems: "center",
+    "&:before": {
+      left: 0,
+      right: 0,
+      bottom: 0,
+      content: '""',
+      position: "absolute",
+      borderBottom: "1px solid rgba(0,0,0,0.42)"
+    },
+    "&:after": {
+      left: 0,
+      right: 0,
+      bottom: 0,
+      content: '""',
+      position: "absolute",
+      transform: "scaleX(0)",
+      borderBottom: "2px solid #000a12"
+    }
+  }),
+  valueContainer: (provided, state) => ({
+    ...provided
+    //padding: 0
+  }),
+  menuPortal: (provided, state) => ({
+    ...provided,
+    zIndex: "1400"
   }),
   singleValue: (provided, state) => {
     const opacity = state.isDisabled ? 0.5 : 1;
@@ -90,30 +118,8 @@ class AccountSelect extends Component<*, State> {
     });
   };
 
-  loadOptions = () => {
-    // const firestore = getFirestore();
-    // const firebase = getFirebase();
-    //console.log(options);
-    // const authorId = this.props.auth;
-    // firestore
-    //   .collection("accounts_" + authorId)
-    //   .orderBy("id")
-    //   .get()
-    //   .then(results => {
-    //     var options = results.data();
-    //     console.log(options);
-    //     var loadedOptions = [options];
-    //     console.log(loadedOptions);
-    //     this.setState({ options: loadedOptions });
-    //   });
-  };
-
-  componentDidMount() {
-    this.loadOptions();
-  }
-
   componentDidUpdate(prevProps, prevState) {
-    if (this.state && this.state !== prevState) {
+    if (this.state.value && this.state !== prevState) {
       var value = this.state.value.value;
       var label = this.state.value.label;
       console.log(this.state.value);
@@ -125,7 +131,7 @@ class AccountSelect extends Component<*, State> {
   render() {
     console.log(this.state.accounts);
     //const classes = this.props.classes;
-    const { options, value } = this.state;
+    const { value } = this.state;
     console.log(this.state.options);
 
     const accounts = this.props.accounts;
@@ -133,7 +139,9 @@ class AccountSelect extends Component<*, State> {
 
     return (
       <CreatableSelect
+        autoFocus
         isClearable
+        menuPortalTarget={document.body}
         //isDisabled={isLoading}
         //isLoading={isLoading}
         onChange={this.handleChange}
