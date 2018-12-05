@@ -155,8 +155,9 @@ class CreateWorkOrder extends Component {
 
   render() {
     const classes = this.props.classes;
-    const { auth, users } = this.props;
+    const { auth, users, accounts } = this.props;
     if (!auth.uid) return <Redirect to="/login" />;
+
     return (
       <Card>
         <CardHeader
@@ -184,7 +185,10 @@ class CreateWorkOrder extends Component {
                 />
               </Grid>
               <Grid item xs={12} lg={6}>
-                <AccountSelect onSelectAccount={this.handleAccount} />
+                <AccountSelect
+                  accounts={accounts}
+                  onSelectAccount={this.handleAccount}
+                />
               </Grid>
               <Grid item xs={12} lg={6}>
                 <FormControl className={classes.assignSelect}>
@@ -249,7 +253,8 @@ class CreateWorkOrder extends Component {
 const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
-    users: state.firestore.ordered.users
+    users: state.firestore.ordered.users,
+    accounts: state.firestore.ordered.accounts
   };
 };
 
@@ -287,5 +292,11 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  firestoreConnect([{ collection: "users", where: ["role", "==", "graphics"] }])
+  firestoreConnect(props => {
+    if (!props.auth.uid) return [];
+    return [
+      { collection: "accounts", where: [["userId", "==", props.auth.uid]] },
+      { collection: "users", where: ["role", "==", "graphics"] }
+    ];
+  })
 )(styledComponent);

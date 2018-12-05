@@ -33,11 +33,12 @@ export const createWorkorder = workorder => {
       )
       .then(
         firestore
-          .collection("accounts_" + authorId)
+          .collection("accounts")
           .doc(workorder.accountId)
           .set(
             {
-              name: workorder.account
+              name: workorder.account,
+              userId: authorId
             },
             { merge: true }
           )

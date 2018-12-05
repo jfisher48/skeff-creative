@@ -59,16 +59,11 @@ const createOption = (label: string) => ({
   value: label.toLowerCase().replace(/\W/g, "")
 });
 
-const defaultOptions = [
-  createOption("Caseys Paris"),
-  createOption("Caseys Penn St"),
-  createOption("Brazas Liquor")
-];
-
 class AccountSelect extends Component<*, State> {
   state = {
+    accounts: this.props.accounts,
     //isLoading: false,
-    options: defaultOptions,
+    options: [],
     value: undefined
   };
 
@@ -90,7 +85,7 @@ class AccountSelect extends Component<*, State> {
     console.groupEnd();
     this.setState({
       //isLoading: false,
-      options: [...options, newOption],
+      options: [options, newOption],
       value: newOption
     });
   };
@@ -98,8 +93,7 @@ class AccountSelect extends Component<*, State> {
   loadOptions = () => {
     // const firestore = getFirestore();
     // const firebase = getFirebase();
-    console.log(this.props.accounts);
-
+    //console.log(options);
     // const authorId = this.props.auth;
     // firestore
     //   .collection("accounts_" + authorId)
@@ -119,7 +113,7 @@ class AccountSelect extends Component<*, State> {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.value && this.state.value !== prevState) {
+    if (this.state && this.state !== prevState) {
       var value = this.state.value.value;
       var label = this.state.value.label;
       console.log(this.state.value);
@@ -129,11 +123,12 @@ class AccountSelect extends Component<*, State> {
   }
 
   render() {
-    //console.log(this.state.options);
+    console.log(this.state.accounts);
     //const classes = this.props.classes;
     const { options, value } = this.state;
     console.log(this.state.options);
-    const { accounts, auth } = this.props;
+
+    const accounts = this.props.accounts;
     console.log(accounts);
 
     return (
@@ -143,7 +138,12 @@ class AccountSelect extends Component<*, State> {
         //isLoading={isLoading}
         onChange={this.handleChange}
         onCreateOption={this.handleCreate}
-        options={options}
+        options={
+          accounts &&
+          accounts.map(account => {
+            return { label: account.name, value: account.id };
+          })
+        }
         value={value}
         name="account"
         state={this.state}
@@ -154,30 +154,4 @@ class AccountSelect extends Component<*, State> {
 }
 const styledComponent = withStyles(styles)(AccountSelect);
 
-const mapStateToProps = state => {
-  console.log(state);
-  const authorId = state.firebase.auth.uid;
-  var accountsById = "state.firestore.ordered_" + authorId;
-  return {
-    auth: state.firebase.auth,
-    accounts: state.firebase.ordered_$[authorId]
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    //addAccountToStore: (option) => dispatch(addAccountToStore(option))
-  };
-};
-
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  ),
-  firestoreConnect(props => {
-    return [
-      { collection: "accounts_" + props.auth.uid, orderBy: ["name", "asc"] }
-    ];
-  })
-)(styledComponent);
+export default styledComponent;
