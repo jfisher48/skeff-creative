@@ -26,6 +26,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { getFirestore } from "redux-firestore";
 import AccountSelect from "../AccountSelect";
 import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounded";
+import Item from "./Item/Item";
 
 const styles = theme => ({
   formCard: {
@@ -261,6 +262,9 @@ class CreateWorkOrder extends Component {
                   margin="normal"
                   onChange={this.handleChange}
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <Item />
               </Grid>
               <Grid item xs={12}>
                 <Button
