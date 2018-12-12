@@ -122,20 +122,14 @@ class AccountSelect extends Component<*, State> {
     if (this.state.value && this.state !== prevState) {
       var value = this.state.value.value;
       var label = this.state.value.label;
-      console.log(this.state.value);
-      console.log(this.state.options);
       this.props.onSelectAccount(value, label);
     }
   }
 
   render() {
-    console.log(this.state.accounts);
     //const classes = this.props.classes;
     const { value } = this.state;
-    console.log(this.state.options);
-
     const accounts = this.props.accounts;
-    console.log(accounts);
 
     return (
       <CreatableSelect

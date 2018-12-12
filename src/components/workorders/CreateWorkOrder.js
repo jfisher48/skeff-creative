@@ -113,11 +113,6 @@ class CreateWorkOrder extends Component {
     dueDate: setDueDate(this.isRush)
   };
 
-  // constructor(props) {
-  //   super(props);
-  //   this.onChangeAccount = this.onChangeAccount.bind(this);
-  // }
-
   setAssignedToName = checkId => {
     const firestore = getFirestore();
 
