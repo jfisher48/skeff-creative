@@ -109,7 +109,7 @@ class CreateWorkOrder extends Component {
     isRush: false,
     assignedTo: "unassigned",
     assignedToName: "Unassigned",
-    //items: [],
+    items: [],
     dueDate: setDueDate(this.isRush)
   };
 
@@ -150,6 +150,10 @@ class CreateWorkOrder extends Component {
   handleNameSelect = e => {
     this.setState({ assignedTo: e.target.value });
   };
+
+  eachItem(item, i) {
+    return <Item key={i}>{item.item}</Item>;
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (

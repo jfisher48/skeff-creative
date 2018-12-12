@@ -24,6 +24,7 @@ import { getFirestore } from "redux-firestore";
 
 class Item extends Component {
   state = {
+    editing: false,
     brand: "",
     package: "",
     pkgType: "",
@@ -37,10 +38,24 @@ class Item extends Component {
     labelWidth: 0
   };
 
-  componentDidMount() {
-    this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
-    });
+  // componentDidMount() {
+  //   this.state.editing && this.setState({
+  //     labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
+  //   });
+  // }
+
+  edit = e => {
+    e.preventDefault();
+    this.setState({ editing: true });
+  };
+
+  save = e => {
+    e.preventDefault();
+    alert(this.state.brand);
+  };
+
+  remove() {
+    alert("removing item");
   }
 
   createSizeOptions = checkType => {
@@ -66,6 +81,11 @@ class Item extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.signType !== prevState.signType) {
       this.createSizeOptions(this.state.signType);
+    }
+    if (this.state.editing !== prevState.editing && this.state.editing) {
+      this.setState({
+        labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
+      });
     }
   }
 
@@ -121,7 +141,7 @@ class Item extends Component {
                 >
                   {brands &&
                     brands.map(brand => (
-                      <MenuItem key={brand.id} value={brand.id}>
+                      <MenuItem key={brand.id} value={brand.name}>
                         {brand.name}
                       </MenuItem>
                     ))}
@@ -343,14 +363,28 @@ class Item extends Component {
           </Grid>
         </Grid>
         <Grid item xs={12} md={6} />
-        <Button>Save</Button>
+        <Button onClick={this.save}>Save</Button>
         <Button>Delete</Button>
       </Grid>
     );
   }
 
+  renderDisplay() {
+    return (
+      <div>
+        <p>
+          <span>{this.state.brand}</span>
+        </p>
+        <span>
+          <Button onClick={this.edit}>Edit</Button>
+          <Button onClick={this.remove}>Remove</Button>
+        </span>
+      </div>
+    );
+  }
+
   render() {
-    return this.renderForm();
+    return this.state.editing ? this.renderForm() : this.renderDisplay();
   }
 }
 
