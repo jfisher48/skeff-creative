@@ -109,9 +109,20 @@ class CreateWorkOrder extends Component {
     isRush: false,
     assignedTo: "unassigned",
     assignedToName: "Unassigned",
-    items: [],
+    items: [
+      {
+        id: 0,
+        item: "order 1"
+      },
+      {
+        id: 1,
+        item: "order 2"
+      }
+    ],
     dueDate: setDueDate(this.isRush)
   };
+
+  //updateItems = this.updateItems.bind(this);
 
   setAssignedToName = checkId => {
     const firestore = getFirestore();
@@ -151,9 +162,22 @@ class CreateWorkOrder extends Component {
     this.setState({ assignedTo: e.target.value });
   };
 
-  eachItem(item, i) {
-    return <Item key={i}>{item.item}</Item>;
-  }
+  update = (newItem, i) => {
+    console.log("updating item at index", i, newItem);
+    this.setState(prevState => ({
+      items: prevState.items.map(
+        item => (item.id !== i ? item : { ...item, item: newItem })
+      )
+    }));
+  };
+
+  eachItem = (item, i) => {
+    return (
+      <Item key={i} index={i} onChange={this.update}>
+        {item.item}
+      </Item>
+    );
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (
@@ -263,7 +287,7 @@ class CreateWorkOrder extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Item />
+                {this.state.items.map(this.eachItem)}
               </Grid>
               <Grid item xs={12}>
                 <Button

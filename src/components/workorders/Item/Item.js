@@ -51,7 +51,10 @@ class Item extends Component {
 
   save = e => {
     e.preventDefault();
-    alert(this.state.brand);
+    this.props.onChange(this.state, this.props.index);
+    this.setState({
+      editing: false
+    });
   };
 
   remove() {
@@ -364,7 +367,6 @@ class Item extends Component {
         </Grid>
         <Grid item xs={12} md={6} />
         <Button onClick={this.save}>Save</Button>
-        <Button>Delete</Button>
       </Grid>
     );
   }
@@ -373,7 +375,7 @@ class Item extends Component {
     return (
       <div>
         <p>
-          <span>{this.state.brand}</span>
+          <span>{this.props.children}</span>
         </p>
         <span>
           <Button onClick={this.edit}>Edit</Button>
