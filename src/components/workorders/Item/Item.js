@@ -25,24 +25,25 @@ import { getFirestore } from "redux-firestore";
 class Item extends Component {
   state = {
     editing: false,
-    brand: "",
-    package: "",
-    pkgType: "",
-    pkgSize: "",
-    price: "",
-    signType: "",
-    signSize: "",
-    signTheme: "",
+    id: this.props.id,
+    brand: this.props.brand,
+    package: this.props.package,
+    pkgType: this.props.pkgType,
+    pkgSize: this.props.pkgSize,
+    price: this.props.price,
+    signType: this.props.signType,
+    signTypeName: this.props.signTypeName,
+    signSize: this.props.signSize,
+    signTheme: this.props.signTheme,
     quantity: "",
     sizeOptions: [],
     labelWidth: 0
   };
 
-  // componentDidMount() {
-  //   this.state.editing && this.setState({
-  //     labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
-  //   });
-  // }
+  componentDidMount() {
+    console.log(this.state.signType);
+    this.createSizeOptions(this.state.signType);
+  }
 
   edit = e => {
     e.preventDefault();
@@ -51,7 +52,18 @@ class Item extends Component {
 
   save = e => {
     e.preventDefault();
-    this.props.onChange(this.state, this.props.index);
+    this.props.onChange(
+      this.state.brand,
+      this.state.signTheme,
+      this.state.signType,
+      this.state.signTypeName,
+      this.state.signSize,
+      this.state.price,
+      this.state.package,
+      this.state.pkgSize,
+      this.state.pkgType,
+      this.props.index
+    );
     this.setState({
       editing: false
     });
@@ -71,7 +83,11 @@ class Item extends Component {
       .then(results => {
         var type = results.data();
         var sizes = type.sizes;
-        this.setState({ sizeOptions: sizes });
+        var name = type.name;
+        this.setState({
+          sizeOptions: sizes,
+          signTypeName: name
+        });
       });
   };
 
@@ -79,6 +95,15 @@ class Item extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+    console.log(this.state);
+  };
+
+  handleSignTypeChange = e => {
+    this.setState({
+      signType: e.target.key,
+      signTypeName: e.target.value
+    });
+    console.log(this.state);
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -176,7 +201,7 @@ class Item extends Component {
                 >
                   {signThemes &&
                     signThemes.map(signTheme => (
-                      <MenuItem key={signTheme.id} value={signTheme.id}>
+                      <MenuItem key={signTheme.id} value={signTheme.name}>
                         {signTheme.name}
                       </MenuItem>
                     ))}
@@ -253,6 +278,7 @@ class Item extends Component {
             <Grid item xs={12}>
               <TextField
                 required
+                value={this.state.price}
                 variant="outlined"
                 name="price"
                 label="Price"
@@ -292,7 +318,7 @@ class Item extends Component {
                 >
                   {pkgs &&
                     pkgs.map(pkg => (
-                      <MenuItem key={pkg.id} value={pkg.id}>
+                      <MenuItem key={pkg.id} value={pkg.name}>
                         {pkg.name}
                       </MenuItem>
                     ))}
@@ -324,7 +350,7 @@ class Item extends Component {
                 >
                   {pkgSizes &&
                     pkgSizes.map(pkgSize => (
-                      <MenuItem key={pkgSize.id} value={pkgSize.id}>
+                      <MenuItem key={pkgSize.id} value={pkgSize.name}>
                         {pkgSize.name}
                       </MenuItem>
                     ))}
@@ -356,7 +382,7 @@ class Item extends Component {
                 >
                   {pkgTypes &&
                     pkgTypes.map(pkgType => (
-                      <MenuItem key={pkgType.id} value={pkgType.id}>
+                      <MenuItem key={pkgType.id} value={pkgType.name}>
                         {pkgType.name}
                       </MenuItem>
                     ))}
@@ -407,7 +433,7 @@ const mapStateToProps = state => {
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: "brands", orderBy: ["name", "asc"] },
+    { collection: "brands", orderBy: ["seq", "asc"] },
     { collection: "packages", orderBy: ["seq", "asc"] },
     { collection: "pkgSizes", orderBy: ["seq", "asc"] },
     { collection: "pkgTypes", orderBy: ["seq", "asc"] },

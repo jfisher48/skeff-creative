@@ -47,9 +47,19 @@ class WorkOrderDetail extends Component {
                   by {workorder.requesterFirstName}{" "}
                   {workorder.requesterLastName}
                 </Typography>
-                <Typography className={classes.orderContent}>
-                  {workorder.content}
-                </Typography>
+                {workorder.items &&
+                  workorder.items.map((item, i) => {
+                    return (
+                      <div key={i}>
+                        <Typography className={classes.orderContent}>
+                          <span>{item.brand} </span>
+                          <span>{item.signTheme} </span>
+                          <span>{item.signTypeName} </span>
+                          <span>{item.signSize}</span>
+                        </Typography>
+                      </div>
+                    );
+                  })}
               </CardContent>
             </Card>
           </Grid>

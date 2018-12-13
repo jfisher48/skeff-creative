@@ -112,11 +112,27 @@ class CreateWorkOrder extends Component {
     items: [
       {
         id: 0,
-        item: "order 1"
+        brand: "Bud Light",
+        signTheme: "Iconic",
+        signType: "poster",
+        signTypeName: "Poster",
+        signSize: "2' x 3'",
+        price: "12.99",
+        package: "12 Pack",
+        pkgSize: "12oz",
+        pkgType: "Can"
       },
       {
         id: 1,
-        item: "order 2"
+        brand: "Natural Light",
+        signTheme: "Iconic",
+        signType: "poster",
+        signTypeName: "Poster",
+        signSize: "3' x 2'",
+        price: "6.99",
+        package: "15 Pack",
+        pkgSize: "12 oz",
+        pkgType: "Cans"
       }
     ],
     dueDate: setDueDate(this.isRush)
@@ -162,19 +178,57 @@ class CreateWorkOrder extends Component {
     this.setState({ assignedTo: e.target.value });
   };
 
-  update = (newItem, i) => {
-    console.log("updating item at index", i, newItem);
+  update = (
+    newBrand,
+    newSignTheme,
+    newSignType,
+    newSignTypeName,
+    newSignSize,
+    newPrice,
+    newPackage,
+    newPkgSize,
+    newPkgType,
+    i
+  ) => {
+    console.log(
+      "updating item at index",
+      i,
+      newBrand,
+      newSignTheme,
+      newSignType,
+      newSignTypeName,
+      newSignSize,
+      newPrice,
+      newPackage,
+      newPkgSize,
+      newPkgType
+    );
     this.setState(prevState => ({
       items: prevState.items.map(
-        item => (item.id !== i ? item : { ...item, item: newItem })
+        item =>
+          item.id !== i
+            ? item
+            : {
+                ...item,
+                brand: newBrand,
+                signTheme: newSignTheme,
+                signType: newSignType,
+                signTypeName: newSignTypeName,
+                signSize: newSignSize,
+                price: newPrice,
+                package: newPackage,
+                pkgSize: newPkgSize,
+                pkgType: newPkgType
+              }
       )
     }));
   };
 
   eachItem = (item, i) => {
     return (
-      <Item key={i} index={i} onChange={this.update}>
-        {item.item}
+      <Item {...this.state.items[i]} key={i} index={i} onChange={this.update}>
+        {item.brand} {item.signTheme} {item.signTypeName} {item.signSize} $
+        {item.price} {item.package} {item.pkgSize} {item.pkgType}
       </Item>
     );
   };
