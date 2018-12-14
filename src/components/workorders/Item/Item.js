@@ -13,7 +13,8 @@ import {
   Grid,
   Typography,
   InputAdornment,
-  OutlinedInput
+  OutlinedInput,
+  IconButton
 } from "@material-ui/core";
 import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounded";
 import { compose } from "recompose";
@@ -21,10 +22,13 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import styles from "./styleItem.js";
 import { getFirestore } from "redux-firestore";
+import SaveIcon from "@material-ui/icons/Save";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 class Item extends Component {
   state = {
-    editing: false,
+    editing: this.props.editing,
     id: this.props.id,
     brand: this.props.brand,
     package: this.props.package,
@@ -41,8 +45,12 @@ class Item extends Component {
   };
 
   componentDidMount() {
-    console.log(this.state.signType);
-    this.createSizeOptions(this.state.signType);
+    this.setState({
+      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
+    });
+    if (this.state.signType.length > 0) {
+      this.createSizeOptions(this.state.signType);
+    }
   }
 
   edit = e => {
@@ -110,11 +118,11 @@ class Item extends Component {
     if (this.state.signType !== prevState.signType) {
       this.createSizeOptions(this.state.signType);
     }
-    if (this.state.editing !== prevState.editing && this.state.editing) {
-      this.setState({
-        labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
-      });
-    }
+    // if ((this.state.editing !== prevState.editing) && this.state.editing) {
+    //   this.setState({
+    //     labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
+    //   });
+    // }
   }
 
   renderForm() {
@@ -392,7 +400,10 @@ class Item extends Component {
           </Grid>
         </Grid>
         <Grid item xs={12} md={6} />
-        <Button onClick={this.save}>Save</Button>
+        <Button onClick={this.save}>
+          <SaveIcon />
+          Save
+        </Button>
       </Grid>
     );
   }
@@ -404,8 +415,12 @@ class Item extends Component {
           <span>{this.props.children}</span>
         </p>
         <span>
-          <Button onClick={this.edit}>Edit</Button>
-          <Button onClick={this.remove}>Remove</Button>
+          <IconButton onClick={this.edit}>
+            <EditIcon />
+          </IconButton>
+          <IconButton onClick={this.remove}>
+            <DeleteIcon />
+          </IconButton>
         </span>
       </div>
     );

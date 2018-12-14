@@ -109,32 +109,7 @@ class CreateWorkOrder extends Component {
     isRush: false,
     assignedTo: "unassigned",
     assignedToName: "Unassigned",
-    items: [
-      {
-        id: 0,
-        brand: "Bud Light",
-        signTheme: "Iconic",
-        signType: "poster",
-        signTypeName: "Poster",
-        signSize: "2' x 3'",
-        price: "12.99",
-        package: "12 Pack",
-        pkgSize: "12oz",
-        pkgType: "Can"
-      },
-      {
-        id: 1,
-        brand: "Natural Light",
-        signTheme: "Iconic",
-        signType: "poster",
-        signTypeName: "Poster",
-        signSize: "3' x 2'",
-        price: "6.99",
-        package: "15 Pack",
-        pkgSize: "12 oz",
-        pkgType: "Cans"
-      }
-    ],
+    items: [],
     dueDate: setDueDate(this.isRush)
   };
 
@@ -176,6 +151,55 @@ class CreateWorkOrder extends Component {
 
   handleNameSelect = e => {
     this.setState({ assignedTo: e.target.value });
+  };
+
+  addItem = e => {
+    e.preventDefault();
+    const newItem = {
+      editing: true,
+      id: this.nextId(),
+      brand: "",
+      signTheme: "",
+      signType: "",
+      signTypeName: "",
+      signSize: "",
+      price: "",
+      package: "",
+      pkgSize: "",
+      pkgType: "",
+      quantity: "",
+      sizeOptions: [],
+      labelWidth: 0
+    };
+
+    console.log(newItem);
+    const items = [...this.state.items, newItem];
+    this.setState(
+      {
+        items: items
+      },
+      () => {
+        console.log(this.state.items);
+        return (
+          <Item
+            {...this.state.items[newItem.id]}
+            key={newItem.id}
+            index={newItem}
+            onChange={this.update}
+          >
+            {newItem.brand} {newItem.signTheme} {newItem.signTypeName}{" "}
+            {newItem.signSize} ${newItem.price} {newItem.package}{" "}
+            {newItem.pkgSize} {newItem.pkgType}
+          </Item>
+        );
+      }
+    );
+    console.log(this.state.items);
+  };
+
+  nextId = () => {
+    this.uniqueId = this.uniqueId || 0;
+    return this.uniqueId++;
   };
 
   update = (
@@ -342,6 +366,9 @@ class CreateWorkOrder extends Component {
               </Grid>
               <Grid item xs={12}>
                 {this.state.items.map(this.eachItem)}
+              </Grid>
+              <Grid item xs={12}>
+                <Button onClick={this.addItem}>Add Item</Button>
               </Grid>
               <Grid item xs={12}>
                 <Button
