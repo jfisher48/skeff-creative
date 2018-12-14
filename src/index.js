@@ -76,6 +76,14 @@ const theme = createMuiTheme({
       docked: {
         height: "100%"
       }
+    },
+    MuiInputLabel: {
+      filled: {
+        "&$shrink": {
+          transform: "translate(14px, 6px) scale(0.75)",
+          color: "rgba(0,0,0,0.35)"
+        }
+      }
     }
   }
   // MuiSvgIcon: {

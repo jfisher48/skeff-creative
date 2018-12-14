@@ -19,7 +19,13 @@ import {
   CardHeader,
   CardContent,
   FormControlLabel,
-  Grid
+  Grid,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
@@ -251,8 +257,14 @@ class CreateWorkOrder extends Component {
   eachItem = (item, i) => {
     return (
       <Item {...this.state.items[i]} key={i} index={i} onChange={this.update}>
-        {item.brand} {item.signTheme} {item.signTypeName} {item.signSize} $
-        {item.price} {item.package} {item.pkgSize} {item.pkgType}
+        <TableCell>{item.brand}</TableCell>
+        <TableCell>{item.signTheme}</TableCell>
+        <TableCell>{item.signTypeName}</TableCell>
+        <TableCell>{item.signSize}</TableCell>
+        <TableCell numeric>1</TableCell>
+        <TableCell>
+          ${item.price} {item.package} {item.pkgSize} {item.pkgType}
+        </TableCell>
       </Item>
     );
   };
@@ -365,7 +377,29 @@ class CreateWorkOrder extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                {this.state.items.map(this.eachItem)}
+                {this.state.items.length > 0 ? (
+                  <Paper>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Brand</TableCell>
+                          <TableCell>Theme</TableCell>
+                          <TableCell>Sign Type</TableCell>
+                          <TableCell>Size</TableCell>
+                          <TableCell numeric>Quantity</TableCell>
+                          <TableCell>Feature</TableCell>
+                          <TableCell />
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {this.state.items.map(this.eachItem)}
+                      </TableBody>
+                    </Table>
+                  </Paper>
+                ) : (
+                  ""
+                )}
+                {/* {this.state.items.map(this.eachItem)} */}
               </Grid>
               <Grid item xs={12}>
                 <Button onClick={this.addItem}>Add Item</Button>

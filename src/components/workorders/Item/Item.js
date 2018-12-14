@@ -14,7 +14,14 @@ import {
   Typography,
   InputAdornment,
   OutlinedInput,
-  IconButton
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  FilledInput,
+  TableRow,
+  TableCell
 } from "@material-ui/core";
 import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounded";
 import { compose } from "recompose";
@@ -45,9 +52,6 @@ class Item extends Component {
   };
 
   componentDidMount() {
-    this.setState({
-      labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
-    });
     if (this.state.signType.length > 0) {
       this.createSizeOptions(this.state.signType);
     }
@@ -73,7 +77,8 @@ class Item extends Component {
       this.props.index
     );
     this.setState({
-      editing: false
+      editing: false,
+      labelWidth: 0
     });
   };
 
@@ -118,11 +123,6 @@ class Item extends Component {
     if (this.state.signType !== prevState.signType) {
       this.createSizeOptions(this.state.signType);
     }
-    // if ((this.state.editing !== prevState.editing) && this.state.editing) {
-    //   this.setState({
-    //     labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth
-    //   });
-    // }
   }
 
   renderForm() {
@@ -149,280 +149,254 @@ class Item extends Component {
       });
 
     return (
-      <Grid container spacing={16}>
-        <Grid item xs={12}>
-          <Grid container spacing={16}>
-            <Grid item xs={12} sm={6}>
-              <FormControl variant="outlined" className={classes.formSelect}>
-                <InputLabel
-                  ref={ref => {
-                    this.InputLabelRef = ref;
-                  }}
-                  required
-                  htmlFor="brand"
-                >
-                  Brand
-                </InputLabel>
-                <Select
-                  value={this.state.brand}
-                  onChange={this.handleChange}
-                  IconComponent={KeyboardArrowDownRounded}
-                  input={
-                    <OutlinedInput
-                      labelWidth={this.state.labelWidth}
-                      className={classes.input}
-                      name="brand"
-                    />
-                  }
-                >
-                  {brands &&
-                    brands.map(brand => (
-                      <MenuItem key={brand.id} value={brand.name}>
-                        {brand.name}
-                      </MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl variant="outlined" className={classes.formSelect}>
-                <InputLabel
-                  ref={ref => {
-                    this.InputLabelRef = ref;
-                  }}
-                  required
-                  htmlFor="signTheme"
-                >
-                  Theme
-                </InputLabel>
-                <Select
-                  value={this.state.signTheme}
-                  onChange={this.handleChange}
-                  IconComponent={KeyboardArrowDownRounded}
-                  input={
-                    <OutlinedInput
-                      labelWidth={this.state.labelWidth}
-                      className={classes.input}
-                      name="signTheme"
-                    />
-                  }
-                >
-                  {signThemes &&
-                    signThemes.map(signTheme => (
-                      <MenuItem key={signTheme.id} value={signTheme.name}>
-                        {signTheme.name}
-                      </MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl variant="outlined" className={classes.formSelect}>
-                <InputLabel
-                  ref={ref => {
-                    this.InputLabelRef = ref;
-                  }}
-                  required
-                  htmlFor="signType"
-                >
-                  Sign Type
-                </InputLabel>
-                <Select
-                  value={this.state.signType}
-                  displayEmpty
-                  onChange={this.handleChange}
-                  IconComponent={KeyboardArrowDownRounded}
-                  input={
-                    <OutlinedInput
-                      labelWidth={this.state.labelWidth}
-                      className={classes.input}
-                      name="signType"
-                    />
-                  }
-                >
-                  {signTypes &&
-                    signTypes.map(signType => (
-                      <MenuItem key={signType.id} value={signType.id}>
-                        {signType.name}
-                      </MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl variant="outlined" className={classes.formSelect}>
-                <InputLabel
-                  ref={ref => {
-                    this.InputLabelRef = ref;
-                  }}
-                  required
-                  htmlFor="signSize"
-                >
-                  Sign Size
-                </InputLabel>
-                <Select
-                  value={this.state.signSize}
-                  onChange={this.handleChange}
-                  IconComponent={KeyboardArrowDownRounded}
-                  input={
-                    <OutlinedInput
-                      labelWidth={this.state.labelWidth}
-                      className={classes.input}
-                      name="signSize"
-                    />
-                  }
-                >
-                  {sizeSelect}
-                </Select>
-              </FormControl>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography>Featured Price</Typography>
-        </Grid>
-        <Grid item xs={12} md={6}>
+      <Dialog
+        open={this.state.editing}
+        onClose={this.handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">
+          <Typography className={classes.formTitle}>Add Item</Typography>
+        </DialogTitle>
+        <DialogContent>
           <Grid container spacing={16}>
             <Grid item xs={12}>
-              <TextField
-                required
-                value={this.state.price}
-                variant="outlined"
-                name="price"
-                label="Price"
-                className={classNames(classes.textField, classes.dense)}
-                fullWidth
-                margin="normal"
-                onChange={this.handleChange}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
-                  )
-                }}
-              />
+              <Grid container spacing={16}>
+                <Grid item xs={12} sm={6}>
+                  <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel
+                      FormLabelClasses={classes.mylabel}
+                      required
+                      htmlFor="brand"
+                    >
+                      Brand
+                    </InputLabel>
+                    <Select
+                      value={this.state.brand}
+                      onChange={this.handleChange}
+                      IconComponent={KeyboardArrowDownRounded}
+                      input={
+                        <OutlinedInput
+                          className={classes.outlinedInput}
+                          labelWidth={this.state.labelWidth}
+                          className={classes.input}
+                          name="brand"
+                        />
+                      }
+                    >
+                      {brands &&
+                        brands.map(brand => (
+                          <MenuItem key={brand.id} value={brand.name}>
+                            {brand.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel required htmlFor="signTheme">
+                      Theme
+                    </InputLabel>
+                    <Select
+                      value={this.state.signTheme}
+                      onChange={this.handleChange}
+                      IconComponent={KeyboardArrowDownRounded}
+                      input={
+                        <OutlinedInput
+                          labelWidth={this.state.labelWidth}
+                          className={classes.input}
+                          name="signTheme"
+                        />
+                      }
+                    >
+                      {signThemes &&
+                        signThemes.map(signTheme => (
+                          <MenuItem key={signTheme.id} value={signTheme.name}>
+                            {signTheme.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel required htmlFor="signType">
+                      Sign Type
+                    </InputLabel>
+                    <Select
+                      value={this.state.signType}
+                      displayEmpty
+                      onChange={this.handleChange}
+                      IconComponent={KeyboardArrowDownRounded}
+                      input={
+                        <OutlinedInput
+                          labelWidth={this.state.labelWidth}
+                          className={classes.input}
+                          name="signType"
+                        />
+                      }
+                    >
+                      {signTypes &&
+                        signTypes.map(signType => (
+                          <MenuItem key={signType.id} value={signType.id}>
+                            {signType.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel required htmlFor="signSize">
+                      Sign Size
+                    </InputLabel>
+                    <Select
+                      value={this.state.signSize}
+                      onChange={this.handleChange}
+                      IconComponent={KeyboardArrowDownRounded}
+                      input={
+                        <OutlinedInput
+                          labelWidth={this.state.labelWidth}
+                          className={classes.input}
+                          name="signSize"
+                        />
+                      }
+                    >
+                      {sizeSelect}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <FormControl variant="outlined" className={classes.formSelect}>
-                <InputLabel
-                  ref={ref => {
-                    this.InputLabelRef = ref;
-                  }}
-                  required
-                  htmlFor="package"
-                >
-                  Package
-                </InputLabel>
-                <Select
-                  value={this.state.package}
-                  onChange={this.handleChange}
-                  IconComponent={KeyboardArrowDownRounded}
-                  input={
-                    <OutlinedInput
-                      labelWidth={this.state.labelWidth}
-                      className={classes.input}
-                      name="package"
-                    />
-                  }
-                >
-                  {pkgs &&
-                    pkgs.map(pkg => (
-                      <MenuItem key={pkg.id} value={pkg.name}>
-                        {pkg.name}
-                      </MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
+            <Grid item xs={12}>
+              <Typography>Featured Price</Typography>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <FormControl variant="outlined" className={classes.formSelect}>
-                <InputLabel
-                  ref={ref => {
-                    this.InputLabelRef = ref;
-                  }}
-                  required
-                  htmlFor="pkgSize"
-                >
-                  Pkg Size
-                </InputLabel>
-                <Select
-                  value={this.state.pkgSize}
-                  onChange={this.handleChange}
-                  IconComponent={KeyboardArrowDownRounded}
-                  input={
-                    <OutlinedInput
-                      labelWidth={this.state.labelWidth}
-                      className={classes.input}
-                      name="pkgSize"
-                    />
-                  }
-                >
-                  {pkgSizes &&
-                    pkgSizes.map(pkgSize => (
-                      <MenuItem key={pkgSize.id} value={pkgSize.name}>
-                        {pkgSize.name}
-                      </MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <FormControl variant="outlined" className={classes.formSelect}>
-                <InputLabel
-                  ref={ref => {
-                    this.InputLabelRef = ref;
-                  }}
-                  required
-                  htmlFor="pkgType"
-                >
-                  Pkg Type
-                </InputLabel>
-                <Select
-                  value={this.state.pkgType}
-                  onChange={this.handleChange}
-                  IconComponent={KeyboardArrowDownRounded}
-                  input={
-                    <OutlinedInput
-                      labelWidth={this.state.labelWidth}
-                      className={classes.input}
-                      name="pkgType"
-                    />
-                  }
-                >
-                  {pkgTypes &&
-                    pkgTypes.map(pkgType => (
-                      <MenuItem key={pkgType.id} value={pkgType.name}>
-                        {pkgType.name}
-                      </MenuItem>
-                    ))}
-                </Select>
-              </FormControl>
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={16}>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    value={this.state.price}
+                    variant="outlined"
+                    name="price"
+                    label="Price"
+                    className={classNames(classes.textField, classes.dense)}
+                    fullWidth
+                    margin="normal"
+                    onChange={this.handleChange}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">$</InputAdornment>
+                      )
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel required htmlFor="package">
+                      Package
+                    </InputLabel>
+                    <Select
+                      value={this.state.package}
+                      onChange={this.handleChange}
+                      IconComponent={KeyboardArrowDownRounded}
+                      input={
+                        <OutlinedInput
+                          labelWidth={this.state.labelWidth}
+                          className={classes.input}
+                          name="package"
+                        />
+                      }
+                    >
+                      {pkgs &&
+                        pkgs.map(pkg => (
+                          <MenuItem key={pkg.id} value={pkg.name}>
+                            {pkg.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel required htmlFor="pkgSize">
+                      Pkg Size
+                    </InputLabel>
+                    <Select
+                      value={this.state.pkgSize}
+                      onChange={this.handleChange}
+                      IconComponent={KeyboardArrowDownRounded}
+                      input={
+                        <OutlinedInput
+                          labelWidth={this.state.labelWidth}
+                          className={classes.input}
+                          name="pkgSize"
+                        />
+                      }
+                    >
+                      {pkgSizes &&
+                        pkgSizes.map(pkgSize => (
+                          <MenuItem key={pkgSize.id} value={pkgSize.name}>
+                            {pkgSize.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel required htmlFor="pkgType">
+                      Pkg Type
+                    </InputLabel>
+                    <Select
+                      value={this.state.pkgType}
+                      onChange={this.handleChange}
+                      IconComponent={KeyboardArrowDownRounded}
+                      input={
+                        <OutlinedInput
+                          labelWidth={this.state.labelWidth}
+                          className={classes.input}
+                          name="pkgType"
+                        />
+                      }
+                    >
+                      {pkgTypes &&
+                        pkgTypes.map(pkgType => (
+                          <MenuItem key={pkgType.id} value={pkgType.name}>
+                            {pkgType.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item xs={12} md={6} />
-        <Button onClick={this.save}>
-          <SaveIcon />
-          Save
-        </Button>
-      </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.save}>
+            <SaveIcon />
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 
   renderDisplay() {
     return (
-      <div>
-        <p>
-          <span>{this.props.children}</span>
-        </p>
-        <span>
+      <TableRow key={this.props.key}>
+        {this.props.children}
+
+        <TableCell>
           <IconButton onClick={this.edit}>
             <EditIcon />
           </IconButton>
           <IconButton onClick={this.remove}>
             <DeleteIcon />
           </IconButton>
-        </span>
-      </div>
+        </TableCell>
+      </TableRow>
     );
   }
 
