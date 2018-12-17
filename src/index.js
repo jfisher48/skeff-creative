@@ -93,8 +93,8 @@ const theme = createMuiTheme({
         fontSize: "0.75em"
       },
       body: {
-        whiteSpace: "nowrap",
-        fontSize: "0.75em"
+        //whiteSpace: "nowrap",
+        fontSize: "0.65em"
       }
     }
   }

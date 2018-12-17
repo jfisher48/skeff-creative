@@ -4,7 +4,13 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Moment from "react-moment";
-import { Grid, IconButton } from "@material-ui/core";
+import {
+  Grid,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText
+} from "@material-ui/core";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "recompose";
@@ -47,19 +53,30 @@ class WorkOrderDetail extends Component {
                   by {workorder.requesterFirstName}{" "}
                   {workorder.requesterLastName}
                 </Typography>
-                {workorder.items &&
-                  workorder.items.map((item, i) => {
-                    return (
-                      <div key={i}>
-                        <Typography className={classes.orderContent}>
-                          <span>{item.brand} </span>
-                          <span>{item.signTheme} </span>
-                          <span>{item.signTypeName} </span>
-                          <span>{item.signSize}</span>
-                        </Typography>
-                      </div>
-                    );
-                  })}
+                <List>
+                  {workorder.items &&
+                    workorder.items.map((item, i) => {
+                      return (
+                        <ListItem divider alignItems="flex-start" key={i}>
+                          <ListItemText
+                            primary={
+                              <React.Fragment>
+                                {item.brand} {item.signTheme}{" "}
+                                {item.signTypeName} {item.signSize} Qty:{" "}
+                                {item.quantity}
+                              </React.Fragment>
+                            }
+                            secondary={
+                              <Typography>
+                                ${item.price} {item.package} {item.pkgSize}{" "}
+                                {item.pkgType}
+                              </Typography>
+                            }
+                          />
+                        </ListItem>
+                      );
+                    })}
+                </List>
               </CardContent>
             </Card>
           </Grid>

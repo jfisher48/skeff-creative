@@ -20,12 +20,9 @@ import {
   CardContent,
   FormControlLabel,
   Grid,
-  Paper,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody
+  List,
+  ListItem,
+  ListItemText
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
@@ -178,6 +175,7 @@ class CreateWorkOrder extends Component {
       signType: "",
       signTypeName: "",
       signSize: "",
+      quantity: "",
       price: "",
       package: "",
       pkgSize: "",
@@ -203,8 +201,8 @@ class CreateWorkOrder extends Component {
             onChange={this.update}
           >
             {newItem.brand} {newItem.signTheme} {newItem.signTypeName}{" "}
-            {newItem.signSize} ${newItem.price} {newItem.package}{" "}
-            {newItem.pkgSize} {newItem.pkgType}
+            {newItem.signSize} {newItem.quantity} ${newItem.price}{" "}
+            {newItem.package} {newItem.pkgSize} {newItem.pkgType}
           </Item>
         );
       }
@@ -223,6 +221,7 @@ class CreateWorkOrder extends Component {
     newSignType,
     newSignTypeName,
     newSignSize,
+    newQuantity,
     newPrice,
     newPackage,
     newPkgSize,
@@ -237,6 +236,7 @@ class CreateWorkOrder extends Component {
       newSignType,
       newSignTypeName,
       newSignSize,
+      newQuantity,
       newPrice,
       newPackage,
       newPkgSize,
@@ -254,6 +254,7 @@ class CreateWorkOrder extends Component {
                 signType: newSignType,
                 signTypeName: newSignTypeName,
                 signSize: newSignSize,
+                quantity: newQuantity,
                 price: newPrice,
                 package: newPackage,
                 pkgSize: newPkgSize,
@@ -278,16 +279,18 @@ class CreateWorkOrder extends Component {
         index={i}
         onChange={this.update}
         removeItem={this.removeItem}
-      >
-        <TableCell>{item.brand}</TableCell>
-        <TableCell>{item.signTheme}</TableCell>
-        <TableCell>{item.signTypeName}</TableCell>
-        <TableCell>{item.signSize}</TableCell>
-        <TableCell numeric>1</TableCell>
-        <TableCell>
-          ${item.price} {item.package} {item.pkgSize} {item.pkgType}
-        </TableCell>
-      </Item>
+        primary={
+          <React.Fragment>
+            {item.brand} {item.signTheme} {item.signTypeName} {item.signSize}{" "}
+            Qty: {item.quantity}
+          </React.Fragment>
+        }
+        secondary={
+          <Typography>
+            ${item.price} {item.package} {item.pkgSize} {item.pkgType}
+          </Typography>
+        }
+      />
     );
   };
 
@@ -400,26 +403,9 @@ class CreateWorkOrder extends Component {
               </Grid>
               <Grid item xs={12}>
                 {this.state.items.length > 0 ? (
-                  <Paper className={classes.itemsContainer}>
-                    <Table className={classes.table}>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Brand</TableCell>
-                          <TableCell>Theme</TableCell>
-                          <TableCell style={{ whiteSpace: "nowrap" }}>
-                            Sign Type
-                          </TableCell>
-                          <TableCell>Size</TableCell>
-                          <TableCell numeric>Quantity</TableCell>
-                          <TableCell>Feature</TableCell>
-                          <TableCell />
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {this.state.items.map(this.eachItem)}
-                      </TableBody>
-                    </Table>
-                  </Paper>
+                  <List className={classes.itemsContainer}>
+                    {this.state.items.map(this.eachItem)}
+                  </List>
                 ) : (
                   ""
                 )}

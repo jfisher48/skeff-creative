@@ -21,7 +21,10 @@ import {
   DialogActions,
   FilledInput,
   TableRow,
-  TableCell
+  TableCell,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction
 } from "@material-ui/core";
 import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounded";
 import { compose } from "recompose";
@@ -41,12 +44,12 @@ class Item extends Component {
     package: this.props.package,
     pkgType: this.props.pkgType,
     pkgSize: this.props.pkgSize,
+    quantity: 1,
     price: this.props.price,
     signType: this.props.signType,
     signTypeName: this.props.signTypeName,
     signSize: this.props.signSize,
     signTheme: this.props.signTheme,
-    quantity: "",
     sizeOptions: [],
     labelWidth: 0
   };
@@ -70,6 +73,7 @@ class Item extends Component {
       this.state.signType,
       this.state.signTypeName,
       this.state.signSize,
+      this.state.quantity,
       this.state.price,
       this.state.package,
       this.state.pkgSize,
@@ -267,6 +271,20 @@ class Item extends Component {
                     </Select>
                   </FormControl>
                 </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    value={this.state.quantity}
+                    variant="outlined"
+                    name="quantity"
+                    label="Quantity"
+                    className={classNames(classes.textField, classes.dense)}
+                    fullWidth
+                    margin="normal"
+                    onChange={this.handleChange}
+                    type="number"
+                  />
+                </Grid>
               </Grid>
             </Grid>
             <Grid item xs={12}>
@@ -386,10 +404,12 @@ class Item extends Component {
 
   renderDisplay() {
     return (
-      <TableRow key={this.props.key}>
-        {this.props.children}
-
-        <TableCell>
+      <ListItem alignItems="flex-start" divider>
+        <ListItemText
+          primary={this.props.primary}
+          secondary={this.props.secondary}
+        />
+        <ListItemSecondaryAction>
           <IconButton onClick={this.edit}>
             <EditIcon />
           </IconButton>
@@ -398,10 +418,11 @@ class Item extends Component {
               this.props.removeItem(this.props.id);
             }}
           >
+            {" "}
             <DeleteIcon />
           </IconButton>
-        </TableCell>
-      </TableRow>
+        </ListItemSecondaryAction>
+      </ListItem>
     );
   }
 
