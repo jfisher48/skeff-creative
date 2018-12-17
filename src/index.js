@@ -84,6 +84,18 @@ const theme = createMuiTheme({
           color: "rgba(0,0,0,0.35)"
         }
       }
+    },
+    MuiTableCell: {
+      head: {
+        whiteSpace: "nowrap",
+        backgroundColor: "black",
+        color: "white",
+        fontSize: "0.75em"
+      },
+      body: {
+        whiteSpace: "nowrap",
+        fontSize: "0.75em"
+      }
     }
   }
   // MuiSvgIcon: {

@@ -69,6 +69,15 @@ const styles = theme => ({
       maxHeight: "75vh"
     }
   },
+  itemsContainer: {
+    width: "100%",
+    overflowX: "auto",
+    fontSize: "16px"
+  },
+  table: {
+    minWidth: 700,
+    fontSize: "16px"
+  },
   container: {
     margin: 10
     //padding: "24px 30px",
@@ -189,8 +198,8 @@ class CreateWorkOrder extends Component {
         return (
           <Item
             {...this.state.items[newItem.id]}
-            key={newItem.id}
-            index={newItem}
+            //key={newItem.id}
+            //index={newItem.id}
             onChange={this.update}
           >
             {newItem.brand} {newItem.signTheme} {newItem.signTypeName}{" "}
@@ -218,11 +227,11 @@ class CreateWorkOrder extends Component {
     newPackage,
     newPkgSize,
     newPkgType,
-    i
+    newId
   ) => {
     console.log(
-      "updating item at index",
-      i,
+      "updating item",
+      newId,
       newBrand,
       newSignTheme,
       newSignType,
@@ -236,7 +245,7 @@ class CreateWorkOrder extends Component {
     this.setState(prevState => ({
       items: prevState.items.map(
         item =>
-          item.id !== i
+          item.id !== newId
             ? item
             : {
                 ...item,
@@ -254,9 +263,22 @@ class CreateWorkOrder extends Component {
     }));
   };
 
+  removeItem = id => {
+    console.log("removing item", id);
+    this.setState(prevState => ({
+      items: prevState.items.filter(item => item.id !== id)
+    }));
+  };
+
   eachItem = (item, i) => {
     return (
-      <Item {...this.state.items[i]} key={i} index={i} onChange={this.update}>
+      <Item
+        {...this.state.items[i]}
+        key={item.id}
+        index={i}
+        onChange={this.update}
+        removeItem={this.removeItem}
+      >
         <TableCell>{item.brand}</TableCell>
         <TableCell>{item.signTheme}</TableCell>
         <TableCell>{item.signTypeName}</TableCell>
@@ -378,13 +400,15 @@ class CreateWorkOrder extends Component {
               </Grid>
               <Grid item xs={12}>
                 {this.state.items.length > 0 ? (
-                  <Paper>
-                    <Table>
+                  <Paper className={classes.itemsContainer}>
+                    <Table className={classes.table}>
                       <TableHead>
                         <TableRow>
                           <TableCell>Brand</TableCell>
                           <TableCell>Theme</TableCell>
-                          <TableCell>Sign Type</TableCell>
+                          <TableCell style={{ whiteSpace: "nowrap" }}>
+                            Sign Type
+                          </TableCell>
                           <TableCell>Size</TableCell>
                           <TableCell numeric>Quantity</TableCell>
                           <TableCell>Feature</TableCell>

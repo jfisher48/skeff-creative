@@ -74,7 +74,7 @@ class Item extends Component {
       this.state.package,
       this.state.pkgSize,
       this.state.pkgType,
-      this.props.index
+      this.state.id
     );
     this.setState({
       editing: false,
@@ -82,9 +82,10 @@ class Item extends Component {
     });
   };
 
-  remove() {
-    alert("removing item");
-  }
+  remove = () => {
+    //e.preventDefault();
+    this.props.onRemove(this.state.id);
+  };
 
   createSizeOptions = checkType => {
     const firestore = getFirestore();
@@ -392,7 +393,11 @@ class Item extends Component {
           <IconButton onClick={this.edit}>
             <EditIcon />
           </IconButton>
-          <IconButton onClick={this.remove}>
+          <IconButton
+            onClick={() => {
+              this.props.removeItem(this.props.id);
+            }}
+          >
             <DeleteIcon />
           </IconButton>
         </TableCell>
