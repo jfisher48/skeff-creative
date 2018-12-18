@@ -6,12 +6,13 @@ import Learning from "../views/Learning/Learning";
 import Logos from "../views/Logos/Logos";
 import News from "../views/News/News";
 import People from "../views/People/People";
-//import Reminders from "../views/Reminders/Reminders";
+import Reminders from "../views/Reminders/Reminders";
 import Suppliers from "../views/Suppliers/Suppliers";
 import WorkOrders from "../views/WorkOrders/WorkOrders.js";
 
 import dashboardButton from "../styles/dashboardButton";
 import logosButton from "../styles/logosButton";
+import workordersButton from "../styles/workordersButton";
 import documentsButton from "../styles/documentsButton";
 import calendarButton from "../styles/calendarButton";
 import remindersButton from "../styles/remindersButton";
@@ -20,22 +21,11 @@ import peopleButton from "../styles/peopleButton";
 import suppliersButton from "../styles/suppliersButton";
 import learningButton from "../styles/learningButton";
 
-import DashboardIco from "../icons/dashboard.svg";
-import BrandIco from "../icons/brand.svg";
-import CalendarIco from "../icons/calendar.svg";
-import DocumentsIco from "../icons/document.svg";
-import RemindersIco from "../icons/reminders.svg";
-import NewsIco from "../icons/news.svg";
-import PeopleIco from "../icons/people.svg";
-import LearningIco from "../icons/learning.svg";
-import SuppliersIco from "../icons/suppliers.svg";
-
 const siteRoutes = [
   {
     path: "/",
     sidebarName: "Dashboard",
     navbarName: "Dashboard",
-    icon: DashboardIco,
     component: Dashboard,
     btn: dashboardButton,
     svgbox: "0 0 39.37 39.37",
@@ -46,9 +36,8 @@ const siteRoutes = [
     path: "/workorders",
     sidebarName: "Work Orders",
     navbarName: "Work Orders",
-    icon: RemindersIco,
     component: WorkOrders,
-    btn: remindersButton,
+    btn: workordersButton,
     svgbox: "0 0 36.04 36.04",
     svgpath:
       "M26.71,4.12H23.63l2,3H26.8V28.84H9.28V7.15h1.13l2-3H9.37A2.84,2.84,0,0,0,6.52,7V29.07a2.84,2.84,0,0,0,2.83,2.85H26.67a2.85,2.85,0,0,0,2.85-2.83V6.93A2.77,2.77,0,0,0,26.8,4.12Z M23.82,7.15l-2-3L20.64,2.44l0,.05a2.49,2.49,0,0,0-5,0l0-.05L14.44,4.12l-2,3L11.82,8l6.29.05L24.45,8ZM18.07,1.58a.86.86,0,0,1,0,1.72.85.85,0,0,1-.86-.86h0a.86.86,0,0,1,.85-.86Z M19.92,13.08a1.2,1.2,0,0,1-1.18,1.18H12.49a1.19,1.19,0,0,1-1.17-1.18V12.9a1.19,1.19,0,0,1,1.17-1.17h6.25a1.19,1.19,0,0,1,1.18,1.17Z M25,18.11a1.22,1.22,0,0,1-1.18,1.18H12.5a1.21,1.21,0,0,1-1.18-1.18v-.18a1.2,1.2,0,0,1,1.18-1.18H23.77A1.21,1.21,0,0,1,25,17.93Z M25,23.09a1.22,1.22,0,0,1-1.18,1.18H12.5a1.21,1.21,0,0,1-1.18-1.18v-.18a1.2,1.2,0,0,1,1.18-1.18H23.77A1.21,1.21,0,0,1,25,22.91Z"
@@ -57,7 +46,6 @@ const siteRoutes = [
     path: "/logos",
     sidebarName: "Logos",
     navbarName: "Logos",
-    icon: BrandIco,
     component: Logos,
     btn: logosButton,
     svgbox: "0 0 35 34.99",
@@ -68,7 +56,6 @@ const siteRoutes = [
     path: "/documents",
     sidebarName: "Documents",
     navbarName: "Documents",
-    icon: DocumentsIco,
     component: Documents,
     btn: documentsButton,
     svgbox: "0 0 38.01 38.01",
@@ -79,29 +66,26 @@ const siteRoutes = [
     path: "/calendar",
     sidebarName: "Calendar",
     navbarName: "Calendar",
-    icon: CalendarIco,
     component: Calendar,
     btn: calendarButton,
     svgbox: "0 0 33.67 33.67",
     svgpath:
       "M15.53,24.16v.37a.86.86,0,0,1,0,.23.2.2,0,0,1-.09.14.16.16,0,0,1-.14.05H9.94a.5.5,0,0,1-.27-.05.22.22,0,0,1-.19-.09.33.33,0,0,1-.09-.23c0-.1-.05-.24-.05-.42v-.42a.47.47,0,0,1,.09-.28l.14-.28a1.27,1.27,0,0,1,.24-.28l1.58-1.72c.32-.33.56-.65.79-.93s.33-.51.46-.74a6.44,6.44,0,0,0,.24-.61,2.09,2.09,0,0,0,0-.56,1.45,1.45,0,0,0-.09-.46,1,1,0,0,0-.6-.6,1.84,1.84,0,0,0-.52-.1,3.66,3.66,0,0,0-.74.1,3.88,3.88,0,0,0-.56.23,2.82,2.82,0,0,1-.42.23.35.35,0,0,1-.28.1s-.09,0-.09-.05,0-.09-.09-.14,0-.14,0-.28v-.7c0-.09,0-.14,0-.18s0-.1,0-.14,0-.1.14-.14A3.43,3.43,0,0,1,10,16a4.22,4.22,0,0,1,.61-.28c.23-.09.51-.14.79-.23a2.59,2.59,0,0,1,.88-.09,3.6,3.6,0,0,1,1.26.18,2.31,2.31,0,0,1,.88.52,1.67,1.67,0,0,1,.51.79,2.16,2.16,0,0,1,.19,1,6.54,6.54,0,0,1-.09.89,2.9,2.9,0,0,1-.38.93A10.32,10.32,0,0,1,14,20.77a11.47,11.47,0,0,1-1.3,1.4l-1.07,1.11h3.63a.19.19,0,0,1,.14,0c.05.05.09.09.09.14a.32.32,0,0,1,.05.23A2.38,2.38,0,0,1,15.53,24.16Z M24.74,24.2v.33a1.85,1.85,0,0,1,0,.23c-.05,0-.05.09-.1.14a.13.13,0,0,1-.09.05H19.44c-.05,0-.1,0-.1-.05a.42.42,0,0,1-.09-.14.37.37,0,0,1-.05-.23v-.65c0-.08,0-.16.05-.24s.05-.09.09-.14a.18.18,0,0,1,.1,0h1.72v-6l-1.49.83a.56.56,0,0,1-.28.1.29.29,0,0,1-.18-.05c-.05-.05-.05-.09-.1-.23v-.7c0-.1,0-.14.05-.19s.05-.09.09-.14.1,0,.14-.09l2-1.3c.05,0,.05,0,.1,0a.16.16,0,0,0,.14-.05h1a.37.37,0,0,1,.23.05.19.19,0,0,1,.1,0s0,0,0,.09v7.63h1.49a.19.19,0,0,1,.14.05.31.31,0,0,1,.09.14.32.32,0,0,1,.05.23A1.18,1.18,0,0,0,24.74,24.2Z M25.91,3.91v.56a2.69,2.69,0,0,1-.37,1.35c-.1.14-.19.23-.28.37a2.51,2.51,0,0,1-2,.88A2.59,2.59,0,0,1,21.21,6a1,1,0,0,1-.28-.51,2.41,2.41,0,0,1-.23-1V3.63H13.11v.84a2.41,2.41,0,0,1-.23,1c-.09.18-.18.35-.28.51a2.54,2.54,0,0,1-2.1,1.07,2.47,2.47,0,0,1-1.95-.88,2.4,2.4,0,0,1-.28-.37A2.69,2.69,0,0,1,7.9,4.47V3.91A6.3,6.3,0,0,0,3.34,10V24.39a6.28,6.28,0,0,0,6.28,6.28H24.05a6.28,6.28,0,0,0,6.28-6.28V10A6,6,0,0,0,25.91,3.91Zm2.14,20.48a3.94,3.94,0,0,1-3.91,3.91H9.71A4,4,0,0,1,5.8,24.39V12.89H28.1v11.5Z M22.51,6.05a1.56,1.56,0,0,0,.79.18,1.84,1.84,0,0,0,1.35-.6,2,2,0,0,0,.42-1.11V1.82a1.77,1.77,0,1,0-3.54,0V4.56a1.91,1.91,0,0,0,.33,1C22.07,5.75,22.29,5.9,22.51,6.05Z M9.71,6.05a1.56,1.56,0,0,0,.79.19,2.35,2.35,0,0,0,.79-.19,2,2,0,0,0,.61-.51,1.58,1.58,0,0,0,.32-1V1.77a1.77,1.77,0,1,0-3.53,0v2.7a1.61,1.61,0,0,0,.42,1.12A4.54,4.54,0,0,0,9.71,6.05Z"
   },
-  // {
-  //   path: "/reminders",
-  //   sidebarName: "Reminders",
-  //   navbarName: "Reminders",
-  //   icon: RemindersIco,
-  //   component: Reminders,
-  //   btn: remindersButton,
-  //   svgbox: "0 0 36.04 36.04",
-  //   svgpath:
-  //     "M26.71,4.12H23.63l2,3H26.8V28.84H9.28V7.15h1.13l2-3H9.37A2.84,2.84,0,0,0,6.52,7V29.07a2.84,2.84,0,0,0,2.83,2.85H26.67a2.85,2.85,0,0,0,2.85-2.83V6.93A2.77,2.77,0,0,0,26.8,4.12Z M23.82,7.15l-2-3L20.64,2.44l0,.05a2.49,2.49,0,0,0-5,0l0-.05L14.44,4.12l-2,3L11.82,8l6.29.05L24.45,8ZM18.07,1.58a.86.86,0,0,1,0,1.72.85.85,0,0,1-.86-.86h0a.86.86,0,0,1,.85-.86Z M19.92,13.08a1.2,1.2,0,0,1-1.18,1.18H12.49a1.19,1.19,0,0,1-1.17-1.18V12.9a1.19,1.19,0,0,1,1.17-1.17h6.25a1.19,1.19,0,0,1,1.18,1.17Z M25,18.11a1.22,1.22,0,0,1-1.18,1.18H12.5a1.21,1.21,0,0,1-1.18-1.18v-.18a1.2,1.2,0,0,1,1.18-1.18H23.77A1.21,1.21,0,0,1,25,17.93Z M25,23.09a1.22,1.22,0,0,1-1.18,1.18H12.5a1.21,1.21,0,0,1-1.18-1.18v-.18a1.2,1.2,0,0,1,1.18-1.18H23.77A1.21,1.21,0,0,1,25,22.91Z"
-  // },
+  {
+    path: "/reminders",
+    sidebarName: "Reminders",
+    navbarName: "Reminders",
+    component: Reminders,
+    btn: remindersButton,
+    svgbox: "0 0 36.04 36.04",
+    svgpath:
+      "M26.71,4.12H23.63l2,3H26.8V28.84H9.28V7.15h1.13l2-3H9.37A2.84,2.84,0,0,0,6.52,7V29.07a2.84,2.84,0,0,0,2.83,2.85H26.67a2.85,2.85,0,0,0,2.85-2.83V6.93A2.77,2.77,0,0,0,26.8,4.12Z M23.82,7.15l-2-3L20.64,2.44l0,.05a2.49,2.49,0,0,0-5,0l0-.05L14.44,4.12l-2,3L11.82,8l6.29.05L24.45,8ZM18.07,1.58a.86.86,0,0,1,0,1.72.85.85,0,0,1-.86-.86h0a.86.86,0,0,1,.85-.86Z M19.92,13.08a1.2,1.2,0,0,1-1.18,1.18H12.49a1.19,1.19,0,0,1-1.17-1.18V12.9a1.19,1.19,0,0,1,1.17-1.17h6.25a1.19,1.19,0,0,1,1.18,1.17Z M25,18.11a1.22,1.22,0,0,1-1.18,1.18H12.5a1.21,1.21,0,0,1-1.18-1.18v-.18a1.2,1.2,0,0,1,1.18-1.18H23.77A1.21,1.21,0,0,1,25,17.93Z M25,23.09a1.22,1.22,0,0,1-1.18,1.18H12.5a1.21,1.21,0,0,1-1.18-1.18v-.18a1.2,1.2,0,0,1,1.18-1.18H23.77A1.21,1.21,0,0,1,25,22.91Z"
+  },
   {
     path: "/news",
     sidebarName: "News",
     navbarName: "News",
-    icon: NewsIco,
     component: News,
     btn: newsButton,
     svgbox: "0 0 34 34",
@@ -112,7 +96,6 @@ const siteRoutes = [
     path: "/people",
     sidebarName: "People",
     navbarName: "People",
-    icon: PeopleIco,
     component: People,
     btn: peopleButton,
     svgbox: "0 0 42.87 42.87",
@@ -123,7 +106,6 @@ const siteRoutes = [
     path: "/suppliers",
     sidebarName: "Suppliers",
     navbarName: "Suppliers",
-    icon: SuppliersIco,
     component: Suppliers,
     btn: suppliersButton,
     svgbox: "0 0 42.5 42.5",
@@ -134,7 +116,6 @@ const siteRoutes = [
     path: "/learning",
     sidebarName: "Learning",
     navbarName: "Learning",
-    icon: LearningIco,
     component: Learning,
     btn: learningButton,
     svgbox: "0 0 32.19 32.19",

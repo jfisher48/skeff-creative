@@ -2,7 +2,7 @@ const styles = theme => ({
   widgetHeader: {
     padding: "16px 26px",
     lineHeight: "33.06px",
-    backgroundColor: "#a94e93"
+    backgroundColor: "#355675"
   },
   widgetTitle: {
     fontSize: "1.5em",

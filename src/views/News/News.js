@@ -3,7 +3,6 @@ import { withStyles } from "@material-ui/core/styles";
 import PageHeading from "../../components/PageHeading.js";
 import Helmet from "react-helmet";
 import Grid from "@material-ui/core/Grid";
-import NewsIco from "../../icons/news_b.svg";
 import NewsList from "../../components/NewsList.js";
 import CategoryList from "../../components/CategoryList.js";
 import TagList from "../../components/TagList.js";
@@ -66,7 +65,12 @@ class News extends Component {
         <Helmet>
           <title>News and Announcements | Skeff Creative Services</title>
         </Helmet>
-        <PageHeading headingIcon={NewsIco} pageTitle="News and Announcements" />
+        <PageHeading
+          color="#4caf50"
+          view="0 0 34 34"
+          svgPath="M17.56,10.57,28.42,5.85V3.4Z M17.56,9.51l8-5.37V1.83Z M2.53,26.11l13.87,6,.05.05V11.5l-13.92-6Z M16.45,10.57,5.58,5.85V3.4Z M16.45,9.51l-8-5.37V1.83Z M31.47,5.48l-13.91,6V32.17l13.91-6ZM29.72,24.21l-10,4.49V27.36l10-4.44Zm0-3.6-10,4.48V23.75l10-4.44Zm0-3.61-10,4.49V20.15l10-4.44Z"
+          pageTitle="News and Announcements"
+        />
         <Grid container spacing={16}>
           <Grid item xs={12} lg={7} xl={6}>
             <Switch>
