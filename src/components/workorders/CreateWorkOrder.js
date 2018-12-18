@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-//import PropTypes from 'prop-types';
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -20,9 +19,7 @@ import {
   CardContent,
   FormControlLabel,
   Grid,
-  List,
-  ListItem,
-  ListItemText
+  List
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
@@ -105,8 +102,12 @@ const styles = theme => ({
   input: {
     padding: "2px 8px"
   },
-  button: {
-    boxShadow: "none"
+  createButton: {
+    boxShadow: "none",
+    float: "right",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
   },
   dense: {
     marginTop: 19
@@ -169,6 +170,7 @@ class CreateWorkOrder extends Component {
     e.preventDefault();
     const newItem = {
       editing: true,
+      new: true,
       id: this.nextId(),
       brand: "",
       signTheme: "",
@@ -180,9 +182,7 @@ class CreateWorkOrder extends Component {
       package: "",
       pkgSize: "",
       pkgType: "",
-      quantity: "",
-      sizeOptions: [],
-      labelWidth: 0
+      sizeOptions: []
     };
 
     console.log(newItem);
@@ -200,8 +200,8 @@ class CreateWorkOrder extends Component {
             //index={newItem.id}
             onChange={this.update}
           >
-            {newItem.brand} {newItem.signTheme} {newItem.signTypeName}{" "}
-            {newItem.signSize} {newItem.quantity} ${newItem.price}{" "}
+            {newItem.brand} {newItem.signTheme} {newItem.signTypeName}
+            {newItem.signSize} {newItem.quantity} ${newItem.price}
             {newItem.package} {newItem.pkgSize} {newItem.pkgType}
           </Item>
         );
@@ -376,21 +376,8 @@ class CreateWorkOrder extends Component {
                   </Select>
                 </FormControl>
               </Grid>
-              {/* <Grid item xs={12}>
-                <TextField
-                  required
-                  name="account"
-                  type="text"
-                  label="Account"
-                  className={classNames(classes.textField, classes.dense)}
-                  margin="normal"
-                  fullWidth
-                  onChange={this.handleChange}
-                />
-              </Grid> */}
               <Grid item xs={12}>
                 <TextField
-                  required
                   name="comments"
                   multiline
                   rowsMax="4"
@@ -409,7 +396,6 @@ class CreateWorkOrder extends Component {
                 ) : (
                   ""
                 )}
-                {/* {this.state.items.map(this.eachItem)} */}
               </Grid>
               <Grid item xs={12}>
                 <Button onClick={this.addItem}>Add Item</Button>
@@ -419,7 +405,7 @@ class CreateWorkOrder extends Component {
                   type="submit"
                   variant="contained"
                   color="secondary"
-                  className={classes.button}
+                  className={classes.createButton}
                 >
                   Create Order
                 </Button>

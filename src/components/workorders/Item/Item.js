@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import TextField from "@material-ui/core/TextField";
@@ -8,7 +7,6 @@ import {
   FormControl,
   InputLabel,
   Select,
-  //Input,
   MenuItem,
   Grid,
   Typography,
@@ -19,9 +17,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  FilledInput,
-  TableRow,
-  TableCell,
   ListItem,
   ListItemText,
   ListItemSecondaryAction
@@ -39,6 +34,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 class Item extends Component {
   state = {
     editing: this.props.editing,
+    new: this.props.new,
     id: this.props.id,
     brand: this.props.brand,
     package: this.props.package,
@@ -81,9 +77,17 @@ class Item extends Component {
       this.state.id
     );
     this.setState({
-      editing: false,
-      labelWidth: 0
+      new: false,
+      editing: false
     });
+  };
+
+  cancel = () => {
+    this.state.new
+      ? this.props.removeItem(this.props.id)
+      : this.setState({
+          editing: false
+        });
   };
 
   remove = () => {
@@ -181,9 +185,8 @@ class Item extends Component {
                       IconComponent={KeyboardArrowDownRounded}
                       input={
                         <OutlinedInput
-                          className={classes.outlinedInput}
                           labelWidth={this.state.labelWidth}
-                          className={classes.input}
+                          className={classes.outlinedInput}
                           name="brand"
                         />
                       }
@@ -393,6 +396,7 @@ class Item extends Component {
           </Grid>
         </DialogContent>
         <DialogActions>
+          <Button onClick={this.cancel}>Cancel</Button>
           <Button onClick={this.save}>
             <SaveIcon />
             Save
@@ -404,7 +408,7 @@ class Item extends Component {
 
   renderDisplay() {
     return (
-      <ListItem alignItems="flex-start" divider>
+      <ListItem divider>
         <ListItemText
           primary={this.props.primary}
           secondary={this.props.secondary}
