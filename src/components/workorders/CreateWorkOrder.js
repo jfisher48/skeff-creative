@@ -13,13 +13,14 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Input,
+  //Input,
   Card,
   CardHeader,
   CardContent,
   FormControlLabel,
   Grid,
-  List
+  List,
+  OutlinedInput
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
@@ -27,6 +28,7 @@ import { getFirestore } from "redux-firestore";
 import AccountSelect from "../AccountSelect";
 import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounded";
 import Item from "./Item/Item";
+import AddIcon from "@material-ui/icons/Add";
 
 const styles = theme => ({
   formCard: {
@@ -61,6 +63,17 @@ const styles = theme => ({
     [theme.breakpoints.up("lg")]: {
       width: "50vw",
       maxHeight: "75vh"
+    }
+  },
+  addIcon: {
+    fontSize: 15,
+    marginRight: "5px",
+    fontWeight: "bolder",
+    padding: "12px 0",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "24px",
+      margin: "0",
+      fontWeight: "500"
     }
   },
   itemsContainer: {
@@ -100,11 +113,16 @@ const styles = theme => ({
     //flex: "1 1 auto"
   },
   input: {
-    padding: "2px 8px"
+    //padding: "2px 8px",
+    "&$focused": {
+      borderColor: "blue"
+    }
   },
   createButton: {
     boxShadow: "none",
     float: "right",
+    paddingTop: "16px",
+    paddingBottom: "16px",
     [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
@@ -123,7 +141,8 @@ class CreateWorkOrder extends Component {
     assignedTo: "unassigned",
     assignedToName: "",
     items: [],
-    dueDate: setDueDate(this.isRush)
+    dueDate: setDueDate(this.isRush),
+    labelWidth: 0
   };
 
   setAssignedToName = checkId => {
@@ -318,7 +337,7 @@ class CreateWorkOrder extends Component {
     const { auth, users, accounts } = this.props;
     const { account, assignedTo, items } = this.state;
     const isEnabled =
-      account.length > 0 && assignedTo != "unassigned" && items.length > 0;
+      account.length > 0 && assignedTo !== "unassigned" && items.length > 0;
     if (!auth.uid) return <Redirect to="/login" />;
 
     return (
@@ -349,7 +368,7 @@ class CreateWorkOrder extends Component {
                 />
               </Grid>
               <Grid item xs={12} xl={6}>
-                <FormControl className={classes.formSelect}>
+                <FormControl variant="filled" className={classes.formSelect}>
                   <InputLabel shrink required htmlFor="account">
                     Account
                   </InputLabel>
@@ -360,7 +379,7 @@ class CreateWorkOrder extends Component {
                 </FormControl>
               </Grid>
               <Grid item xs={12} xl={6}>
-                <FormControl className={classes.formSelect}>
+                <FormControl variant="filled" className={classes.formSelect}>
                   <InputLabel required htmlFor="assignedTo">
                     Assign To
                   </InputLabel>
@@ -369,7 +388,11 @@ class CreateWorkOrder extends Component {
                     onChange={this.handleNameSelect}
                     IconComponent={KeyboardArrowDownRounded}
                     input={
-                      <Input className={classes.input} name="assignedTo" />
+                      <OutlinedInput
+                        className={classes.input}
+                        labelWidth={this.state.labelWidth}
+                        name="assignedTo"
+                      />
                     }
                   >
                     {users &&
@@ -382,9 +405,28 @@ class CreateWorkOrder extends Component {
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
+                {this.state.items.length > 0 ? (
+                  <List className={classes.itemsContainer}>
+                    {this.state.items.map(this.eachItem)}
+                  </List>
+                ) : (
+                  ""
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={this.addItem}
+                >
+                  <AddIcon className={classes.addIcon} />
+                  New Item
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
                 <TextField
-                  required
                   name="comments"
+                  variant="outlined"
                   multiline
                   rowsMax="4"
                   label="Comments"
@@ -395,18 +437,6 @@ class CreateWorkOrder extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                {this.state.items.length > 0 ? (
-                  <List className={classes.itemsContainer}>
-                    {this.state.items.map(this.eachItem)}
-                  </List>
-                ) : (
-                  ""
-                )}
-              </Grid>
-              <Grid item xs={12}>
-                <Button onClick={this.addItem}>Add Item</Button>
-              </Grid>
-              <Grid item xs={12}>
                 <Button
                   disabled={!isEnabled}
                   type="submit"
@@ -414,7 +444,7 @@ class CreateWorkOrder extends Component {
                   color="secondary"
                   className={classes.createButton}
                 >
-                  Create Order
+                  Submit Order
                 </Button>
               </Grid>
             </Grid>
