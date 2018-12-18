@@ -121,12 +121,10 @@ class CreateWorkOrder extends Component {
     comments: "",
     isRush: false,
     assignedTo: "unassigned",
-    assignedToName: "Unassigned",
+    assignedToName: "",
     items: [],
     dueDate: setDueDate(this.isRush)
   };
-
-  //updateItems = this.updateItems.bind(this);
 
   setAssignedToName = checkId => {
     const firestore = getFirestore();
@@ -141,6 +139,7 @@ class CreateWorkOrder extends Component {
         var name = assignedTo.firstName + " " + assignedTo.lastName;
         console.log(name);
         this.setState({ assignedToName: name });
+        console.log(this.state.assignedToName);
       });
   };
 
@@ -148,6 +147,7 @@ class CreateWorkOrder extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+    console.log(this.state);
   };
 
   handleRushToggle = () => {
@@ -164,6 +164,7 @@ class CreateWorkOrder extends Component {
 
   handleNameSelect = e => {
     this.setState({ assignedTo: e.target.value });
+    console.log(this.state);
   };
 
   addItem = e => {
@@ -302,6 +303,7 @@ class CreateWorkOrder extends Component {
       console.log(this.state.account);
       this.setAssignedToName(this.state.assignedTo);
       this.setState({ dueDate: setDueDate(this.state.isRush) });
+      console.log(this.state);
     }
   }
 
@@ -314,6 +316,9 @@ class CreateWorkOrder extends Component {
   render() {
     const classes = this.props.classes;
     const { auth, users, accounts } = this.props;
+    const { account, assignedTo, items } = this.state;
+    const isEnabled =
+      account.length > 0 && assignedTo != "unassigned" && items.length > 0;
     if (!auth.uid) return <Redirect to="/login" />;
 
     return (
@@ -378,6 +383,7 @@ class CreateWorkOrder extends Component {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  required
                   name="comments"
                   multiline
                   rowsMax="4"
@@ -402,6 +408,7 @@ class CreateWorkOrder extends Component {
               </Grid>
               <Grid item xs={12}>
                 <Button
+                  disabled={!isEnabled}
                   type="submit"
                   variant="contained"
                   color="secondary"
