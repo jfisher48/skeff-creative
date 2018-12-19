@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PageHeading from "../../components/PageHeading.js";
 import Helmet from "react-helmet";
 import CreateWorkOrder from "../../components/workorders/CreateWorkOrder.js";
-import { Switch, NavLink } from "react-router-dom";
+import { Switch, NavLink, Route } from "react-router-dom";
 import {
   Grid,
   Button,
@@ -77,14 +77,14 @@ class WorkOrders extends Component {
         </PageHeading>
         <Grid container spacing={16}>
           <Grid item xs={12} lg={8}>
-            <WorkOrderList workorders={workorders} />
-
+            {this.props.location.pathname !== "/workorders/create" ? (
+              <WorkOrderList workorders={workorders} />
+            ) : (
+              ""
+            )}
             <Switch>
-              <ModalRoute
-                path="/workorders/create"
-                parentPath="/workorders"
-                component={CreateWorkOrder}
-              />
+              <Route path="/workorders/create" component={CreateWorkOrder} />
+
               <ModalRoute
                 path="/workorders/:id"
                 parentPath="/workorders"
@@ -97,7 +97,6 @@ class WorkOrders extends Component {
               <WorkOrderTotalWidget
                 totalIncomplete={workorders && workorders.length}
               />
-
               <Grid item xs={12} sm={6} lg={12}>
                 {/* when i move this to its own component, remember to pass props down */}
                 <Card className={classes.card}>
