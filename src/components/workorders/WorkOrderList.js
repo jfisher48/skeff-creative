@@ -13,6 +13,8 @@ const WorkOrderList = ({ workorders }) => {
               key={workorder.id}
               orderNumber={workorder.workorderNumber}
               account={workorder.account}
+              items={workorder.items}
+              comments={workorder.comments}
               orderType="Standard POS"
               requester={
                 workorder.requesterFirstName + " " + workorder.requesterLastName

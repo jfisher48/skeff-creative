@@ -8,15 +8,7 @@ class SummaryHeader extends Component {
   render() {
     const classes = this.props.classes;
     return (
-      <div
-        className={
-          this.props.dueDate - Date.now() >= 43200000
-            ? classes.header
-            : this.props.dueDate < Date.now()
-              ? classes.headerLate
-              : classes.headerSoon
-        }
-      >
+      <div className={classes.header}>
         <div className={classes.headerContainer}>
           <span className={classes.orderNumber}>{this.props.orderNumber}</span>
           <span className={classes.dueDate}>
