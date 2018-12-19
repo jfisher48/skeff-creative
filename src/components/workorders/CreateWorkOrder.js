@@ -49,27 +49,27 @@ const styles = theme => ({
     lineHeight: "33.06px",
     color: "rgba(0,0,0,0.65)"
   },
-  formContent: {
-    padding: "24px 26px",
-    overflowY: "auto",
-    [theme.breakpoints.down("sm")]: {
-      width: "65vw",
-      maxHeight: "55vh"
-    },
-    [theme.breakpoints.up("sm")]: {
-      width: "75vw",
-      maxHeight: "65vh"
-    },
-    [theme.breakpoints.up("lg")]: {
-      width: "50vw",
-      maxHeight: "75vh"
-    }
-  },
+  // formContent: {
+  //   padding: "24px 26px",
+  //   overflowY: "auto",
+  //   [theme.breakpoints.down("sm")]: {
+  //     width: "65vw",
+  //     maxHeight: "55vh"
+  //   },
+  //   [theme.breakpoints.up("sm")]: {
+  //     width: "75vw",
+  //     maxHeight: "65vh"
+  //   },
+  //   [theme.breakpoints.up("lg")]: {
+  //     width: "50vw",
+  //     maxHeight: "75vh"
+  //   }
+  // },
   addIcon: {
     fontSize: 15,
     marginRight: "5px",
     fontWeight: "bolder",
-    padding: "12px 0",
+    //padding: "12px 0",
     [theme.breakpoints.down("xs")]: {
       fontSize: "24px",
       margin: "0",
@@ -121,8 +121,6 @@ const styles = theme => ({
   createButton: {
     boxShadow: "none",
     float: "right",
-    paddingTop: "16px",
-    paddingBottom: "16px",
     [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
@@ -341,116 +339,118 @@ class CreateWorkOrder extends Component {
     if (!auth.uid) return <Redirect to="/login" />;
 
     return (
-      <Card className={classes.formCard}>
-        <CardHeader
-          className={classes.formHeader}
-          disableTypography
-          title={
-            <Typography color="textSecondary" className={classes.formTitle}>
-              Create Work Order
-            </Typography>
-          }
-        />
-        <CardContent className={classes.formContent}>
-          <form className={classes.container} onSubmit={this.handleSubmit}>
-            <Grid container spacing={24}>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  className={classes.rushCheck}
-                  control={
-                    <Checkbox
-                      checked={this.state.isRush}
-                      onChange={this.handleRushToggle}
-                      value="isRush"
-                    />
-                  }
-                  label="Rush Order"
-                />
-              </Grid>
-              <Grid item xs={12} xl={6}>
-                <FormControl variant="filled" className={classes.formSelect}>
-                  <InputLabel shrink required htmlFor="account">
-                    Account
-                  </InputLabel>
-                  <AccountSelect
-                    accounts={accounts}
-                    onSelectAccount={this.handleAccount}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} xl={6}>
-                <FormControl variant="filled" className={classes.formSelect}>
-                  <InputLabel required htmlFor="assignedTo">
-                    Assign To
-                  </InputLabel>
-                  <Select
-                    value={this.state.assignedTo}
-                    onChange={this.handleNameSelect}
-                    IconComponent={KeyboardArrowDownRounded}
-                    input={
-                      <OutlinedInput
-                        className={classes.input}
-                        labelWidth={this.state.labelWidth}
-                        name="assignedTo"
+      <Grid item xs={12}>
+        <Card className={classes.formCard}>
+          <CardHeader
+            className={classes.formHeader}
+            disableTypography
+            title={
+              <Typography color="textSecondary" className={classes.formTitle}>
+                Create Work Order
+              </Typography>
+            }
+          />
+          <CardContent className={classes.formContent}>
+            <form className={classes.container} onSubmit={this.handleSubmit}>
+              <Grid container spacing={16}>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    className={classes.rushCheck}
+                    control={
+                      <Checkbox
+                        checked={this.state.isRush}
+                        onChange={this.handleRushToggle}
+                        value="isRush"
                       />
                     }
+                    label="Rush Order"
+                  />
+                </Grid>
+                <Grid item xs={12} xl={6}>
+                  <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel shrink required htmlFor="account">
+                      Account
+                    </InputLabel>
+                    <AccountSelect
+                      accounts={accounts}
+                      onSelectAccount={this.handleAccount}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} xl={6}>
+                  <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel required htmlFor="assignedTo">
+                      Assign To
+                    </InputLabel>
+                    <Select
+                      value={this.state.assignedTo}
+                      onChange={this.handleNameSelect}
+                      IconComponent={KeyboardArrowDownRounded}
+                      input={
+                        <OutlinedInput
+                          className={classes.input}
+                          labelWidth={this.state.labelWidth}
+                          name="assignedTo"
+                        />
+                      }
+                    >
+                      {users &&
+                        users.map(user => (
+                          <MenuItem key={user.id} value={user.id}>
+                            {user.firstName} {user.lastName}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  {this.state.items.length > 0 ? (
+                    <List className={classes.itemsContainer}>
+                      {this.state.items.map(this.eachItem)}
+                    </List>
+                  ) : (
+                    ""
+                  )}
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={this.addItem}
                   >
-                    {users &&
-                      users.map(user => (
-                        <MenuItem key={user.id} value={user.id}>
-                          {user.firstName} {user.lastName}
-                        </MenuItem>
-                      ))}
-                  </Select>
-                </FormControl>
+                    <AddIcon className={classes.addIcon} />
+                    New Item
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    name="comments"
+                    variant="outlined"
+                    multiline
+                    rowsMax="4"
+                    label="Comments"
+                    className={classNames(classes.textField, classes.dense)}
+                    fullWidth
+                    margin="normal"
+                    onChange={this.handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    disabled={!isEnabled}
+                    type="submit"
+                    variant="contained"
+                    color="secondary"
+                    className={classes.createButton}
+                  >
+                    Submit Order
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                {this.state.items.length > 0 ? (
-                  <List className={classes.itemsContainer}>
-                    {this.state.items.map(this.eachItem)}
-                  </List>
-                ) : (
-                  ""
-                )}
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={this.addItem}
-                >
-                  <AddIcon className={classes.addIcon} />
-                  New Item
-                </Button>
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  name="comments"
-                  variant="outlined"
-                  multiline
-                  rowsMax="4"
-                  label="Comments"
-                  className={classNames(classes.textField, classes.dense)}
-                  fullWidth
-                  margin="normal"
-                  onChange={this.handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  disabled={!isEnabled}
-                  type="submit"
-                  variant="contained"
-                  color="secondary"
-                  className={classes.createButton}
-                >
-                  Submit Order
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
-        </CardContent>
-      </Card>
+            </form>
+          </CardContent>
+        </Card>
+      </Grid>
     );
   }
 }

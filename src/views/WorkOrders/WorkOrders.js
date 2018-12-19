@@ -77,20 +77,24 @@ class WorkOrders extends Component {
         </PageHeading>
         <Grid container spacing={16}>
           <Grid item xs={12} lg={8}>
-            {this.props.location.pathname !== "/workorders/create" ? (
-              <WorkOrderList workorders={workorders} />
-            ) : (
-              ""
-            )}
-            <Switch>
-              <Route path="/workorders/create" component={CreateWorkOrder} />
+            <Grid container spacing={16}>
+              {this.props.location.pathname !== "/workorders/create" ? (
+                <Grid item xs={12}>
+                  <WorkOrderList workorders={workorders} />
+                </Grid>
+              ) : (
+                ""
+              )}
+              <Switch>
+                <Route path="/workorders/create" component={CreateWorkOrder} />
 
-              <ModalRoute
-                path="/workorders/:id"
-                parentPath="/workorders"
-                component={WorkOrderDetail}
-              />
-            </Switch>
+                <ModalRoute
+                  path="/workorders/:id"
+                  parentPath="/workorders"
+                  component={WorkOrderDetail}
+                />
+              </Switch>
+            </Grid>
           </Grid>
           <Grid item xs={12} lg={4}>
             <Grid container spacing={16}>
