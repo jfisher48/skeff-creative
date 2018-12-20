@@ -24,6 +24,15 @@ const styles = theme => ({
       lineHeight: "1"
     }
   },
+  totalLink: {
+    color: "rgb(42,47,67)",
+    "&:visited": {
+      color: "inherit"
+    },
+    "&:hover": {
+      color: "#0091ea"
+    }
+  },
   totalText: {
     fontSize: "1em",
     fontWeight: "500",

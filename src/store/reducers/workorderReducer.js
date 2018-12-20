@@ -35,6 +35,12 @@ const workorderReducer = (state = initState, action) => {
     case "COMPLETE_WORKORDER_ERROR":
       console.log("complete workorder error", action.err);
       return state;
+    case "HOLD_WORKORDER":
+      console.log("hold workorder", action.workorder);
+      return state;
+    case "HOLD_WORKORDER_ERROR":
+      console.log("hold workorder error", action.err);
+      return state;
     default:
       return state;
   }

@@ -20,9 +20,8 @@ import CloseIcon from "@material-ui/icons/Close";
 import styles from "./styleWorkOrderDetail";
 import { Redirect } from "react-router-dom";
 import { completeWorkorder } from "../../../store/actions/workorderActions";
-import { holdWorkorder } from "../../../store/actions/workorderActions";
 
-class WorkOrderDetail extends Component {
+class CompletedWorkOrderDetail extends Component {
   handleComplete = e => {
     e.preventDefault();
     console.log(this.props.match.params.id);
@@ -32,14 +31,6 @@ class WorkOrderDetail extends Component {
     );
     this.props.history.push("/workorders");
   };
-
-  handleHold = e => {
-    e.preventDefault();
-    console.log(this.props.match.params.id);
-    this.props.holdWorkorder(this.props.workorder, this.props.match.params.id);
-    this.props.history.push("/workorders");
-  };
-
   render() {
     const classes = this.props.classes;
     const { workorder, auth } = this.props;
@@ -98,7 +89,6 @@ class WorkOrderDetail extends Component {
                     })}
                 </List>
                 <Button onClick={this.handleComplete}>Complete</Button>
-                <Button onClick={this.handleHold}>Hold</Button>
               </CardContent>
             </Card>
           </Grid>
@@ -113,7 +103,7 @@ class WorkOrderDetail extends Component {
 const mapStateToProps = (state, ownProps) => {
   //console.log(state);
   const id = ownProps.match.params.id;
-  const workorders = state.firestore.data.workorders;
+  const workorders = state.firestore.data.completed_workorders;
   const workorder = workorders ? workorders[id] : null;
   return {
     workorder: workorder,
@@ -125,12 +115,11 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     completeWorkorder: (workorder, id) =>
-      dispatch(completeWorkorder(workorder, id)),
-    holdWorkorder: (workorder, id) => dispatch(holdWorkorder(workorder, id))
+      dispatch(completeWorkorder(workorder, id))
   };
 };
 
-const styledComponent = withStyles(styles)(WorkOrderDetail);
+const styledComponent = withStyles(styles)(CompletedWorkOrderDetail);
 
 export default compose(
   connect(
@@ -142,14 +131,14 @@ export default compose(
     if (props.profile.role === "graphics") {
       return [
         {
-          collection: "workorders",
+          collection: "completed_workorders",
           where: [["assignedTo", "==", props.auth.uid]]
         }
       ];
     } else
       return [
         {
-          collection: "workorders",
+          collection: "completed_workorders",
           where: [["requesterId", "==", props.auth.uid]]
         }
       ];

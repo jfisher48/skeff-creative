@@ -27,18 +27,46 @@ class WorkOrderTotalWidget extends Component {
           <CardContent className={classes.widgetContent}>
             <div className={classes.totalWrap}>
               <Typography className={classes.totalNumber}>
-                {this.props.totalIncomplete}
+                <a
+                  className={classes.totalLink}
+                  href="#"
+                  onClick={e => {
+                    this.props.handleOpenView(e);
+                  }}
+                >
+                  {this.props.totalOpen}
+                </a>
               </Typography>
               <Typography className={classes.totalText}>Open Orders</Typography>
             </div>
             <div style={{ textAlign: "center" }} className={classes.totalWrap}>
-              <Typography className={classes.totalNumber}>0</Typography>
+              <Typography className={classes.totalNumber}>
+                <a
+                  className={classes.totalLink}
+                  href="#"
+                  onClick={e => {
+                    this.props.handleCompletedView(e);
+                  }}
+                >
+                  {this.props.totalComplete}
+                </a>
+              </Typography>
               <Typography className={classes.totalText}>
                 Completed Orders
               </Typography>
             </div>
             <div style={{ textAlign: "right" }} className={classes.totalWrap}>
-              <Typography className={classes.totalNumber}>0</Typography>
+              <Typography className={classes.totalNumber}>
+                <a
+                  className={classes.totalLink}
+                  href="#"
+                  onClick={e => {
+                    this.props.handleHeldView(e);
+                  }}
+                >
+                  {this.props.totalHeld}
+                </a>
+              </Typography>
               <Typography className={classes.totalText}>Held Orders</Typography>
             </div>
           </CardContent>

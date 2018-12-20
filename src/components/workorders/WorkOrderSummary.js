@@ -224,10 +224,18 @@ class WorkOrderSummary extends Component {
                 </Grid>
                 <Grid item xs={12}>
                   <span className={classes.fromNowText}>
-                    {this.props.dueDate < Date.now()
-                      ? "Order was due"
-                      : "Order is due"}{" "}
-                    <Moment fromNow>{this.props.dueDate}</Moment>
+                    {this.props.completedAt
+                      ? "Order is complete"
+                      : this.props.heldAt
+                        ? "Order is on hold"
+                        : this.props.dueDate < Date.now()
+                          ? "Order was due"
+                          : "Order is due"}{" "}
+                    {!this.props.completedAt && !this.props.heldAt ? (
+                      <Moment fromNow>{this.props.dueDate}</Moment>
+                    ) : (
+                      ""
+                    )}
                   </span>
                 </Grid>
               </Grid>

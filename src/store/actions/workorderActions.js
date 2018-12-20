@@ -81,3 +81,39 @@ export const completeWorkorder = (workorder, id) => {
       );
   };
 };
+
+export const holdWorkorder = (workorder, id) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    //const profile = getState().firebase.profile;
+    //const authorId = getState().firebase.auth.uid;
+
+    //let newCount = profile.createdOrderCount + 1;
+
+    firestore
+      .collection("held_workorders")
+      .doc(id)
+      .set({
+        ...workorder,
+        heldAt: new Date()
+      })
+      .then(() => {
+        dispatch({ type: "HOLD_WORKORDER", workorder });
+      })
+      .catch(err => {
+        dispatch({ type: "HOLD_WORKORDER_ERROR", err });
+      })
+      .then(
+        firestore
+          .collection("workorders")
+          .doc(id)
+          .delete()
+          .then(() => {
+            console.log("Document successfully deleted!");
+          })
+          .catch(err => {
+            console.err("Error removing document: ", err);
+          })
+      );
+  };
+};
