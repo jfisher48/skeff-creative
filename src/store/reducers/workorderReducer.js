@@ -35,6 +35,24 @@ const workorderReducer = (state = initState, action) => {
     case "COMPLETE_WORKORDER_ERROR":
       console.log("complete workorder error", action.err);
       return state;
+    case "RECREATE_WORKORDER":
+      console.log("recreate workorder", action.workorder);
+      return state;
+    case "RECREATE_WORKORDER_ERROR":
+      console.log("recreate workorder error", action.err);
+      return state;
+    case "DELETE_ORIGINAL":
+      console.log("delete workorder", action.workorder);
+      return state;
+    case "DELETE_WORKORDER_ERROR":
+      console.log("delete workorder error", action.err);
+      return state;
+    case "PROCESS_COMPLETE":
+      console.log("process complete", action.workorder);
+      return state;
+    case "PROCESS_COMPLETE_ERROR":
+      console.log("process complete error", action.err);
+      return state;
     case "HOLD_WORKORDER":
       console.log("hold workorder", action.workorder);
       return state;

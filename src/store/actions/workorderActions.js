@@ -73,6 +73,52 @@ export const completeWorkorder = (workorder, id) => {
           .doc(id)
           .delete()
           .then(() => {
+            dispatch({ type: "DELETE_ORIGINAL", workorder });
+          })
+          .catch(err => {
+            dispatch({ type: "DELETE_ORIGINAL", err });
+          })
+          .then(() => {
+            dispatch({ type: "PROCESS_COMPLETE", workorder });
+          })
+          .catch(err => {
+            dispatch({ type: "PROCESS_COMPLETE", err });
+          })
+      );
+  };
+};
+
+export const recreateWorkorder = (workorder, id) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    const firebase = getFirebase();
+    //const profile = getState().firebase.profile;
+    //const authorId = getState().firebase.auth.uid;
+
+    //let newCount = profile.createdOrderCount + 1;
+
+    firestore
+      .collection("workorders")
+      .doc(id)
+      .set(
+        {
+          ...workorder,
+          completedAt: firebase.firestore.FieldValue.delete()
+        },
+        { merge: true }
+      )
+      .then(() => {
+        dispatch({ type: "RECREATE_WORKORDER", workorder });
+      })
+      .catch(err => {
+        dispatch({ type: "RECREATE_WORKORDER_ERROR", err });
+      })
+      .then(
+        firestore
+          .collection("completed_workorders")
+          .doc(id)
+          .delete()
+          .then(() => {
             console.log("Document successfully deleted!");
           })
           .catch(err => {

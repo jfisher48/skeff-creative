@@ -19,18 +19,39 @@ import SummaryHeader from "../SummaryHeader/SummaryHeader";
 import CloseIcon from "@material-ui/icons/Close";
 import styles from "./styleWorkOrderDetail";
 import { Redirect } from "react-router-dom";
-import { completeWorkorder } from "../../../store/actions/workorderActions";
+import { recreateWorkorder } from "../../../store/actions/workorderActions";
 
 class CompletedWorkOrderDetail extends Component {
-  handleComplete = e => {
+  handleRecreate = e => {
     e.preventDefault();
+    var refresh = false;
     console.log(this.props.match.params.id);
-    this.props.completeWorkorder(
+    this.props.recreateWorkorder(
       this.props.workorder,
       this.props.match.params.id
     );
-    this.props.history.push("/workorders");
+    refresh = true;
+    if (refresh) {
+      this.props.history.push("/workorders");
+    }
   };
+
+  //   $('a.button').click(function(){
+  //     if (condition == 'true'){
+  //         function1(someVariable, function() {
+  //           function2(someOtherVariable);
+  //         });
+  //     }
+  //     else {
+  //         doThis(someVariable);
+  //     }
+  //    });
+
+  // function function1(param, callback) {
+  //   ...do stuff
+  //   callback();
+  // }
+
   render() {
     const classes = this.props.classes;
     const { workorder, auth } = this.props;
@@ -88,7 +109,7 @@ class CompletedWorkOrderDetail extends Component {
                       );
                     })}
                 </List>
-                <Button onClick={this.handleComplete}>Complete</Button>
+                <Button onClick={this.handleRecreate}>Mark Incomplete</Button>
               </CardContent>
             </Card>
           </Grid>
@@ -114,8 +135,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    completeWorkorder: (workorder, id) =>
-      dispatch(completeWorkorder(workorder, id))
+    recreateWorkorder: (workorder, id) =>
+      dispatch(recreateWorkorder(workorder, id))
   };
 };
 
