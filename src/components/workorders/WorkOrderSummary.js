@@ -22,7 +22,11 @@ const styles = theme => ({
   orderTitle: {
     marginBottom: "15px",
     color: "rgba(0,0,0,0.87)",
-    fontWeight: "500"
+    fontWeight: "500",
+    width: "100%",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis"
   },
   orderLabel: {
     color: "rgba(0,0,0,0.54)",
@@ -62,16 +66,25 @@ const styles = theme => ({
     borderRadius: 5,
     fontWeight: "500",
     fontSize: "12px",
+    linHeight: "12px",
     backgroundColor: "#d50000",
-    padding: "5px 10px"
+    padding: "5px 10px",
+    marginRight: "10px"
   },
   yellowAlert: {
     color: "white",
     borderRadius: 5,
     fontWeight: "500",
     fontSize: "12px",
+    lineHeight: "12px",
     backgroundColor: "#e6c60d",
-    padding: "5px 10px"
+    padding: "6px 10px",
+    marginRight: "10px"
+  },
+  noAlert: {
+    height: "24px",
+    width: "1px",
+    marginRight: "-1px"
   },
   badgeContainer: {
     display: "flex",
@@ -88,7 +101,7 @@ const styles = theme => ({
   },
   commentIcon: {
     color: "rgba(0,0,0,0.5)",
-    marginLeft: "25px"
+    marginRight: "10px"
   },
   fromNowText: {
     color: "rgba(0,0,0,0.87)",
@@ -98,7 +111,6 @@ const styles = theme => ({
     fontSize: "14px",
     fontWeight: "600",
     color: "rgba(0,0,0,0.87)",
-    marginLeft: "10px",
     fontStyle: "italic",
     display: "flex",
     alignItems: "center"
@@ -137,7 +149,6 @@ class WorkOrderSummary extends Component {
             <CardContent className={classes.orderContainer}>
               <Typography variant="h3" className={classes.orderTitle}>
                 {this.props.account}
-                {this.props.isRush ? <span> - Please Rush</span> : null}
               </Typography>
               <Typography className={classes.orderLabel} variant="h4">
                 WO TYPE:{" "}
@@ -169,11 +180,11 @@ class WorkOrderSummary extends Component {
               <Grid container spacing={8}>
                 <Grid item xs={12} className={classes.badgeContainer}>
                   {this.props.dueDate - Date.now() >= 43200000 ? (
-                    ""
+                    <span className={classes.noAlert} />
                   ) : this.props.dueDate < Date.now() ? (
                     <span className={classes.redAlert}>OVERDUE</span>
                   ) : (
-                    <span className={classes.redAlert}>DUE SOON</span>
+                    <span className={classes.yellowAlert}>DUE SOON</span>
                   )}
                   <Tooltip
                     title={
@@ -182,13 +193,15 @@ class WorkOrderSummary extends Component {
                       " items"
                     }
                   >
-                    <Badge
-                      badgeContent={this.props.items.length}
-                      classes={{ badge: classes.badge }}
-                      color="secondary"
-                    >
-                      <ListIcon className={classes.listIcon} />
-                    </Badge>
+                    <span style={{ marginRight: "25px" }}>
+                      <Badge
+                        badgeContent={this.props.items.length}
+                        classes={{ badge: classes.badge }}
+                        color="secondary"
+                      >
+                        <ListIcon className={classes.listIcon} />
+                      </Badge>
+                    </span>
                   </Tooltip>
                   {this.props.comments ? (
                     <CommentIcon className={classes.commentIcon} />

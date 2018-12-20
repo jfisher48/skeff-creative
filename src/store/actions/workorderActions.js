@@ -49,8 +49,8 @@ export const createWorkorder = workorder => {
 export const completeWorkorder = (workorder, id) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    const profile = getState().firebase.profile;
-    const authorId = getState().firebase.auth.uid;
+    //const profile = getState().firebase.profile;
+    //const authorId = getState().firebase.auth.uid;
 
     //let newCount = profile.createdOrderCount + 1;
 
