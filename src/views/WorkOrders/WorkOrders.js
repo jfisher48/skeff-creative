@@ -14,8 +14,7 @@ import {
   List,
   ListItem,
   Hidden,
-  IconButton,
-  Icon
+  IconButton
 } from "@material-ui/core";
 import WorkOrderList from "../../components/workorders/WorkOrderList.js";
 import WorkOrderDetail from "../../components/workorders/WorkOrderDetail/WorkOrderDetail.js";

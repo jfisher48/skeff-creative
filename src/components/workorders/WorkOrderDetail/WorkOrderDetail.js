@@ -9,7 +9,8 @@ import {
   IconButton,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
+  Button
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -18,8 +19,18 @@ import SummaryHeader from "../SummaryHeader/SummaryHeader";
 import CloseIcon from "@material-ui/icons/Close";
 import styles from "./styleWorkOrderDetail";
 import { Redirect } from "react-router-dom";
+import { completeWorkorder } from "../../../store/actions/workorderActions";
 
 class WorkOrderDetail extends Component {
+  handleComplete = e => {
+    e.preventDefault();
+    console.log(this.props.match.params.id);
+    this.props.completeWorkorder(
+      this.props.workorder,
+      this.props.match.params.id
+    );
+    this.props.history.push("/workorders");
+  };
   render() {
     const classes = this.props.classes;
     const { workorder, auth } = this.props;
@@ -77,6 +88,7 @@ class WorkOrderDetail extends Component {
                       );
                     })}
                 </List>
+                <Button onClick={this.handleComplete}>Complete</Button>
               </CardContent>
             </Card>
           </Grid>
@@ -100,10 +112,20 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    completeWorkorder: (workorder, id) =>
+      dispatch(completeWorkorder(workorder, id))
+  };
+};
+
 const styledComponent = withStyles(styles)(WorkOrderDetail);
 
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   firestoreConnect(props => {
     if (!props.auth.uid) return [];
     if (props.profile.role === "graphics") {

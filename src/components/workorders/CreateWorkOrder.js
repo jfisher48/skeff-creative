@@ -112,17 +112,15 @@ const styles = theme => ({
     width: "100%"
     //flex: "1 1 auto"
   },
-  input: {
-    //padding: "2px 8px",
-    "&$focused": {
-      borderColor: "blue"
-    }
-  },
   createButton: {
     boxShadow: "none",
-    float: "right",
     [theme.breakpoints.down("sm")]: {
-      width: "100%"
+      width: "100%",
+      marginTop: "10px"
+    },
+    [theme.breakpoints.up("md")]: {
+      float: "right",
+      marginLeft: "10px"
     }
   },
   dense: {
@@ -443,7 +441,16 @@ class CreateWorkOrder extends Component {
                     color="secondary"
                     className={classes.createButton}
                   >
-                    Submit Order
+                    Submit
+                  </Button>
+                  <Button
+                    variant="contained"
+                    className={classes.createButton}
+                    onClick={() => {
+                      this.props.history.push("/workorders");
+                    }}
+                  >
+                    Cancel
                   </Button>
                 </Grid>
               </Grid>

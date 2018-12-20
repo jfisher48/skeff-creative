@@ -6,14 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { NavLink } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Moment from "react-moment";
-import {
-  Grid,
-  Divider,
-  Paper,
-  Badge,
-  Tooltip,
-  SvgIcon
-} from "@material-ui/core";
+import { Grid, Divider, Badge, Tooltip, SvgIcon } from "@material-ui/core";
 import SummaryHeader from "./SummaryHeader/SummaryHeader";
 import CommentIcon from "@material-ui/icons/Comment";
 import ListIcon from "@material-ui/icons/List";
@@ -111,7 +104,7 @@ const styles = theme => ({
     alignItems: "center"
   },
   rushIcon: {
-    fontSize: "28px",
+    fontSize: "24px",
     marginRight: "5px",
     color: "#d50000"
   },
