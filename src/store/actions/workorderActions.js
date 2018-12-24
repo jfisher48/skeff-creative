@@ -8,10 +8,10 @@ export const createWorkorder = workorder => {
 
     firestore
       .collection("workorders")
-      .add({
+      .doc(profile.routeNumber + ("0000000" + newCount).slice(-7))
+      .set({
         ...workorder,
-        workorderNumber:
-          "#" + profile.routeNumber + ("0000000" + newCount).slice(-7),
+        workorderNumber: profile.routeNumber + ("0000000" + newCount).slice(-7),
         requesterFirstName: profile.firstName,
         requesterLastName: profile.lastName,
         requesterId: authorId,
@@ -66,25 +66,24 @@ export const completeWorkorder = (workorder, id) => {
       })
       .catch(err => {
         dispatch({ type: "COMPLETE_WORKORDER_ERROR", err });
+      });
+  };
+};
+
+export const deleteWorkorder = (collection, id) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection(collection)
+      .doc(id)
+      .delete()
+      .then(() => {
+        dispatch({ type: "DELETE_WORKORDER", id });
       })
-      .then(
-        firestore
-          .collection("workorders")
-          .doc(id)
-          .delete()
-          .then(() => {
-            dispatch({ type: "DELETE_ORIGINAL", workorder });
-          })
-          .catch(err => {
-            dispatch({ type: "DELETE_ORIGINAL", err });
-          })
-          .then(() => {
-            dispatch({ type: "PROCESS_COMPLETE", workorder });
-          })
-          .catch(err => {
-            dispatch({ type: "PROCESS_COMPLETE", err });
-          })
-      );
+      .catch(err => {
+        dispatch({ type: "DELETE_WORKORDER_ERROR", err });
+      });
   };
 };
 
@@ -92,10 +91,6 @@ export const recreateWorkorder = (workorder, id) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
-    //const profile = getState().firebase.profile;
-    //const authorId = getState().firebase.auth.uid;
-
-    //let newCount = profile.createdOrderCount + 1;
 
     firestore
       .collection("workorders")
@@ -116,6 +111,42 @@ export const recreateWorkorder = (workorder, id) => {
       .then(
         firestore
           .collection("completed_workorders")
+          .doc(id)
+          .delete()
+          .then(() => {
+            console.log("Document successfully deleted!");
+          })
+          .catch(err => {
+            console.err("Error removing document: ", err);
+          })
+      );
+  };
+};
+
+export const restoreWorkorder = (workorder, id) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    const firebase = getFirebase();
+
+    firestore
+      .collection("workorders")
+      .doc(id)
+      .set(
+        {
+          ...workorder,
+          heldAt: firebase.firestore.FieldValue.delete()
+        },
+        { merge: true }
+      )
+      .then(() => {
+        dispatch({ type: "RESTORE_WORKORDER", workorder });
+      })
+      .catch(err => {
+        dispatch({ type: "RESTORE_WORKORDER_ERROR", err });
+      })
+      .then(
+        firestore
+          .collection("held_workorders")
           .doc(id)
           .delete()
           .then(() => {

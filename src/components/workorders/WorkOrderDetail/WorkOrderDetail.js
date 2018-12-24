@@ -21,6 +21,7 @@ import styles from "./styleWorkOrderDetail";
 import { Redirect } from "react-router-dom";
 import { completeWorkorder } from "../../../store/actions/workorderActions";
 import { holdWorkorder } from "../../../store/actions/workorderActions";
+import { deleteWorkorder } from "../../../store/actions/workorderActions";
 
 class WorkOrderDetail extends Component {
   handleComplete = e => {
@@ -30,6 +31,7 @@ class WorkOrderDetail extends Component {
       this.props.workorder,
       this.props.match.params.id
     );
+    this.props.deleteWorkorder("workorders", this.props.match.params.id);
     this.props.history.push("/workorders");
   };
 
@@ -77,7 +79,7 @@ class WorkOrderDetail extends Component {
                   {workorder.items &&
                     workorder.items.map((item, i) => {
                       return (
-                        <ListItem divider alignItems="flex-start" key={i}>
+                        <ListItem divider key={i}>
                           <ListItemText
                             primary={
                               <React.Fragment>
@@ -126,6 +128,8 @@ const mapDispatchToProps = dispatch => {
   return {
     completeWorkorder: (workorder, id) =>
       dispatch(completeWorkorder(workorder, id)),
+    deleteWorkorder: (collection, id) =>
+      dispatch(deleteWorkorder(collection, id)),
     holdWorkorder: (workorder, id) => dispatch(holdWorkorder(workorder, id))
   };
 };

@@ -10,7 +10,7 @@ class SummaryHeader extends Component {
     return (
       <div className={classes.header}>
         <div className={classes.headerContainer}>
-          <span className={classes.orderNumber}>{this.props.orderNumber}</span>
+          <span className={classes.orderNumber}>#{this.props.orderNumber}</span>
           <span className={classes.dueDate}>
             <ScheduleIcon fontSize="small" className={classes.leftIcon} />
             <span className={classes.dueDateText}>

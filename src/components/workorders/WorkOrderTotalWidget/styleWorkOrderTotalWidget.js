@@ -25,12 +25,24 @@ const styles = theme => ({
     }
   },
   totalLink: {
+    padding: 0,
+    backgroundColor: "transparent",
+    border: 0,
+    fontSize: "5em",
+    lineHeight: ".90",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "4.5em",
+      lineHeight: "1"
+    },
     color: "rgb(42,47,67)",
     "&:visited": {
       color: "inherit"
     },
     "&:hover": {
       color: "#0091ea"
+    },
+    "&:focus": {
+      outline: 0
     }
   },
   totalText: {

@@ -16,7 +16,7 @@ import {
   Hidden,
   IconButton
 } from "@material-ui/core";
-import WorkOrderList from "../../components/workorders/WorkOrderList.js";
+//import WorkOrderList from "../../components/workorders/WorkOrderList.js";
 import WorkOrderDetail from "../../components/workorders/WorkOrderDetail/WorkOrderDetail.js";
 import CompletedWorkOrderDetail from "../../components/workorders/WorkOrderDetail/CompletedWorkOrderDetail.js";
 import HeldWorkOrderDetail from "../../components/workorders/WorkOrderDetail/HeldWorkOrderDetail.js";
@@ -30,6 +30,8 @@ import styles from "./styleWorkOrders.js";
 import { Redirect } from "react-router-dom";
 import Moment from "react-moment";
 import WorkOrderTotalWidget from "../../components/workorders/WorkOrderTotalWidget/WorkOrderTotalWidget.js";
+import WorkOrderList from "../../components/workorders/WorkOrderList.js";
+import { withRouter } from "react-router-dom";
 
 class WorkOrders extends Component {
   state = {
@@ -51,8 +53,16 @@ class WorkOrders extends Component {
     this.setState({ listView: "held" });
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      console.log("was at", prevProps.location);
+      console.log("now at", this.props.location);
+    }
+  }
   render() {
-    //console.log(this.props);
+    //console.log(this.state.open);
+    //this.realTimeListener();
+    //this.setState({open: this.getOpenOrders()})
 
     const classes = this.props.classes;
     const {
@@ -125,7 +135,11 @@ class WorkOrders extends Component {
                 ""
               )}
               <Switch>
-                <Route path="/workorders/create" component={CreateWorkOrder} />
+                <Route
+                  exact
+                  path="/workorders/create"
+                  component={CreateWorkOrder}
+                />
 
                 <ModalRoute
                   path="/workorders/:id"
@@ -254,5 +268,6 @@ export default compose(
         },
         { collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
       ];
-  })
+  }),
+  withRouter
 )(styledComponent);

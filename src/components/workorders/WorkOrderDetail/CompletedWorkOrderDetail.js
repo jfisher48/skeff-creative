@@ -24,33 +24,12 @@ import { recreateWorkorder } from "../../../store/actions/workorderActions";
 class CompletedWorkOrderDetail extends Component {
   handleRecreate = e => {
     e.preventDefault();
-    var refresh = false;
-    console.log(this.props.match.params.id);
     this.props.recreateWorkorder(
       this.props.workorder,
       this.props.match.params.id
     );
-    refresh = true;
-    if (refresh) {
-      this.props.history.push("/workorders");
-    }
+    this.props.history.push("/workorders");
   };
-
-  //   $('a.button').click(function(){
-  //     if (condition == 'true'){
-  //         function1(someVariable, function() {
-  //           function2(someOtherVariable);
-  //         });
-  //     }
-  //     else {
-  //         doThis(someVariable);
-  //     }
-  //    });
-
-  // function function1(param, callback) {
-  //   ...do stuff
-  //   callback();
-  // }
 
   render() {
     const classes = this.props.classes;
@@ -89,7 +68,7 @@ class CompletedWorkOrderDetail extends Component {
                   {workorder.items &&
                     workorder.items.map((item, i) => {
                       return (
-                        <ListItem divider alignItems="flex-start" key={i}>
+                        <ListItem divider key={i}>
                           <ListItemText
                             primary={
                               <React.Fragment>

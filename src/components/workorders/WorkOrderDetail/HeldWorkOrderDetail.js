@@ -19,18 +19,24 @@ import SummaryHeader from "../SummaryHeader/SummaryHeader";
 import CloseIcon from "@material-ui/icons/Close";
 import styles from "./styleWorkOrderDetail";
 import { Redirect } from "react-router-dom";
-import { completeWorkorder } from "../../../store/actions/workorderActions";
+import { restoreWorkorder } from "../../../store/actions/workorderActions";
+import { deleteWorkorder } from "../../../store/actions/workorderActions";
 
 class HeldWorkOrderDetail extends Component {
-  handleComplete = e => {
+  handleRestore = e => {
     e.preventDefault();
-    console.log(this.props.match.params.id);
-    this.props.completeWorkorder(
+    this.props.restoreWorkorder(
       this.props.workorder,
       this.props.match.params.id
     );
     this.props.history.push("/workorders");
   };
+  handleDelete = e => {
+    e.preventDefault();
+    this.props.deleteWorkorder("held_workorders", this.props.match.params.ids);
+    this.props.history.push("/workorders");
+  };
+
   render() {
     const classes = this.props.classes;
     const { workorder, auth } = this.props;
@@ -68,7 +74,7 @@ class HeldWorkOrderDetail extends Component {
                   {workorder.items &&
                     workorder.items.map((item, i) => {
                       return (
-                        <ListItem divider alignItems="flex-start" key={i}>
+                        <ListItem divider key={i}>
                           <ListItemText
                             primary={
                               <React.Fragment>
@@ -88,7 +94,8 @@ class HeldWorkOrderDetail extends Component {
                       );
                     })}
                 </List>
-                <Button onClick={this.handleComplete}>Complete</Button>
+                <Button onClick={this.handleRestore}>Restore</Button>
+                <Button onClick={this.handleDelete}>Delete</Button>
               </CardContent>
             </Card>
           </Grid>
@@ -114,8 +121,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    completeWorkorder: (workorder, id) =>
-      dispatch(completeWorkorder(workorder, id))
+    restoreWorkorder: (workorder, id) =>
+      dispatch(restoreWorkorder(workorder, id)),
+    deleteWorkorder: (collection, id) =>
+      dispatch(deleteWorkorder(collection, id))
   };
 };
 
