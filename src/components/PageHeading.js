@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { Paper, SvgIcon } from "@material-ui/core";
+import { Paper, SvgIcon, Grid } from "@material-ui/core";
 //import { Hidden } from "@material-ui/core";
 //import SignedInLinks from "./SignedInLinks/SignedInLinks";
 //import SignedOutLinks from "./SignedOutLinks/SignedOutLinks";
@@ -42,6 +42,10 @@ const styles = theme => ({
   },
   headingText: {
     flexGrow: 1
+    // width: "100%",
+    // overflow: "hidden",
+    // whiteSpace: "nowrap",
+    // textOverflow: "ellipsis"
   }
 });
 
@@ -57,19 +61,25 @@ class PageHeading extends Component {
       <div className={classes.root}>
         <AppBar className={classes.appBar} position="static" color="default">
           <Toolbar className={classes.toolBar}>
-            <Paper
-              className={classes.iconContainer}
-              style={{ backgroundColor: this.props.color }}
-            >
-              <SvgIcon className={classes.icon} viewBox={this.props.view}>
-                <path d={this.props.svgPath} />
-              </SvgIcon>
-            </Paper>
-            <Typography className={classes.headingText} variant="subtitle1">
-              {this.props.pageTitle}
-            </Typography>
-            {this.props.children}
-            {/* <Hidden xsDown>{links}</Hidden> */}
+            <Grid container spacing={16}>
+              <Grid item xs={10} sm={8} style={{ display: "flex" }}>
+                <Paper
+                  className={classes.iconContainer}
+                  style={{ backgroundColor: this.props.color }}
+                >
+                  <SvgIcon className={classes.icon} viewBox={this.props.view}>
+                    <path d={this.props.svgPath} />
+                  </SvgIcon>
+                </Paper>
+                <Typography className={classes.headingText} variant="subtitle1">
+                  {this.props.pageTitle}
+                </Typography>
+                {this.props.extraContent}
+              </Grid>
+              <Grid item xs={2} sm={4}>
+                {this.props.children}
+              </Grid>
+            </Grid>
           </Toolbar>
         </AppBar>
       </div>

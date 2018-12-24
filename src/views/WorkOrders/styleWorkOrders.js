@@ -1,6 +1,10 @@
 const styles = theme => ({
-  createButton: {
+  viewTabs: {
     float: "right"
+  },
+  createButton: {
+    float: "right",
+    flexGrow: 1
   },
   createIcon: {
     fontSize: 15,

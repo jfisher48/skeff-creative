@@ -14,7 +14,9 @@ import {
   List,
   ListItem,
   Hidden,
-  IconButton
+  IconButton,
+  Tabs,
+  Tab
 } from "@material-ui/core";
 //import WorkOrderList from "../../components/workorders/WorkOrderList.js";
 import WorkOrderDetail from "../../components/workorders/WorkOrderDetail/WorkOrderDetail.js";
@@ -36,6 +38,11 @@ import { withRouter } from "react-router-dom";
 class WorkOrders extends Component {
   state = {
     listView: "open"
+  };
+
+  handleChangeView = (e, value) => {
+    e.preventDefault();
+    this.setState({ listView: value });
   };
 
   handleOpenView = e => {
@@ -84,16 +91,26 @@ class WorkOrders extends Component {
           svgPath="M26.71,4.12H23.63l2,3H26.8V28.84H9.28V7.15h1.13l2-3H9.37A2.84,2.84,0,0,0,6.52,7V29.07a2.84,2.84,0,0,0,2.83,2.85H26.67a2.85,2.85,0,0,0,2.85-2.83V6.93A2.77,2.77,0,0,0,26.8,4.12Z M23.82,7.15l-2-3L20.64,2.44l0,.05a2.49,2.49,0,0,0-5,0l0-.05L14.44,4.12l-2,3L11.82,8l6.29.05L24.45,8ZM18.07,1.58a.86.86,0,0,1,0,1.72.85.85,0,0,1-.86-.86h0a.86.86,0,0,1,.85-.86Z M19.92,13.08a1.2,1.2,0,0,1-1.18,1.18H12.49a1.19,1.19,0,0,1-1.17-1.18V12.9a1.19,1.19,0,0,1,1.17-1.17h6.25a1.19,1.19,0,0,1,1.18,1.17Z M25,18.11a1.22,1.22,0,0,1-1.18,1.18H12.5a1.21,1.21,0,0,1-1.18-1.18v-.18a1.2,1.2,0,0,1,1.18-1.18H23.77A1.21,1.21,0,0,1,25,17.93Z M25,23.09a1.22,1.22,0,0,1-1.18,1.18H12.5a1.21,1.21,0,0,1-1.18-1.18v-.18a1.2,1.2,0,0,1,1.18-1.18H23.77A1.21,1.21,0,0,1,25,22.91Z"
           color="#355675"
           view="0 0 36.04 36.04"
-          pageTitle={
-            this.state.listView === "open"
-              ? "Open Work Orders"
-              : this.state.listView === "completed"
-                ? "Completed Work Orders"
-                : "Held Work Orders"
+          pageTitle="Work Orders"
+          extraContent={
+            <Hidden xsDown>
+              <Tabs
+                value={this.state.listView}
+                onChange={this.handleChangeView}
+                indicatorColor="secondary"
+                textColor="primary"
+                centered
+                className={classes.viewTabs}
+              >
+                <Tab label="Open" value="open" />
+                <Tab label="Completed" value="completed" />
+                <Tab label="Held" value="held" />
+              </Tabs>
+            </Hidden>
           }
         >
           <Hidden xsDown>
-            <NavLink to="workorders/create">
+            <NavLink to="workorders/create" style={{ flexGrow: 1 }}>
               <Button
                 className={classes.createButton}
                 variant="outlined"
@@ -119,6 +136,21 @@ class WorkOrders extends Component {
           </Hidden>
         </PageHeading>
         <Grid container spacing={16}>
+          <Hidden smUp>
+            <Grid item xs={12}>
+              <Tabs
+                value={this.state.listView}
+                onChange={this.handleChangeView}
+                indicatorColor="secondary"
+                textColor="primary"
+                fullWidth
+              >
+                <Tab label="Open" value="open" />
+                <Tab label="Completed" value="completed" />
+                <Tab label="Held" value="held" />
+              </Tabs>
+            </Grid>
+          </Hidden>
           <Grid item xs={12} lg={8}>
             <Grid container spacing={16}>
               {this.props.location.pathname !== "/workorders/create" ? (

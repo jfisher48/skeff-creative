@@ -28,6 +28,7 @@ const styles = theme => ({
     padding: 0,
     backgroundColor: "transparent",
     border: 0,
+    cursor: "pointer",
     fontSize: "5em",
     lineHeight: ".90",
     [theme.breakpoints.down("xs")]: {

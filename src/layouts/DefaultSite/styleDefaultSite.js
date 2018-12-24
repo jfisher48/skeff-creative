@@ -152,8 +152,8 @@ const styles = theme => ({
       "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
   },
   content: {
-    [theme.breakpoints.down("sm")]: {
-      marginTop: "56px"
+    [theme.breakpoints.down("md")]: {
+      marginTop: "64px"
     },
     [theme.breakpoints.up("md")]: {
       overflowY: "scroll"
