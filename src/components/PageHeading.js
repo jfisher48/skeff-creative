@@ -42,10 +42,6 @@ const styles = theme => ({
   },
   headingText: {
     flexGrow: 1
-    // width: "100%",
-    // overflow: "hidden",
-    // whiteSpace: "nowrap",
-    // textOverflow: "ellipsis"
   }
 });
 
@@ -62,7 +58,13 @@ class PageHeading extends Component {
         <AppBar className={classes.appBar} position="static" color="default">
           <Toolbar className={classes.toolBar}>
             <Grid container spacing={16}>
-              <Grid item xs={10} sm={8} style={{ display: "flex" }}>
+              <Grid
+                item
+                xs={12}
+                sm={9}
+                lg={8}
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <Paper
                   className={classes.iconContainer}
                   style={{ backgroundColor: this.props.color }}
@@ -76,7 +78,17 @@ class PageHeading extends Component {
                 </Typography>
                 {this.props.extraContent}
               </Grid>
-              <Grid item xs={2} sm={4}>
+              <Grid
+                item
+                xs={12}
+                sm={3}
+                lg={4}
+                style={{
+                  display: "flex",
+                  alignItems: "stretch",
+                  justifyContent: "flex-end"
+                }}
+              >
                 {this.props.children}
               </Grid>
             </Grid>

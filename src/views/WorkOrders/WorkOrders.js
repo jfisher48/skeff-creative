@@ -16,7 +16,8 @@ import {
   Hidden,
   IconButton,
   Tabs,
-  Tab
+  Tab,
+  Fab
 } from "@material-ui/core";
 //import WorkOrderList from "../../components/workorders/WorkOrderList.js";
 import WorkOrderDetail from "../../components/workorders/WorkOrderDetail/WorkOrderDetail.js";
@@ -93,26 +94,32 @@ class WorkOrders extends Component {
           view="0 0 36.04 36.04"
           pageTitle="Work Orders"
           extraContent={
-            <Hidden xsDown>
-              <Tabs
-                value={this.state.listView}
-                onChange={this.handleChangeView}
-                indicatorColor="secondary"
-                textColor="primary"
-                centered
-                className={classes.viewTabs}
-              >
-                <Tab label="Open" value="open" />
-                <Tab label="Completed" value="completed" />
-                <Tab label="Held" value="held" />
-              </Tabs>
-            </Hidden>
+            this.props.location.pathname !== "/workorders/create" ? (
+              <Hidden xsDown>
+                <Tabs
+                  value={this.state.listView}
+                  onChange={this.handleChangeView}
+                  indicatorColor="secondary"
+                  textColor="primary"
+                  centered
+                  className={classes.viewTabs}
+                >
+                  <Tab label="Open" value="open" />
+                  <Tab label="Completed" value="completed" />
+                  <Tab label="Held" value="held" />
+                </Tabs>
+              </Hidden>
+            ) : (
+              ""
+            )
           }
         >
-          <Hidden xsDown>
-            <NavLink to="workorders/create" style={{ flexGrow: 1 }}>
+          {this.props.location.pathname !== "/workorders/create" ? (
+            <Hidden xsDown>
               <Button
                 className={classes.createButton}
+                component={NavLink}
+                to="workorders/create"
                 variant="outlined"
                 size="large"
                 color="secondary"
@@ -120,37 +127,45 @@ class WorkOrders extends Component {
                 <AddIcon className={classes.createIcon} />
                 New Order
               </Button>
-            </NavLink>
-          </Hidden>
-          <Hidden smUp>
-            <NavLink to="workorders/create">
-              <IconButton
-                className={classes.createButton}
-                variant="outlined"
-                size="large"
+            </Hidden>
+          ) : (
+            ""
+          )}
+          {this.props.location.pathname !== "/workorders/create" ? (
+            <Hidden smUp>
+              <Fab
+                component={NavLink}
+                to="workorders/create"
+                className={classes.floatingButton}
                 color="secondary"
               >
                 <AddIcon className={classes.createIcon} />
-              </IconButton>
-            </NavLink>
-          </Hidden>
+              </Fab>
+            </Hidden>
+          ) : (
+            ""
+          )}
         </PageHeading>
         <Grid container spacing={16}>
-          <Hidden smUp>
-            <Grid item xs={12}>
-              <Tabs
-                value={this.state.listView}
-                onChange={this.handleChangeView}
-                indicatorColor="secondary"
-                textColor="primary"
-                fullWidth
-              >
-                <Tab label="Open" value="open" />
-                <Tab label="Completed" value="completed" />
-                <Tab label="Held" value="held" />
-              </Tabs>
-            </Grid>
-          </Hidden>
+          {this.props.location.pathname !== "/workorders/create" ? (
+            <Hidden smUp>
+              <Grid item xs={12}>
+                <Tabs
+                  value={this.state.listView}
+                  onChange={this.handleChangeView}
+                  indicatorColor="secondary"
+                  textColor="primary"
+                  fullWidth
+                >
+                  <Tab label="Open" value="open" />
+                  <Tab label="Completed" value="completed" />
+                  <Tab label="Held" value="held" />
+                </Tabs>
+              </Grid>
+            </Hidden>
+          ) : (
+            ""
+          )}
           <Grid item xs={12} lg={8}>
             <Grid container spacing={16}>
               {this.props.location.pathname !== "/workorders/create" ? (
