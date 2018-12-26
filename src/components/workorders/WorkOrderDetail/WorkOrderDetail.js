@@ -68,13 +68,53 @@ class WorkOrderDetail extends Component {
                 <Typography className={classes.orderTitle}>
                   {workorder.account}
                 </Typography>
-                <Typography className={classes.orderInfo}>
-                  <Moment format="M.DD.YY [at] h:mm A">
-                    {workorder.createdAt.toDate()}
-                  </Moment>{" "}
-                  by {workorder.requesterFirstName}{" "}
-                  {workorder.requesterLastName}
-                </Typography>
+                <Grid container spacing={8}>
+                  <Grid item xs={12}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      WORK ORDER TYPE:{" "}
+                      <span className={classes.orderInfo}>
+                        {workorder.orderType}
+                      </span>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      CREATED BY:{" "}
+                      <span className={classes.orderInfo}>
+                        {workorder.requesterFirstName}{" "}
+                        {workorder.requesterLastName}
+                      </span>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      CREATED ON:{" "}
+                      <span className={classes.orderInfo}>
+                        <Moment format="M.DD.YY [at] h:mm A">
+                          {workorder.createdAt.toDate()}
+                        </Moment>
+                      </span>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      ASSIGNED TO:{" "}
+                      <span className={classes.orderInfo}>
+                        {workorder.assignedToName}
+                      </span>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      DUE ON:{" "}
+                      <span className={classes.orderInfo}>
+                        <Moment format="M.DD.YY [at] h:mm A">
+                          {workorder.dueDate.toDate()}
+                        </Moment>
+                      </span>
+                    </Typography>
+                  </Grid>
+                </Grid>
                 <List>
                   {workorder.items &&
                     workorder.items.map((item, i) => {
@@ -83,9 +123,14 @@ class WorkOrderDetail extends Component {
                           <ListItemText
                             primary={
                               <React.Fragment>
-                                {item.brand} {item.signTheme}{" "}
-                                {item.signTypeName} {item.signSize} Qty:{" "}
-                                {item.quantity}
+                                <Typography
+                                  type="subtitle2"
+                                  className={classes.primaryItemText}
+                                >
+                                  {item.brand} {item.signTheme}{" "}
+                                  {item.signTypeName} {item.signSize} Qty:{" "}
+                                  {item.quantity}
+                                </Typography>
                               </React.Fragment>
                             }
                             secondary={
@@ -99,8 +144,22 @@ class WorkOrderDetail extends Component {
                       );
                     })}
                 </List>
-                <Button onClick={this.handleComplete}>Complete</Button>
-                <Button onClick={this.handleHold}>Hold</Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={this.handleComplete}
+                  className={classes.orderButton}
+                >
+                  Complete
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={this.handleHold}
+                  className={classes.orderButton}
+                  style={{ paddingTop: "7px", paddingBottom: "7px" }}
+                >
+                  Hold
+                </Button>
               </CardContent>
             </Card>
           </Grid>

@@ -407,9 +407,11 @@ class Item extends Component {
   }
 
   renderDisplay() {
+    const classes = this.props.classes;
     return (
       <ListItem divider>
         <ListItemText
+          disableTypography
           primary={this.props.primary}
           secondary={this.props.secondary}
         />

@@ -36,12 +36,6 @@ const styles = theme => ({
     color: "rgba(0,0,0,0.87)",
     fontWeight: "400"
   },
-  orderContent: {
-    color: "#7f828f",
-    marginTop: "25px",
-    fontSize: "1em",
-    lineHeight: "24px"
-  },
   orderActions: {
     paddingBottom: "40px",
     paddingLeft: "40px",

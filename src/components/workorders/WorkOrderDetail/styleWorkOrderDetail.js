@@ -2,8 +2,8 @@ const styles = theme => ({
   orderContainer: {
     padding: "20px 26px",
     overflowY: "auto",
-    [theme.breakpoints.down("sm")]: {
-      width: "65vw",
+    [theme.breakpoints.down("xs")]: {
+      width: "75vw",
       maxHeight: "55vh"
     },
     [theme.breakpoints.up("sm")]: {
@@ -27,37 +27,30 @@ const styles = theme => ({
     fontSize: "2.25em",
     lineHeight: "1.25",
     color: "#2a2f43",
-    "& a": {
-      color: "#2a2f43",
-      textDecoration: "none",
-      "&:hover": {
-        color: theme.palette.secondary.main
-      }
+    width: "100%",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.75em"
     }
+  },
+  orderLabel: {
+    color: "rgba(0,0,0,0.54)",
+    lineHeight: "1"
   },
   orderInfo: {
-    color: "#7f828f",
-    fontSize: "0.75em",
-    fontWeight: "700",
-    "& a": {
-      color: "rgb(0,145,234)",
-      textDecoration: "none",
-      "&:hover": {
-        color: "#0064b7"
-      }
-    }
-  },
-  orderContent: {
-    color: "#7f828f",
-    marginTop: "25px",
-    fontSize: "1em",
-    lineHeight: "24px"
+    color: "rgba(0,0,0,0.87)",
+    fontWeight: "400"
   },
   orderActions: {
     paddingBottom: "40px",
     paddingLeft: "40px",
     padddingRight: "40px",
     textDecoration: "none"
+  },
+  primaryItemText: {
+    lineHeight: "1.2em"
   },
   orderLink: {
     margin: 0
@@ -68,8 +61,12 @@ const styles = theme => ({
   orderButton: {
     boxShadow: "none",
     fontSize: "0.75",
-    margin: 0,
-    textDecoration: "none"
+    margin: "0 10px 0 0",
+    textDecoration: "none",
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      margin: "10px 0 0 0"
+    }
   },
   media: {
     minHeight: "200px",

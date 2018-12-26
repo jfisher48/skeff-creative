@@ -131,6 +131,7 @@ const styles = theme => ({
 class CreateWorkOrder extends Component {
   state = {
     account: "",
+    orderType: "Standard POS",
     accountId: "",
     comments: "",
     isRush: false,
