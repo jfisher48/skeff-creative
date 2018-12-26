@@ -33,7 +33,7 @@ class HeldWorkOrderDetail extends Component {
   };
   handleDelete = e => {
     e.preventDefault();
-    this.props.deleteWorkorder("held_workorders", this.props.match.params.ids);
+    this.props.deleteWorkorder("held_workorders", this.props.match.params.id);
     this.props.history.push("/workorders");
   };
 

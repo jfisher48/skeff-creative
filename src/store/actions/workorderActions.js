@@ -49,7 +49,7 @@ export const createWorkorder = workorder => {
 export const completeWorkorder = (workorder, id) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    //const profile = getState().firebase.profile;
+    const profile = getState().firebase.profile;
     //const authorId = getState().firebase.auth.uid;
 
     //let newCount = profile.createdOrderCount + 1;
@@ -59,7 +59,9 @@ export const completeWorkorder = (workorder, id) => {
       .doc(id)
       .set({
         ...workorder,
-        completedAt: new Date()
+        completedAt: new Date(),
+        completedByFirst: profile.firstName,
+        completedByLast: profile.lastName
       })
       .then(() => {
         dispatch({ type: "COMPLETE_WORKORDER", workorder });
@@ -91,6 +93,7 @@ export const recreateWorkorder = (workorder, id) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
+    const profile = getState().firebase.profile;
 
     firestore
       .collection("workorders")
@@ -98,6 +101,9 @@ export const recreateWorkorder = (workorder, id) => {
       .set(
         {
           ...workorder,
+          restoredAt: new Date(),
+          restoredByFirst: profile.firstName,
+          restoredByLast: profile.lastName,
           completedAt: firebase.firestore.FieldValue.delete()
         },
         { merge: true }
@@ -127,6 +133,7 @@ export const restoreWorkorder = (workorder, id) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
+    const profile = getState().firebase.profile;
 
     firestore
       .collection("workorders")
@@ -134,6 +141,9 @@ export const restoreWorkorder = (workorder, id) => {
       .set(
         {
           ...workorder,
+          restoredAt: new Date(),
+          restoredByFirst: profile.firstName,
+          restoredByLast: profile.lastName,
           heldAt: firebase.firestore.FieldValue.delete()
         },
         { merge: true }
@@ -162,16 +172,15 @@ export const restoreWorkorder = (workorder, id) => {
 export const holdWorkorder = (workorder, id) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
-    //const profile = getState().firebase.profile;
-    //const authorId = getState().firebase.auth.uid;
-
-    //let newCount = profile.createdOrderCount + 1;
+    const profile = getState().firebase.profile;
 
     firestore
       .collection("held_workorders")
       .doc(id)
       .set({
         ...workorder,
+        heldByFirst: profile.firstName,
+        heldByLast: profile.lastName,
         heldAt: new Date()
       })
       .then(() => {

@@ -11,8 +11,10 @@ const WorkOrderList = ({ workorders }) => {
             <WorkOrderSummary
               workorder={workorder}
               key={workorder.id}
-              completedAt={workorder.completedAt}
-              heldAt={workorder.heldAt}
+              completedAt={
+                workorder.completedAt && workorder.completedAt.toDate()
+              }
+              heldAt={workorder.heldAt && workorder.heldAt.toDate()}
               orderNumber={workorder.workorderNumber}
               account={workorder.account}
               items={workorder.items}

@@ -179,12 +179,16 @@ class WorkOrderSummary extends Component {
               <Divider className={classes.divider} />
               <Grid container spacing={8}>
                 <Grid item xs={12} className={classes.badgeContainer}>
-                  {this.props.dueDate - Date.now() >= 43200000 ? (
-                    <span className={classes.noAlert} />
-                  ) : this.props.dueDate < Date.now() ? (
-                    <span className={classes.redAlert}>OVERDUE</span>
+                  {!this.props.completedAt ? (
+                    this.props.dueDate - Date.now() >= 43200000 ? (
+                      <span className={classes.noAlert} />
+                    ) : this.props.dueDate < Date.now() ? (
+                      <span className={classes.redAlert}>OVERDUE</span>
+                    ) : (
+                      <span className={classes.yellowAlert}>DUE SOON</span>
+                    )
                   ) : (
-                    <span className={classes.yellowAlert}>DUE SOON</span>
+                    ""
                   )}
                   <Tooltip
                     title={
@@ -225,16 +229,18 @@ class WorkOrderSummary extends Component {
                 <Grid item xs={12}>
                   <span className={classes.fromNowText}>
                     {this.props.completedAt
-                      ? "Order is complete"
+                      ? "Order was completed"
                       : this.props.heldAt
-                        ? "Order is on hold"
+                        ? "Order was placed on hold"
                         : this.props.dueDate < Date.now()
                           ? "Order was due"
                           : "Order is due"}{" "}
                     {!this.props.completedAt && !this.props.heldAt ? (
                       <Moment fromNow>{this.props.dueDate}</Moment>
                     ) : (
-                      ""
+                      <Moment fromNow>
+                        {this.props.heldAt || this.props.completedAt}
+                      </Moment>
                     )}
                   </span>
                 </Grid>
