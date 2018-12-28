@@ -147,6 +147,15 @@ class Item extends Component {
 
     const sizes = this.state.sizeOptions;
 
+    const availableThemes =
+      signThemes &&
+      signThemes.filter(theme => {
+        return (
+          theme.isActive &&
+          (theme.brand === "All" || this.state.brand === theme.brand)
+        );
+      });
+
     const sizeSelect =
       sizes.length > 0 &&
       sizes.map((size, i) => {
@@ -217,8 +226,8 @@ class Item extends Component {
                         />
                       }
                     >
-                      {signThemes &&
-                        signThemes.map(signTheme => (
+                      {availableThemes &&
+                        availableThemes.map(signTheme => (
                           <MenuItem key={signTheme.id} value={signTheme.name}>
                             {signTheme.name}
                           </MenuItem>
@@ -293,9 +302,9 @@ class Item extends Component {
             <Grid item xs={12}>
               <Typography>Featured Price</Typography>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12}>
               <Grid container spacing={16}>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     value={this.state.price}
@@ -303,7 +312,6 @@ class Item extends Component {
                     name="price"
                     label="Price"
                     className={classNames(classes.textField, classes.dense)}
-                    fullWidth
                     margin="normal"
                     onChange={this.handleChange}
                     InputProps={{
@@ -313,6 +321,7 @@ class Item extends Component {
                     }}
                   />
                 </Grid>
+                <Grid item xs={12} md={6} />
                 <Grid item xs={12} md={4}>
                   <FormControl variant="filled" className={classes.formSelect}>
                     <InputLabel required htmlFor="package">
