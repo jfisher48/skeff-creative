@@ -75,6 +75,26 @@ const styles = theme => ({
     padding: "6px 10px",
     marginRight: "10px"
   },
+  greenAlert: {
+    color: "white",
+    borderRadius: 5,
+    fontWeight: "500",
+    fontSize: "12px",
+    lineHeight: "12px",
+    backgroundColor: "#4caf50",
+    padding: "6px 10px",
+    marginRight: "10px"
+  },
+  orangeAlert: {
+    color: "white",
+    borderRadius: 5,
+    fontWeight: "500",
+    fontSize: "12px",
+    lineHeight: "12px",
+    backgroundColor: "#ff9800",
+    padding: "6px 10px",
+    marginRight: "10px"
+  },
   noAlert: {
     height: "24px",
     width: "1px",
@@ -174,15 +194,19 @@ class WorkOrderSummary extends Component {
               <Grid container spacing={8}>
                 <Grid item xs={12} className={classes.badgeContainer}>
                   {!this.props.completedAt ? (
-                    this.props.dueDate - Date.now() >= 43200000 ? (
-                      <span className={classes.noAlert} />
-                    ) : this.props.dueDate < Date.now() ? (
-                      <span className={classes.redAlert}>OVERDUE</span>
+                    !this.props.heldAt ? (
+                      this.props.dueDate - Date.now() >= 43200000 ? (
+                        <span className={classes.noAlert} />
+                      ) : this.props.dueDate < Date.now() ? (
+                        <span className={classes.redAlert}>OVERDUE</span>
+                      ) : (
+                        <span className={classes.yellowAlert}>DUE SOON</span>
+                      )
                     ) : (
-                      <span className={classes.yellowAlert}>DUE SOON</span>
+                      <span className={classes.orangeAlert}>ON HOLD</span>
                     )
                   ) : (
-                    ""
+                    <span className={classes.greenAlert}>COMPLETED</span>
                   )}
                   <Tooltip
                     title={

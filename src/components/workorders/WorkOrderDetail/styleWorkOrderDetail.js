@@ -44,13 +44,23 @@ const styles = theme => ({
     fontWeight: "400"
   },
   orderActions: {
-    paddingBottom: "40px",
-    paddingLeft: "40px",
-    padddingRight: "40px",
-    textDecoration: "none"
+    padding: "0 26px 20px 26px",
+    textDecoration: "none",
+    display: "block"
+  },
+  listItem: {
+    borderBottom: 0,
+    borderTop: "1px solid rgba(0, 0, 0, 0.12)"
   },
   primaryItemText: {
-    lineHeight: "1.2em"
+    display: "flex",
+    lineHeight: "1.2em",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column"
+    }
+  },
+  primaryItemGroup: {
+    marginRight: "10px"
   },
   orderLink: {
     margin: 0
@@ -65,12 +75,8 @@ const styles = theme => ({
     textDecoration: "none",
     [theme.breakpoints.down("xs")]: {
       width: "100%",
-      margin: "10px 0 0 0"
+      margin: "0 0 10px 0"
     }
-  },
-  media: {
-    minHeight: "200px",
-    objectFit: "cover"
   }
 });
 

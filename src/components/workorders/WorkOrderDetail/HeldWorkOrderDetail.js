@@ -10,7 +10,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  Button
+  Button,
+  CardActions
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -39,7 +40,7 @@ class HeldWorkOrderDetail extends Component {
 
   render() {
     const classes = this.props.classes;
-    const { workorder, auth } = this.props;
+    const { workorder, auth, profile } = this.props;
     if (!auth.uid) return <Redirect to="/login" />;
     if (workorder) {
       return (
@@ -63,24 +64,90 @@ class HeldWorkOrderDetail extends Component {
                 <Typography className={classes.orderTitle}>
                   {workorder.account}
                 </Typography>
-                <Typography className={classes.orderInfo}>
-                  <Moment format="M.DD.YY [at] h:mm A">
-                    {workorder.createdAt.toDate()}
-                  </Moment>{" "}
-                  by {workorder.requesterFirstName}{" "}
-                  {workorder.requesterLastName}
-                </Typography>
+                <Grid container spacing={8} style={{ paddingBottom: "20px" }}>
+                  <Grid item xs={12}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      WO TYPE:{" "}
+                      <span className={classes.orderInfo}>
+                        {workorder.orderType}
+                      </span>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      CREATED BY:{" "}
+                      <span className={classes.orderInfo}>
+                        {workorder.requesterFirstName}{" "}
+                        {workorder.requesterLastName}
+                      </span>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      CREATED ON:{" "}
+                      <span className={classes.orderInfo}>
+                        <Moment format="M.DD.YY [at] h:mm A">
+                          {workorder.createdAt.toDate()}
+                        </Moment>
+                      </span>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      ASSIGNED TO:{" "}
+                      <span className={classes.orderInfo}>
+                        {workorder.assignedToName}
+                      </span>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      DUE ON:{" "}
+                      <span className={classes.orderInfo}>
+                        <Moment format="M.DD.YY [at] h:mm A">
+                          {workorder.dueDate.toDate()}
+                        </Moment>
+                      </span>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      STATUS: <span className={classes.orderInfo}>On Hold</span>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      HELD ON:{" "}
+                      <span className={classes.orderInfo}>
+                        <Moment format="M.DD.YY [at] h:mm A">
+                          {workorder.heldAt.toDate()}
+                        </Moment>
+                      </span>
+                    </Typography>
+                  </Grid>
+                </Grid>
                 <List>
                   {workorder.items &&
                     workorder.items.map((item, i) => {
                       return (
-                        <ListItem divider key={i}>
+                        <ListItem divider className={classes.listItem} key={i}>
                           <ListItemText
                             primary={
                               <React.Fragment>
-                                {item.brand} {item.signTheme}{" "}
-                                {item.signTypeName} {item.signSize} Qty:{" "}
-                                {item.quantity}
+                                <Typography
+                                  type="subtitle2"
+                                  className={classes.primaryItemText}
+                                >
+                                  <span className={classes.primaryItemGroup}>
+                                    {item.brand} {item.signTheme}
+                                  </span>{" "}
+                                  <span className={classes.primaryItemGroup}>
+                                    {item.signSize} {item.signTypeName}{" "}
+                                  </span>
+                                  <span className={classes.primaryItemGroup}>
+                                    Qty: {item.quantity}
+                                  </span>
+                                </Typography>
                               </React.Fragment>
                             }
                             secondary={
@@ -94,9 +161,30 @@ class HeldWorkOrderDetail extends Component {
                       );
                     })}
                 </List>
-                <Button onClick={this.handleRestore}>Restore</Button>
-                <Button onClick={this.handleDelete}>Delete</Button>
               </CardContent>
+              {profile.role === "graphics" ? (
+                <CardActions className={classes.orderActions}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={this.handleRestore}
+                    className={classes.orderButton}
+                  >
+                    Restore
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="inherit"
+                    onClick={this.handleDelete}
+                    className={classes.orderButton}
+                    style={{ color: "#fff", backgroundColor: "#f44336" }}
+                  >
+                    Delete
+                  </Button>
+                </CardActions>
+              ) : (
+                ""
+              )}
             </Card>
           </Grid>
         </Grid>

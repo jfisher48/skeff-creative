@@ -10,7 +10,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  Button
+  Button,
+  CardActions
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -44,7 +45,7 @@ class WorkOrderDetail extends Component {
 
   render() {
     const classes = this.props.classes;
-    const { workorder, auth } = this.props;
+    const { workorder, auth, profile } = this.props;
     if (!auth.uid) return <Redirect to="/login" />;
     if (workorder) {
       return (
@@ -68,10 +69,10 @@ class WorkOrderDetail extends Component {
                 <Typography className={classes.orderTitle}>
                   {workorder.account}
                 </Typography>
-                <Grid container spacing={8}>
+                <Grid container spacing={8} style={{ paddingBottom: "20px" }}>
                   <Grid item xs={12}>
                     <Typography className={classes.orderLabel} variant="h4">
-                      WORK ORDER TYPE:{" "}
+                      WO TYPE:{" "}
                       <span className={classes.orderInfo}>
                         {workorder.orderType}
                       </span>
@@ -114,12 +115,28 @@ class WorkOrderDetail extends Component {
                       </span>
                     </Typography>
                   </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      STATUS:{" "}
+                      <span className={classes.orderInfo}>Assigned</span>
+                    </Typography>
+                  </Grid>
+                  {/* <Grid item xs={12} sm={6}>
+                    <Typography className={classes.orderLabel} variant="h4">
+                      DUE ON:{" "}
+                      <span className={classes.orderInfo}>
+                        <Moment format="M.DD.YY [at] h:mm A">
+                          {workorder.dueDate.toDate()}
+                        </Moment>
+                      </span>
+                    </Typography>
+                  </Grid> */}
                 </Grid>
                 <List>
                   {workorder.items &&
                     workorder.items.map((item, i) => {
                       return (
-                        <ListItem divider key={i}>
+                        <ListItem divider className={classes.listItem} key={i}>
                           <ListItemText
                             primary={
                               <React.Fragment>
@@ -127,9 +144,15 @@ class WorkOrderDetail extends Component {
                                   type="subtitle2"
                                   className={classes.primaryItemText}
                                 >
-                                  {item.brand} {item.signTheme}{" "}
-                                  {item.signTypeName} {item.signSize} Qty:{" "}
-                                  {item.quantity}
+                                  <span className={classes.primaryItemGroup}>
+                                    {item.brand} {item.signTheme}
+                                  </span>{" "}
+                                  <span className={classes.primaryItemGroup}>
+                                    {item.signSize} {item.signTypeName}{" "}
+                                  </span>
+                                  <span className={classes.primaryItemGroup}>
+                                    Qty: {item.quantity}
+                                  </span>
                                 </Typography>
                               </React.Fragment>
                             }
@@ -144,23 +167,29 @@ class WorkOrderDetail extends Component {
                       );
                     })}
                 </List>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={this.handleComplete}
-                  className={classes.orderButton}
-                >
-                  Complete
-                </Button>
-                <Button
-                  variant="outlined"
-                  onClick={this.handleHold}
-                  className={classes.orderButton}
-                  style={{ paddingTop: "7px", paddingBottom: "7px" }}
-                >
-                  Hold
-                </Button>
               </CardContent>
+              {profile.role === "graphics" ? (
+                <CardActions className={classes.orderActions}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={this.handleComplete}
+                    className={classes.orderButton}
+                  >
+                    Complete
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={this.handleHold}
+                    className={classes.orderButton}
+                    style={{ paddingTop: "7px", paddingBottom: "7px" }}
+                  >
+                    Hold
+                  </Button>
+                </CardActions>
+              ) : (
+                ""
+              )}
             </Card>
           </Grid>
         </Grid>
