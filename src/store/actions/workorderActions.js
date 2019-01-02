@@ -15,6 +15,7 @@ export const createWorkorder = workorder => {
         requesterFirstName: profile.firstName,
         requesterLastName: profile.lastName,
         requesterId: authorId,
+        requesterEmail: profile.email,
         createdAt: new Date()
       })
       .then(() => {

@@ -47,7 +47,8 @@ class Item extends Component {
     signSize: this.props.signSize,
     signTheme: this.props.signTheme,
     sizeOptions: [],
-    labelWidth: 0
+    labelWidth: 0,
+    errMessage: ""
   };
 
   componentDidMount() {
@@ -63,23 +64,45 @@ class Item extends Component {
 
   save = e => {
     e.preventDefault();
-    this.props.onChange(
-      this.state.brand,
-      this.state.signTheme,
-      this.state.signType,
-      this.state.signTypeName,
-      this.state.signSize,
-      this.state.quantity,
-      this.state.price,
-      this.state.package,
-      this.state.pkgSize,
-      this.state.pkgType,
-      this.state.id
-    );
-    this.setState({
-      new: false,
-      editing: false
-    });
+    if (this.state.brand.length < 1) {
+      this.setState({ errMessage: "Please select a Brand" });
+    } else if (this.state.signTheme.length < 1) {
+      this.setState({ errMessage: "Please select a Theme" });
+    } else if (this.state.signType.length < 1) {
+      this.setState({ errMessage: "Please select a Sign Type" });
+    } else if (this.state.signSize.length < 1) {
+      this.setState({ errMessage: "Please select a Sign Size" });
+    } else if (this.state.quantity < 1) {
+      this.setState({ errMessage: "Quantity must be greater than 0" });
+    } else if (this.state.price.length < 1) {
+      this.setState({ errMessage: "Please enter a price" });
+    } else if (this.state.signTheme.length < 1) {
+      this.setState({ errMessage: "Please select a theme" });
+    } else if (this.state.package.length < 1) {
+      this.setState({ errMessage: "Please select a Package" });
+    } else if (this.state.pkgSize.length < 1) {
+      this.setState({ errMessage: "Please select a Package Size" });
+    } else if (this.state.pkgType.length < 1) {
+      this.setState({ errMessage: "Please select a Package Type" });
+    } else {
+      this.props.onChange(
+        this.state.brand,
+        this.state.signTheme,
+        this.state.signType,
+        this.state.signTypeName,
+        this.state.signSize,
+        this.state.quantity,
+        this.state.price,
+        this.state.package,
+        this.state.pkgSize,
+        this.state.pkgType,
+        this.state.id
+      );
+      this.setState({
+        new: false,
+        editing: false
+      });
+    }
   };
 
   cancel = () => {
@@ -399,6 +422,9 @@ class Item extends Component {
                         ))}
                     </Select>
                   </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography>{this.state.errMessage}</Typography>
                 </Grid>
               </Grid>
             </Grid>

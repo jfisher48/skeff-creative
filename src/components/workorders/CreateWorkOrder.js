@@ -137,6 +137,7 @@ class CreateWorkOrder extends Component {
     isRush: false,
     assignedTo: "unassigned",
     assignedToName: "",
+    assignedToEmail: "skeffgraphics@gmail.com",
     items: [],
     dueDate: setDueDate(this.isRush),
     labelWidth: 0
@@ -153,8 +154,9 @@ class CreateWorkOrder extends Component {
         var assignedTo = results.data();
         console.log(assignedTo);
         var name = assignedTo.firstName + " " + assignedTo.lastName;
+        var email = assignedTo.email;
         console.log(name);
-        this.setState({ assignedToName: name });
+        this.setState({ assignedToName: name, assignedToEmail: email });
         console.log(this.state.assignedToName);
       });
   };
