@@ -424,7 +424,9 @@ class Item extends Component {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography>{this.state.errMessage}</Typography>
+                  <Typography style={{ color: "red" }}>
+                    {this.state.errMessage}
+                  </Typography>
                 </Grid>
               </Grid>
             </Grid>
