@@ -14,7 +14,6 @@ import {
   List,
   ListItem,
   Hidden,
-  IconButton,
   Tabs,
   Tab,
   Fab

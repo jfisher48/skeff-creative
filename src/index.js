@@ -107,11 +107,11 @@ const theme = createMuiTheme({
         whiteSpace: "nowrap",
         backgroundColor: "black",
         color: "white",
-        fontSize: "0.75em"
+        fontSize: "1em"
       },
       body: {
         //whiteSpace: "nowrap",
-        fontSize: "0.65em"
+        fontSize: "1em"
       }
     }
   }

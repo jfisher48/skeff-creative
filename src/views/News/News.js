@@ -27,32 +27,34 @@ class News extends Component {
       tags: []
     };
   }
-  componentDidMount() {
-    let postsURL = jsonPrefix + "posts?_embed";
-    let categoriesURL =
-      jsonPrefix + "categories?per_page=100&filter[orderby]=name&order=asc";
-    let tagsURL = jsonPrefix + "tags?per_page=100&orderby=count&order=desc";
-    fetch(postsURL)
-      .then(response => response.json())
-      .then(response => {
-        this.setState({
-          posts: response
+  componentDidMount(prevState) {
+    if (this.state !== prevState) {
+      let postsURL = jsonPrefix + "posts?_embed";
+      let categoriesURL =
+        jsonPrefix + "categories?per_page=100&filter[orderby]=name&order=asc";
+      let tagsURL = jsonPrefix + "tags?per_page=100&orderby=count&order=desc";
+      fetch(postsURL)
+        .then(response => response.json())
+        .then(response => {
+          this.setState({
+            posts: response
+          });
         });
-      });
-    fetch(categoriesURL)
-      .then(response => response.json())
-      .then(response => {
-        this.setState({
-          categories: response
+      fetch(categoriesURL)
+        .then(response => response.json())
+        .then(response => {
+          this.setState({
+            categories: response
+          });
         });
-      });
-    fetch(tagsURL)
-      .then(response => response.json())
-      .then(response => {
-        this.setState({
-          tags: response
+      fetch(tagsURL)
+        .then(response => response.json())
+        .then(response => {
+          this.setState({
+            tags: response
+          });
         });
-      });
+    }
   }
 
   render() {

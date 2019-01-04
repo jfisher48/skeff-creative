@@ -444,7 +444,7 @@ class Item extends Component {
   }
 
   renderDisplay() {
-    const classes = this.props.classes;
+    //const classes = this.props.classes;
     return (
       <ListItem divider>
         <ListItemText
