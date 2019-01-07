@@ -1,7 +1,8 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { TableBody, TableRow, TableCell, Button } from "@material-ui/core";
+import { TableBody, TableRow, TableCell, IconButton } from "@material-ui/core";
 import styles from "./styleContactList";
+import AddIcon from "@material-ui/icons/Add";
 import { getFirestore, getState } from "redux-firestore";
 import { getFirebase } from "react-redux-firebase";
 
@@ -41,15 +42,25 @@ const ContactList = ({ contacts, auth }) => {
               <TableCell>{contact.cell}</TableCell>
               <TableCell>
                 {!contact.added ? (
-                  <Button
+                  <IconButton
+                    size="small"
+                    color="secondary"
                     onClick={() => {
                       handleAdd(contact, auth);
                     }}
                   >
-                    Add
-                  </Button>
+                    <AddIcon style={{ fontSize: "16px" }} />
+                  </IconButton>
                 ) : (
-                  ""
+                  <IconButton
+                    size="small"
+                    color="secondary"
+                    // onClick={() => {
+                    //   handleAdd(contact, auth);
+                    // }}
+                  >
+                    {/* <AddIcon style={{fontSize: "16px"}} /> */}
+                  </IconButton>
                 )}
               </TableCell>
             </TableRow>

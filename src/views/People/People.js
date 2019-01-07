@@ -62,7 +62,7 @@ class People extends Component {
           }
         />
         <Grid container spacing={16}>
-          <Grid item xs={12} md={9}>
+          <Grid item xs={12} lg={10} xl={9}>
             <Paper className={classes.paper}>
               <Table className={classes.table}>
                 <TableHead>
@@ -84,7 +84,7 @@ class People extends Component {
               </Table>
             </Paper>
           </Grid>
-          <Grid item xs={12} md={3} />
+          <Grid item xs={12} lg={2} xl={3} />
         </Grid>
       </div>
     );

@@ -4,7 +4,10 @@ const styles = theme => ({
     overflowX: "auto"
   },
   table: {
-    width: "100%"
+    width: "100%",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "12px"
+    }
   }
 });
 
