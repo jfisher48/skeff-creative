@@ -9,21 +9,11 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "recompose";
 import ContactList from "../../components/contacts/ContactList/ContactList";
 import styles from "./stylePeople";
-import {
-  Grid,
-  Hidden,
-  Tabs,
-  Tab,
-  Table,
-  TableRow,
-  TableHead,
-  TableCell,
-  Paper
-} from "@material-ui/core";
+import { Grid, Hidden, Tabs, Tab, Paper } from "@material-ui/core";
 
 class People extends Component {
   state = {
-    listView: "all"
+    listView: "mine"
   };
 
   handleChangeView = (e, value) => {
@@ -33,7 +23,13 @@ class People extends Component {
 
   render() {
     const classes = this.props.classes;
-    const { auth, contacts, myContacts } = this.props;
+    const { auth, companyContacts, myContacts } = this.props;
+    if (this.state.listView === "mine") {
+      var contacts = myContacts;
+    } else {
+      var contacts = companyContacts;
+      var user = auth.uid;
+    }
     if (!auth.uid) return <Redirect to="/login" />;
     return (
       <div>
@@ -62,26 +58,44 @@ class People extends Component {
           }
         />
         <Grid container spacing={16}>
-          <Grid item xs={12} lg={10} xl={9}>
+          <Hidden smUp>
+            <Grid item xs={12} style={{ padding: "0 8px" }}>
+              <Tabs
+                value={this.state.listView}
+                onChange={this.handleChangeView}
+                indicatorColor="secondary"
+                textColor="primary"
+                centered
+                className={classes.viewTabs}
+              >
+                <Tab label="All Company" value="all" />
+                <Tab label="My Contacts" value="mine" />
+              </Tabs>
+            </Grid>
+          </Hidden>
+          <Grid item xs={12} lg={8} xl={8}>
             <Paper className={classes.paper}>
-              <Table className={classes.table}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Position</TableCell>
-                    <TableCell>Route</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Ext.</TableCell>
-                    <TableCell>Cell</TableCell>
-                    <TableCell />
-                  </TableRow>
-                </TableHead>
-                {this.state.listView === "mine" ? (
-                  <ContactList contacts={myContacts} />
-                ) : (
-                  <ContactList contacts={contacts} auth={auth.uid} />
-                )}
-              </Table>
+              <div className={classes.table}>
+                <Hidden xsDown className={classes.tableHead}>
+                  <div className={classes.tableRow}>
+                    <div className={classes.nameCell}>Name</div>
+                    <div className={classes.tableCell}>Position</div>
+                    <Hidden smDown>
+                      <div className={classes.tableCell}>Route</div>
+                    </Hidden>
+                    <div className={classes.tableCell}>Email Address</div>
+                    <Hidden smDown>
+                      <div className={classes.tableCell}>Ext.</div>
+                    </Hidden>
+                    <div className={classes.tableCell}>Cell Phone</div>
+                    <div className={classes.tableCell} />
+                  </div>
+                </Hidden>
+                <ContactList
+                  contacts={contacts && contacts}
+                  auth={user && user}
+                />
+              </div>
             </Paper>
           </Grid>
           <Grid item xs={12} lg={2} xl={3} />
@@ -96,7 +110,7 @@ const mapStateToProps = state => {
 
   return {
     auth: state.firebase.auth,
-    contacts: state.firestore.ordered.contacts_company,
+    companyContacts: state.firestore.ordered.contacts_company,
     myContacts: state.firestore.ordered.myContacts
       ? state.firestore.ordered.myContacts
       : []

@@ -14,12 +14,16 @@ const styles = theme => ({
   appBar: {
     boxShadow: "none",
     width: "100%",
-    minHeight: "75px"
+    [theme.breakpoints.up("sm")]: {
+      minHeight: "75px"
+    }
   },
   toolBar: {
     paddingLeft: theme.spacing.unit * 0,
     paddingRight: 0,
-    minHeight: "75px",
+    [theme.breakpoints.up("sm")]: {
+      minHeight: "75px"
+    },
     display: "flex",
     alignItems: "center"
   },
@@ -78,19 +82,7 @@ class PageHeading extends Component {
                 </Typography>
                 {this.props.extraContent}
               </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={3}
-                lg={4}
-                style={{
-                  display: "flex",
-                  alignItems: "stretch",
-                  justifyContent: "flex-end"
-                }}
-              >
-                {this.props.children}
-              </Grid>
+              {this.props.children}
             </Grid>
           </Toolbar>
         </AppBar>

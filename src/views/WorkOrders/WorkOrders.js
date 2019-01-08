@@ -115,17 +115,29 @@ class WorkOrders extends Component {
         >
           {this.props.location.pathname !== "/workorders/create" ? (
             <Hidden xsDown>
-              <Button
-                className={classes.createButton}
-                component={NavLink}
-                to="workorders/create"
-                variant="outlined"
-                size="large"
-                color="secondary"
+              <Grid
+                item
+                xs={12}
+                sm={3}
+                lg={4}
+                style={{
+                  display: "flex",
+                  alignItems: "stretch",
+                  justifyContent: "flex-end"
+                }}
               >
-                <AddIcon className={classes.createIcon} />
-                New Order
-              </Button>
+                <Button
+                  className={classes.createButton}
+                  component={NavLink}
+                  to="workorders/create"
+                  variant="outlined"
+                  size="large"
+                  color="secondary"
+                >
+                  <AddIcon className={classes.createIcon} />
+                  New Order
+                </Button>
+              </Grid>
             </Hidden>
           ) : (
             ""
