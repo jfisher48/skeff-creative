@@ -60,7 +60,7 @@ class ContactList extends Component {
                 <Hidden xsDown>
                   <div className={classes.positionCell}>{contact.position}</div>
                 </Hidden>
-                <Hidden smDown>
+                <Hidden xsDown>
                   <div className={classes.tableCell}>
                     {contact.route ? contact.route : "N/A"}
                   </div>
@@ -72,7 +72,7 @@ class ContactList extends Component {
                     </a>
                   </div>
                 </Hidden>
-                <Hidden smDown>
+                <Hidden xsDown>
                   <div className={classes.tableCell}>
                     {contact.ext ? contact.ext : "N/A"}
                   </div>

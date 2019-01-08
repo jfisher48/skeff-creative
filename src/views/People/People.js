@@ -80,13 +80,13 @@ class People extends Component {
                   <div className={classes.tableRow}>
                     <div className={classes.nameCell}>Name</div>
                     <div className={classes.tableCell}>Position</div>
-                    <Hidden smDown>
-                      <div className={classes.tableCell}>Route</div>
-                    </Hidden>
+
+                    <div className={classes.tableCell}>Route</div>
+
                     <div className={classes.tableCell}>Email Address</div>
-                    <Hidden smDown>
-                      <div className={classes.tableCell}>Ext.</div>
-                    </Hidden>
+
+                    <div className={classes.tableCell}>Ext.</div>
+
                     <div className={classes.tableCell}>Cell Phone</div>
                     <div className={classes.tableCell} />
                   </div>
