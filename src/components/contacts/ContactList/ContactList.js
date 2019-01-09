@@ -6,12 +6,14 @@ import {
   withWidth,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
+  Dialog
 } from "@material-ui/core";
 import styles from "./styleContactList";
 import AddIcon from "@material-ui/icons/Add";
 import { getFirestore, getState } from "redux-firestore";
 import { getFirebase } from "react-redux-firebase";
+import Contact from "../Contact/Contact";
 
 const handleAdd = (contact, user) => {
   const firestore = getFirestore();
@@ -31,81 +33,46 @@ const handleAdd = (contact, user) => {
 class ContactList extends Component {
   render() {
     const classes = this.props.classes;
-    const { width, contacts, auth } = this.props;
+    const { contacts, auth } = this.props;
 
     return (
       <List className={classes.tableBody}>
         {contacts &&
           contacts.sort(compareValues("lastName", "asc")).map(contact => {
             return (
-              <ListItem
-                alignItems="flex-start"
-                button={width !== "xs" ? false : true}
-                key={contact.id}
-                className={classes.tableRow}
-              >
-                {width === "xs" ? (
-                  <ListItemText
-                    primary={contact.firstName + " " + contact.lastName}
-                    secondary={contact.position}
-                  />
-                ) : (
-                  ""
-                )}
-                <Hidden xsDown>
-                  <div className={classes.nameCell}>
-                    {contact.firstName} {contact.lastName}
-                  </div>
-                </Hidden>
-                <Hidden xsDown>
-                  <div className={classes.positionCell}>{contact.position}</div>
-                </Hidden>
-                <Hidden xsDown>
-                  <div className={classes.tableCell}>
-                    {contact.route ? contact.route : "N/A"}
-                  </div>
-                </Hidden>
-                <Hidden xsDown>
-                  <div className={classes.tableCell}>
-                    <a href={"mailto:" + contact.emailAddress}>
-                      {contact.emailAddress}
-                    </a>
-                  </div>
-                </Hidden>
-                <Hidden xsDown>
-                  <div className={classes.tableCell}>
-                    {contact.ext ? contact.ext : "N/A"}
-                  </div>
-                </Hidden>
-                <Hidden xsDown>
-                  <div className={classes.tableCell}>{contact.cell}</div>
-                </Hidden>
-                <Hidden xsDown>
-                  <div className={classes.actionCell}>
-                    {!contact.added ? (
-                      <IconButton
-                        size="small"
-                        color="secondary"
-                        onClick={() => {
-                          handleAdd(contact, auth);
-                        }}
-                      >
-                        <AddIcon className={classes.addIcon} />
-                      </IconButton>
-                    ) : (
-                      <IconButton
-                        size="small"
-                        color="secondary"
-                        // onClick={() => {
-                        //   handleAdd(contact, auth);
-                        // }}
-                      >
-                        {/* <AddIcon style={{fontSize: "16px"}} /> */}
-                      </IconButton>
-                    )}
-                  </div>
-                </Hidden>
-              </ListItem>
+              <Contact
+                id={contact.id}
+                firstName={contact.firstName}
+                lastName={contact.lastName}
+                position={contact.position}
+                route={contact.route}
+                emailAddress={contact.emailAddress}
+                ext={contact.ext}
+                cell={contact.cell}
+                added={
+                  !contact.added ? (
+                    <IconButton
+                      size="small"
+                      color="secondary"
+                      onClick={() => {
+                        handleAdd(contact, auth);
+                      }}
+                    >
+                      <AddIcon className={classes.addIcon} />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      size="small"
+                      color="secondary"
+                      // onClick={() => {
+                      //   handleAdd(contact, auth);
+                      // }}
+                    >
+                      {/* <AddIcon style={{fontSize: "16px"}} /> */}
+                    </IconButton>
+                  )
+                }
+              />
             );
           })}
       </List>
