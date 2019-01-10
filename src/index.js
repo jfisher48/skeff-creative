@@ -23,15 +23,10 @@ const theme = createMuiTheme({
     useNextVariants: true,
     fontFamily:
       "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
-    fontSize: "0.875em",
+    //fontSize: "0.875em",
     fontWeightLight: 300,
     fontWeightRegular: 400,
-    fontWeightMedium: 500,
-    subtitle1: {
-      color: "rgb(85,85,85)",
-      fontSize: "1.4em",
-      fontWeight: "500"
-    }
+    fontWeightMedium: 500
   },
   palette: {
     primary: {

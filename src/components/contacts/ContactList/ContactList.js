@@ -1,23 +1,16 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import {
-  Hidden,
-  IconButton,
-  withWidth,
-  List,
-  ListItem,
-  ListItemText,
-  Dialog
-} from "@material-ui/core";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "recompose";
+import { IconButton, List } from "@material-ui/core";
 import styles from "./styleContactList";
 import AddIcon from "@material-ui/icons/Add";
-import { getFirestore, getState } from "redux-firestore";
-import { getFirebase } from "react-redux-firebase";
+import { getFirestore } from "redux-firestore";
 import Contact from "../Contact/Contact";
 
 const handleAdd = (contact, user) => {
   const firestore = getFirestore();
-  const firebase = getFirebase();
 
   firestore
     .collection("users")
@@ -33,7 +26,12 @@ const handleAdd = (contact, user) => {
 class ContactList extends Component {
   render() {
     const classes = this.props.classes;
-    const { contacts, auth } = this.props;
+    const { contacts, myContacts, auth } = this.props;
+    var myIds = [];
+
+    myContacts.map(id => {
+      return myIds.push(id.id);
+    });
 
     return (
       <List className={classes.tableBody}>
@@ -41,7 +39,7 @@ class ContactList extends Component {
           contacts.sort(compareValues("lastName", "asc")).map(contact => {
             return (
               <Contact
-                id={contact.id}
+                key={contact.id}
                 firstName={contact.firstName}
                 lastName={contact.lastName}
                 position={contact.position}
@@ -50,25 +48,17 @@ class ContactList extends Component {
                 ext={contact.ext}
                 cell={contact.cell}
                 added={
-                  !contact.added ? (
-                    <IconButton
-                      size="small"
-                      color="secondary"
-                      onClick={() => {
-                        handleAdd(contact, auth);
-                      }}
-                    >
-                      <AddIcon className={classes.addIcon} />
-                    </IconButton>
+                  myIds.includes(contact.id) ? (
+                    ""
                   ) : (
                     <IconButton
                       size="small"
                       color="secondary"
-                      // onClick={() => {
-                      //   handleAdd(contact, auth);
-                      // }}
+                      onClick={() => {
+                        handleAdd(contact, auth.uid);
+                      }}
                     >
-                      {/* <AddIcon style={{fontSize: "16px"}} /> */}
+                      <AddIcon className={classes.addIcon} />
                     </IconButton>
                   )
                 }
@@ -99,6 +89,31 @@ function compareValues(key, order = "asc") {
   };
 }
 
-const styledComponent = withStyles(styles)(ContactList);
+const styledContactList = withStyles(styles)(ContactList);
 
-export default withWidth()(styledComponent);
+const mapStateToProps = state => {
+  console.log(state);
+
+  return {
+    auth: state.firebase.auth,
+    myContacts: state.firestore.ordered.myContacts
+      ? state.firestore.ordered.myContacts
+      : []
+  };
+};
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect(props => {
+    if (!props.auth.uid) return [];
+
+    return [
+      {
+        collection: "users",
+        doc: props.auth.uid,
+        subcollections: [{ collection: "myContacts" }],
+        storeAs: "myContacts"
+      }
+    ];
+  })
+)(styledContactList);

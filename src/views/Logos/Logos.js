@@ -114,6 +114,6 @@ const mapStateToProps = state => {
   };
 };
 
-const styledComponent = withStyles(styles)(Logos);
+const styledLogos = withStyles(styles)(Logos);
 
-export default connect(mapStateToProps)(styledComponent);
+export default connect(mapStateToProps)(styledLogos);

@@ -222,7 +222,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const styledComponent = withStyles(styles)(WorkOrderDetail);
+const styledWorkOrderDetail = withStyles(styles)(WorkOrderDetail);
 
 export default compose(
   connect(
@@ -246,4 +246,4 @@ export default compose(
         }
       ];
   })
-)(styledComponent);
+)(styledWorkOrderDetail);

@@ -216,7 +216,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const styledComponent = withStyles(styles)(HeldWorkOrderDetail);
+const styledHeldWorkOrderDetail = withStyles(styles)(HeldWorkOrderDetail);
 
 export default compose(
   connect(
@@ -240,4 +240,4 @@ export default compose(
         }
       ];
   })
-)(styledComponent);
+)(styledHeldWorkOrderDetail);

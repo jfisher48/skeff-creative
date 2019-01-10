@@ -288,7 +288,7 @@ const mapStateToProps = state => {
   };
 };
 
-const styledComponent = withStyles(styles)(WorkOrders);
+const styledWorkOrders = withStyles(styles)(WorkOrders);
 
 export default compose(
   connect(mapStateToProps),
@@ -328,4 +328,4 @@ export default compose(
       ];
   }),
   withRouter
-)(styledComponent);
+)(styledWorkOrders);

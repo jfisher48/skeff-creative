@@ -4,11 +4,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { Paper, SvgIcon, Grid } from "@material-ui/core";
-//import { Hidden } from "@material-ui/core";
-//import SignedInLinks from "./SignedInLinks/SignedInLinks";
-//import SignedOutLinks from "./SignedOutLinks/SignedOutLinks";
-//import { connect } from "react-redux";
-//import { compose } from "recompose";
 
 const styles = theme => ({
   appBar: {
@@ -45,7 +40,9 @@ const styles = theme => ({
     fontSize: "30px"
   },
   headingText: {
-    flexGrow: 1
+    flexGrow: 1,
+    color: "rgb(85,85,85)",
+    fontWeight: "500"
   }
 });
 
@@ -77,7 +74,7 @@ class PageHeading extends Component {
                     <path d={this.props.svgPath} />
                   </SvgIcon>
                 </Paper>
-                <Typography className={classes.headingText} variant="subtitle1">
+                <Typography className={classes.headingText} variant="h6">
                   {this.props.pageTitle}
                 </Typography>
                 {this.props.extraContent}
@@ -91,12 +88,6 @@ class PageHeading extends Component {
   }
 }
 
-const styledComponent = withStyles(styles)(PageHeading);
+const styledPageHeading = withStyles(styles)(PageHeading);
 
-// const mapStateToProps = state => {
-//   return {
-//     auth: state.firebase.auth
-//   };
-// }; connect(mapStateToProps)
-
-export default styledComponent;
+export default styledPageHeading;

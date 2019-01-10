@@ -177,6 +177,6 @@ const mapStateToProps = state => {
   };
 };
 
-const styledComponent = withStyles(styles)(News);
+const styledNews = withStyles(styles)(News);
 
-export default connect(mapStateToProps)(styledComponent);
+export default connect(mapStateToProps)(styledNews);

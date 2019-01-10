@@ -172,6 +172,6 @@ class AccountSelect extends Component<*, State> {
     );
   }
 }
-const styledComponent = withStyles(styles)(AccountSelect);
+const styledAccountSelect = withStyles(styles)(AccountSelect);
 
-export default styledComponent;
+export default styledAccountSelect;

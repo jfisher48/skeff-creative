@@ -95,11 +95,11 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const styledComponent = withStyles(styles)(LogIn);
+const styledLogIn = withStyles(styles)(LogIn);
 
 export default compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
   )
-)(styledComponent);
+)(styledLogIn);

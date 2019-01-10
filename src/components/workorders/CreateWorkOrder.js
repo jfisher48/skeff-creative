@@ -500,7 +500,7 @@ function setDueDate(check) {
   return dueDate;
 }
 
-const styledComponent = withStyles(styles)(CreateWorkOrder);
+const styledCreateWorkOrder = withStyles(styles)(CreateWorkOrder);
 
 export default compose(
   connect(
@@ -514,4 +514,4 @@ export default compose(
       { collection: "users", where: ["role", "==", "graphics"] }
     ];
   })
-)(styledComponent);
+)(styledCreateWorkOrder);

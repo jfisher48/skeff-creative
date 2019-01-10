@@ -99,7 +99,7 @@ class SignUp extends Component {
   }
 }
 
-const styledComponent = withStyles(styles)(SignUp);
+const styledSignUp = withStyles(styles)(SignUp);
 
 const mapStateToProps = state => {
   return {
@@ -117,4 +117,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(styledComponent);
+)(styledSignUp);

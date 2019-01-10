@@ -474,7 +474,7 @@ class Item extends Component {
   }
 }
 
-const styledComponent = withStyles(styles)(Item);
+const styledItem = withStyles(styles)(Item);
 
 const mapStateToProps = state => {
   // console.log(state);
@@ -498,4 +498,4 @@ export default compose(
     { collection: "signThemes", orderBy: ["seq", "asc"] },
     { collection: "signTypes", orderBy: ["seq", "asc"] }
   ])
-)(styledComponent);
+)(styledItem);

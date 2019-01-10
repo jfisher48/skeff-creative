@@ -77,6 +77,6 @@ class WorkOrderTotalWidget extends Component {
   }
 }
 
-const styledComponent = withStyles(styles)(WorkOrderTotalWidget);
+const styledWorkOrderTotalWidget = withStyles(styles)(WorkOrderTotalWidget);
 
-export default styledComponent;
+export default styledWorkOrderTotalWidget;

@@ -18,6 +18,6 @@ class LandingPage extends Component {
   }
 }
 
-const styledComponent = withStyles(styles)(LandingPage);
+const styledLandingPage = withStyles(styles)(LandingPage);
 
-export default styledComponent;
+export default styledLandingPage;

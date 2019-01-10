@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "recompose";
 import styles from "./styleContact";
 import {
   Dialog,
   Hidden,
-  IconButton,
   withWidth,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
+  DialogTitle,
+  Typography,
+  DialogActions
 } from "@material-ui/core";
 
 class Contact extends Component {
@@ -32,60 +31,76 @@ class Contact extends Component {
     const { width } = this.props;
 
     return (
-      <ListItem
-        alignItems="flex-start"
-        button={width !== "xs" ? false : true}
-        onClick={this.handleClickOpen}
-        key={this.props.id}
-        className={classes.tableRow}
-      >
-        {width === "xs" ? (
-          <ListItemText
-            primary={this.props.firstName + " " + this.props.lastName}
-            secondary={this.props.position}
-          />
-        ) : (
-          ""
-        )}
-        <Hidden xsDown>
-          <div className={classes.nameCell}>
-            {this.props.firstName} {this.props.lastName}
-          </div>
-        </Hidden>
-        <Hidden xsDown>
-          <div className={classes.positionCell}>{this.props.position}</div>
-        </Hidden>
-        <Hidden xsDown>
-          <div className={classes.tableCell}>
-            {this.props.route ? this.props.route : "N/A"}
-          </div>
-        </Hidden>
-        <Hidden xsDown>
-          <div className={classes.tableCell}>
-            <a href={"mailto:" + this.props.emailAddress}>
-              {this.props.emailAddress}
-            </a>
-          </div>
-        </Hidden>
-        <Hidden xsDown>
-          <div className={classes.tableCell}>
-            {this.props.ext ? this.props.ext : "N/A"}
-          </div>
-        </Hidden>
-        <Hidden xsDown>
-          <div className={classes.tableCell}>{this.props.cell}</div>
-        </Hidden>
-        <Hidden xsDown>
-          <div className={classes.actionCell}>{this.props.added}</div>
-        </Hidden>
-        <Dialog open={this.state.open} onClose={this.handleClose}>
-          {this.props.firstName}
+      <React.Fragment>
+        <ListItem
+          alignItems="flex-start"
+          button={width !== "xs" ? false : true}
+          onClick={this.handleClickOpen}
+          key={this.props.id}
+          className={classes.tableRow}
+        >
+          {width === "xs" ? (
+            <ListItemText
+              primary={this.props.firstName + " " + this.props.lastName}
+              secondary={this.props.position}
+            />
+          ) : (
+            ""
+          )}
+          <Hidden xsDown>
+            <div className={classes.nameCell}>
+              {this.props.firstName} {this.props.lastName}
+            </div>
+          </Hidden>
+          <Hidden xsDown>
+            <div className={classes.positionCell}>{this.props.position}</div>
+          </Hidden>
+          <Hidden xsDown>
+            <div className={classes.tableCell}>
+              {this.props.route ? this.props.route : "N/A"}
+            </div>
+          </Hidden>
+          <Hidden xsDown>
+            <div className={classes.tableCell}>
+              <a href={"mailto:" + this.props.emailAddress}>
+                {this.props.emailAddress}
+              </a>
+            </div>
+          </Hidden>
+          <Hidden xsDown>
+            <div className={classes.tableCell}>
+              {this.props.ext ? this.props.ext : "N/A"}
+            </div>
+          </Hidden>
+          <Hidden xsDown>
+            <div className={classes.tableCell}>{this.props.cell}</div>
+          </Hidden>
+          <Hidden xsDown>
+            <div className={classes.actionCell}>{this.props.added}</div>
+          </Hidden>
+        </ListItem>
+        <Dialog fullWidth open={this.state.open} onClose={this.handleClose}>
+          <DialogTitle disableTypography>
+            <Typography variant="h6">
+              {this.props.firstName} {this.props.lastName}
+            </Typography>
+            <Typography variant="subtitle1">
+              {this.props.position === "Account Manager"
+                ? this.props.position + " Route #" + this.props.route
+                : this.props.position}
+            </Typography>
+          </DialogTitle>
+          <List>
+            <ListItem divider>{this.props.cell}</ListItem>
+            <ListItem divider>{this.props.emailAddress}</ListItem>
+          </List>
+          <DialogActions>{this.props.added}</DialogActions>
         </Dialog>
-      </ListItem>
+      </React.Fragment>
     );
   }
 }
 
-const styledComponent = withStyles(styles)(Contact);
+const styledContact = withStyles(styles)(Contact);
 
-export default withWidth()(styledComponent);
+export default withWidth()(styledContact);

@@ -27,7 +27,7 @@ class People extends Component {
     if (this.state.listView === "mine") {
       var contacts = myContacts;
     } else {
-      var contacts = companyContacts;
+      contacts = companyContacts;
       var user = auth.uid;
     }
     if (!auth.uid) return <Redirect to="/login" />;
@@ -106,8 +106,6 @@ class People extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
-
   return {
     auth: state.firebase.auth,
     companyContacts: state.firestore.ordered.contacts_company,
@@ -117,7 +115,7 @@ const mapStateToProps = state => {
   };
 };
 
-const styledComponent = withStyles(styles)(People);
+const styledPeople = withStyles(styles)(People);
 
 export default compose(
   connect(mapStateToProps),
@@ -137,4 +135,4 @@ export default compose(
     ];
   }),
   withRouter
-)(styledComponent);
+)(styledPeople);

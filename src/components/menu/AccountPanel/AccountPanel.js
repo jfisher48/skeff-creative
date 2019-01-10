@@ -55,7 +55,7 @@ class AccountPanel extends Component {
   }
 }
 
-const styledComponent = withStyles(styles)(AccountPanel);
+const styledAccountPanel = withStyles(styles)(AccountPanel);
 
 const mapStateToProps = state => {
   return {
@@ -72,4 +72,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(styledComponent);
+)(styledAccountPanel);
