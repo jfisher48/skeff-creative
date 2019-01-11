@@ -23,7 +23,8 @@ const styles = theme => ({
     display: "inline-flex",
     padding: "0 16px",
     lineHeight: "32px",
-    fontWeight: "500"
+    fontWeight: "500",
+    fontSize: "1rem"
   },
   expand: {
     color: "#fff"

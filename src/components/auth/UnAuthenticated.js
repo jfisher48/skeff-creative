@@ -12,6 +12,7 @@ import People from "../../views/People/People";
 import Reminders from "../../views/Reminders/Reminders";
 import Suppliers from "../../views/Suppliers/Suppliers";
 import WorkOrders from "../../views/WorkOrders/WorkOrders.js";
+import Admin from "../../views/Admin/Admin.js";
 import LogIn from "./LogIn/LogIn";
 import SignUp from "./SignUp/SignUp";
 
@@ -30,6 +31,7 @@ const UnAuthenticated = () => {
       <Route path="/workorders" component={WorkOrders} />
       <Route path="/login" component={LogIn} />
       <Route path="/signup" component={SignUp} />
+      <Route path="/admin" component={Admin} />
     </LandingPage>
   );
 };

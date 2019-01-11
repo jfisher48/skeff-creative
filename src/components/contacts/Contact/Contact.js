@@ -91,8 +91,14 @@ class Contact extends Component {
             </Typography>
           </DialogTitle>
           <List>
-            <ListItem divider>{this.props.cell}</ListItem>
-            <ListItem divider>{this.props.emailAddress}</ListItem>
+            <ListItem divider>
+              <a href={"tel:+1-217-" + this.props.cell}>{this.props.cell}</a>
+            </ListItem>
+            <ListItem divider>
+              <a href={"mailto:" + this.props.emailAddress}>
+                {this.props.emailAddress}
+              </a>
+            </ListItem>
           </List>
           <DialogActions>{this.props.added}</DialogActions>
         </Dialog>
