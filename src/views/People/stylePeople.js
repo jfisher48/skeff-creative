@@ -7,6 +7,9 @@ const styles = theme => ({
     width: "100%",
     borderCollapse: "collapse"
   },
+  formSelect: {
+    width: "100%"
+  },
   tableHead: {
     display: "table-header-group"
   },

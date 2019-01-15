@@ -23,7 +23,8 @@ class CreateContact extends Component {
     position: "",
     department: "",
     cell: "",
-    emailAddress: ""
+    emailAddress: "",
+    seq: 5
   };
 
   handleChange = e => {
@@ -119,7 +120,19 @@ class CreateContact extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
-                <Grid item xs="12" md="4">
+                <Grid item xs="12" md="3">
+                  <TextField
+                    value={this.state.seq}
+                    variant="outlined"
+                    name="seq"
+                    label="Priority"
+                    className={classes.textField}
+                    margin="normal"
+                    onChange={this.handleChange}
+                    type="number"
+                  />
+                </Grid>
+                <Grid item xs="12" md="3">
                   <TextField
                     value={this.state.route}
                     variant="outlined"
@@ -130,7 +143,7 @@ class CreateContact extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
-                <Grid item xs="12" md="4">
+                <Grid item xs="12" md="3">
                   <TextField
                     value={this.state.team}
                     variant="outlined"
@@ -141,7 +154,7 @@ class CreateContact extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
-                <Grid item xs="12" md="4">
+                <Grid item xs="12" md="3">
                   <TextField
                     value={this.state.ext}
                     variant="outlined"

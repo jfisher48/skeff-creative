@@ -8,12 +8,26 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "recompose";
 import ContactList from "../../components/contacts/ContactList/ContactList";
+import MyContactList from "../../components/contacts/ContactList/MyContactList";
 import styles from "./stylePeople";
-import { Grid, Hidden, Tabs, Tab, Paper } from "@material-ui/core";
+import {
+  Grid,
+  Hidden,
+  Tabs,
+  Tab,
+  Paper,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  OutlinedInput
+} from "@material-ui/core";
+import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounded";
 
 class People extends Component {
   state = {
-    listView: "mine"
+    listView: "mine",
+    filteredBy: ""
   };
 
   handleChangeView = (e, value) => {
@@ -21,16 +35,29 @@ class People extends Component {
     this.setState({ listView: value });
   };
 
+  handleChangeFilter = e => {
+    e.preventDefault();
+    this.setState({ filteredBy: e.target.value });
+  };
+
   render() {
+    console.log(this.state);
     const classes = this.props.classes;
-    const { auth, companyContacts, myContacts } = this.props;
-    if (this.state.listView === "mine") {
-      var contacts = myContacts;
-    } else {
-      contacts = companyContacts;
-      var user = auth.uid;
-    }
+    const { auth } = this.props;
+
     if (!auth.uid) return <Redirect to="/login" />;
+
+    const filters = [
+      { name: "None", value: "" },
+      { name: "Management", value: "Management" },
+      { name: "Administration", value: "Administration" },
+      { name: "Sales", value: "Sales" },
+      { name: "Creative Services", value: "Creative Services" },
+      { name: "Team VanMeenen", value: "100" },
+      { name: "Team Harigodt", value: "200" },
+      { name: "Team Baszis", value: "700" }
+    ];
+
     return (
       <div>
         <Helmet>
@@ -91,14 +118,38 @@ class People extends Component {
                     <div className={classes.tableCell} />
                   </div>
                 </Hidden>
-                <ContactList
-                  contacts={contacts && contacts}
-                  auth={user && user}
-                />
+                {this.state.listView === "mine" ? (
+                  <MyContactList filteredBy={this.state.filteredBy} />
+                ) : (
+                  <ContactList filteredBy={this.state.filteredBy} />
+                )}
               </div>
             </Paper>
           </Grid>
-          <Grid item xs={12} lg={2} xl={3} />
+          <Grid item xs={12} lg={4}>
+            <FormControl variant="filled" className={classes.formSelect}>
+              <InputLabel htmlFor="filteredBy">Filter By</InputLabel>
+              <Select
+                value={this.state.filteredBy}
+                onChange={this.handleChangeFilter}
+                IconComponent={KeyboardArrowDownRounded}
+                input={
+                  <OutlinedInput
+                    className={classes.input}
+                    labelWidth={this.state.labelWidth}
+                    name="filteredBy"
+                  />
+                }
+              >
+                {filters &&
+                  filters.map(filter => (
+                    <MenuItem key={filter.name} value={filter.value}>
+                      {filter.name}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+          </Grid>
         </Grid>
       </div>
     );
@@ -107,11 +158,7 @@ class People extends Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.firebase.auth,
-    companyContacts: state.firestore.ordered.contacts_company,
-    myContacts: state.firestore.ordered.myContacts
-      ? state.firestore.ordered.myContacts
-      : []
+    auth: state.firebase.auth
   };
 };
 
@@ -119,20 +166,5 @@ const styledPeople = withStyles(styles)(People);
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect(props => {
-    if (!props.auth.uid) return [];
-
-    return [
-      {
-        collection: "contacts_company"
-      },
-      {
-        collection: "users",
-        doc: props.auth.uid,
-        subcollections: [{ collection: "myContacts" }],
-        storeAs: "myContacts"
-      }
-    ];
-  }),
   withRouter
 )(styledPeople);

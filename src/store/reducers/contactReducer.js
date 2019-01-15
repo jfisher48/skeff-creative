@@ -5,7 +5,13 @@ const contactReducer = (state = initState, action) => {
     case "CREATE_CONTACT":
       console.log("created contact", action.contact);
       return state;
-    case "CREATE_WORKORDER_ERROR":
+    case "CREATE_CONTACT_ERROR":
+      console.log("create contact error", action.err);
+      return state;
+    case "ADD_CONTACT":
+      console.log("created contact", action.contact);
+      return state;
+    case "ADD_CONTACT_ERROR":
       console.log("create contact error", action.err);
       return state;
     default:
