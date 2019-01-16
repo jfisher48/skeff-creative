@@ -5,7 +5,7 @@ import PageHeading from "../../components/PageHeading.js";
 import Helmet from "react-helmet";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
+//import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "recompose";
 import ContactList from "../../components/contacts/ContactList/ContactList";
 import MyContactList from "../../components/contacts/ContactList/MyContactList";
@@ -27,7 +27,8 @@ import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounde
 class People extends Component {
   state = {
     listView: "mine",
-    filteredBy: ""
+    filteredBy: "",
+    labelWidth: 0
   };
 
   handleChangeView = (e, value) => {
@@ -112,9 +113,8 @@ class People extends Component {
 
                     <div className={classes.tableCell}>Email Address</div>
 
-                    <div className={classes.tableCell}>Ext.</div>
-
                     <div className={classes.tableCell}>Cell Phone</div>
+                    <div className={classes.tableCell}>Ext.</div>
                     <div className={classes.tableCell} />
                   </div>
                 </Hidden>

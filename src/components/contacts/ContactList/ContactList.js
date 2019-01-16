@@ -6,23 +6,9 @@ import { compose } from "recompose";
 import { addContact } from "../../../store/actions/contactActions";
 import { IconButton, List } from "@material-ui/core";
 import styles from "./styleContactList";
-import AddIcon from "@material-ui/icons/Add";
-import { getFirestore } from "redux-firestore";
+import CheckIcon from "@material-ui/icons/CheckCircle";
+import AddIcon from "@material-ui/icons/AddCircle";
 import Contact from "../Contact/Contact";
-
-// const handleAdd = (contact, user) => {
-//   const firestore = getFirestore();
-
-//   firestore
-//     .collection("users")
-//     .doc(user)
-//     .collection("myContacts")
-//     .doc(contact.id)
-//     .set({
-//       ...contact,
-//       added: true
-//     });
-// };
 
 class ContactList extends Component {
   render() {
@@ -64,13 +50,15 @@ class ContactList extends Component {
                 cell={contact.cell}
                 added={
                   myIds.includes(contact.id) ? (
-                    ""
+                    <div className={classes.checkWrapper}>
+                      <CheckIcon className={classes.checkIcon} />
+                    </div>
                   ) : (
                     <IconButton
+                      className={classes.iconButton}
                       size="small"
                       color="secondary"
                       onClick={() => {
-                        //handleAdd(contact, auth.uid);
                         this.props.addContact(contact, auth.uid);
                       }}
                     >

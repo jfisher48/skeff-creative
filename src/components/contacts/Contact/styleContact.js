@@ -43,7 +43,18 @@ const styles = theme => ({
       padding: "0px 4px 15px 20px"
     }
   },
-  actionCell: {},
+  actionCell: {
+    display: "block",
+    padding: "0px 4px",
+    textAlign: "center",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "12px"
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "14px",
+      padding: "0px 4px 15px 20px"
+    }
+  },
   addIcon: {
     fontSize: "16px",
     [theme.breakpoints.down("lg")]: {

@@ -14,7 +14,6 @@ import { createContact } from "../../../store/actions/contactActions";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { getFirestore } from "redux-firestore";
 
 class CreateContact extends Component {
   state = {
@@ -22,6 +21,9 @@ class CreateContact extends Component {
     lastName: "",
     position: "",
     department: "",
+    route: "",
+    team: "",
+    ext: "",
     cell: "",
     emailAddress: "",
     seq: 5

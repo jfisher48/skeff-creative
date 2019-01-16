@@ -3,25 +3,11 @@ import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "recompose";
+import { deleteMyContact } from "../../../store/actions/contactActions";
 import { IconButton, List } from "@material-ui/core";
 import styles from "./styleContactList";
-import AddIcon from "@material-ui/icons/Add";
-import { getFirestore } from "redux-firestore";
+import DeleteIcon from "@material-ui/icons/RemoveCircle";
 import Contact from "../Contact/Contact";
-
-// const handleAdd = (contact, user) => {
-//   const firestore = getFirestore();
-
-//   firestore
-//     .collection("users")
-//     .doc(user)
-//     .collection("myContacts")
-//     .doc(contact.id)
-//     .set({
-//       ...contact,
-//       added: true
-//     });
-// };
 
 class MyContactList extends Component {
   render() {
@@ -56,21 +42,18 @@ class MyContactList extends Component {
                 emailAddress={contact.emailAddress}
                 ext={contact.ext}
                 cell={contact.cell}
-                // added={
-                //   myIds.includes(contact.id) ? (
-                //     ""
-                //   ) : (
-                //     <IconButton
-                //       size="small"
-                //       color="secondary"
-                //       onClick={() => {
-                //         handleAdd(contact, auth.uid);
-                //       }}
-                //     >
-                //       <AddIcon className={classes.addIcon} />
-                //     </IconButton>
-                //   )
-                // }
+                added={
+                  <IconButton
+                    className={classes.iconButton}
+                    size="small"
+                    color="secondary"
+                    onClick={() => {
+                      this.props.deleteMyContact(contact, auth.uid);
+                    }}
+                  >
+                    <DeleteIcon className={classes.deleteIcon} />
+                  </IconButton>
+                }
               />
             );
           })}
@@ -111,8 +94,17 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteMyContact: (contact, user) => dispatch(deleteMyContact(contact, user))
+  };
+};
+
 export default compose(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   firestoreConnect(props => {
     if (!props.auth.uid) return [];
 

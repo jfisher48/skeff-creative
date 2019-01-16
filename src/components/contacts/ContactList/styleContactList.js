@@ -43,9 +43,27 @@ const styles = theme => ({
       padding: "0px 4px 15px 20px"
     }
   },
-  actionCell: {},
+  checkWrapper: {
+    position: "relative",
+    top: "6px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  checkIcon: {
+    color: "green",
+    alignSelf: "center"
+  },
+  iconButton: {
+    padding: "10px"
+  },
   addIcon: {
-    fontSize: "16px",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "14px"
+    }
+  },
+  deleteIcon: {
+    color: "red",
     [theme.breakpoints.down("lg")]: {
       fontSize: "14px"
     }

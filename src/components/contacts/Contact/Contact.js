@@ -3,7 +3,6 @@ import { withStyles } from "@material-ui/core/styles";
 import styles from "./styleContact";
 import {
   Dialog,
-  Hidden,
   withWidth,
   List,
   ListItem,
@@ -43,7 +42,11 @@ class Contact extends Component {
             >
               <ListItemText
                 primary={this.props.firstName + " " + this.props.lastName}
-                secondary={this.props.position}
+                secondary={
+                  this.props.route && this.props.route.length > 0
+                    ? this.props.position + " Route #" + this.props.route
+                    : this.props.position
+                }
               />
             </ListItem>
             <Dialog fullWidth open={this.state.open} onClose={this.handleClose}>
@@ -52,7 +55,7 @@ class Contact extends Component {
                   {this.props.firstName} {this.props.lastName}
                 </Typography>
                 <Typography variant="subtitle1">
-                  {this.props.position === "Account Manager"
+                  {this.props.route && this.props.route.length > 0
                     ? this.props.position + " Route #" + this.props.route
                     : this.props.position}
                 </Typography>
@@ -79,39 +82,23 @@ class Contact extends Component {
               key={this.props.id}
               className={classes.tableRow}
             >
-              <Hidden xsDown>
-                <div className={classes.nameCell}>
-                  {this.props.firstName} {this.props.lastName}
-                </div>
-              </Hidden>
-              <Hidden xsDown>
-                <div className={classes.positionCell}>
-                  {this.props.position}
-                </div>
-              </Hidden>
-              <Hidden xsDown>
-                <div className={classes.tableCell}>
-                  {this.props.route ? this.props.route : "N/A"}
-                </div>
-              </Hidden>
-              <Hidden xsDown>
-                <div className={classes.tableCell}>
-                  <a href={"mailto:" + this.props.emailAddress}>
-                    {this.props.emailAddress}
-                  </a>
-                </div>
-              </Hidden>
-              <Hidden xsDown>
-                <div className={classes.tableCell}>
-                  {this.props.ext ? this.props.ext : "N/A"}
-                </div>
-              </Hidden>
-              <Hidden xsDown>
-                <div className={classes.tableCell}>{this.props.cell}</div>
-              </Hidden>
-              <Hidden xsDown>
-                <div className={classes.actionCell}>{this.props.added}</div>
-              </Hidden>
+              <div className={classes.nameCell}>
+                {this.props.firstName} {this.props.lastName}
+              </div>
+              <div className={classes.positionCell}>{this.props.position}</div>
+              <div className={classes.tableCell}>
+                {this.props.route ? this.props.route : ""}
+              </div>
+              <div className={classes.tableCell}>
+                <a href={"mailto:" + this.props.emailAddress}>
+                  {this.props.emailAddress}
+                </a>
+              </div>
+              <div className={classes.tableCell}>{this.props.cell}</div>
+              <div className={classes.tableCell}>
+                {this.props.ext ? this.props.ext : ""}
+              </div>
+              <div className={classes.actionCell}>{this.props.added}</div>
             </ListItem>
           </React.Fragment>
         )}

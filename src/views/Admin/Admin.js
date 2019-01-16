@@ -4,7 +4,11 @@ import styles from "./styleAdmin";
 import PageHeading from "../../components/PageHeading.js";
 import Helmet from "react-helmet";
 import { Redirect } from "react-router-dom";
-import { Switch, NavLink, Route } from "react-router-dom";
+import {
+  //Switch,
+  //NavLink,
+  Route
+} from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 import { Grid } from "@material-ui/core";
@@ -14,7 +18,7 @@ import { withRouter } from "react-router-dom";
 class Admin extends Component {
   state = {};
   render() {
-    const classes = this.props.classes;
+    //const classes = this.props.classes;
     const { auth } = this.props;
     if (!auth.uid) return <Redirect to="/login" />;
     return (
