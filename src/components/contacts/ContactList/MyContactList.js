@@ -27,11 +27,12 @@ class MyContactList extends Component {
 
     var sortedByLast = filteredContacts.sort(compareValues("lastName", "asc"));
     var sortedBySeq = sortedByLast.sort(compareValues("seq", "asc"));
+    var sortedByDept = sortedBySeq.sort(compareValues("deptSeq", "asc"));
 
     return (
       <List className={classes.tableBody}>
-        {sortedBySeq &&
-          sortedBySeq.map(contact => {
+        {sortedByDept &&
+          sortedByDept.map(contact => {
             return (
               <Contact
                 key={contact.id}

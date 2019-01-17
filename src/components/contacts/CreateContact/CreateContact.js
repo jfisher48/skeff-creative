@@ -8,9 +8,16 @@ import {
   Typography,
   CardContent,
   TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  OutlinedInput,
   Button
 } from "@material-ui/core";
 import { createContact } from "../../../store/actions/contactActions";
+import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounded";
+import { getFirestore } from "redux-firestore";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -36,6 +43,28 @@ class CreateContact extends Component {
     console.log(this.state);
   };
 
+  setDeptSeq = checkDepartment => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection("departments")
+      .doc(checkDepartment.toLowerCase())
+      .get()
+      .then(results => {
+        var dept = results.data();
+        var seq = dept.seq;
+        this.setState({
+          deptSeq: seq
+        });
+      });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.department !== prevState.department) {
+      this.setDeptSeq(this.state.department);
+    }
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.createContact(this.state);
@@ -59,6 +88,8 @@ class CreateContact extends Component {
       department.length > 0 &&
       cell.length > 0 &&
       emailAddress.length > 0;
+
+    const { departments } = this.props;
     return (
       <Grid item xs={12}>
         <Card className={classes.formCard}>
@@ -74,7 +105,7 @@ class CreateContact extends Component {
           <CardContent className={classes.formContent}>
             <form className={classes.container} onSubmit={this.handleSubmit}>
               <Grid container spacing={16}>
-                <Grid item xs="12" md="6">
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     value={this.state.firstName}
@@ -86,7 +117,7 @@ class CreateContact extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
-                <Grid item xs="12" md="6">
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     value={this.state.lastName}
@@ -98,7 +129,7 @@ class CreateContact extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
-                <Grid item xs="12" md="6">
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     value={this.state.position}
@@ -110,19 +141,40 @@ class CreateContact extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
-                <Grid item xs="12" md="6">
-                  <TextField
-                    required
-                    value={this.state.department}
-                    variant="outlined"
-                    name="department"
-                    label="Department"
-                    className={classes.textField}
-                    margin="normal"
-                    onChange={this.handleChange}
-                  />
+                <Grid item xs={12} md={6}>
+                  <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel
+                      FormLabelClasses={classes.mylabel}
+                      required
+                      htmlFor="department"
+                    >
+                      Department
+                    </InputLabel>
+                    <Select
+                      value={this.state.department}
+                      onChange={this.handleChange}
+                      IconComponent={KeyboardArrowDownRounded}
+                      input={
+                        <OutlinedInput
+                          labelWidth={0}
+                          className={classes.outlinedInput}
+                          name="department"
+                        />
+                      }
+                    >
+                      {departments &&
+                        departments.map(department => (
+                          <MenuItem
+                            key={department.seq}
+                            value={department.name}
+                          >
+                            {department.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
-                <Grid item xs="12" md="3">
+                <Grid item xs={12} md={3}>
                   <TextField
                     value={this.state.seq}
                     variant="outlined"
@@ -134,7 +186,7 @@ class CreateContact extends Component {
                     type="number"
                   />
                 </Grid>
-                <Grid item xs="12" md="3">
+                <Grid item xs={12} md={3}>
                   <TextField
                     value={this.state.route}
                     variant="outlined"
@@ -145,7 +197,7 @@ class CreateContact extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
-                <Grid item xs="12" md="3">
+                <Grid item xs={12} md={3}>
                   <TextField
                     value={this.state.team}
                     variant="outlined"
@@ -156,7 +208,7 @@ class CreateContact extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
-                <Grid item xs="12" md="3">
+                <Grid item xs={12} md={3}>
                   <TextField
                     value={this.state.ext}
                     variant="outlined"
@@ -167,7 +219,7 @@ class CreateContact extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
-                <Grid item xs="12" md="4">
+                <Grid item xs={12} md={4}>
                   <TextField
                     required
                     value={this.state.cell}
@@ -179,7 +231,7 @@ class CreateContact extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
-                <Grid item xs="12" md="8">
+                <Grid item xs={12} md={8}>
                   <TextField
                     required
                     value={this.state.emailAddress}
@@ -226,7 +278,8 @@ const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
     users: state.firestore.ordered.users,
-    accounts: state.firestore.ordered.accounts
+    accounts: state.firestore.ordered.accounts,
+    departments: state.firestore.ordered.departments
   };
 };
 
@@ -245,7 +298,8 @@ export default compose(
     if (!props.auth.uid) return [];
     return [
       { collection: "accounts", where: [["userId", "==", props.auth.uid]] },
-      { collection: "users", where: ["role", "==", "graphics"] }
+      { collection: "users", where: ["role", "==", "graphics"] },
+      { collection: "departments" }
     ];
   })
 )(styledCreateContact);

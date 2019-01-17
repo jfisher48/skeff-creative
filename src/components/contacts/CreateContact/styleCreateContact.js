@@ -22,7 +22,11 @@ const styles = theme => ({
   },
   textField: {
     width: "100%",
-    justifyContent: "stretch"
+    justifyContent: "stretch",
+    margin: "0"
+  },
+  formSelect: {
+    width: "100%"
   },
   createButton: {
     boxShadow: "none",

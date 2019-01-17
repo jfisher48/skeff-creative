@@ -28,6 +28,7 @@ export const addContact = (contact, user) => {
       .set({
         cell: contact.cell ? contact.cell : "",
         department: contact.department,
+        deptSeq: contact.deptSeq,
         emailAddress: contact.emailAddress,
         ext: contact.ext ? contact.ext : "",
         firstName: contact.firstName,
