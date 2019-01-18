@@ -60,7 +60,10 @@ class CompletedWorkOrderDetail extends Component {
                 </Typography>
                 <Grid container spacing={8} style={{ paddingBottom: "20px" }}>
                   <Grid item xs={12}>
-                    <Typography className={classes.orderLabel} variant="h4">
+                    <Typography
+                      className={classes.orderLabel}
+                      variant="subtitle1"
+                    >
                       WO TYPE:{" "}
                       <span className={classes.orderInfo}>
                         {workorder.orderType}
@@ -68,7 +71,10 @@ class CompletedWorkOrderDetail extends Component {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography className={classes.orderLabel} variant="h4">
+                    <Typography
+                      className={classes.orderLabel}
+                      variant="subtitle1"
+                    >
                       CREATED BY:{" "}
                       <span className={classes.orderInfo}>
                         {workorder.requesterFirstName}{" "}
@@ -77,7 +83,10 @@ class CompletedWorkOrderDetail extends Component {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography className={classes.orderLabel} variant="h4">
+                    <Typography
+                      className={classes.orderLabel}
+                      variant="subtitle1"
+                    >
                       CREATED ON:{" "}
                       <span className={classes.orderInfo}>
                         <Moment format="M.DD.YY [at] h:mm A">
@@ -87,7 +96,10 @@ class CompletedWorkOrderDetail extends Component {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography className={classes.orderLabel} variant="h4">
+                    <Typography
+                      className={classes.orderLabel}
+                      variant="subtitle1"
+                    >
                       ASSIGNED TO:{" "}
                       <span className={classes.orderInfo}>
                         {workorder.assignedToName}
@@ -95,7 +107,10 @@ class CompletedWorkOrderDetail extends Component {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography className={classes.orderLabel} variant="h4">
+                    <Typography
+                      className={classes.orderLabel}
+                      variant="subtitle1"
+                    >
                       DUE ON:{" "}
                       <span className={classes.orderInfo}>
                         <Moment format="M.DD.YY [at] h:mm A">
@@ -105,13 +120,19 @@ class CompletedWorkOrderDetail extends Component {
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography className={classes.orderLabel} variant="h4">
+                    <Typography
+                      className={classes.orderLabel}
+                      variant="subtitle1"
+                    >
                       STATUS:{" "}
                       <span className={classes.orderInfo}>Completed</span>
                     </Typography>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <Typography className={classes.orderLabel} variant="h4">
+                    <Typography
+                      className={classes.orderLabel}
+                      variant="subtitle1"
+                    >
                       COMPLETED ON:{" "}
                       <span className={classes.orderInfo}>
                         <Moment format="M.DD.YY [at] h:mm A">

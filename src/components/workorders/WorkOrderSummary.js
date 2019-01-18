@@ -161,22 +161,22 @@ class WorkOrderSummary extends Component {
               dueDate={this.props.dueDate}
             />
             <CardContent className={classes.orderContainer}>
-              <Typography variant="h3" className={classes.orderTitle}>
+              <Typography variant="h6" className={classes.orderTitle}>
                 {this.props.account}
               </Typography>
-              <Typography className={classes.orderLabel} variant="h4">
+              <Typography className={classes.orderLabel} variant="subtitle1">
                 WO TYPE:{" "}
                 <span className={classes.orderInfo}>
                   {this.props.orderType}
                 </span>
               </Typography>
-              <Typography className={classes.orderLabel} variant="h4">
+              <Typography className={classes.orderLabel} variant="subtitle1">
                 CREATED BY:{" "}
                 <span className={classes.orderInfo}>
                   {this.props.requester}
                 </span>
               </Typography>
-              <Typography className={classes.orderLabel} variant="h4">
+              <Typography className={classes.orderLabel} variant="subtitle1">
                 CREATED ON:{" "}
                 <span className={classes.orderInfo}>
                   <Moment format="M.DD.YY [at] h:mm A">
@@ -184,7 +184,7 @@ class WorkOrderSummary extends Component {
                   </Moment>
                 </span>
               </Typography>
-              <Typography className={classes.orderLabel} variant="h4">
+              <Typography className={classes.orderLabel} variant="subtitle1">
                 ASSIGNED TO:{" "}
                 <span className={classes.orderInfo}>
                   {this.props.assignedToName}
@@ -212,7 +212,7 @@ class WorkOrderSummary extends Component {
                     title={
                       "This order contains " +
                       this.props.items.length +
-                      " items"
+                      " item(s)"
                     }
                   >
                     <span style={{ marginRight: "25px" }}>
