@@ -34,6 +34,7 @@ import Moment from "react-moment";
 import WorkOrderTotalWidget from "../../components/workorders/WorkOrderTotalWidget/WorkOrderTotalWidget.js";
 import WorkOrderList from "../../components/workorders/WorkOrderList.js";
 import { withRouter } from "react-router-dom";
+import { WorkOrderPDF } from "../../components/workorders/WorkOrderPDF/WorkOrderPDF.js";
 
 class WorkOrders extends Component {
   state = {
@@ -197,6 +198,16 @@ class WorkOrders extends Component {
                   exact
                   path="/workorders/create"
                   component={CreateWorkOrder}
+                />
+                <Route
+                  exact
+                  path="/workorders/view"
+                  render={() => (
+                    <WorkOrderPDF
+                      style={{ width: "100%" }}
+                      workorders={workorders}
+                    />
+                  )}
                 />
 
                 <ModalRoute
