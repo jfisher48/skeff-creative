@@ -35,6 +35,7 @@ import WorkOrderTotalWidget from "../../components/workorders/WorkOrderTotalWidg
 import WorkOrderList from "../../components/workorders/WorkOrderList.js";
 import { withRouter } from "react-router-dom";
 import { WorkOrderPDF } from "../../components/workorders/WorkOrderPDF/WorkOrderPDF.js";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 class WorkOrders extends Component {
   state = {
@@ -138,6 +139,25 @@ class WorkOrders extends Component {
                   <AddIcon className={classes.createIcon} />
                   New Order
                 </Button>
+                <PDFDownloadLink
+                  document={<WorkOrderPDF workorders={workorders} />}
+                  fileName="Work Order Details.pdf"
+                >
+                  {({ blob, url, loading, error }) =>
+                    loading ? (
+                      "Loading document..."
+                    ) : (
+                      <Button
+                        className={classes.createButton}
+                        variant="outlined"
+                        size="large"
+                        color="secondary"
+                      >
+                        Download PDF
+                      </Button>
+                    )
+                  }
+                </PDFDownloadLink>
               </Grid>
             </Hidden>
           ) : (
@@ -199,7 +219,7 @@ class WorkOrders extends Component {
                   path="/workorders/create"
                   component={CreateWorkOrder}
                 />
-                <Route
+                {/* <Route
                   exact
                   path="/workorders/view"
                   render={() => (
@@ -208,7 +228,7 @@ class WorkOrders extends Component {
                       workorders={workorders}
                     />
                   )}
-                />
+                /> */}
 
                 <ModalRoute
                   path="/workorders/:id"
