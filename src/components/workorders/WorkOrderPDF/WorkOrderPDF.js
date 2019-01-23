@@ -27,15 +27,15 @@ export class WorkOrderPDF extends Component {
           workorders.sort(compareValues("dueDate", "asc")).map(workorder => {
             var createdAtDate = workorder.createdAt.toDate();
             var createdAtMoment = moment(createdAtDate).format(
-              "M.DD.YY [at] h:mm A"
+              "M/DD/YY [at] h:mm A"
             );
             var dueOnDate = workorder.dueDate.toDate();
-            var dueOnMoment = moment(dueOnDate).format("M.DD.YY [at] h:mm A");
+            var dueOnMoment = moment(dueOnDate).format("M/DD/YY [at] h:mm A");
 
             return (
               <Page
                 key={workorder.id}
-                size="A4"
+                size="letter"
                 orientation="landscape"
                 style={styles.page}
               >
@@ -45,7 +45,7 @@ export class WorkOrderPDF extends Component {
                   <Text>#{workorder.id}</Text>
                 </View>
                 <View style={styles.container}>
-                  <Text>{workorder.account}</Text>
+                  <Text style={styles.accountText}>{workorder.account}</Text>
                 </View>
                 <View style={styles.container}>
                   <View style={styles.detailColumn}>
@@ -75,7 +75,12 @@ export class WorkOrderPDF extends Component {
                   </View>
                   <View style={styles.detailColumn}>
                     <View style={styles.detailRow}>
-                      <Text> </Text>
+                      <Text style={styles.rushLabel}>Rush:</Text>
+                      {workorder.isRush ? (
+                        <Text style={styles.rushText}>PLEASE RUSH</Text>
+                      ) : (
+                        <Text />
+                      )}
                     </View>
                     <View style={styles.detailRow}>
                       <Text>CREATED ON:</Text>
@@ -90,27 +95,60 @@ export class WorkOrderPDF extends Component {
                     </View>
                   </View>
                 </View>
-                <View>
+                <View style={styles.container}>
+                  {workorder.comments.length > 0 ? (
+                    <View style={styles.comments}>
+                      <Text style={styles.commentLabel}>Comments:</Text>
+                      <Text style={styles.commentValue}>
+                        {workorder.comments}
+                      </Text>
+                    </View>
+                  ) : (
+                    <Text />
+                  )}
+                </View>
+                <View style={styles.itemsWrapper}>
                   {workorder.items &&
                     workorder.items.map((item, i) => {
                       return (
-                        <View style={styles.detailLineItem}>
-                          <Text>{item.quantity}</Text>
-                          <Text>
-                            {item.brand} {item.signTheme}
-                          </Text>
+                        <View key={i} style={styles.itemContainer}>
+                          <View style={styles.itemQ}>
+                            <Text>{item.quantity}</Text>
+                          </View>
+                          <View
+                            style={
+                              workorder.items.length > 1
+                                ? styles.itemCol
+                                : styles.singleItemCol
+                            }
+                          >
+                            <View style={styles.itemPrimary}>
+                              <Text style={styles.itemText}>
+                                {item.brand} {item.signTheme}
+                              </Text>
+                              <Text style={styles.itemText}>
+                                {item.signSize} {item.signTypeName}
+                              </Text>
+                            </View>
+                            <View style={styles.itemSecondary}>
+                              <Text style={styles.itemText}>
+                                ${item.price} {item.package} {item.pkgSize}{" "}
+                                {item.pkgType}
+                              </Text>
+                            </View>
+                          </View>
                         </View>
                       );
                     })}
                 </View>
-                <View style={styles.section}>
-                  <Text
-                    render={({ pageNumber, totalPages }) =>
-                      `${pageNumber} / ${totalPages}`
-                    }
-                    fixed
-                  />
-                </View>
+
+                <Text
+                  style={styles.pageNumber}
+                  render={({ pageNumber, totalPages }) =>
+                    `Page ${pageNumber} of ${totalPages}`
+                  }
+                  fixed
+                />
               </Page>
             );
           })}
