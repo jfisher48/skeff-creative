@@ -6,6 +6,11 @@ const styles = theme => ({
   createButton: {
     float: "right"
   },
+  downloadButton: {
+    float: "right",
+    marginLeft: "12px",
+    minHeight: "48px"
+  },
   floatingButton: {
     position: "fixed",
     bottom: "50px",
@@ -51,7 +56,8 @@ const styles = theme => ({
   },
   notificationTime: {
     paddingLeft: "10px",
-    color: "grey"
+    color: "grey",
+    fontSize: "16px"
   }
 });
 

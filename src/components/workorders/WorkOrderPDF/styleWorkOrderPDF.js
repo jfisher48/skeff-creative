@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontFamily: "Helvetica-Bold",
+    fontSize: "15pt",
     marginTop: 10,
     marginLeft: 10,
     marginRight: 10,
@@ -27,7 +28,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   accountText: {
-    fontFamily: "Helvetica-Bold"
+    fontFamily: "Helvetica-Bold",
+    fontSize: "14pt"
   },
   rushLabel: {
     color: "white"
@@ -37,7 +39,7 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold"
   },
   detailColumn: {
-    fontSize: 12
+    fontSize: "10pt"
   },
   detailRow: {
     flexDirection: "row",
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
     marginBottom: 2
   },
   comments: {
-    fontSize: 12,
+    fontSize: "10pt",
     paddingTop: 10,
     flexDirection: "row"
   },
@@ -68,13 +70,13 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    fontSize: 12,
+    fontSize: "9pt",
     width: "100%"
   },
   itemQ: {
     justifyContent: "center",
     alignItems: "center",
-    fontSize: 18,
+    fontSize: "14pt",
     padding: 8,
     fontFamily: "Helvetica-Bold"
   },
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
   },
   itemPrimary: {
     flexDirection: "row",
-    fontSize: 14,
+    fontSize: "10pt",
     fontFamily: "Helvetica-Bold"
   },
   itemSecondary: {
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
   },
   pageNumber: {
     position: "absolute",
-    fontSize: 10,
+    fontSize: "10pt",
     bottom: 30,
     right: 30,
     color: "grey"

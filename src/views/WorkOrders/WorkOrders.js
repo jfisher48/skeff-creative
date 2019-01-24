@@ -148,7 +148,7 @@ class WorkOrders extends Component {
                       "Loading document..."
                     ) : (
                       <Button
-                        className={classes.createButton}
+                        className={classes.downloadButton}
                         variant="outlined"
                         size="large"
                         color="secondary"
@@ -280,7 +280,7 @@ class WorkOrders extends Component {
                               className={classes.widgetListItem}
                               key={item.id}
                             >
-                              <Typography>
+                              <Typography variant="subtitle2">
                                 <span className={classes.notificationUser}>
                                   {item.user}{" "}
                                 </span>
@@ -289,7 +289,9 @@ class WorkOrders extends Component {
                                 </span>
                               </Typography>
                               <div className={classes.notificationTime}>
-                                <Moment fromNow>{item.time.toDate()}</Moment>
+                                <Typography variant="body2">
+                                  <Moment fromNow>{item.time.toDate()}</Moment>
+                                </Typography>
                               </div>
                             </ListItem>
                           );
