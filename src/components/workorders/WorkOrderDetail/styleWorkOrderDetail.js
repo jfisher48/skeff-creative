@@ -4,7 +4,7 @@ const styles = theme => ({
     overflowY: "auto",
     [theme.breakpoints.down("xs")]: {
       width: "75vw",
-      maxHeight: "55vh"
+      maxHeight: "50vh"
     },
     [theme.breakpoints.up("sm")]: {
       width: "75vw",

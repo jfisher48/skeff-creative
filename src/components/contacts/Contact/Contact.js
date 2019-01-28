@@ -72,7 +72,9 @@ class Contact extends Component {
                   </a>
                 </ListItem>
               </List>
-              <DialogActions>{this.props.added}</DialogActions>
+              <DialogActions className={classes.contactActions}>
+                {this.props.added}
+              </DialogActions>
             </Dialog>
           </React.Fragment>
         ) : (

@@ -55,6 +55,10 @@ const styles = theme => ({
       padding: "0px 4px 15px 20px"
     }
   },
+  contactActions: {
+    paddingLeft: "24px",
+    paddingRight: "24px"
+  },
   addIcon: {
     fontSize: "16px",
     [theme.breakpoints.down("lg")]: {

@@ -67,6 +67,13 @@ const styles = theme => ({
     [theme.breakpoints.down("lg")]: {
       fontSize: "14px"
     }
+  },
+  addButton: {
+    boxShadow: "none",
+    width: "100%",
+    fontSize: "0.75",
+    margin: "0 0 10px 0",
+    textDecoration: "none"
   }
 });
 

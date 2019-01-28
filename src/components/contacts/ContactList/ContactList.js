@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "recompose";
 import { addContact } from "../../../store/actions/contactActions";
-import { IconButton, List } from "@material-ui/core";
+import { IconButton, List, withWidth, Button } from "@material-ui/core";
 import styles from "./styleContactList";
 import CheckIcon from "@material-ui/icons/CheckCircle";
 import AddIcon from "@material-ui/icons/AddCircle";
@@ -13,7 +13,7 @@ import Contact from "../Contact/Contact";
 class ContactList extends Component {
   render() {
     const classes = this.props.classes;
-    const { companyContacts, myContacts, auth } = this.props;
+    const { companyContacts, myContacts, auth, width } = this.props;
     var myIds = [];
 
     myContacts.map(id => {
@@ -54,6 +54,17 @@ class ContactList extends Component {
                     <div className={classes.checkWrapper}>
                       <CheckIcon className={classes.checkIcon} />
                     </div>
+                  ) : width === "xs" ? (
+                    <Button
+                      className={classes.addButton}
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => {
+                        this.props.addContact(contact, auth.uid);
+                      }}
+                    >
+                      Add To My Contacts
+                    </Button>
                   ) : (
                     <IconButton
                       className={classes.iconButton}
@@ -135,5 +146,6 @@ export default compose(
         storeAs: "myContacts"
       }
     ];
-  })
+  }),
+  withWidth()
 )(styledContactList);
