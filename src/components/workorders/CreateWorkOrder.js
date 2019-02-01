@@ -133,6 +133,7 @@ class CreateWorkOrder extends Component {
     account: "",
     orderType: "Standard POS",
     accountId: "",
+    cost: 0,
     comments: "",
     isRush: false,
     assignedTo: "unassigned",
@@ -159,6 +160,14 @@ class CreateWorkOrder extends Component {
         this.setState({ assignedToName: name, assignedToEmail: email });
         console.log(this.state.assignedToName);
       });
+  };
+
+  figureCost = items => {
+    var total = 0;
+    for (var i = 0; i < items.length; i++) {
+      total += items[i].cost;
+    }
+    return total;
   };
 
   handleChange = e => {
@@ -220,7 +229,7 @@ class CreateWorkOrder extends Component {
             onChange={this.update}
           >
             {newItem.brand} {newItem.signTheme} {newItem.signTypeName}
-            {newItem.signSize} {newItem.quantity} ${newItem.price}
+            {newItem.signDimensions} {newItem.quantity} ${newItem.price}
             {newItem.package} {newItem.pkgSize} {newItem.pkgType}
           </Item>
         );
@@ -240,7 +249,9 @@ class CreateWorkOrder extends Component {
     newSignType,
     newSignTypeName,
     newSignSize,
+    newSignDimensions,
     newQuantity,
+    newCost,
     newPrice,
     newPackage,
     newPkgSize,
@@ -255,7 +266,9 @@ class CreateWorkOrder extends Component {
       newSignType,
       newSignTypeName,
       newSignSize,
+      newSignDimensions,
       newQuantity,
+      newCost,
       newPrice,
       newPackage,
       newPkgSize,
@@ -273,7 +286,9 @@ class CreateWorkOrder extends Component {
                 signType: newSignType,
                 signTypeName: newSignTypeName,
                 signSize: newSignSize,
+                signDimensions: newSignDimensions,
                 quantity: newQuantity,
+                cost: newCost,
                 price: newPrice,
                 package: newPackage,
                 pkgSize: newPkgSize,
@@ -300,8 +315,8 @@ class CreateWorkOrder extends Component {
         removeItem={this.removeItem}
         primary={
           <React.Fragment>
-            {item.brand} {item.signTheme} {item.signTypeName} {item.signSize}{" "}
-            Qty: {item.quantity}
+            {item.brand} {item.signTheme} {item.signTypeName}{" "}
+            {item.signDimensions} Qty: {item.quantity}
           </React.Fragment>
         }
         secondary={
@@ -322,6 +337,9 @@ class CreateWorkOrder extends Component {
       this.setAssignedToName(this.state.assignedTo);
       this.setState({ dueDate: setDueDate(this.state.isRush) });
       console.log(this.state);
+    }
+    if (this.state.items !== prevState.items) {
+      this.setState({ cost: this.figureCost(this.state.items) });
     }
   }
 

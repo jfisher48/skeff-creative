@@ -166,7 +166,7 @@ class WorkOrderDetail extends Component {
                                     {item.brand} {item.signTheme}
                                   </span>{" "}
                                   <span className={classes.primaryItemGroup}>
-                                    {item.signSize} {item.signTypeName}{" "}
+                                    {item.signDimensions} {item.signTypeName}{" "}
                                   </span>
                                   <span className={classes.primaryItemGroup}>
                                     Qty: {item.quantity}

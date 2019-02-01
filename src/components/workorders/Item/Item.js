@@ -37,6 +37,7 @@ class Item extends Component {
     new: this.props.new,
     id: this.props.id,
     brand: this.props.brand,
+    cost: 0,
     package: this.props.package,
     pkgType: this.props.pkgType,
     pkgSize: this.props.pkgSize,
@@ -45,8 +46,8 @@ class Item extends Component {
     signType: this.props.signType,
     signTypeName: this.props.signTypeName,
     signSize: this.props.signSize,
+    signDimensions: this.props.signDimensions,
     signTheme: this.props.signTheme,
-    sizeOptions: [],
     labelWidth: 0,
     errMessage: ""
   };
@@ -91,7 +92,9 @@ class Item extends Component {
         this.state.signType,
         this.state.signTypeName,
         this.state.signSize,
+        this.state.signDimensions,
         this.state.quantity,
+        this.state.cost,
         this.state.price,
         this.state.package,
         this.state.pkgSize,
@@ -118,7 +121,7 @@ class Item extends Component {
     this.props.onRemove(this.state.id);
   };
 
-  createSizeOptions = checkType => {
+  setTypeName = checkType => {
     const firestore = getFirestore();
 
     firestore
@@ -130,8 +133,25 @@ class Item extends Component {
         var sizes = type.sizes;
         var name = type.name;
         this.setState({
-          sizeOptions: sizes,
           signTypeName: name
+        });
+      });
+  };
+
+  setSign = checkSize => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection("signSizes")
+      .doc(checkSize)
+      .get()
+      .then(results => {
+        var size = results.data();
+        var name = size.dimensions;
+        var cost = size.cost * this.state.quantity;
+        this.setState({
+          signDimensions: name,
+          cost: cost
         });
       });
   };
@@ -143,17 +163,15 @@ class Item extends Component {
     console.log(this.state);
   };
 
-  handleSignTypeChange = e => {
-    this.setState({
-      signType: e.target.key,
-      signTypeName: e.target.value
-    });
-    console.log(this.state);
-  };
-
   componentDidUpdate(prevProps, prevState) {
     if (this.state.signType !== prevState.signType) {
-      this.createSizeOptions(this.state.signType);
+      this.setTypeName(this.state.signType);
+    }
+    if (
+      this.state.signSize !== prevState.signSize ||
+      this.state.quantity !== prevState.quantity
+    ) {
+      this.setSign(this.state.signSize);
     }
   }
 
@@ -165,10 +183,15 @@ class Item extends Component {
       pkgSizes,
       pkgTypes,
       signThemes,
-      signTypes
+      signTypes,
+      signSizes
     } = this.props;
 
-    const sizes = this.state.sizeOptions;
+    const sizes = signSizes
+      ? signSizes.filter(size => {
+          return size.type === this.state.signType;
+        })
+      : 0;
 
     const availableThemes =
       signThemes &&
@@ -183,8 +206,8 @@ class Item extends Component {
       sizes.length > 0 &&
       sizes.map((size, i) => {
         return (
-          <MenuItem key={i} value={size}>
-            {size}
+          <MenuItem key={i} value={size.id}>
+            {size.dimensions}
           </MenuItem>
         );
       });
@@ -484,7 +507,8 @@ const mapStateToProps = state => {
     pkgSizes: state.firestore.ordered.pkgSizes,
     pkgTypes: state.firestore.ordered.pkgTypes,
     signThemes: state.firestore.ordered.signThemes,
-    signTypes: state.firestore.ordered.signTypes
+    signTypes: state.firestore.ordered.signTypes,
+    signSizes: state.firestore.ordered.signSizes
   };
 };
 
@@ -496,6 +520,7 @@ export default compose(
     { collection: "pkgSizes", orderBy: ["seq", "asc"] },
     { collection: "pkgTypes", orderBy: ["seq", "asc"] },
     { collection: "signThemes", orderBy: ["seq", "asc"] },
-    { collection: "signTypes", orderBy: ["seq", "asc"] }
+    { collection: "signTypes", orderBy: ["seq", "asc"] },
+    { collection: "signSizes" }
   ])
 )(styledItem);

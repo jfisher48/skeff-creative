@@ -127,7 +127,7 @@ export class WorkOrderPDF extends Component {
                                 {item.brand} {item.signTheme}
                               </Text>
                               <Text style={styles.itemText}>
-                                {item.signSize} {item.signTypeName}
+                                {item.signDimensions} {item.signTypeName}
                               </Text>
                             </View>
                             <View style={styles.itemSecondary}>
