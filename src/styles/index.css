@@ -25,5 +25,9 @@ a {
   text-decoration: none;
 }
 
+.link-more {
+  display: none;
+}
+
 @import url("https://fonts.googleapis.com/css?family=Encode+Sans+Condensed:300,600");
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
