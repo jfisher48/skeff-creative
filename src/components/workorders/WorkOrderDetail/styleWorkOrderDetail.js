@@ -52,6 +52,11 @@ const styles = theme => ({
     borderBottom: 0,
     borderTop: "1px solid rgba(0, 0, 0, 0.12)"
   },
+  quantityAvatar: {
+    backgroundColor: "transparent",
+    color: "rgba(0,0,0,0.87)",
+    fontSize: "1.5rem"
+  },
   primaryItemText: {
     display: "flex",
     lineHeight: "1.2em",
@@ -61,6 +66,12 @@ const styles = theme => ({
   },
   primaryItemGroup: {
     marginRight: "10px"
+  },
+  totalText: {
+    color: "rgba(0,0,0,0.54)"
+  },
+  totalAmount: {
+    color: "rgba(0,0,0,0.87)"
   },
   orderLink: {
     margin: 0

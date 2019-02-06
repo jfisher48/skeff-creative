@@ -29,6 +29,7 @@ const WorkOrderList = ({ workorders }) => {
               dueDate={workorder.dueDate.toDate()}
               isRush={workorder.isRush}
               assignedToName={workorder.assignedToName}
+              cost={"$" + workorder.cost}
             />
           );
         })}

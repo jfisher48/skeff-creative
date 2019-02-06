@@ -9,6 +9,8 @@ import {
   IconButton,
   List,
   ListItem,
+  ListItemAvatar,
+  Avatar,
   ListItemText,
   Button,
   CardActions
@@ -147,6 +149,11 @@ class CompletedWorkOrderDetail extends Component {
                     workorder.items.map((item, i) => {
                       return (
                         <ListItem divider className={classes.listItem} key={i}>
+                          <ListItemAvatar>
+                            <Avatar className={classes.quantityAvatar}>
+                              {item.quantity}
+                            </Avatar>
+                          </ListItemAvatar>
                           <ListItemText
                             primary={
                               <React.Fragment>
@@ -160,9 +167,6 @@ class CompletedWorkOrderDetail extends Component {
                                   <span className={classes.primaryItemGroup}>
                                     {item.signDimensions} {item.signTypeName}{" "}
                                   </span>
-                                  <span className={classes.primaryItemGroup}>
-                                    Qty: {item.quantity}
-                                  </span>
                                 </Typography>
                               </React.Fragment>
                             }
@@ -173,9 +177,23 @@ class CompletedWorkOrderDetail extends Component {
                               </Typography>
                             }
                           />
+                          <Typography>${item.cost}</Typography>
                         </ListItem>
                       );
                     })}
+                  <ListItem divider className={classes.listItem}>
+                    <ListItemText />
+                    <Typography
+                      variant="subtitle1"
+                      className={classes.totalText}
+                    >
+                      {" "}
+                      TOTAL:{" "}
+                      <span className={classes.totalAmount}>
+                        ${workorder.cost}
+                      </span>
+                    </Typography>
+                  </ListItem>
                 </List>
               </CardContent>
               {profile.role === "graphics" ? (

@@ -190,6 +190,10 @@ class WorkOrderSummary extends Component {
                   {this.props.assignedToName}
                 </span>
               </Typography>
+              <Typography className={classes.orderLabel} variant="subtitle1">
+                ESTIMATED COST:{" "}
+                <span className={classes.orderInfo}>{this.props.cost}</span>
+              </Typography>
               <Divider className={classes.divider} />
               <Grid container spacing={8}>
                 <Grid item xs={12} className={classes.badgeContainer}>

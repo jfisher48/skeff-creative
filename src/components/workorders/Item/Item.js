@@ -19,7 +19,10 @@ import {
   DialogActions,
   ListItem,
   ListItemText,
-  ListItemSecondaryAction
+  ListItemSecondaryAction,
+  ListItemAvatar,
+  Avatar,
+  withWidth
 } from "@material-ui/core";
 import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounded";
 import { compose } from "recompose";
@@ -184,7 +187,8 @@ class Item extends Component {
       pkgTypes,
       signThemes,
       signTypes,
-      signSizes
+      signSizes,
+      width
     } = this.props;
 
     const sizes = signSizes
@@ -468,14 +472,31 @@ class Item extends Component {
 
   renderDisplay() {
     //const classes = this.props.classes;
+    const width = this.props.width;
     return (
       <ListItem divider>
+        {width !== "xs" ? (
+          <ListItemAvatar>
+            <Avatar
+              style={{
+                backgroundColor: "transparent",
+                color: "rgba(0,0,0,0.87)",
+                fontSize: "1.5rem"
+              }}
+            >
+              {this.props.quantity}
+            </Avatar>
+          </ListItemAvatar>
+        ) : (
+          ""
+        )}
         <ListItemText
           disableTypography
           primary={this.props.primary}
           secondary={this.props.secondary}
         />
         <ListItemSecondaryAction>
+          {width !== "xs" ? this.props.itemCost : ""}
           <IconButton onClick={this.edit}>
             <EditIcon />
           </IconButton>
@@ -522,5 +543,6 @@ export default compose(
     { collection: "signThemes", orderBy: ["seq", "asc"] },
     { collection: "signTypes", orderBy: ["seq", "asc"] },
     { collection: "signSizes" }
-  ])
+  ]),
+  withWidth()
 )(styledItem);

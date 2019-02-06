@@ -62,17 +62,7 @@ class WorkOrders extends Component {
     this.setState({ listView: "held" });
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.location.pathname !== prevProps.location.pathname) {
-      console.log("was at", prevProps.location);
-      console.log("now at", this.props.location);
-    }
-  }
   render() {
-    //console.log(this.state.open);
-    //this.realTimeListener();
-    //this.setState({open: this.getOpenOrders()})
-
     const classes = this.props.classes;
     const {
       workorders,

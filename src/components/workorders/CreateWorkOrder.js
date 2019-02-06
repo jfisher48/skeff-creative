@@ -20,7 +20,8 @@ import {
   FormControlLabel,
   Grid,
   List,
-  OutlinedInput
+  OutlinedInput,
+  withWidth
 } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
@@ -316,12 +317,18 @@ class CreateWorkOrder extends Component {
         primary={
           <React.Fragment>
             {item.brand} {item.signTheme} {item.signTypeName}{" "}
-            {item.signDimensions} Qty: {item.quantity}
+            {item.signDimensions}{" "}
+            {this.props.width === "xs" ? "Qty: " + item.quantity : ""}
           </React.Fragment>
         }
         secondary={
           <Typography>
             ${item.price} {item.package} {item.pkgSize} {item.pkgType}
+          </Typography>
+        }
+        itemCost={
+          <Typography style={{ display: "inline-flex", marginRight: "10px" }}>
+            {item.cost}
           </Typography>
         }
       />
@@ -531,5 +538,6 @@ export default compose(
       { collection: "accounts", where: [["userId", "==", props.auth.uid]] },
       { collection: "users", where: ["role", "==", "graphics"] }
     ];
-  })
+  }),
+  withWidth()
 )(styledCreateWorkOrder);

@@ -118,28 +118,42 @@ export class WorkOrderPDF extends Component {
                           <View
                             style={
                               workorder.items.length > 1
-                                ? styles.itemCol
-                                : styles.singleItemCol
+                                ? styles.itemRow
+                                : styles.singleItemRow
                             }
                           >
-                            <View style={styles.itemPrimary}>
-                              <Text style={styles.itemText}>
-                                {item.brand} {item.signTheme}
-                              </Text>
-                              <Text style={styles.itemText}>
-                                {item.signDimensions} {item.signTypeName}
-                              </Text>
+                            <View style={styles.itemCol}>
+                              <View style={styles.itemPrimary}>
+                                <Text style={styles.itemText}>
+                                  {item.brand} {item.signTheme}
+                                </Text>
+                                <Text style={styles.itemText}>
+                                  {item.signDimensions} {item.signTypeName}
+                                </Text>
+                              </View>
+                              <View style={styles.itemSecondary}>
+                                <Text style={styles.itemText}>
+                                  ${item.price} {item.package} {item.pkgSize}{" "}
+                                  {item.pkgType}
+                                </Text>
+                              </View>
                             </View>
-                            <View style={styles.itemSecondary}>
-                              <Text style={styles.itemText}>
-                                ${item.price} {item.package} {item.pkgSize}{" "}
-                                {item.pkgType}
-                              </Text>
+                            <View style={styles.itemCol}>
+                              <Text style={styles.itemText}>${item.cost}</Text>
                             </View>
                           </View>
                         </View>
                       );
                     })}
+                  <View style={styles.itemContainer}>
+                    <View style={styles.totalRow}>
+                      <View style={styles.itemCol}>
+                        <Text style={styles.totalText}>
+                          Total: ${workorder.cost}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
                 </View>
 
                 <Text

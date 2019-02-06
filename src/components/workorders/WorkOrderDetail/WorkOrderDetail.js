@@ -11,7 +11,9 @@ import {
   ListItem,
   ListItemText,
   Button,
-  CardActions
+  CardActions,
+  ListItemAvatar,
+  Avatar
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -23,6 +25,7 @@ import { Redirect } from "react-router-dom";
 import { completeWorkorder } from "../../../store/actions/workorderActions";
 import { holdWorkorder } from "../../../store/actions/workorderActions";
 import { deleteWorkorder } from "../../../store/actions/workorderActions";
+import Item from "../Item/Item";
 
 class WorkOrderDetail extends Component {
   handleComplete = e => {
@@ -155,6 +158,11 @@ class WorkOrderDetail extends Component {
                     workorder.items.map((item, i) => {
                       return (
                         <ListItem divider className={classes.listItem} key={i}>
+                          <ListItemAvatar>
+                            <Avatar className={classes.quantityAvatar}>
+                              {item.quantity}
+                            </Avatar>
+                          </ListItemAvatar>
                           <ListItemText
                             primary={
                               <React.Fragment>
@@ -168,9 +176,6 @@ class WorkOrderDetail extends Component {
                                   <span className={classes.primaryItemGroup}>
                                     {item.signDimensions} {item.signTypeName}{" "}
                                   </span>
-                                  <span className={classes.primaryItemGroup}>
-                                    Qty: {item.quantity}
-                                  </span>
                                 </Typography>
                               </React.Fragment>
                             }
@@ -181,9 +186,23 @@ class WorkOrderDetail extends Component {
                               </Typography>
                             }
                           />
+                          <Typography>${item.cost}</Typography>
                         </ListItem>
                       );
                     })}
+                  <ListItem divider className={classes.listItem}>
+                    <ListItemText />
+                    <Typography
+                      variant="subtitle1"
+                      className={classes.totalText}
+                    >
+                      {" "}
+                      TOTAL:{" "}
+                      <span className={classes.totalAmount}>
+                        ${workorder.cost}
+                      </span>
+                    </Typography>
+                  </ListItem>
                 </List>
               </CardContent>
               {profile.role === "graphics" ? (

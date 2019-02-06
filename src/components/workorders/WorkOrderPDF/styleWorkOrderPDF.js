@@ -80,19 +80,35 @@ const styles = StyleSheet.create({
     padding: 8,
     fontFamily: "Helvetica-Bold"
   },
-  itemCol: {
-    flexDirection: "column",
+  itemRow: {
+    flexDirection: "row",
     padding: 8,
     borderBottom: "1pt solid #cccccc",
-    width: "95%"
+    width: "95%",
+    justifyContent: "space-between"
   },
-  singleItemCol: {
+  itemCol: {
     flexDirection: "column",
+    justifyContent: "center"
+  },
+  singleItemRow: {
+    flexDirection: "row",
     padding: 8,
-    width: "95%"
+    width: "95%",
+    justifyContent: "space-between"
   },
   itemText: {
     marginRight: 10
+  },
+  totalRow: {
+    flexDirection: "row",
+    padding: 8,
+    width: "100%",
+    justifyContent: "flex-end"
+  },
+  totalText: {
+    fontSize: "10pt",
+    marginRight: 20
   },
   itemPrimary: {
     flexDirection: "row",
