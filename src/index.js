@@ -7,6 +7,7 @@ import "./styles/index.css";
 //import App from './App'
 //import "typeface-roboto";
 import registerServiceWorker from "./registerServiceWorker";
+import * as serviceWorker from "./serviceWorker";
 import indexRoutes from "./routes/indexRoutes";
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./store/reducers/rootReducer";
@@ -147,5 +148,6 @@ store.firebaseAuthIsReady.then(() => {
     </Provider>,
     document.getElementById("root")
   );
-  registerServiceWorker();
+  //registerServiceWorker();
+  serviceWorker.register();
 });
