@@ -1,25 +1,25 @@
 // core components/views
 import Dashboard from "../views/Dashboard/Dashboard";
-import Calendar from "../views/Calendar/Calendar";
-import Documents from "../views/Documents/Documents";
-import Learning from "../views/Learning/Learning";
+//import Calendar from "../views/Calendar/Calendar";
+//import Documents from "../views/Documents/Documents";
+//import Learning from "../views/Learning/Learning";
 import Logos from "../views/Logos/Logos";
 import News from "../views/News/News";
 import People from "../views/People/People";
-import Reminders from "../views/Reminders/Reminders";
-import Suppliers from "../views/Suppliers/Suppliers";
+//import Reminders from "../views/Reminders/Reminders";
+//import Suppliers from "../views/Suppliers/Suppliers";
 import WorkOrders from "../views/WorkOrders/WorkOrders.js";
 import Admin from "../views/Admin/Admin.js";
 
 import dashboardButton from "../styles/dashboardButton";
 import logosButton from "../styles/logosButton";
 import workordersButton from "../styles/workordersButton";
-import documentsButton from "../styles/documentsButton";
-import calendarButton from "../styles/calendarButton";
-import remindersButton from "../styles/remindersButton";
+//import documentsButton from "../styles/documentsButton";
+//import calendarButton from "../styles/calendarButton";
+//import remindersButton from "../styles/remindersButton";
 import newsButton from "../styles/newsButton";
 import peopleButton from "../styles/peopleButton";
-import suppliersButton from "../styles/suppliersButton";
+//import suppliersButton from "../styles/suppliersButton";
 import learningButton from "../styles/learningButton";
 
 const siteRoutes = [

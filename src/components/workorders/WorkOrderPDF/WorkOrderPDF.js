@@ -4,20 +4,20 @@ import {
   Page,
   Text,
   View,
-  Document,
-  PDFViewer,
-  Image
+  Document
+  //PDFViewer,
+  //Image
 } from "@react-pdf/renderer";
-import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "recompose";
+//import { connect } from "react-redux";
+//import { firestoreConnect } from "react-redux-firebase";
+//import { compose } from "recompose";
 import styles from "./styleWorkOrderPDF";
 import moment from "moment";
 
 export class WorkOrderPDF extends Component {
   render() {
-    const classes = this.props.classes;
-    const { workorders, auth, profile } = this.props;
+    //const classes = this.props.classes;
+    const { workorders } = this.props;
     console.log(workorders);
     return (
       // <PDFViewer width="100%" height="800">

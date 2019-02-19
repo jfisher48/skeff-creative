@@ -133,7 +133,6 @@ class Item extends Component {
       .get()
       .then(results => {
         var type = results.data();
-        var sizes = type.sizes;
         var name = type.name;
         this.setState({
           signTypeName: name
@@ -187,8 +186,8 @@ class Item extends Component {
       pkgTypes,
       signThemes,
       signTypes,
-      signSizes,
-      width
+      signSizes
+      //width
     } = this.props;
 
     const sizes = signSizes

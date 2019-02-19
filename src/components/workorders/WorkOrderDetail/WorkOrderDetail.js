@@ -25,7 +25,6 @@ import { Redirect } from "react-router-dom";
 import { completeWorkorder } from "../../../store/actions/workorderActions";
 import { holdWorkorder } from "../../../store/actions/workorderActions";
 import { deleteWorkorder } from "../../../store/actions/workorderActions";
-import Item from "../Item/Item";
 
 class WorkOrderDetail extends Component {
   handleComplete = e => {
