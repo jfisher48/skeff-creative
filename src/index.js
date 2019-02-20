@@ -6,7 +6,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import "./styles/index.css";
 //import App from './App'
 //import "typeface-roboto";
-import registerServiceWorker from "./registerServiceWorker";
+//import registerServiceWorker from "./registerServiceWorker";
 import * as serviceWorker from "./serviceWorker";
 import indexRoutes from "./routes/indexRoutes";
 import { createStore, applyMiddleware, compose } from "redux";
