@@ -105,8 +105,8 @@ const styles = theme => ({
     alignItems: "center"
   },
   badge: {
-    top: -1,
-    right: -20,
+    top: "50%",
+    right: -2,
     fontSize: "12px",
     border: "2px solid white"
   },
@@ -219,7 +219,7 @@ class WorkOrderSummary extends Component {
                       " item(s)"
                     }
                   >
-                    <span style={{ marginRight: "25px" }}>
+                    <span style={{ marginRight: "20px" }}>
                       <Badge
                         badgeContent={this.props.items.length}
                         classes={{ badge: classes.badge }}
