@@ -4,12 +4,18 @@ const styles = theme => ({
     flexGrow: 1
   },
   createButton: {
-    float: "right"
+    float: "right",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "0.8125rem"
+    }
   },
   downloadButton: {
     float: "right",
     marginLeft: "12px",
-    minHeight: "48px"
+    minHeight: "48px",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "0.8125rem"
+    }
   },
   floatingButton: {
     position: "fixed",
