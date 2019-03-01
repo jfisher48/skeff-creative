@@ -22,7 +22,7 @@ const styles = theme => ({
     marginTop: "-100px",
     height: "200px",
     width: "200px",
-    backgroundColor: "#263238",
+    backgroundColor: "#212432",
     [theme.breakpoints.down("xs")]: {
       marginTop: "-63px",
       height: "126px",

@@ -10,7 +10,7 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    backgroundColor: "#263238",
+    backgroundColor: "#212432",
     textAlign: "center"
   },
   brand: {
@@ -30,7 +30,7 @@ const styles = theme => ({
   brandFront: {
     fontWeight: "600",
     fontSize: "1.03em",
-    color: "#bdbfc1"
+    color: "#fff"
   }
 });
 

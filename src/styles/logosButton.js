@@ -6,14 +6,22 @@ export default createMuiTheme({
       root: {
         backgroundColor: "transparent",
         "&$selected": {
-          backgroundColor: "rgba(158, 158, 158, 0.2)"
+          backgroundColor: "rgba(158, 158, 158, 0.2)",
+          "&:hover": {
+            "& svg": {
+              color: "#7b7f91"
+            }
+          }
         }
       }
     },
     MuiListItem: {
       button: {
         "&:hover": {
-          backgroundColor: "#2196f3"
+          backgroundColor: "#2196f3",
+          "& svg": {
+            color: "rgba(255,255,255, 0.50)"
+          }
         }
       }
     },

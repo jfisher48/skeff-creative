@@ -21,9 +21,9 @@ const styles = theme => ({
     }
   },
   drawerPaper: {
-    backgroundColor: "#263238",
+    backgroundColor: "#212432",
     minHeight: "100vh",
-    color: "#ffffff",
+    color: "#fff",
     width: drawerWidth,
     position: "fixed",
     [theme.breakpoints.up("lg")]: {
@@ -74,7 +74,7 @@ const styles = theme => ({
     display: "block",
     fontFamily: "Encode Sans Condensed",
     fontSize: "28px",
-    color: "#848688",
+    color: "#7b7f92",
     textAlign: "left",
     fontWeight: "300",
     lineHeight: "32px",
@@ -87,7 +87,7 @@ const styles = theme => ({
   brandFront: {
     fontWeight: "600",
     fontSize: "29px",
-    color: "#bdbfc1"
+    color: "#fff"
   },
   brandImage: {
     width: "40px",
@@ -124,27 +124,31 @@ const styles = theme => ({
     textDecoration: "none"
   },
   itemLink: {
+    color: "#fff",
     width: "auto",
     transition: "all 200ms linear",
     margin: "10px 15px 0",
     borderRadius: "3px",
     position: "relative",
+    "&:hover": {
+      color: "#cedodb"
+    },
     //display: "block",
     padding: "13px 15px",
     backgroundColor: "transparent"
   },
   icon: {
-    maxHeight: "38px",
-    maxWidth: "30px",
+    maxHeight: "32px",
+    maxWidth: "25px",
     float: "left",
     //marginRight: "15px",
     textAlign: "center",
     verticalAlign: "middle",
-    color: "#fff"
+    color: "#7b7f92"
   },
   itemText: {
-    color: "#ffffff",
     margin: "0",
+    textTransform: "uppercase",
     lineHeight: "30px",
     fontWeight: "500",
     fontSize: "1em",
@@ -160,7 +164,7 @@ const styles = theme => ({
     },
     height: "100%",
     flexGrow: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#f0f4f6",
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3
     //paddingBottom: theme.spacing.unit * 3
