@@ -19,15 +19,16 @@ const styles = theme => ({
     height: "32px"
   },
   userName: {
-    color: "#bdbfc1",
+    color: "#fff",
     display: "inline-flex",
     padding: "0 16px",
     lineHeight: "32px",
     fontWeight: "500",
-    fontSize: "1rem"
+    fontSize: "1rem",
+    textTransform: "uppercase"
   },
   expand: {
-    color: "#fff"
+    color: "#4296cb"
   },
   panelDetails: {
     padding: "0"
