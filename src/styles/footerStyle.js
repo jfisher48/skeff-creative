@@ -1,14 +1,16 @@
 const footerStyle = theme => ({
   block: {
-    color: "inherit",
+    color: "#4e5262",
     padding: "15px",
     textTransform: "uppercase",
     borderRadius: "3px",
     textDecoration: "none",
     position: "relative",
     display: "block",
-    fontWeight: "500",
     fontSize: "0.875rem",
+    "&:hover": {
+      color: "#212432"
+    },
     [theme.breakpoints.down("sm")]: {
       padding: "5px 15px"
     }
@@ -20,6 +22,7 @@ const footerStyle = theme => ({
     }
   },
   footerRight: {
+    color: "#4e5262",
     padding: "5px 0",
     margin: "0",
     fontSize: "0.875rem",
@@ -40,7 +43,8 @@ const footerStyle = theme => ({
   },
   a: {
     textDecoration: "none",
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
+    color: "#0091ea"
   },
   list: {
     marginBottom: "0",
@@ -53,13 +57,12 @@ const footerStyle = theme => ({
     paddingTop: "0px",
     paddingLeft: "0px",
     width: "auto",
-    color: "rgb(85,85,85)",
     [theme.breakpoints.down("md")]: {
       padding: "0 12px;"
     }
   },
   copyright: {
-    color: "rgb(85,85,85)",
+    color: "#4e5262",
     [theme.breakpoints.up("lg")]: {
       paddingRight: "15px"
     }

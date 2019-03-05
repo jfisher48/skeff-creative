@@ -1,6 +1,6 @@
 const styles = theme => ({
   header: {
-    backgroundColor: "#e7e7e7",
+    backgroundColor: "rgba(229,239,247,1)",
     width: "100%"
   },
   headerSoon: {
@@ -24,12 +24,12 @@ const styles = theme => ({
     fontFamily: "Roboto",
     fontSize: "1.25em",
     fontWeight: "500",
-    color: "rgba(0,0,0,0.65)"
+    color: "#4e5262"
   },
   dueDate: {
     display: "flex",
     alignItems: "center",
-    color: "rgba(0,0,0,0.65)",
+    color: "#4e5262",
     padding: ".44em"
   },
   leftIcon: {

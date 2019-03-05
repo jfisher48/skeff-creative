@@ -51,7 +51,7 @@ const styles = theme => ({
       height: "1px",
       right: "15px",
       width: "calc(100% - 30px)",
-      backgroundColor: "rgba(180, 180, 180, 0.3)"
+      backgroundColor: "rgba(123, 127, 146, 0.3)"
     }
   },
   userBar: {
@@ -66,7 +66,7 @@ const styles = theme => ({
       height: "1px",
       right: "15px",
       width: "calc(100% - 30px)",
-      backgroundColor: "rgba(180, 180, 180, 0.3)"
+      backgroundColor: "rgba(123, 127, 146, 0.3)"
     }
   },
   brand: {
@@ -87,7 +87,7 @@ const styles = theme => ({
   brandFront: {
     fontWeight: "600",
     fontSize: "29px",
-    color: "#fff"
+    color: "#C7CDE8"
   },
   brandImage: {
     width: "40px",
@@ -144,14 +144,14 @@ const styles = theme => ({
     //marginRight: "15px",
     textAlign: "center",
     verticalAlign: "middle",
-    color: "#7b7f92"
+    color: "rgba(255,255,255,0.25)"
   },
   itemText: {
     margin: "0",
     textTransform: "uppercase",
     lineHeight: "30px",
     fontWeight: "500",
-    fontSize: "1em",
+    fontSize: "0.875em",
     fontFamily:
       "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
   },

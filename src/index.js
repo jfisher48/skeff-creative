@@ -31,7 +31,7 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      light: "#4f5b62",
+      light: "#4e5262",
       main: "#212432",
       dark: "#000a12",
       contrastText: "#fff"
@@ -58,6 +58,19 @@ const theme = createMuiTheme({
         fontWeight: "600"
       }
     },
+    MuiTab: {
+      textColorPrimary: {
+        color: "#4e5262",
+        "&$selected": {
+          color: "#212432"
+        }
+      }
+    },
+    // MuiTab: {
+    //     label: {
+    //       color: "#4e5262"
+    //     }
+    // },
     MuiCardHeader: {
       root: {
         color: "#000",

@@ -15,20 +15,21 @@ const styles = theme => ({
     }
   },
   userAvatar: {
+    backgroundColor: "#7b7f92",
     width: "32px",
     height: "32px"
   },
   userName: {
-    color: "#fff",
+    color: "#c7cde8",
     display: "inline-flex",
     padding: "0 16px",
     lineHeight: "32px",
     fontWeight: "500",
-    fontSize: "1rem",
+    fontSize: "0.875rem",
     textTransform: "uppercase"
   },
   expand: {
-    color: "#4296cb"
+    color: "#0091ea"
   },
   panelDetails: {
     padding: "0"
@@ -38,14 +39,14 @@ const styles = theme => ({
     textAlign: "left",
     margin: "0",
     padding: "0",
-    fontSize: "1em",
+    fontSize: "0.875em",
     display: "flex",
     justifyContent: "stretch"
   },
   buttonText: {
     flexGrow: "1",
     color: "#fff",
-    textTransform: "none",
+    textTransform: "uppercase",
     lineHeight: "30px",
     padding: "10px 0 10px 60px",
     fontWeight: "500"

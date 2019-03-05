@@ -8,6 +8,7 @@ import { Paper, SvgIcon, Grid } from "@material-ui/core";
 const styles = theme => ({
   appBar: {
     boxShadow: "none",
+    backgroundColor: "#f0f4f6",
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       minHeight: "75px"
@@ -41,7 +42,7 @@ const styles = theme => ({
   },
   headingText: {
     flexGrow: 1,
-    color: "rgb(85,85,85)",
+    color: "rgb(33,36,50)",
     fontWeight: "500"
   }
 });
@@ -56,7 +57,7 @@ class PageHeading extends Component {
     //const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
     return (
       <div className={classes.root}>
-        <AppBar className={classes.appBar} position="static" color="default">
+        <AppBar className={classes.appBar} position="static" color="inherit">
           <Toolbar className={classes.toolBar}>
             <Grid container spacing={16}>
               <Grid
