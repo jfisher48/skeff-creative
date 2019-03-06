@@ -33,6 +33,7 @@ import { getFirestore } from "redux-firestore";
 import SaveIcon from "@material-ui/icons/Save";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import BrandSelect from "../../BrandSelect/BrandSelect.js";
 
 class Item extends Component {
   state = {
@@ -165,6 +166,12 @@ class Item extends Component {
     console.log(this.state);
   };
 
+  handleBrand = (value, label) => {
+    this.setState({
+      brand: label
+    });
+  };
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state.signType !== prevState.signType) {
       this.setTypeName(this.state.signType);
@@ -229,15 +236,20 @@ class Item extends Component {
             <Grid item xs={12}>
               <Grid container spacing={16}>
                 <Grid item xs={12} sm={6}>
+                  {/* <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel shrink required htmlFor="account">
+                      Account
+                    </InputLabel>
+                    <AccountSelect
+                      accounts={accounts}
+                      onSelectAccount={this.handleAccount}
+                    />
+                  </FormControl> */}
                   <FormControl variant="filled" className={classes.formSelect}>
-                    <InputLabel
-                      FormLabelClasses={classes.mylabel}
-                      required
-                      htmlFor="brand"
-                    >
+                    <InputLabel shrink required htmlFor="brand">
                       Brand
                     </InputLabel>
-                    <Select
+                    {/* <Select
                       value={this.state.brand}
                       onChange={this.handleChange}
                       IconComponent={KeyboardArrowDownRounded}
@@ -255,7 +267,12 @@ class Item extends Component {
                             {brand.name}
                           </MenuItem>
                         ))}
-                    </Select>
+                    </Select> */}
+                    <BrandSelect
+                      value={this.state.brand}
+                      brands={brands}
+                      onSelectBrand={this.handleBrand}
+                    />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>

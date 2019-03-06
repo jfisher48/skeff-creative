@@ -66,11 +66,6 @@ const theme = createMuiTheme({
         }
       }
     },
-    // MuiTab: {
-    //     label: {
-    //       color: "#4e5262"
-    //     }
-    // },
     MuiCardHeader: {
       root: {
         color: "#000",
@@ -96,7 +91,7 @@ const theme = createMuiTheme({
     },
     MuiOutlinedInput: {
       root: {
-        "& $notchedOutline": {
+        "&$notchedOutline": {
           borderColor: "rgba(0, 0, 0, 0.23)"
         },
         "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {

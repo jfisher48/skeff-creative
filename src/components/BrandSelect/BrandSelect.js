@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import CreatableSelect from "react-select/lib/Creatable";
+import Select from "react-select";
+import { Dialog } from "@material-ui/core";
 
 const styles = {
   container: () => ({
@@ -32,10 +32,9 @@ const styles = {
     //width: "400px",
     display: "inline-flex",
     //margin: "0 8px",
-    //border: 0,
     borderColor: state.isFocused ? "#0091ea" : "rgba(0,0,0,0.23)",
-    marginTop: "-1px",
-    lineHeight: " 1.1875em",
+    //marginTop: "-1px",
+    lineHeight: "1",
     padding: 0,
     position: "relative",
     width: "100%",
@@ -67,10 +66,10 @@ const styles = {
     ...provided,
     padding: "14px 10px"
   }),
-  dropdownIndicator: provided => ({
-    ...provided,
-    paddingTop: "4px"
-  }),
+  // dropdownIndicator: provided => ({
+  //   ...provided,
+  //   //paddingTop: "4px"
+  // }),
   indicatorSeparator: provided => ({
     ...provided,
     display: "none"
@@ -87,24 +86,10 @@ const styles = {
   }
 };
 
-type State = {
-  options: [{ [string]: string }],
-  value: string | void
-};
-
-const createOption = (label: string) => ({
-  label,
-  value: label.toLowerCase().replace(/\W/g, "")
-});
-
-class AccountSelect extends Component<*, State> {
+class BrandSelect extends Component {
   state = {
-    accounts: this.props.accounts,
-    //isLoading: false,
-    options: [],
-    value: undefined
+    value: this.props.value
   };
-
   handleChange = (newValue: any, actionMeta: any) => {
     console.group("Value Changed");
     console.log(newValue);
@@ -112,58 +97,33 @@ class AccountSelect extends Component<*, State> {
     console.groupEnd();
     this.setState({ value: newValue });
   };
-  handleCreate = (inputValue: any) => {
-    //this.setState({ isLoading: true });
-    console.group("Option created");
-    console.log("Wait a moment...");
-
-    const { options } = this.state;
-    const newOption = createOption(inputValue);
-    console.log(newOption);
-    console.groupEnd();
-    this.setState({
-      //isLoading: false,
-      options: [options, newOption],
-      value: newOption
-    });
-  };
-
   componentDidUpdate(prevProps, prevState) {
     if (this.state.value && this.state !== prevState) {
       var value = this.state.value.value;
       var label = this.state.value.label;
-      this.props.onSelectAccount(value, label);
+      this.props.onSelectBrand(value, label);
     }
   }
-
   render() {
-    //const classes = this.props.classes;
+    const brands = this.props.brands;
     const { value } = this.state;
-    const accounts = this.props.accounts;
-
     return (
-      <CreatableSelect
-        autoFocus
-        isClearable
-        menuPortalTarget={document.body}
-        //isDisabled={isLoading}
-        //isLoading={isLoading}
-        onChange={this.handleChange}
-        onCreateOption={this.handleCreate}
+      <Select
+        placeholder={value}
         options={
-          accounts &&
-          accounts.map(account => {
-            return { label: account.name, value: account.id };
+          brands &&
+          brands.map(brand => {
+            return { label: brand.name, value: brand.id };
           })
         }
-        value={value}
-        name="account"
-        state={this.state}
+        onChange={this.handleChange}
+        menuPortalTarget={document.body}
         styles={styles}
+        value={value}
+        state={this.state}
       />
     );
   }
 }
-const styledAccountSelect = withStyles(styles)(AccountSelect);
 
-export default styledAccountSelect;
+export default BrandSelect;
