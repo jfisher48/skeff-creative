@@ -20,6 +20,7 @@ const styles = {
     color: "rgba(0,0,0,0.87)",
     padding: 20,
     width: "100%",
+    overflow: "visible",
     backgroundColor: state.isSelected
       ? "rgba(0,0,0,0.10)"
       : state.isFocused
@@ -34,7 +35,7 @@ const styles = {
     //margin: "0 8px",
     borderColor: state.isFocused ? "#0091ea" : "rgba(0,0,0,0.23)",
     //marginTop: "-1px",
-    lineHeight: "1",
+    lineHeight: "1.0",
     padding: 0,
     position: "relative",
     width: "100%",
@@ -81,8 +82,9 @@ const styles = {
   singleValue: (provided, state) => {
     const opacity = state.isDisabled ? 0.5 : 1;
     const transition = "opacity 300ms";
+    const overflow = "visible";
 
-    return { ...provided, opacity, transition };
+    return { ...provided, opacity, transition, overflow };
   }
 };
 

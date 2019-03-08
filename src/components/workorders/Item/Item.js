@@ -281,7 +281,11 @@ class Item extends Component {
                       Theme
                     </InputLabel>
                     <Select
-                      value={this.state.signTheme}
+                      value={
+                        this.state.signTheme.length > 0
+                          ? this.state.signTheme
+                          : " "
+                      }
                       onChange={this.handleChange}
                       IconComponent={KeyboardArrowDownRounded}
                       input={
@@ -307,7 +311,11 @@ class Item extends Component {
                       Sign Type
                     </InputLabel>
                     <Select
-                      value={this.state.signType}
+                      value={
+                        this.state.signType.length > 0
+                          ? this.state.signType
+                          : " "
+                      }
                       displayEmpty
                       onChange={this.handleChange}
                       IconComponent={KeyboardArrowDownRounded}
@@ -334,7 +342,11 @@ class Item extends Component {
                       Sign Size
                     </InputLabel>
                     <Select
-                      value={this.state.signSize}
+                      value={
+                        this.state.signSize.length > 0
+                          ? this.state.signSize
+                          : " "
+                      }
                       onChange={this.handleChange}
                       IconComponent={KeyboardArrowDownRounded}
                       input={
@@ -394,7 +406,9 @@ class Item extends Component {
                       Package
                     </InputLabel>
                     <Select
-                      value={this.state.package}
+                      value={
+                        this.state.package.length > 0 ? this.state.package : " "
+                      }
                       onChange={this.handleChange}
                       IconComponent={KeyboardArrowDownRounded}
                       input={
@@ -420,7 +434,9 @@ class Item extends Component {
                       Pkg Size
                     </InputLabel>
                     <Select
-                      value={this.state.pkgSize}
+                      value={
+                        this.state.pkgSize.length > 0 ? this.state.pkgSize : " "
+                      }
                       onChange={this.handleChange}
                       IconComponent={KeyboardArrowDownRounded}
                       input={
@@ -446,7 +462,9 @@ class Item extends Component {
                       Pkg Type
                     </InputLabel>
                     <Select
-                      value={this.state.pkgType}
+                      value={
+                        this.state.pkgType.length > 0 ? this.state.pkgType : " "
+                      }
                       onChange={this.handleChange}
                       IconComponent={KeyboardArrowDownRounded}
                       input={
