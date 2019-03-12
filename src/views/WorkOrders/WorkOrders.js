@@ -129,25 +129,27 @@ class WorkOrders extends Component {
                   <AddIcon className={classes.createIcon} />
                   New Order
                 </Button>
-                <PDFDownloadLink
-                  document={<WorkOrderPDF workorders={workorders} />}
-                  fileName="Work Order Details.pdf"
-                >
-                  {({ blob, url, loading, error }) =>
-                    loading ? (
-                      "Loading document..."
-                    ) : (
-                      <Button
-                        className={classes.downloadButton}
-                        variant="outlined"
-                        size="large"
-                        color="secondary"
-                      >
-                        Download PDF
-                      </Button>
-                    )
-                  }
-                </PDFDownloadLink>
+                <Hidden mdDown>
+                  <PDFDownloadLink
+                    document={<WorkOrderPDF workorders={workorders} />}
+                    fileName="Work Order Details.pdf"
+                  >
+                    {({ blob, url, loading, error }) =>
+                      loading ? (
+                        "Loading document..."
+                      ) : (
+                        <Button
+                          className={classes.downloadButton}
+                          variant="outlined"
+                          size="large"
+                          color="secondary"
+                        >
+                          Download PDF
+                        </Button>
+                      )
+                    }
+                  </PDFDownloadLink>
+                </Hidden>
               </Grid>
             </Hidden>
           ) : (

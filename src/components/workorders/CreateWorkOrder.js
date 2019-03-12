@@ -42,13 +42,13 @@ const styles = theme => ({
     flex: "0 0 auto",
     padding: "16px 26px",
     lineHeight: "33.06px",
-    backgroundColor: "#e7e7e7"
+    backgroundColor: "rgba(229,239,247,1)"
   },
   formTitle: {
     fontSize: "1.5em",
     fontWeight: "500",
     lineHeight: "33.06px",
-    color: "rgba(0,0,0,0.65)"
+    color: "#4e5262"
   },
   // formContent: {
   //   padding: "24px 26px",
@@ -66,13 +66,22 @@ const styles = theme => ({
   //     maxHeight: "75vh"
   //   }
   // },
+  addButton: {
+    paddingTop: "12px",
+    paddingBottom: "12px",
+    boxShadow: "none",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      marginTop: "10px"
+    }
+  },
   addIcon: {
     fontSize: 15,
     marginRight: "5px",
     fontWeight: "bolder",
     //padding: "12px 0",
     [theme.breakpoints.down("xs")]: {
-      fontSize: "24px",
+      fontSize: "12px",
       margin: "0",
       fontWeight: "500"
     }
@@ -114,6 +123,8 @@ const styles = theme => ({
     //flex: "1 1 auto"
   },
   createButton: {
+    paddingTop: "12px",
+    paddingBottom: "12px",
     boxShadow: "none",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
@@ -430,36 +441,37 @@ class CreateWorkOrder extends Component {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                  {this.state.items.length > 0 ? (
-                    <List className={classes.itemsContainer}>
-                      {this.state.items.map(this.eachItem)}
-                    </List>
-                  ) : (
-                    ""
-                  )}
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    onClick={this.addItem}
-                  >
-                    <AddIcon className={classes.addIcon} />
-                    New Item
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
                   <TextField
                     name="comments"
                     variant="outlined"
                     multiline
                     rowsMax="4"
                     label="Comments"
-                    className={classNames(classes.textField, classes.dense)}
+                    className={classes.textField}
                     fullWidth
                     margin="normal"
                     onChange={this.handleChange}
                   />
+                </Grid>
+                {this.state.items.length > 0 ? (
+                  <Grid item xs={12}>
+                    <List className={classes.itemsContainer}>
+                      {this.state.items.map(this.eachItem)}
+                    </List>
+                  </Grid>
+                ) : (
+                  ""
+                )}
+                <Grid item xs={12}>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={this.addItem}
+                    className={classes.addButton}
+                  >
+                    <AddIcon className={classes.addIcon} />
+                    New Item
+                  </Button>
                 </Grid>
                 <Grid item xs={12}>
                   <Button

@@ -34,7 +34,6 @@ const styles = {
     //margin: "0 8px",
     //border: 0,
     borderColor: state.isFocused ? "#0091ea" : "rgba(0,0,0,0.23)",
-    marginTop: "-1px",
     lineHeight: " 1.1875em",
     padding: 0,
     position: "relative",
@@ -65,11 +64,19 @@ const styles = {
   }),
   valueContainer: (provided, state) => ({
     ...provided,
-    padding: "14px 10px"
+    padding: "13px 10px"
+  }),
+  clearIndicator: provided => ({
+    ...provided,
+    padding: "0",
+    paddingRight: "4px",
+    color: "rgba(0,0,0,0.54)"
   }),
   dropdownIndicator: provided => ({
     ...provided,
-    paddingTop: "4px"
+    padding: "0",
+    paddingLeft: "4px",
+    color: "rgba(0,0,0,0.54)"
   }),
   indicatorSeparator: provided => ({
     ...provided,
@@ -145,6 +152,7 @@ class AccountSelect extends Component<*, State> {
       <CreatableSelect
         autoFocus
         isClearable
+        placeholder="Start typing or Select from list"
         menuPortalTarget={document.body}
         //isDisabled={isLoading}
         //isLoading={isLoading}

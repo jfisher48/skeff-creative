@@ -229,7 +229,7 @@ class Item extends Component {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          <Typography className={classes.formTitle}>Add Item</Typography>
+          <Typography className={classes.formTitle}>Add/Edit Item</Typography>
         </DialogTitle>
         <DialogContent>
           <Grid container spacing={16}>
@@ -493,9 +493,19 @@ class Item extends Component {
             </Grid>
           </Grid>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={this.cancel}>Cancel</Button>
-          <Button onClick={this.save}>
+        <DialogActions style={{ padding: 20, margin: 0 }}>
+          <Button
+            variant="contained"
+            className={classes.itemButton}
+            onClick={this.cancel}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            className={classes.itemButton}
+            onClick={this.save}
+          >
             <SaveIcon />
             Save
           </Button>

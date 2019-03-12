@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Select from "react-select";
-import { Dialog } from "@material-ui/core";
 
 const styles = {
   container: () => ({
@@ -67,10 +66,18 @@ const styles = {
     ...provided,
     padding: "14px 10px"
   }),
-  // dropdownIndicator: provided => ({
-  //   ...provided,
-  //   //paddingTop: "4px"
-  // }),
+  clearIndicator: provided => ({
+    ...provided,
+    padding: "0",
+    paddingRight: "4px",
+    color: "rgba(0,0,0,0.54)"
+  }),
+  dropdownIndicator: provided => ({
+    ...provided,
+    padding: "0",
+    paddingLeft: "4px",
+    color: "rgba(0,0,0,0.54)"
+  }),
   indicatorSeparator: provided => ({
     ...provided,
     display: "none"
@@ -111,6 +118,7 @@ class BrandSelect extends Component {
     const { value } = this.state;
     return (
       <Select
+        isClearable
         placeholder={value}
         options={
           brands &&

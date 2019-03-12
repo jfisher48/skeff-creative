@@ -7,7 +7,20 @@ const styles = theme => ({
     fontSize: "1.5em",
     fontWeight: "500",
     lineHeight: "33.06px",
-    color: "rgba(0,0,0,0.65)"
+    color: "#4e5262"
+  },
+  itemButton: {
+    paddingTop: "12px",
+    paddingBottom: "12px",
+    boxShadow: "none",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      marginTop: "10px"
+    },
+    [theme.breakpoints.up("md")]: {
+      float: "right",
+      marginLeft: "10px"
+    }
   }
 });
 
