@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PageHeading from "../../components/PageHeading.js";
 import Helmet from "react-helmet";
 import CreateWorkOrder from "../../components/workorders/CreateWorkOrder.js";
+import WorkOrderReports from "../../components/workorders/WorkOrderReports/WorkOrderReports.js";
 import { Switch, NavLink, Route } from "react-router-dom";
 import {
   Grid,
@@ -34,8 +35,8 @@ import Moment from "react-moment";
 import WorkOrderTotalWidget from "../../components/workorders/WorkOrderTotalWidget/WorkOrderTotalWidget.js";
 import WorkOrderList from "../../components/workorders/WorkOrderList.js";
 import { withRouter } from "react-router-dom";
-import { WorkOrderPDF } from "../../components/workorders/WorkOrderPDF/WorkOrderPDF.js";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+//import { WorkOrderPDF } from "../../components/workorders/WorkOrderPDF/WorkOrderPDF.js";
+//import { PDFDownloadLink } from "@react-pdf/renderer";
 
 class WorkOrders extends Component {
   state = {
@@ -129,7 +130,17 @@ class WorkOrders extends Component {
                   <AddIcon className={classes.createIcon} />
                   New Order
                 </Button>
-                <Hidden mdDown>
+                <Button
+                  className={classes.downloadButton}
+                  component={NavLink}
+                  to="/reports"
+                  variant="outlined"
+                  size="large"
+                  color="secondary"
+                >
+                  Print Reports
+                </Button>
+                {/* <Hidden mdDown>
                   <PDFDownloadLink
                     document={<WorkOrderPDF workorders={workorders} />}
                     fileName="Work Order Details.pdf"
@@ -149,7 +160,7 @@ class WorkOrders extends Component {
                       )
                     }
                   </PDFDownloadLink>
-                </Hidden>
+                </Hidden> */}
               </Grid>
             </Hidden>
           ) : (

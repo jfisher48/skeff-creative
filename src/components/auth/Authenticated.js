@@ -12,6 +12,7 @@ import People from "../../views/People/People";
 import Reminders from "../../views/Reminders/Reminders";
 import Suppliers from "../../views/Suppliers/Suppliers";
 import WorkOrders from "../../views/WorkOrders/WorkOrders.js";
+import Reports from "../../views/Reports/Reports.js";
 import Admin from "../../views/Admin/Admin.js";
 import LogIn from "./LogIn/LogIn";
 import SignUp from "./SignUp/SignUp";
@@ -29,6 +30,7 @@ const Authenticated = () => {
       <Route path="/suppliers" component={Suppliers} />
       <Route path="/learning" component={Learning} />
       <Route path="/workorders" component={WorkOrders} />
+      <Route path="/reports" component={Reports} />
       <Route path="/login" component={LogIn} />
       <Route path="/signup" component={SignUp} />
       <Route path="/admin" component={Admin} />

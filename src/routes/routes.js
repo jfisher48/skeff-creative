@@ -9,6 +9,7 @@ import People from "../views/People/People";
 //import Reminders from "../views/Reminders/Reminders";
 //import Suppliers from "../views/Suppliers/Suppliers";
 import WorkOrders from "../views/WorkOrders/WorkOrders.js";
+import Reports from "../views/Reports/Reports.js";
 import Admin from "../views/Admin/Admin.js";
 
 import dashboardButton from "../styles/dashboardButton";
@@ -38,6 +39,16 @@ const siteRoutes = [
     sidebarName: "Work Orders",
     navbarName: "Work Orders",
     component: WorkOrders,
+    btn: workordersButton,
+    svgbox: "0 0 36.04 36.04",
+    svgpath:
+      "M26.71,4.12H23.63l2,3H26.8V28.84H9.28V7.15h1.13l2-3H9.37A2.84,2.84,0,0,0,6.52,7V29.07a2.84,2.84,0,0,0,2.83,2.85H26.67a2.85,2.85,0,0,0,2.85-2.83V6.93A2.77,2.77,0,0,0,26.8,4.12Z M23.82,7.15l-2-3L20.64,2.44l0,.05a2.49,2.49,0,0,0-5,0l0-.05L14.44,4.12l-2,3L11.82,8l6.29.05L24.45,8ZM18.07,1.58a.86.86,0,0,1,0,1.72.85.85,0,0,1-.86-.86h0a.86.86,0,0,1,.85-.86Z M19.92,13.08a1.2,1.2,0,0,1-1.18,1.18H12.49a1.19,1.19,0,0,1-1.17-1.18V12.9a1.19,1.19,0,0,1,1.17-1.17h6.25a1.19,1.19,0,0,1,1.18,1.17Z M25,18.11a1.22,1.22,0,0,1-1.18,1.18H12.5a1.21,1.21,0,0,1-1.18-1.18v-.18a1.2,1.2,0,0,1,1.18-1.18H23.77A1.21,1.21,0,0,1,25,17.93Z M25,23.09a1.22,1.22,0,0,1-1.18,1.18H12.5a1.21,1.21,0,0,1-1.18-1.18v-.18a1.2,1.2,0,0,1,1.18-1.18H23.77A1.21,1.21,0,0,1,25,22.91Z"
+  },
+  {
+    path: "/reports",
+    sidebarName: "Reports",
+    navbarName: "Reports",
+    component: Reports,
     btn: workordersButton,
     svgbox: "0 0 36.04 36.04",
     svgpath:
