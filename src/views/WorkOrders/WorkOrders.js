@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PageHeading from "../../components/PageHeading.js";
 import Helmet from "react-helmet";
 import CreateWorkOrder from "../../components/workorders/CreateWorkOrder.js";
-import WorkOrderReports from "../../components/workorders/WorkOrderReports/WorkOrderReports.js";
+//import WorkOrderReports from "../../components/workorders/WorkOrderReports/WorkOrderReports.js";
 import { Switch, NavLink, Route } from "react-router-dom";
 import {
   Grid,
