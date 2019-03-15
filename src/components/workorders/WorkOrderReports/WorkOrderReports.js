@@ -26,7 +26,7 @@ class WorkOrderReports extends Component {
                 color="secondary"
               >
                 <DownloadIcon style={{ marginRight: "8px" }} />
-                PDF
+                Download PDF
               </Button>
             )
           }

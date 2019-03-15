@@ -1,5 +1,18 @@
 const styles = theme => ({
+  modalTitle: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  modalActions: {
+    padding: "0 20px 20px 20px",
+    justifyContent: "center"
+  },
+  closeButton: {
+    marginRight: "-15px"
+  },
   downloadButton: {
+    boxShadow: "none",
     float: "right",
     marginLeft: "12px",
     minHeight: "48px",

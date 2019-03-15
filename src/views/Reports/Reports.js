@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "recompose";
 import styles from "./styleReports.js";
+import { ModalContainer, ModalRoute } from "react-router-modal";
+import CloseIcon from "@material-ui/icons/Close";
 import WorkOrderReports from "../../components/workorders/WorkOrderReports/WorkOrderReports";
 import {
   Grid,
@@ -16,14 +18,30 @@ import {
   CardHeader,
   CardContent,
   Typography,
+  IconButton,
   List,
   ListItem,
   ListItemText,
-  Button
+  Button,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Dialog,
+  DialogTitle
 } from "@material-ui/core";
 
 class Reports extends Component {
-  state = {};
+  state = {
+    open: false
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   render() {
     const classes = this.props.classes;
@@ -32,7 +50,8 @@ class Reports extends Component {
       completedWorkorders,
       heldWorkorders,
       auth,
-      notifications
+      notifications,
+      profile
     } = this.props;
     if (!auth.uid) return <Redirect to="/login" />;
     return (
@@ -60,6 +79,87 @@ class Reports extends Component {
         <Grid container spacing={16}>
           <Grid item xs={12} lg={8}>
             Report Generator
+            <ModalRoute path="/reports/open" parentPath="/reports">
+              <DialogTitle disableTypography className={classes.modalTitle}>
+                <Typography variant="h6">Download Report</Typography>
+                <IconButton
+                  onClick={this.props.history.goBack}
+                  className={classes.closeButton}
+                  color="inherit"
+                  aria-label="Close"
+                >
+                  <CloseIcon />
+                </IconButton>
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  {workorders && workorders.length > 0
+                    ? "Your report has been generated. Click below to download a PDF of your report."
+                    : "There are no items to report at this time. Thank You!"}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions className={classes.modalActions}>
+                {workorders && workorders.length > 0 ? (
+                  <WorkOrderReports workorders={workorders} />
+                ) : (
+                  ""
+                )}
+              </DialogActions>
+            </ModalRoute>
+            <ModalRoute path="/reports/completed" parentPath="/reports">
+              <DialogTitle disableTypography className={classes.modalTitle}>
+                <Typography variant="h6">Download Report</Typography>
+                <IconButton
+                  onClick={this.props.history.goBack}
+                  className={classes.closeButton}
+                  color="inherit"
+                  aria-label="Close"
+                >
+                  <CloseIcon />
+                </IconButton>
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  {completedWorkorders && completedWorkorders.length > 0
+                    ? "Your report has been generated. Click below to download a PDF of your report."
+                    : "There are no items to report at this time. Thank You!"}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions className={classes.modalActions}>
+                {completedWorkorders && completedWorkorders.length > 0 ? (
+                  <WorkOrderReports workorders={completedWorkorders} />
+                ) : (
+                  ""
+                )}
+              </DialogActions>
+            </ModalRoute>
+            <ModalRoute path="/reports/held" parentPath="/reports">
+              <DialogTitle disableTypography className={classes.modalTitle}>
+                <Typography variant="h6">Download Report</Typography>
+                <IconButton
+                  onClick={this.props.history.goBack}
+                  className={classes.closeButton}
+                  color="inherit"
+                  aria-label="Close"
+                >
+                  <CloseIcon />
+                </IconButton>
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  {heldWorkorders && heldWorkorders.length > 0
+                    ? "Your report has been generated. Click below to download a PDF of your report."
+                    : "There are no items to report at this time. Thank You!"}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions className={classes.modalActions}>
+                {heldWorkorders && heldWorkorders.length > 0 ? (
+                  <WorkOrderReports workorders={heldWorkorders} />
+                ) : (
+                  ""
+                )}
+              </DialogActions>
+            </ModalRoute>
           </Grid>
           <Grid item xs={12} lg={4}>
             <Grid container spacing={16}>
@@ -83,27 +183,70 @@ class Reports extends Component {
                         <Grid container spacing={8}>
                           <Grid item xs={9}>
                             <ListItemText
-                              primary="My Open Orders"
-                              secondary="Print work order detail sheets for all of your currently open orders."
+                              primary={profile.firstName + "'s Open Orders"}
+                              secondary="Create work order detail sheets for all of your currently open orders."
                             />
                           </Grid>
                           <Grid item xs={3} className={classes.quickAction}>
-                            <WorkOrderReports workorders={workorders} />
+                            <Button
+                              className={classes.downloadButton}
+                              variant="contained"
+                              size="large"
+                              color="secondary"
+                              component={NavLink}
+                              to="/reports/open"
+                            >
+                              Create
+                            </Button>
                           </Grid>
                         </Grid>
                       </ListItem>
-                      {/* <ListItem divider>
-                      <Grid container spacing={8}>
-                      <Grid item xs={9}><ListItemText primary="My Completed Orders" secondary="Print work order detail sheets for all of your completed orders."/></Grid>
-                      <Grid item xs={3} className={classes.quickAction}><WorkOrderReports workorders={completedWorkorders} /></Grid>
-                      </Grid>
-                    </ListItem>
-                    <ListItem divider>
-                      <Grid container spacing={8}>
-                      <Grid item xs={9}><ListItemText primary="My Held Orders" secondary="Print work order detail sheets for all of your orders that are currently on hold."/></Grid>
-                      <Grid item xs={3} className={classes.quickAction}><WorkOrderReports workorders={heldWorkorders} /></Grid>
-                      </Grid>
-                    </ListItem>                     */}
+                      <ListItem divider>
+                        <Grid container spacing={8}>
+                          <Grid item xs={9}>
+                            <ListItemText
+                              primary={
+                                profile.firstName + "'s Completed Orders"
+                              }
+                              secondary="Create work order detail sheets for all of your completed orders."
+                            />
+                          </Grid>
+                          <Grid item xs={3} className={classes.quickAction}>
+                            <Button
+                              className={classes.downloadButton}
+                              variant="contained"
+                              size="large"
+                              color="secondary"
+                              component={NavLink}
+                              to="/reports/completed"
+                            >
+                              Create
+                            </Button>
+                          </Grid>
+                        </Grid>
+                      </ListItem>
+                      <ListItem divider>
+                        <Grid container spacing={8}>
+                          <Grid item xs={9}>
+                            <ListItemText
+                              primary={profile.firstName + "'s Held Orders"}
+                              secondary="Create work order detail sheets for all of your orders that are currently on hold."
+                            />
+                          </Grid>
+                          <Grid item xs={3} className={classes.quickAction}>
+                            <Button
+                              className={classes.downloadButton}
+                              variant="contained"
+                              size="large"
+                              color="secondary"
+                              component={NavLink}
+                              to="/reports/held"
+                            >
+                              Create
+                            </Button>
+                          </Grid>
+                        </Grid>
+                      </ListItem>
                     </List>
                   </CardContent>
                 </Card>
@@ -155,6 +298,22 @@ class Reports extends Component {
             </Grid>
           </Grid>
         </Grid>
+        {/* <Dialog fullWidth open={this.state.open} onClose={this.handleClose}>
+              <DialogTitle disableTypography>
+                <Typography variant="h6">
+                  Download Report
+                </Typography>                
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Your report has been generated. Click below to download a PDF of your report.
+                </DialogContentText>
+              </DialogContent>                            
+              <DialogActions className={classes.contactActions}>
+                <WorkOrderReports workorders={workorders} />
+              </DialogActions>
+            </Dialog> */}
+        <ModalContainer />
       </div>
     );
   }
