@@ -45,7 +45,7 @@ const styles = theme => ({
   },
   actionCell: {
     display: "block",
-    padding: "0px 4px",
+    padding: "16px 4px",
     textAlign: "center",
     [theme.breakpoints.down("lg")]: {
       fontSize: "12px"

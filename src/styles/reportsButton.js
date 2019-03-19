@@ -1,4 +1,4 @@
-import { createMuiTheme } from "../../node_modules/@material-ui/core";
+import { createMuiTheme } from "@material-ui/core";
 
 export default createMuiTheme({
   overrides: {
@@ -18,7 +18,7 @@ export default createMuiTheme({
     MuiListItem: {
       button: {
         "&:hover": {
-          backgroundColor: "#295496",
+          backgroundColor: "#cc3640",
           "& svg": {
             color: "rgba(255,255,255, 0.50)"
           }

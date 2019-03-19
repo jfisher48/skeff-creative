@@ -44,15 +44,18 @@ const styles = theme => ({
     }
   },
   checkWrapper: {
-    position: "relative",
-    top: "6px",
+    padding: "10px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
   },
   checkIcon: {
     color: "green",
-    alignSelf: "center"
+    alignSelf: "center",
+    fontSize: "16px",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "14px"
+    }
   },
   iconButton: {
     padding: "10px"

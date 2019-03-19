@@ -23,7 +23,7 @@ const styles = theme => ({
   widgetHeader: {
     padding: "16px 26px",
     lineHeight: "33.06px",
-    backgroundColor: "#355675"
+    backgroundColor: "#cc3640"
   },
   widgetContent: {
     padding: "24px 26px"

@@ -138,7 +138,7 @@ const styles = theme => ({
     backgroundColor: "transparent"
   },
   icon: {
-    maxHeight: "32px",
+    maxHeight: "25px",
     maxWidth: "25px",
     float: "left",
     //marginRight: "15px",
