@@ -2,13 +2,13 @@ const styles = theme => ({
   widgetHeader: {
     padding: "16px 26px",
     lineHeight: "33.06px",
-    backgroundColor: "#295496"
+    backgroundColor: "rgba(229, 239, 247, 1)"
   },
   widgetTitle: {
     fontSize: "1.5em",
     fontWeight: "500",
     lineHeight: "33.06px",
-    color: "rgba(0,0,0,0.65)"
+    color: "#4e5262"
   },
   widgetContent: {
     display: "flex",

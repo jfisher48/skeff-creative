@@ -7,20 +7,26 @@ import Typography from "@material-ui/core/Typography";
 import {
   List,
   ListItem,
-  ListItemIcon
+  ListItemIcon,
+  CardHeader
 } from "../../node_modules/@material-ui/core";
 import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 import jsonPrefix from "../data/jsonPrefix";
 
 const styles = theme => ({
+  widgetHeader: {
+    padding: "16px 26px",
+    lineHeight: "33.06px",
+    backgroundColor: "rgba(229,239,247,1)"
+  },
   widgetContent: {
-    padding: "30px"
+    padding: "24px 26px"
   },
   widgetTitle: {
     fontSize: "1.5em",
     fontWeight: "500",
-    marginBottom: "20px",
-    lineHeight: "1"
+    lineHeight: "33.06px",
+    color: "#4e5262"
   },
   widgetList: {
     padding: "0"
@@ -113,10 +119,16 @@ class CategoryWidget extends Component {
     });
     return (
       <Card className={classes.card}>
+        <CardHeader
+          className={classes.widgetHeader}
+          disableTypography
+          title={
+            <Typography color="textSecondary" className={classes.widgetTitle}>
+              Categories
+            </Typography>
+          }
+        />
         <CardContent className={classes.widgetContent}>
-          <Typography className={classes.widgetTitle} color="textSecondary">
-            Categories
-          </Typography>
           <List className={classes.widgetList}>{categories}</List>
         </CardContent>
       </Card>

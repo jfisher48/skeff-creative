@@ -15,7 +15,7 @@ class Dashboard extends Component {
           <title>Dashboard | Skeff Creative Services</title>
         </Helmet>
         <PageHeading
-          color="#9e9e9e"
+          color="#5a4d98"
           view="0 0 24 24"
           svgPath="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
           pageTitle="Dashboard"

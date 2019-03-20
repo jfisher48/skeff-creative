@@ -20,8 +20,8 @@ const styles = theme => ({
   tableCell: {
     display: "table-cell",
     padding: "16px 4px",
-    color: "white",
-    backgroundColor: "black",
+    color: "#4e5262",
+    backgroundColor: "rgba(229,239,247,1)",
     [theme.breakpoints.down("lg")]: {
       fontSize: "12px"
     }
@@ -29,8 +29,8 @@ const styles = theme => ({
   nameCell: {
     display: "table-cell",
     padding: "16px 4px 16px 20px",
-    color: "white",
-    backgroundColor: "black",
+    color: "#4e5262",
+    backgroundColor: "rgba(229,239,247,1)",
     [theme.breakpoints.down("lg")]: {
       fontSize: "12px"
     }

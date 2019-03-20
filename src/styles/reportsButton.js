@@ -18,7 +18,7 @@ export default createMuiTheme({
     MuiListItem: {
       button: {
         "&:hover": {
-          backgroundColor: "#cc3640",
+          backgroundColor: "#298b84",
           "& svg": {
             color: "rgba(255,255,255, 0.50)"
           }

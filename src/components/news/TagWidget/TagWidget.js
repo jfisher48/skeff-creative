@@ -4,31 +4,9 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
-import jsonPrefix from "../data/jsonPrefix";
-
-const styles = theme => ({
-  widgetContent: {
-    padding: "30px"
-  },
-  widgetTitle: {
-    fontSize: "1.5em",
-    fontWeight: "500",
-    marginBottom: "20px",
-    lineHeight: "1"
-  },
-  tagChip: {
-    backgroundColor: "rgb(0, 145, 234)",
-    margin: "0 4px 4px 0",
-    borderRadius: "4px",
-    fontSize: "11px",
-    fontWeight: "700",
-    color: "white",
-    textTransform: "uppercase",
-    "&:hover": {
-      backgroundColor: "#0064b7"
-    }
-  }
-});
+import jsonPrefix from "../../../data/jsonPrefix";
+import { CardHeader } from "@material-ui/core";
+import styles from "./styleTagWidget";
 
 class TagWidget extends Component {
   constructor(props) {
@@ -64,10 +42,16 @@ class TagWidget extends Component {
     });
     return (
       <Card className={classes.card}>
+        <CardHeader
+          className={classes.widgetHeader}
+          disableTypography
+          title={
+            <Typography color="textSecondary" className={classes.widgetTitle}>
+              Tags
+            </Typography>
+          }
+        />
         <CardContent className={classes.widgetContent}>
-          <Typography className={classes.widgetTitle} color="textSecondary">
-            Tags
-          </Typography>
           <div className={classes.tagCloud}>{tags}</div>
         </CardContent>
       </Card>
@@ -75,4 +59,6 @@ class TagWidget extends Component {
   }
 }
 
-export default withStyles(styles)(TagWidget);
+const styledTagWidget = withStyles(styles)(TagWidget);
+
+export default styledTagWidget;
