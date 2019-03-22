@@ -30,7 +30,8 @@ const styles = theme => ({
     marginRight: "15px",
     [theme.breakpoints.down("xs")]: {
       marginRight: "8px",
-      width: "35px"
+      width: "35px",
+      height: "35px"
     },
     display: "flex",
     alignItems: "center",
@@ -38,7 +39,10 @@ const styles = theme => ({
   },
   icon: {
     color: "white",
-    fontSize: "30px"
+    fontSize: "28px",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "24px"
+    }
   },
   headingText: {
     flexGrow: 1,

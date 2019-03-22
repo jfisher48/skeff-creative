@@ -1,4 +1,4 @@
-import { createMuiTheme } from "../../node_modules/@material-ui/core";
+import { createMuiTheme } from "@material-ui/core";
 
 export default createMuiTheme({
   overrides: {
@@ -18,7 +18,7 @@ export default createMuiTheme({
     MuiListItem: {
       button: {
         "&:hover": {
-          backgroundColor: "#009688",
+          backgroundColor: "#893959",
           "& svg": {
             color: "rgba(255,255,255, 0.50)"
           }
@@ -27,7 +27,7 @@ export default createMuiTheme({
     },
     MuiTouchRipple: {
       ripple: {
-        color: "white"
+        color: "grey"
       }
     }
   }
