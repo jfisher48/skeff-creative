@@ -46,7 +46,7 @@ export class StripSetPDF extends Component {
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
                 <View style={styles.logo}>
-                  <Image src="https://admin.skeffcreative.com/wp-content/uploads/2019/04/budlight.jpg" />
+                  <Image src={require("../../assets/budlight.jpg")} />
                 </View>
                 <View style={styles.stripText}>
                   <Text style={styles.specText}>2 for</Text>
@@ -59,7 +59,9 @@ export class StripSetPDF extends Component {
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
                   <Text style={styles.specText}>2 for</Text>
 
