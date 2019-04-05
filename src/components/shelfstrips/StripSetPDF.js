@@ -49,11 +49,34 @@ export class StripSetPDF extends Component {
                   <Image src={require("../../assets/budlight.jpg")} />
                 </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      fontSize: "15pt",
+                      position: "absolute",
+                      top: "4%"
+                    }}
+                  >
+                    2 for
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "15%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $4.00
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "6%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    25oz Cans
+                  </Text>
                 </View>
               </View>
             </View>
@@ -63,215 +86,501 @@ export class StripSetPDF extends Component {
                   <Image src={require("../../assets/budlight.jpg")} />
                 </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
             <View style={styles.stripContainer}>
               <View style={styles.strip}>
-                <View style={styles.logo} />
+                <View style={styles.logo}>
+                  <Image src={require("../../assets/budlight.jpg")} />
+                </View>
                 <View style={styles.stripText}>
-                  <Text style={styles.specText}>2 for</Text>
-
-                  <Text style={styles.priceText}>$7.29</Text>
-
-                  <Text style={styles.pkgText}>6 PK CANS</Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      top: "6%",
+                      fontSize: "36pt"
+                    }}
+                  >
+                    $6.99
+                  </Text>
+                  <Text
+                    style={{
+                      position: "absolute",
+                      bottom: "14%",
+                      fontSize: "12pt",
+                      textTransform: "uppercase"
+                    }}
+                  >
+                    6 Pk Cans
+                  </Text>
                 </View>
               </View>
             </View>
