@@ -8,7 +8,7 @@ import DownloadIcon from "@material-ui/icons/SaveAlt";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { StripSetPDF } from "../../components/shelfstrips/StripSetPDF.js";
+import { StripSetPDF } from "../../components/shelfstrips/StripSetPDF/StripSetPDF.js";
 
 class ShelfStrips extends Component {
   state = {};

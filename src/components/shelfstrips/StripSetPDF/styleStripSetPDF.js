@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     height: "72pt",
     display: "flex",
     position: "relative",
-    backgroundColor: "yellow",
+    //backgroundColor: "yellow",
 
     alignItems: "center",
     flexDirection: "column",
