@@ -40,7 +40,7 @@ export class StripSetPDF extends Component {
                 paddingLeft: "18pt"
               }}
             >
-              Lynch Liquors - Danville
+              Freedom Oil
             </Text>
           </View>
           <View style={styles.body}>
@@ -56,7 +56,11 @@ export class StripSetPDF extends Component {
                               strip.brand +
                               ".jpg")}
                           />
-                        ) : null}
+                        ) : (
+                          <Image
+                            src={require("../../../assets/needlogo.jpg")}
+                          />
+                        )}
                       </View>
                       <View style={styles.stripText}>
                         <Text
@@ -83,7 +87,7 @@ export class StripSetPDF extends Component {
                   </View>
                 );
               })}
-            <View style={styles.stripContainer}>
+            {/* <View style={styles.stripContainer}>
               <View style={styles.strip}>
                 <View style={styles.logo}>
                   <Image src={require("../../../assets/budweiser.jpg")} />
@@ -120,7 +124,7 @@ export class StripSetPDF extends Component {
                   </Text>
                 </View>
               </View>
-            </View>
+            </View> */}
           </View>
 
           <Text

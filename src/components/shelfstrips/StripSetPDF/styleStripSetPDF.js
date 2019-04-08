@@ -36,8 +36,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: "90pt",
-    height: "72pt",
-    backgroundColor: "grey"
+    height: "72pt"
   },
   stripText: {
     width: "126pt",
