@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import PageHeading from "../../components/PageHeading.js";
+import { Switch, NavLink, Route } from "react-router-dom";
+import CreateStripSet from "../../components/shelfstrips/CreateStripSet/CreateStripSet";
 import Helmet from "react-helmet";
 import styles from "./styleShelfStrips";
 import Button from "@material-ui/core/Button";
@@ -9,6 +11,8 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { StripSetPDF } from "../../components/shelfstrips/StripSetPDF/StripSetPDF.js";
+import { Hidden, Grid } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 
 class ShelfStrips extends Component {
   state = {};
@@ -26,7 +30,62 @@ class ShelfStrips extends Component {
           view="0 0 36.838 33.608"
           svgPath="M32.194,32.608H3a3,3,0,0,1-3-3V22.4a3,3,0,0,1,3-3h29.2a3,3,0,0,1,3,3v7.205A3,3,0,0,1,32.194,32.608ZM3,21.816a.589.589,0,0,0-.589.588v7.205A.589.589,0,0,0,3,30.2h9.265V21.816Zm32.411-2.559,0,0A4.464,4.464,0,0,0,32.194,17.9H8.67L30.66,12.5a3,3,0,0,1,3.627,2.194l1.12,4.559ZM7.465,16.645h0L27.524,6.158a3,3,0,0,1,4.047,1.269l2.174,4.162a.167.167,0,0,1-.02-.015.086.086,0,0,0-.017-.014,4.506,4.506,0,0,0-2.329-.653,4.561,4.561,0,0,0-1.078.13L7.466,16.644Zm-1.478-.927h0L22.964.749a3,3,0,0,1,4.234.265l3.1,3.521-.008,0-.006,0a.115.115,0,0,0-.028-.01,4.509,4.509,0,0,0-1.356-.21,4.434,4.434,0,0,0-2.078.515L5.989,15.717Z"
           pageTitle="Shelf Strips"
-        />
+        >
+          {this.props.location.pathname !== "/shelfstrips/create" ? (
+            <Hidden xsDown>
+              <Grid
+                item
+                xs={12}
+                sm={3}
+                lg={4}
+                style={{
+                  display: "flex",
+                  alignItems: "stretch",
+                  justifyContent: "flex-end"
+                }}
+              >
+                <Button
+                  className={classes.createButton}
+                  component={NavLink}
+                  to="shelfstrips/create"
+                  variant="outlined"
+                  size="large"
+                  color="secondary"
+                >
+                  <AddIcon className={classes.createIcon} />
+                  New Order
+                </Button>
+              </Grid>
+            </Hidden>
+          ) : (
+            ""
+          )}
+        </PageHeading>
+        <Switch>
+          <Route exact path="/shelfstrips/create" component={CreateStripSet} />
+          {/* <Route
+                  exact
+                  path="/workorders/view"
+                  render={() => (
+                    <WorkOrderPDF
+                      style={{ width: "100%" }}
+                      workorders={workorders}
+                    />
+                  )}
+                /> */}
+
+          {/* <ModalRoute
+                  path="/workorders/:id"
+                  parentPath="/workorders"
+                  component={
+                    this.state.listView === "open"
+                      ? WorkOrderDetail
+                      : this.state.listView === "completed"
+                        ? CompletedWorkOrderDetail
+                        : HeldWorkOrderDetail
+                  }
+                /> */}
+        </Switch>
         <PDFDownloadLink
           document={<StripSetPDF />}
           fileName="Shelf Strip Detail.pdf"

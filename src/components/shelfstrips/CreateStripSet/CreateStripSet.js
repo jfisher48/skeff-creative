@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { compose } from "recompose";
 import { connect } from "react-redux";
-import { createWorkorder } from "../../../store/actions/workorderActions";
+import { createStripSet } from "../../../store/actions/shelfstripActions";
 import styles from "./styleCreateStripSet.js";
 import {
   Checkbox,
@@ -35,7 +35,7 @@ import AddIcon from "@material-ui/icons/Add";
 class CreateStripSet extends Component {
   state = {
     account: "",
-    orderType: "Standard POS",
+    orderType: "Shelf Strips",
     accountId: "",
     cost: 0,
     comments: "",
@@ -105,16 +105,9 @@ class CreateStripSet extends Component {
       new: true,
       id: this.nextId(),
       brand: "",
-      signTheme: "",
-      signType: "",
-      signTypeName: "",
-      signSize: "",
       quantity: "",
       price: "",
-      package: "",
-      pkgSize: "",
-      pkgType: "",
-      sizeOptions: []
+      package: ""
     };
 
     console.log(newStrip);
@@ -132,9 +125,9 @@ class CreateStripSet extends Component {
             //index={newStrip.id}
             onChange={this.update}
           >
-            {newStrip.brand} {newStrip.signTheme} {newStrip.signTypeName}
-            {newStrip.signDimensions} {newStrip.quantity} ${newStrip.price}
-            {newStrip.package} {newStrip.pkgSize} {newStrip.pkgType}
+            {newStrip.brand}
+            {newStrip.quantity} ${newStrip.price}
+            {newStrip.package}
           </Strip>
         );
       }
@@ -147,36 +140,15 @@ class CreateStripSet extends Component {
     return this.uniqueId++;
   };
 
-  update = (
-    newBrand,
-    newSignTheme,
-    newSignType,
-    newSignTypeName,
-    newSignSize,
-    newSignDimensions,
-    newQuantity,
-    newCost,
-    newPrice,
-    newPackage,
-    newPkgSize,
-    newPkgType,
-    newId
-  ) => {
+  update = (newBrand, newQuantity, newCost, newPrice, newPackage, newId) => {
     console.log(
       "updating strip",
       newId,
       newBrand,
-      newSignTheme,
-      newSignType,
-      newSignTypeName,
-      newSignSize,
-      newSignDimensions,
       newQuantity,
       newCost,
       newPrice,
-      newPackage,
-      newPkgSize,
-      newPkgType
+      newPackage
     );
     this.setState(prevState => ({
       strips: prevState.strips.map(
@@ -186,17 +158,10 @@ class CreateStripSet extends Component {
             : {
                 ...strip,
                 brand: newBrand,
-                signTheme: newSignTheme,
-                signType: newSignType,
-                signTypeName: newSignTypeName,
-                signSize: newSignSize,
-                signDimensions: newSignDimensions,
                 quantity: newQuantity,
                 cost: newCost,
                 price: newPrice,
-                package: newPackage,
-                pkgSize: newPkgSize,
-                pkgType: newPkgType
+                package: newPackage
               }
       )
     }));
@@ -219,14 +184,13 @@ class CreateStripSet extends Component {
         removeStrip={this.removeStrip}
         primary={
           <React.Fragment>
-            {strip.brand} {strip.signTheme} {strip.signTypeName}{" "}
-            {strip.signDimensions}{" "}
+            {strip.brand}{" "}
             {this.props.width === "xs" ? "Qty: " + strip.quantity : ""}
           </React.Fragment>
         }
         secondary={
           <Typography>
-            ${strip.price} {strip.package} {strip.pkgSize} {strip.pkgType}
+            ${strip.price} {strip.package}
           </Typography>
         }
         stripCost={
@@ -255,8 +219,8 @@ class CreateStripSet extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.createWorkorder(this.state);
-    this.props.history.push("/workorders");
+    this.props.createStripSet(this.state);
+    this.props.history.push("/shelfstrips");
   };
 
   render() {
@@ -275,7 +239,7 @@ class CreateStripSet extends Component {
             disableTypography
             title={
               <Typography color="textSecondary" className={classes.formTitle}>
-                Create Work Order
+                Order Shelf Strips
               </Typography>
             }
           />
@@ -404,7 +368,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createWorkorder: workorder => dispatch(createWorkorder(workorder))
+    createStripSet: stripset => dispatch(createStripSet(stripset))
   };
 };
 

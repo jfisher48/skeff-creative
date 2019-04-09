@@ -62,27 +62,62 @@ export class StripSetPDF extends Component {
                           />
                         )}
                       </View>
-                      <View style={styles.stripText}>
-                        <Text
-                          style={{
-                            position: "absolute",
-                            top: "6%",
-                            fontSize: "36pt"
-                          }}
-                        >
-                          ${strip.price}
-                        </Text>
-                        <Text
-                          style={{
-                            position: "absolute",
-                            bottom: "14%",
-                            fontSize: "12pt",
-                            textTransform: "uppercase"
-                          }}
-                        >
-                          {strip.package}
-                        </Text>
-                      </View>
+
+                      {strip.multi.length > 0 ? (
+                        <View style={styles.stripText}>
+                          <Text
+                            style={{
+                              fontSize: "15pt",
+                              position: "absolute",
+                              top: "4%"
+                            }}
+                          >
+                            {strip.multi}
+                          </Text>
+                          <Text
+                            style={{
+                              position: "absolute",
+                              top: "15%",
+                              fontSize: "36pt"
+                            }}
+                          >
+                            {strip.price}
+                          </Text>
+                          <Text
+                            style={{
+                              position: "absolute",
+                              bottom: "6%",
+                              fontSize: "12pt",
+                              textTransform: "uppercase",
+                              flexWrap: "nowrap"
+                            }}
+                          >
+                            {strip.package}
+                          </Text>
+                        </View>
+                      ) : (
+                        <View style={styles.stripText}>
+                          <Text
+                            style={{
+                              position: "absolute",
+                              top: "6%",
+                              fontSize: "36pt"
+                            }}
+                          >
+                            ${strip.price}
+                          </Text>
+                          <Text
+                            style={{
+                              position: "absolute",
+                              bottom: "14%",
+                              fontSize: "12pt",
+                              textTransform: "uppercase"
+                            }}
+                          >
+                            {strip.package}
+                          </Text>
+                        </View>
+                      )}
                     </View>
                   </View>
                 );

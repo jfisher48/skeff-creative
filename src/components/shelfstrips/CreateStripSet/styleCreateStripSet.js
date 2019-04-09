@@ -79,3 +79,5 @@ const styles = theme => ({
     marginTop: 19
   }
 });
+
+export default styles;

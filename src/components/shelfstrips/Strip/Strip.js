@@ -43,24 +43,11 @@ class Strip extends Component {
     brand: this.props.brand,
     cost: 0,
     package: this.props.package,
-    pkgType: this.props.pkgType,
-    pkgSize: this.props.pkgSize,
     quantity: 1,
     price: this.props.price,
-    signType: this.props.signType,
-    signTypeName: this.props.signTypeName,
-    signSize: this.props.signSize,
-    signDimensions: this.props.signDimensions,
-    signTheme: this.props.signTheme,
     labelWidth: 0,
     errMessage: ""
   };
-
-  componentDidMount() {
-    if (this.state.signType.length > 0) {
-      this.createSizeOptions(this.state.signType);
-    }
-  }
 
   edit = e => {
     e.preventDefault();
@@ -71,38 +58,19 @@ class Strip extends Component {
     e.preventDefault();
     if (this.state.brand.length < 1) {
       this.setState({ errMessage: "Please select a Brand" });
-    } else if (this.state.signTheme.length < 1) {
-      this.setState({ errMessage: "Please select a Theme" });
-    } else if (this.state.signType.length < 1) {
-      this.setState({ errMessage: "Please select a Sign Type" });
-    } else if (this.state.signSize.length < 1) {
-      this.setState({ errMessage: "Please select a Sign Size" });
     } else if (this.state.quantity < 1) {
       this.setState({ errMessage: "Quantity must be greater than 0" });
     } else if (this.state.price.length < 1) {
       this.setState({ errMessage: "Please enter a price" });
-    } else if (this.state.signTheme.length < 1) {
-      this.setState({ errMessage: "Please select a theme" });
     } else if (this.state.package.length < 1) {
       this.setState({ errMessage: "Please select a Package" });
-    } else if (this.state.pkgSize.length < 1) {
-      this.setState({ errMessage: "Please select a Package Size" });
-    } else if (this.state.pkgType.length < 1) {
-      this.setState({ errMessage: "Please select a Package Type" });
     } else {
       this.props.onChange(
         this.state.brand,
-        this.state.signTheme,
-        this.state.signType,
-        this.state.signTypeName,
-        this.state.signSize,
-        this.state.signDimensions,
         this.state.quantity,
         this.state.cost,
         this.state.price,
         this.state.package,
-        this.state.pkgSize,
-        this.state.pkgType,
         this.state.id
       );
       this.setState({
@@ -125,40 +93,6 @@ class Strip extends Component {
     this.props.onRemove(this.state.id);
   };
 
-  setTypeName = checkType => {
-    const firestore = getFirestore();
-
-    firestore
-      .collection("signTypes")
-      .doc(checkType)
-      .get()
-      .then(results => {
-        var type = results.data();
-        var name = type.name;
-        this.setState({
-          signTypeName: name
-        });
-      });
-  };
-
-  setSign = checkSize => {
-    const firestore = getFirestore();
-
-    firestore
-      .collection("signSizes")
-      .doc(checkSize)
-      .get()
-      .then(results => {
-        var size = results.data();
-        var name = size.dimensions;
-        var cost = size.cost * this.state.quantity;
-        this.setState({
-          signDimensions: name,
-          cost: cost
-        });
-      });
-  };
-
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -172,55 +106,22 @@ class Strip extends Component {
     });
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.signType !== prevState.signType) {
-      this.setTypeName(this.state.signType);
-    }
-    if (
-      this.state.signSize !== prevState.signSize ||
-      this.state.quantity !== prevState.quantity
-    ) {
-      this.setSign(this.state.signSize);
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (
+  //     this.state.signSize !== prevState.signSize ||
+  //     this.state.quantity !== prevState.quantity
+  //   ) {
+  //     this.setSign(this.state.signSize);
+  //   }
+  // }
 
   renderForm() {
     const classes = this.props.classes;
     const {
       brands,
-      pkgs,
-      pkgSizes,
-      pkgTypes,
-      signThemes,
-      signTypes,
-      signSizes
+      stripPackages
       //width
     } = this.props;
-
-    const sizes = signSizes
-      ? signSizes.filter(size => {
-          return size.type === this.state.signType;
-        })
-      : 0;
-
-    const availableThemes =
-      signThemes &&
-      signThemes.filter(theme => {
-        return (
-          theme.isActive &&
-          (theme.brand === "All" || this.state.brand === theme.brand)
-        );
-      });
-
-    const sizeSelect =
-      sizes.length > 0 &&
-      sizes.map((size, i) => {
-        return (
-          <MenuItem key={i} value={size.id}>
-            {size.dimensions}
-          </MenuItem>
-        );
-      });
 
     return (
       <Dialog
@@ -276,92 +177,6 @@ class Strip extends Component {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <FormControl variant="filled" className={classes.formSelect}>
-                    <InputLabel required htmlFor="signTheme">
-                      Theme
-                    </InputLabel>
-                    <Select
-                      value={
-                        this.state.signTheme.length > 0
-                          ? this.state.signTheme
-                          : " "
-                      }
-                      onChange={this.handleChange}
-                      IconComponent={KeyboardArrowDownRounded}
-                      input={
-                        <OutlinedInput
-                          labelWidth={this.state.labelWidth}
-                          className={classes.input}
-                          name="signTheme"
-                        />
-                      }
-                    >
-                      {availableThemes &&
-                        availableThemes.map(signTheme => (
-                          <MenuItem key={signTheme.id} value={signTheme.name}>
-                            {signTheme.name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <FormControl variant="filled" className={classes.formSelect}>
-                    <InputLabel required htmlFor="signType">
-                      Sign Type
-                    </InputLabel>
-                    <Select
-                      value={
-                        this.state.signType.length > 0
-                          ? this.state.signType
-                          : " "
-                      }
-                      displayEmpty
-                      onChange={this.handleChange}
-                      IconComponent={KeyboardArrowDownRounded}
-                      input={
-                        <OutlinedInput
-                          labelWidth={this.state.labelWidth}
-                          className={classes.input}
-                          name="signType"
-                        />
-                      }
-                    >
-                      {signTypes &&
-                        signTypes.map(signType => (
-                          <MenuItem key={signType.id} value={signType.id}>
-                            {signType.name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <FormControl variant="filled" className={classes.formSelect}>
-                    <InputLabel required htmlFor="signSize">
-                      Sign Size
-                    </InputLabel>
-                    <Select
-                      value={
-                        this.state.signSize.length > 0
-                          ? this.state.signSize
-                          : " "
-                      }
-                      onChange={this.handleChange}
-                      IconComponent={KeyboardArrowDownRounded}
-                      input={
-                        <OutlinedInput
-                          labelWidth={this.state.labelWidth}
-                          className={classes.input}
-                          name="signSize"
-                        />
-                      }
-                    >
-                      {sizeSelect}
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     value={this.state.quantity}
@@ -376,9 +191,6 @@ class Strip extends Component {
                   />
                 </Grid>
               </Grid>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography>Featured Price</Typography>
             </Grid>
             <Grid item xs={12}>
               <Grid container spacing={16}>
@@ -419,66 +231,10 @@ class Strip extends Component {
                         />
                       }
                     >
-                      {pkgs &&
-                        pkgs.map(pkg => (
+                      {stripPackages &&
+                        stripPackages.map(pkg => (
                           <MenuItem key={pkg.id} value={pkg.name}>
                             {pkg.name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <FormControl variant="filled" className={classes.formSelect}>
-                    <InputLabel required htmlFor="pkgSize">
-                      Pkg Size
-                    </InputLabel>
-                    <Select
-                      value={
-                        this.state.pkgSize.length > 0 ? this.state.pkgSize : " "
-                      }
-                      onChange={this.handleChange}
-                      IconComponent={KeyboardArrowDownRounded}
-                      input={
-                        <OutlinedInput
-                          labelWidth={this.state.labelWidth}
-                          className={classes.input}
-                          name="pkgSize"
-                        />
-                      }
-                    >
-                      {pkgSizes &&
-                        pkgSizes.map(pkgSize => (
-                          <MenuItem key={pkgSize.id} value={pkgSize.name}>
-                            {pkgSize.name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <FormControl variant="filled" className={classes.formSelect}>
-                    <InputLabel required htmlFor="pkgType">
-                      Pkg Type
-                    </InputLabel>
-                    <Select
-                      value={
-                        this.state.pkgType.length > 0 ? this.state.pkgType : " "
-                      }
-                      onChange={this.handleChange}
-                      IconComponent={KeyboardArrowDownRounded}
-                      input={
-                        <OutlinedInput
-                          labelWidth={this.state.labelWidth}
-                          className={classes.input}
-                          name="pkgType"
-                        />
-                      }
-                    >
-                      {pkgTypes &&
-                        pkgTypes.map(pkgType => (
-                          <MenuItem key={pkgType.id} value={pkgType.name}>
-                            {pkgType.name}
                           </MenuItem>
                         ))}
                     </Select>
@@ -565,15 +321,10 @@ class Strip extends Component {
 const styledStrip = withStyles(styles)(Strip);
 
 const mapStateToProps = state => {
-  // console.log(state);
+  console.log(state);
   return {
     brands: state.firestore.ordered.brands,
-    pkgs: state.firestore.ordered.packages,
-    pkgSizes: state.firestore.ordered.pkgSizes,
-    pkgTypes: state.firestore.ordered.pkgTypes,
-    signThemes: state.firestore.ordered.signThemes,
-    signTypes: state.firestore.ordered.signTypes,
-    signSizes: state.firestore.ordered.signSizes
+    stripPackages: state.firestore.ordered.stripPackges
   };
 };
 
@@ -581,12 +332,7 @@ export default compose(
   connect(mapStateToProps),
   firestoreConnect([
     { collection: "brands", orderBy: ["seq", "asc"] },
-    { collection: "packages", orderBy: ["seq", "asc"] },
-    { collection: "pkgSizes", orderBy: ["seq", "asc"] },
-    { collection: "pkgTypes", orderBy: ["seq", "asc"] },
-    { collection: "signThemes", orderBy: ["seq", "asc"] },
-    { collection: "signTypes", orderBy: ["seq", "asc"] },
-    { collection: "signSizes" }
+    { collection: "stripPackges", orderBy: ["seq", "asc"] }
   ]),
   withWidth()
 )(styledStrip);
