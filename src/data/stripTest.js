@@ -583,38 +583,38 @@ const stripTest = [
   },
   {
     brand: "budlightlemontea",
-    price: "6.46",
+    price: "7.59",
     package: "6 Pk Btls",
     multi: ""
   },
   {
     brand: "bonvivspikedseltzer",
-    price: "11.85",
+    price: "12.99",
     package: "12 Pk Cans",
     multi: ""
   },
   {
     brand: "ritasrosespritzwhitepeach",
-    price: "1.10",
-    package: "6 Pk Btls",
+    price: "1.89",
+    package: "16oz Can",
     multi: ""
   },
   {
     brand: "budlightlemontea",
-    price: "1.88",
+    price: "2.59",
     package: "25oz Can",
     multi: ""
   },
   {
     brand: "gooseislandnextcoastipa",
-    price: "7.66",
+    price: "8.79",
     package: "6 Pk Cans",
     multi: ""
   },
   {
     brand: "ritassangriaspritzstrawberryblueberry",
-    price: "1.10",
-    package: "6 Pk Btls",
+    price: "1.89",
+    package: "16oz Can",
     multi: ""
   }
 ];

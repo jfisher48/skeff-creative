@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
+import { withRouter, NavLink } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -13,50 +14,61 @@ import {
   Button,
   CardActions,
   ListItemAvatar,
-  Avatar
+  Avatar,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  //Dialog,
+  DialogTitle
 } from "@material-ui/core";
+import { ModalContainer, ModalRoute } from "react-router-modal";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "recompose";
 import SummaryHeader from "../SummaryHeader/SummaryHeader";
 import CloseIcon from "@material-ui/icons/Close";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import DownloadIcon from "@material-ui/icons/SaveAlt";
+import { StripSetPDF } from "../StripSetPDF/StripSetPDF";
 import styles from "./styleStripSetDetail";
 import { Redirect } from "react-router-dom";
-import { completeWorkorder } from "../../../store/actions/workorderActions";
-import { holdWorkorder } from "../../../store/actions/workorderActions";
-import { deleteWorkorder } from "../../../store/actions/workorderActions";
+import StripSet from "../StripSet/StripSet";
+//import { completeWorkorder } from "../../../store/actions/workorderActions";
+//import { holdWorkorder } from "../../../store/actions/workorderActions";
+//import { deleteWorkorder } from "../../../store/actions/workorderActions";
 
 class StripSetDetail extends Component {
-  handleComplete = e => {
-    e.preventDefault();
-    console.log(this.props.match.params.id);
-    this.props.completeWorkorder(
-      this.props.workorder,
-      this.props.match.params.id
-    );
-    this.props.deleteWorkorder("workorders", this.props.match.params.id);
-    this.props.history.push("/workorders");
-  };
+  // handleComplete = e => {
+  //   e.preventDefault();
+  //   console.log(this.props.match.params.id);
+  //   this.props.completeWorkorder(
+  //     this.props.workorder,
+  //     this.props.match.params.id
+  //   );
+  //   this.props.deleteWorkorder("workorders", this.props.match.params.id);
+  //   this.props.history.push("/workorders");
+  // };
 
-  handleHold = e => {
-    e.preventDefault();
-    console.log(this.props.match.params.id);
-    this.props.holdWorkorder(this.props.workorder, this.props.match.params.id);
-    this.props.history.push("/workorders");
-  };
+  // handleHold = e => {
+  //   e.preventDefault();
+  //   console.log(this.props.match.params.id);
+  //   this.props.holdWorkorder(this.props.workorder, this.props.match.params.id);
+  //   this.props.history.push("/workorders");
+  // };
 
   render() {
     const classes = this.props.classes;
-    const { workorder, auth, profile } = this.props;
+    const { stripset, auth, profile } = this.props;
+    const stripsetPath = "/shelfstrips/" + stripset.stripsetNumber + "/pdf";
     if (!auth.uid) return <Redirect to="/login" />;
-    if (workorder) {
+    if (stripset) {
       return (
         <Grid container spacing={16}>
           <Grid item xs={12}>
             <Card className={classes.orderCard}>
               <SummaryHeader
-                orderNumber={workorder.workorderNumber}
-                dueDate={workorder.dueDate.toDate()}
+                orderNumber={stripset.stripsetNumber}
+                dueDate={stripset.dueDate.toDate()}
               >
                 <IconButton
                   onClick={this.props.history.goBack}
@@ -69,7 +81,7 @@ class StripSetDetail extends Component {
               </SummaryHeader>
               <CardContent className={classes.orderContainer}>
                 <Typography className={classes.orderTitle}>
-                  {workorder.account}
+                  {stripset.account}
                 </Typography>
                 <Grid container spacing={8} style={{ paddingBottom: "20px" }}>
                   <Grid item xs={12}>
@@ -79,7 +91,7 @@ class StripSetDetail extends Component {
                     >
                       WO TYPE:{" "}
                       <span className={classes.orderInfo}>
-                        {workorder.orderType}
+                        {stripset.orderType}
                       </span>
                     </Typography>
                   </Grid>
@@ -90,8 +102,8 @@ class StripSetDetail extends Component {
                     >
                       CREATED BY:{" "}
                       <span className={classes.orderInfo}>
-                        {workorder.requesterFirstName}{" "}
-                        {workorder.requesterLastName}
+                        {stripset.requesterFirstName}{" "}
+                        {stripset.requesterLastName}
                       </span>
                     </Typography>
                   </Grid>
@@ -103,7 +115,7 @@ class StripSetDetail extends Component {
                       CREATED ON:{" "}
                       <span className={classes.orderInfo}>
                         <Moment format="M.DD.YY [at] h:mm A">
-                          {workorder.createdAt.toDate()}
+                          {stripset.createdAt.toDate()}
                         </Moment>
                       </span>
                     </Typography>
@@ -115,7 +127,7 @@ class StripSetDetail extends Component {
                     >
                       ASSIGNED TO:{" "}
                       <span className={classes.orderInfo}>
-                        {workorder.assignedToName}
+                        {stripset.assignedToName}
                       </span>
                     </Typography>
                   </Grid>
@@ -127,7 +139,7 @@ class StripSetDetail extends Component {
                       DUE ON:{" "}
                       <span className={classes.orderInfo}>
                         <Moment format="M.DD.YY [at] h:mm A">
-                          {workorder.dueDate.toDate()}
+                          {stripset.dueDate.toDate()}
                         </Moment>
                       </span>
                     </Typography>
@@ -153,13 +165,13 @@ class StripSetDetail extends Component {
                   </Grid> */}
                 </Grid>
                 <List>
-                  {workorder.items &&
-                    workorder.items.map((item, i) => {
+                  {stripset.strips &&
+                    stripset.strips.map((strip, i) => {
                       return (
                         <ListItem divider className={classes.listItem} key={i}>
                           <ListItemAvatar>
                             <Avatar className={classes.quantityAvatar}>
-                              {item.quantity}
+                              {strip.quantity}
                             </Avatar>
                           </ListItemAvatar>
                           <ListItemText
@@ -170,22 +182,18 @@ class StripSetDetail extends Component {
                                   className={classes.primaryItemText}
                                 >
                                   <span className={classes.primaryItemGroup}>
-                                    {item.brand} {item.signTheme}
+                                    {strip.brand}
                                   </span>{" "}
-                                  <span className={classes.primaryItemGroup}>
-                                    {item.signDimensions} {item.signTypeName}{" "}
-                                  </span>
                                 </Typography>
                               </React.Fragment>
                             }
                             secondary={
                               <Typography>
-                                ${item.price} {item.package} {item.pkgSize}{" "}
-                                {item.pkgType}
+                                ${strip.price} {strip.package}
                               </Typography>
                             }
                           />
-                          <Typography>${item.cost}</Typography>
+                          <Typography>${strip.cost}</Typography>
                         </ListItem>
                       );
                     })}
@@ -198,15 +206,73 @@ class StripSetDetail extends Component {
                       {" "}
                       TOTAL:{" "}
                       <span className={classes.totalAmount}>
-                        ${workorder.cost}
+                        ${stripset.cost}
                       </span>
                     </Typography>
                   </ListItem>
                 </List>
+                <ModalRoute path={stripsetPath} parentPath="/shelfstrips/:id">
+                  <DialogTitle disableTypography className={classes.modalTitle}>
+                    <Typography variant="h6">Download PDF</Typography>
+                    <IconButton
+                      onClick={this.props.history.goBack}
+                      className={classes.closeButton}
+                      color="inherit"
+                      aria-label="Close"
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+                      {stripset && stripset.length > 0
+                        ? "Your shelf strips have been generated. Click below to download a PDF of your set."
+                        : "There are no strips to print. Thank You!"}
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions className={classes.modalActions}>
+                    {stripset && stripset.length > 0 ? (
+                      <StripSet stripset={stripset} />
+                    ) : (
+                      ""
+                    )}
+                  </DialogActions>
+                </ModalRoute>
               </CardContent>
-              {profile.role === "graphics" ? (
-                <CardActions className={classes.orderActions}>
-                  <Button
+
+              <CardActions className={classes.orderActions}>
+                <Button
+                  className={classes.downloadButton}
+                  variant="contained"
+                  size="large"
+                  color="secondary"
+                  component={NavLink}
+                  to={stripsetPath}
+                >
+                  Create
+                </Button>
+
+                {/* <PDFDownloadLink
+          document={<StripSetPDF stripset={stripset}/>}
+          fileName="Shelf Strip Detail.pdf"
+        >
+          {({ blob, url, loading, error }) =>
+            loading ? (
+              "Loading document..."
+            ) : (
+              <Button
+                className={classes.downloadButton}
+                variant="contained"
+                size="large"
+                color="secondary"
+              >
+                <DownloadIcon style={{ marginRight: "8px" }} />
+                Download PDF
+              </Button>
+            )
+          }
+        </PDFDownloadLink> */}
+                {/* <Button
                     variant="contained"
                     color="secondary"
                     onClick={this.handleComplete}
@@ -221,13 +287,11 @@ class StripSetDetail extends Component {
                     style={{ paddingTop: "7px", paddingBottom: "7px" }}
                   >
                     Hold
-                  </Button>
-                </CardActions>
-              ) : (
-                ""
-              )}
+                  </Button> */}
+              </CardActions>
             </Card>
           </Grid>
+          <ModalContainer />
         </Grid>
       );
     } else {
@@ -239,45 +303,45 @@ class StripSetDetail extends Component {
 const mapStateToProps = (state, ownProps) => {
   //console.log(state);
   const id = ownProps.match.params.id;
-  const workorders = state.firestore.data.workorders;
-  const workorder = workorders ? workorders[id] : null;
+  const stripsets = state.firestore.data.stripsets;
+  const stripset = stripsets ? stripsets[id] : null;
   return {
-    workorder: workorder,
+    stripset: stripset,
     auth: state.firebase.auth,
     profile: state.firebase.profile
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    completeWorkorder: (workorder, id) =>
-      dispatch(completeWorkorder(workorder, id)),
-    deleteWorkorder: (collection, id) =>
-      dispatch(deleteWorkorder(collection, id)),
-    holdWorkorder: (workorder, id) => dispatch(holdWorkorder(workorder, id))
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     completeWorkorder: (workorder, id) =>
+//       dispatch(completeWorkorder(workorder, id)),
+//     deleteWorkorder: (collection, id) =>
+//       dispatch(deleteWorkorder(collection, id)),
+//     holdWorkorder: (workorder, id) => dispatch(holdWorkorder(workorder, id))
+//   };
+// };
 
 const styledStripSetDetail = withStyles(styles)(StripSetDetail);
 
 export default compose(
   connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
+    // mapDispatchToProps
   ),
   firestoreConnect(props => {
     if (!props.auth.uid) return [];
     if (props.profile.role === "graphics") {
       return [
         {
-          collection: "workorders",
+          collection: "stripsets",
           where: [["assignedTo", "==", props.auth.uid]]
         }
       ];
     } else
       return [
         {
-          collection: "workorders",
+          collection: "stripsets",
           where: [["requesterId", "==", props.auth.uid]]
         }
       ];

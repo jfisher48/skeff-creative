@@ -41,6 +41,7 @@ class Strip extends Component {
     new: this.props.new,
     id: this.props.id,
     brand: this.props.brand,
+    brandId: this.props.brandId,
     cost: 0,
     package: this.props.package,
     quantity: 1,
@@ -67,6 +68,7 @@ class Strip extends Component {
     } else {
       this.props.onChange(
         this.state.brand,
+        this.state.brandId,
         this.state.quantity,
         this.state.cost,
         this.state.price,
@@ -102,7 +104,8 @@ class Strip extends Component {
 
   handleBrand = (value, label) => {
     this.setState({
-      brand: label
+      brand: label,
+      brandId: value
     });
   };
 

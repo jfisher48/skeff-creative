@@ -17,7 +17,7 @@ const StripSetList = ({ stripsets }) => {
               heldAt={stripset.heldAt && stripset.heldAt.toDate()}
               orderNumber={stripset.stripsetNumber}
               account={stripset.account}
-              items={stripset.items}
+              strips={stripset.strips}
               comments={stripset.comments}
               orderType={stripset.orderType}
               requester={

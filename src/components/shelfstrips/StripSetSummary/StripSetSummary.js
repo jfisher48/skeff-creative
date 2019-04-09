@@ -80,13 +80,13 @@ class StripSetSummary extends Component {
                   <Tooltip
                     title={
                       "This order contains " +
-                      this.props.items.length +
-                      " item(s)"
+                      this.props.strips.length +
+                      " strips(s)"
                     }
                   >
                     <span style={{ marginRight: "20px" }}>
                       <Badge
-                        badgeContent={this.props.items.length}
+                        badgeContent={this.props.strips.length}
                         classes={{ badge: classes.badge }}
                         color="secondary"
                       >

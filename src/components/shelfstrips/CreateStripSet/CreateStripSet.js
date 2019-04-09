@@ -105,6 +105,7 @@ class CreateStripSet extends Component {
       new: true,
       id: this.nextId(),
       brand: "",
+      brandId: "",
       quantity: "",
       price: "",
       package: ""
@@ -140,11 +141,20 @@ class CreateStripSet extends Component {
     return this.uniqueId++;
   };
 
-  update = (newBrand, newQuantity, newCost, newPrice, newPackage, newId) => {
+  update = (
+    newBrand,
+    newBrandId,
+    newQuantity,
+    newCost,
+    newPrice,
+    newPackage,
+    newId
+  ) => {
     console.log(
       "updating strip",
       newId,
       newBrand,
+      newBrandId,
       newQuantity,
       newCost,
       newPrice,
@@ -158,6 +168,7 @@ class CreateStripSet extends Component {
             : {
                 ...strip,
                 brand: newBrand,
+                brandId: newBrandId,
                 quantity: newQuantity,
                 cost: newCost,
                 price: newPrice,

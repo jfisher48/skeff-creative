@@ -5,20 +5,26 @@ import { Switch, NavLink, Route } from "react-router-dom";
 import CreateStripSet from "../../components/shelfstrips/CreateStripSet/CreateStripSet";
 import Helmet from "react-helmet";
 import styles from "./styleShelfStrips";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "recompose";
+import { ModalContainer, ModalRoute } from "react-router-modal";
 import Button from "@material-ui/core/Button";
 import DownloadIcon from "@material-ui/icons/SaveAlt";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 import { StripSetPDF } from "../../components/shelfstrips/StripSetPDF/StripSetPDF.js";
 import { Hidden, Grid } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import { withRouter } from "react-router-dom";
+import StripSetList from "../../components/shelfstrips/StripSetList.js";
+import StripSetDetail from "../../components/shelfstrips/StripSetDetail/StripSetDetail.js";
 
 class ShelfStrips extends Component {
   state = {};
   render() {
     const classes = this.props.classes;
-    const { auth } = this.props;
+    const { auth, stripsets, notifications } = this.props;
     if (!auth.uid) return <Redirect to="/login" />;
     return (
       <div>
@@ -61,9 +67,27 @@ class ShelfStrips extends Component {
             ""
           )}
         </PageHeading>
-        <Switch>
-          <Route exact path="/shelfstrips/create" component={CreateStripSet} />
-          {/* <Route
+        <Grid item xs={12} lg={8}>
+          <Grid container spacing={16}>
+            {this.props.location.pathname !== "/shelfstrips/create" ? (
+              <Grid item xs={12}>
+                <StripSetList stripsets={stripsets} />
+              </Grid>
+            ) : (
+              ""
+            )}
+            <Switch>
+              <Route
+                exact
+                path="/shelfstrips/create"
+                component={CreateStripSet}
+              />
+              <Route
+                path="/shelfstrips/:id"
+                //parentPath="/shelfstrips"
+                component={StripSetDetail}
+              />
+              {/* <Route
                   exact
                   path="/workorders/view"
                   render={() => (
@@ -73,20 +97,11 @@ class ShelfStrips extends Component {
                     />
                   )}
                 /> */}
+            </Switch>
+          </Grid>
+        </Grid>
 
-          {/* <ModalRoute
-                  path="/workorders/:id"
-                  parentPath="/workorders"
-                  component={
-                    this.state.listView === "open"
-                      ? WorkOrderDetail
-                      : this.state.listView === "completed"
-                        ? CompletedWorkOrderDetail
-                        : HeldWorkOrderDetail
-                  }
-                /> */}
-        </Switch>
-        <PDFDownloadLink
+        {/* <PDFDownloadLink
           document={<StripSetPDF />}
           fileName="Shelf Strip Detail.pdf"
         >
@@ -105,7 +120,8 @@ class ShelfStrips extends Component {
               </Button>
             )
           }
-        </PDFDownloadLink>
+        </PDFDownloadLink> */}
+        {/* <ModalContainer /> */}
       </div>
     );
   }
@@ -114,10 +130,53 @@ class ShelfStrips extends Component {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    auth: state.firebase.auth
+    stripsets: state.firestore.ordered.stripsets,
+    //completedWorkorders: state.firestore.ordered.completed_workorders,
+    //heldWorkorders: state.firestore.ordered.held_workorders,
+    auth: state.firebase.auth,
+    notifications: state.firestore.ordered.notifications,
+    profile: state.firebase.profile
   };
 };
 
 const styledShelfStrips = withStyles(styles)(ShelfStrips);
 
-export default connect(mapStateToProps)(styledShelfStrips);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect(props => {
+    if (!props.auth.uid) return [];
+    if (props.profile.role === "graphics") {
+      return [
+        {
+          collection: "stripsets",
+          where: [["assignedTo", "==", props.auth.uid]]
+        },
+        // {
+        //   collection: "completed_workorders",
+        //   where: [["assignedTo", "==", props.auth.uid]]
+        // },
+        // {
+        //   collection: "held_workorders",
+        //   where: [["assignedTo", "==", props.auth.uid]]
+        // },
+        { collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
+      ];
+    } else
+      return [
+        {
+          collection: "stripsets",
+          where: [["requesterId", "==", props.auth.uid]]
+        },
+        // {
+        //   collection: "completed_workorders",
+        //   where: [["requesterId", "==", props.auth.uid]]
+        // },
+        // {
+        //   collection: "held_workorders",
+        //   where: [["requesterId", "==", props.auth.uid]]
+        // },
+        { collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
+      ];
+  }),
+  withRouter
+)(styledShelfStrips);

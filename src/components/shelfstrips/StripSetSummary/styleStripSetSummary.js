@@ -133,3 +133,4 @@ const styles = theme => ({
     objectFit: "cover"
   }
 });
+export default styles;

@@ -19,14 +19,14 @@ import styles from "./styleStripSetPDF";
 export class StripSetPDF extends Component {
   render() {
     //const classes = this.props.classes;
-    //const { workorders } = this.props;
-    //console.log(workorders);
+    const { stripset } = this.props;
+    console.log(stripset);
     return (
       // <PDFViewer width="100%" height="800">
 
       <Document>
         <Page
-          //key={workorder.id}
+          key={stripset.id}
           size="letter"
           orientation="landscape"
           style={styles.page}
@@ -40,20 +40,20 @@ export class StripSetPDF extends Component {
                 paddingLeft: "18pt"
               }}
             >
-              Freedom Oil
+              {stripset.account}
             </Text>
           </View>
           <View style={styles.body}>
-            {stripTest &&
-              stripTest.map(strip => {
+            {stripset &&
+              stripset.strips.map(strip => {
                 return (
-                  <View style={styles.stripContainer}>
+                  <View key={strip.id} style={styles.stripContainer}>
                     <View style={styles.strip}>
                       <View style={styles.logo}>
                         {strip.brand.length > 0 ? (
                           <Image
                             src={require("../../../assets/" +
-                              strip.brand +
+                              strip.brandId +
                               ".jpg")}
                           />
                         ) : (
@@ -63,7 +63,7 @@ export class StripSetPDF extends Component {
                         )}
                       </View>
 
-                      {strip.multi.length > 0 ? (
+                      {strip.multi && strip.multi.length > 0 ? (
                         <View style={styles.stripText}>
                           <Text
                             style={{

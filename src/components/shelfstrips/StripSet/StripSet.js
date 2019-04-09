@@ -1,19 +1,20 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import styles from "./styleWorkOrderReports";
+import styles from "./styleStripSet";
 import Button from "@material-ui/core/Button";
 import DownloadIcon from "@material-ui/icons/SaveAlt";
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { WorkOrderPDF } from "../WorkOrderPDF/WorkOrderPDF.js";
+import { StripSetPDF } from "../StripSetPDF/StripSetPDF";
 
-class WorkOrderReports extends Component {
+class StripSet extends Component {
   render() {
     const classes = this.props.classes;
+    const { stripset } = this.props;
     return (
       <div>
         <PDFDownloadLink
-          document={<WorkOrderPDF workorders={this.props.workorders} />}
-          fileName="Work Order Details.pdf"
+          document={<StripSetPDF stripset={stripset} />}
+          fileName={stripset.account}
         >
           {({ blob, url, loading, error }) =>
             loading ? (
@@ -36,6 +37,6 @@ class WorkOrderReports extends Component {
   }
 }
 
-const styledWorkOrderReports = withStyles(styles)(WorkOrderReports);
+const styledStripSet = withStyles(styles)(StripSet);
 
-export default styledWorkOrderReports;
+export default styledStripSet;
