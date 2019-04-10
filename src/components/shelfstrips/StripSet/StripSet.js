@@ -15,7 +15,7 @@ class StripSet extends Component {
       <div>
         <PDFDownloadLink
           document={<StripSetPDF stripset={stripset} />}
-          fileName={stripset.account}
+          fileName={stripset.account.toLowerCase().replace(/\W/g, "")}
         >
           {({ blob, url, loading, error }) =>
             loading ? (
@@ -28,7 +28,7 @@ class StripSet extends Component {
                 color="secondary"
               >
                 <DownloadIcon style={{ marginRight: "8px" }} />
-                Download PDF
+                Download {stripset.account} Strips
               </Button>
             )
           }

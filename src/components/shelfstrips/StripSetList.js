@@ -9,7 +9,7 @@ const StripSetList = ({ stripsets }) => {
       {stripsets &&
         stripsets.sort(compareValues("dueDate", "asc")).map(stripset => {
           return (
-            <StripSet stripset={stripset} />
+            <StripSet key={stripset.id} stripset={stripset} />
             // <StripSetSummary
             //   stripset={stripset}
             //   key={stripset.id}
