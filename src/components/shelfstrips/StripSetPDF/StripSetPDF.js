@@ -32,15 +32,20 @@ export class StripSetPDF extends Component {
           style={styles.page}
         >
           <View style={styles.header} fixed>
-            {/* <Image src="http://localhost:3000/android-chrome-192x192.png" /> */}
             <Text
               style={{
                 position: "absolute",
                 top: "-18pt",
-                paddingLeft: "18pt"
+                paddingLeft: "25pt"
               }}
             >
-              {stripset.account}
+              {stripset.account +
+                " - " +
+                stripset.requesterFirstName +
+                " " +
+                stripset.requesterLastName +
+                " - Printed " +
+                new Date().toDateString()}
             </Text>
           </View>
           <View style={styles.body}>
@@ -64,7 +69,13 @@ export class StripSetPDF extends Component {
                       </View>
 
                       {strip.multi && strip.multi.length > 0 ? (
-                        <View style={styles.stripText}>
+                        <View
+                          style={
+                            strip.yellow
+                              ? styles.stripTextYellow
+                              : styles.stripText
+                          }
+                        >
                           <Text
                             style={{
                               fontSize: "15pt",

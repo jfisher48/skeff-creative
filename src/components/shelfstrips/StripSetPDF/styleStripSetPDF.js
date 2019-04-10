@@ -43,8 +43,16 @@ const styles = StyleSheet.create({
     height: "72pt",
     display: "flex",
     position: "relative",
-    //backgroundColor: "yellow",
-
+    alignItems: "center",
+    flexDirection: "column",
+    fontFamily: "OpenSans"
+  },
+  stripTextYellow: {
+    width: "126pt",
+    height: "72pt",
+    display: "flex",
+    position: "relative",
+    backgroundColor: "yellow",
     alignItems: "center",
     flexDirection: "column",
     fontFamily: "OpenSans"
