@@ -9,7 +9,8 @@ import { StripSetPDF } from "../StripSetPDF/StripSetPDF";
 class StripSet extends Component {
   render() {
     const classes = this.props.classes;
-    const { stripset } = this.props;
+    const stripset = this.props.stripset;
+    console.log(stripset);
     return (
       <div>
         <PDFDownloadLink

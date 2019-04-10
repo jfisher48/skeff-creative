@@ -121,7 +121,7 @@ class ShelfStrips extends Component {
             )
           }
         </PDFDownloadLink> */}
-        {/* <ModalContainer /> */}
+        <ModalContainer />
       </div>
     );
   }

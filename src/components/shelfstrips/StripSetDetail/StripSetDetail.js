@@ -59,6 +59,7 @@ class StripSetDetail extends Component {
   render() {
     const classes = this.props.classes;
     const { stripset, auth, profile } = this.props;
+    console.log(stripset);
     const stripsetPath = "/shelfstrips/" + stripset.stripsetNumber + "/pdf";
     if (!auth.uid) return <Redirect to="/login" />;
     if (stripset) {
@@ -225,17 +226,13 @@ class StripSetDetail extends Component {
                   </DialogTitle>
                   <DialogContent>
                     <DialogContentText>
-                      {stripset && stripset.length > 0
+                      {stripset
                         ? "Your shelf strips have been generated. Click below to download a PDF of your set."
                         : "There are no strips to print. Thank You!"}
                     </DialogContentText>
                   </DialogContent>
                   <DialogActions className={classes.modalActions}>
-                    {stripset && stripset.length > 0 ? (
-                      <StripSet stripset={stripset} />
-                    ) : (
-                      ""
-                    )}
+                    {stripset ? <StripSet stripset={stripset} /> : ""}
                   </DialogActions>
                 </ModalRoute>
               </CardContent>
@@ -345,5 +342,6 @@ export default compose(
           where: [["requesterId", "==", props.auth.uid]]
         }
       ];
-  })
+  }),
+  withRouter
 )(styledStripSetDetail);

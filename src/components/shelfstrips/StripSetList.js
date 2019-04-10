@@ -1,6 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import StripSetSummary from "./StripSetSummary/StripSetSummary";
+import StripSet from "./StripSet/StripSet";
 
 const StripSetList = ({ stripsets }) => {
   return (
@@ -8,29 +9,30 @@ const StripSetList = ({ stripsets }) => {
       {stripsets &&
         stripsets.sort(compareValues("dueDate", "asc")).map(stripset => {
           return (
-            <StripSetSummary
-              stripset={stripset}
-              key={stripset.id}
-              completedAt={
-                stripset.completedAt && stripset.completedAt.toDate()
-              }
-              heldAt={stripset.heldAt && stripset.heldAt.toDate()}
-              orderNumber={stripset.stripsetNumber}
-              account={stripset.account}
-              strips={stripset.strips}
-              comments={stripset.comments}
-              orderType={stripset.orderType}
-              requester={
-                stripset.requesterFirstName + " " + stripset.requesterLastName
-              }
-              content={stripset.content}
-              link={"/shelfstrips/" + stripset.id}
-              date={stripset.createdAt.toDate()}
-              dueDate={stripset.dueDate.toDate()}
-              isRush={stripset.isRush}
-              assignedToName={stripset.assignedToName}
-              cost={"$" + stripset.cost}
-            />
+            <StripSet stripset={stripset} />
+            // <StripSetSummary
+            //   stripset={stripset}
+            //   key={stripset.id}
+            //   completedAt={
+            //     stripset.completedAt && stripset.completedAt.toDate()
+            //   }
+            //   heldAt={stripset.heldAt && stripset.heldAt.toDate()}
+            //   orderNumber={stripset.stripsetNumber}
+            //   account={stripset.account}
+            //   strips={stripset.strips}
+            //   comments={stripset.comments}
+            //   orderType={stripset.orderType}
+            //   requester={
+            //     stripset.requesterFirstName + " " + stripset.requesterLastName
+            //   }
+            //   content={stripset.content}
+            //   link={"/shelfstrips/" + stripset.id}
+            //   date={stripset.createdAt.toDate()}
+            //   dueDate={stripset.dueDate.toDate()}
+            //   isRush={stripset.isRush}
+            //   assignedToName={stripset.assignedToName}
+            //   cost={"$" + stripset.cost}
+            // />
           );
         })}
     </Grid>
