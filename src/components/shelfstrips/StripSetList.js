@@ -2,40 +2,45 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import StripSetSummary from "./StripSetSummary/StripSetSummary";
 import StripSet from "./StripSet/StripSet";
+import { List } from "@material-ui/core";
 
-const StripSetList = ({ stripsets }) => {
+const StripSetList = ({ stripsets, role }) => {
   return (
-    <Grid container spacing={16}>
+    <div style={{ display: "table-row-group" }}>
       {stripsets &&
         stripsets.sort(compareValues("dueDate", "asc")).map(stripset => {
           return (
-            <StripSet key={stripset.id} stripset={stripset} />
-            // <StripSetSummary
-            //   stripset={stripset}
-            //   key={stripset.id}
-            //   completedAt={
-            //     stripset.completedAt && stripset.completedAt.toDate()
-            //   }
-            //   heldAt={stripset.heldAt && stripset.heldAt.toDate()}
-            //   orderNumber={stripset.stripsetNumber}
-            //   account={stripset.account}
-            //   strips={stripset.strips}
-            //   comments={stripset.comments}
-            //   orderType={stripset.orderType}
-            //   requester={
-            //     stripset.requesterFirstName + " " + stripset.requesterLastName
-            //   }
-            //   content={stripset.content}
-            //   link={"/shelfstrips/" + stripset.id}
-            //   date={stripset.createdAt.toDate()}
-            //   dueDate={stripset.dueDate.toDate()}
-            //   isRush={stripset.isRush}
-            //   assignedToName={stripset.assignedToName}
-            //   cost={"$" + stripset.cost}
-            // />
+            //<StripSet key={stripset.id} stripset={stripset} />
+            <StripSetSummary
+              stripset={stripset}
+              key={stripset.id}
+              completedAt={
+                stripset.completedAt && stripset.completedAt.toDate()
+              }
+              heldAt={stripset.heldAt && stripset.heldAt.toDate()}
+              orderNumber={stripset.stripsetNumber}
+              account={stripset.account}
+              strips={stripset.strips}
+              comments={stripset.comments}
+              orderType={stripset.orderType}
+              name={
+                role && role !== "sales"
+                  ? stripset.requesterFirstName +
+                    " " +
+                    stripset.requesterLastName
+                  : stripset.assignedToName
+              }
+              contains={stripset.strips.length}
+              link={"/shelfstrips/" + stripset.id}
+              date={stripset.createdAt.toDate()}
+              dueDate={stripset.dueDate.toDate()}
+              isRush={stripset.isRush}
+              assignedToName={stripset.assignedToName}
+              cost={"$" + stripset.cost}
+            />
           );
         })}
-    </Grid>
+    </div>
   );
 
   function compareValues(key, order = "asc") {

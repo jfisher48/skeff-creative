@@ -19,7 +19,7 @@ class StripSet extends Component {
         >
           {({ blob, url, loading, error }) =>
             loading ? (
-              "Loading document..."
+              "Loading..."
             ) : (
               <Button
                 className={classes.downloadButton}
@@ -27,8 +27,7 @@ class StripSet extends Component {
                 size="large"
                 color="secondary"
               >
-                <DownloadIcon style={{ marginRight: "8px" }} />
-                Download {stripset.account} Strips
+                <DownloadIcon />
               </Button>
             )
           }

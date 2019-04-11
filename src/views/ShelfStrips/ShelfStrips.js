@@ -14,7 +14,7 @@ import DownloadIcon from "@material-ui/icons/SaveAlt";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Redirect } from "react-router-dom";
 import { StripSetPDF } from "../../components/shelfstrips/StripSetPDF/StripSetPDF.js";
-import { Hidden, Grid } from "@material-ui/core";
+import { Hidden, Grid, Paper } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { withRouter } from "react-router-dom";
 import StripSetList from "../../components/shelfstrips/StripSetList.js";
@@ -24,7 +24,8 @@ class ShelfStrips extends Component {
   state = {};
   render() {
     const classes = this.props.classes;
-    const { auth, stripsets, notifications } = this.props;
+    const { auth, stripsets, notifications, profile } = this.props;
+    const role = profile.role;
     if (!auth.uid) return <Redirect to="/login" />;
     return (
       <div>
@@ -71,7 +72,28 @@ class ShelfStrips extends Component {
           <Grid container spacing={16}>
             {this.props.location.pathname !== "/shelfstrips/create" ? (
               <Grid item xs={12}>
-                <StripSetList stripsets={stripsets} />
+                <Paper className={classes.paper}>
+                  <div className={classes.table}>
+                    <Hidden xsDown className={classes.tableHead}>
+                      <div className={classes.tableRow}>
+                        <div className={classes.nameCell}>Order Id#</div>
+                        <div className={classes.tableCell}>Account</div>
+                        <div className={classes.tableCell}>
+                          {profile.role !== "sales"
+                            ? "Created By"
+                            : "Assigned To"}
+                        </div>
+
+                        <div className={classes.tableCell}>Order Date</div>
+
+                        <div className={classes.tableCell}>Due Date</div>
+
+                        <div className={classes.tableCell}>Contains</div>
+                      </div>
+                    </Hidden>
+                    <StripSetList stripsets={stripsets} role={role} />
+                  </div>
+                </Paper>
               </Grid>
             ) : (
               ""
@@ -128,7 +150,7 @@ class ShelfStrips extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  //console.log(state);
   return {
     stripsets: state.firestore.ordered.stripsets,
     //completedWorkorders: state.firestore.ordered.completed_workorders,

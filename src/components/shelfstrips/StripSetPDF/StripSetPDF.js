@@ -20,7 +20,6 @@ export class StripSetPDF extends Component {
   render() {
     //const classes = this.props.classes;
     const { stripset } = this.props;
-    console.log(stripset);
     return (
       // <PDFViewer width="100%" height="800">
 
@@ -71,9 +70,9 @@ export class StripSetPDF extends Component {
                       {strip.multi && strip.multi.length > 0 ? (
                         <View
                           style={
-                            strip.yellow
-                              ? styles.stripTextYellow
-                              : styles.stripText
+                            !strip.yellow
+                              ? styles.stripText
+                              : styles.stripTextYellow
                           }
                         >
                           <Text
@@ -107,7 +106,13 @@ export class StripSetPDF extends Component {
                           </Text>
                         </View>
                       ) : (
-                        <View style={styles.stripText}>
+                        <View
+                          style={
+                            !strip.yellow
+                              ? styles.stripText
+                              : styles.stripTextYellow
+                          }
+                        >
                           <Text
                             style={{
                               position: "absolute",
