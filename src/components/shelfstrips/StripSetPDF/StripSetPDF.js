@@ -20,6 +20,7 @@ export class StripSetPDF extends Component {
   render() {
     //const classes = this.props.classes;
     const { stripset } = this.props;
+    console.log(stripset);
     return (
       // <PDFViewer width="100%" height="800">
 

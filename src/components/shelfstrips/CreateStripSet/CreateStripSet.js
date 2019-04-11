@@ -354,7 +354,7 @@ class CreateStripSet extends Component {
                     variant="contained"
                     className={classes.createButton}
                     onClick={() => {
-                      this.props.history.push("/workorders");
+                      this.props.history.push("/shelfstrips");
                     }}
                   >
                     Cancel

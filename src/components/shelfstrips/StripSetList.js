@@ -23,7 +23,7 @@ const StripSetList = ({ stripsets, role }) => {
               strips={stripset.strips}
               comments={stripset.comments}
               orderType={stripset.orderType}
-              name={
+              displayName={
                 role && role !== "sales"
                   ? stripset.requesterFirstName +
                     " " +
@@ -36,6 +36,9 @@ const StripSetList = ({ stripsets, role }) => {
               dueDate={stripset.dueDate.toDate()}
               isRush={stripset.isRush}
               assignedToName={stripset.assignedToName}
+              requesterName={
+                stripset.requesterFirstName + " " + stripset.requesterLastName
+              }
               cost={"$" + stripset.cost}
             />
           );
