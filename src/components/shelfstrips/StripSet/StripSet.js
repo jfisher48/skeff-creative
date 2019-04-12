@@ -17,13 +17,24 @@ class StripSet extends Component {
   render() {
     const classes = this.props.classes;
     const stripset = this.props.stripset;
+    const date = new Date();
     console.log(this.state);
     return (
       <div>
         {this.state.pdf == true ? (
           <PDFDownloadLink
             document={<StripSetPDF stripset={stripset} />}
-            fileName={stripset.account.toLowerCase().replace(/\W/g, "")}
+            fileName={(
+              stripset.account +
+              "_" +
+              date.getMonth() +
+              "_" +
+              date.getDate() +
+              "_" +
+              date.getFullYear()
+            )
+              .toLowerCase()
+              .replace(/\W/g, "")}
           >
             {({ blob, url, loading, error }) =>
               loading ? (

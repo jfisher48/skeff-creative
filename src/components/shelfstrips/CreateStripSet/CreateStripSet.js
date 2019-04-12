@@ -108,7 +108,8 @@ class CreateStripSet extends Component {
       brandId: "",
       quantity: "",
       price: "",
-      isYellow: "false",
+      isYellow: false,
+      extText: "",
       package: ""
     };
 
@@ -129,7 +130,7 @@ class CreateStripSet extends Component {
           >
             {newStrip.brand}
             {newStrip.quantity} ${newStrip.price}
-            {newStrip.package}
+            {newStrip.package} {newStrip.extText} {newStrip.isYellow}
           </Strip>
         );
       }
@@ -149,6 +150,7 @@ class CreateStripSet extends Component {
     newCost,
     newPrice,
     newIsYellow,
+    newExtText,
     newPackage,
     newId
   ) => {
@@ -161,6 +163,7 @@ class CreateStripSet extends Component {
       newCost,
       newPrice,
       newIsYellow,
+      newExtText,
       newPackage
     );
     this.setState(prevState => ({
@@ -176,6 +179,7 @@ class CreateStripSet extends Component {
                 cost: newCost,
                 price: newPrice,
                 isYellow: newIsYellow,
+                extText: newExtText,
                 package: newPackage
               }
       )
@@ -205,7 +209,7 @@ class CreateStripSet extends Component {
         }
         secondary={
           <Typography>
-            ${strip.price} {strip.package}
+            ${strip.price} {strip.package} {strip.extText}
           </Typography>
         }
         yellowStatus={

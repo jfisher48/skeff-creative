@@ -20,6 +20,13 @@ export class StripSetPDF extends Component {
   render() {
     //const classes = this.props.classes;
     const { stripset } = this.props;
+
+    var expandedStrips = [];
+
+    stripset.strips.forEach(strip => {
+      for (var i = 0; i < strip.quantity; i++) expandedStrips.push(strip);
+    });
+    console.log(expandedStrips);
     console.log(stripset);
     return (
       // <PDFViewer width="100%" height="800">
@@ -49,10 +56,10 @@ export class StripSetPDF extends Component {
             </Text>
           </View>
           <View style={styles.body}>
-            {stripset &&
-              stripset.strips.map(strip => {
+            {expandedStrips &&
+              expandedStrips.map((strip, i) => {
                 return (
-                  <View key={strip.id} style={styles.stripContainer}>
+                  <View key={i} style={styles.stripContainer}>
                     <View style={styles.strip}>
                       <View style={styles.logo}>
                         {strip.brand.length > 0 ? (
@@ -68,7 +75,7 @@ export class StripSetPDF extends Component {
                         )}
                       </View>
 
-                      {strip.multi && strip.multi.length > 0 ? (
+                      {strip.extText && strip.extText.length > 0 ? (
                         <View
                           style={
                             !strip.isYellow
@@ -83,7 +90,7 @@ export class StripSetPDF extends Component {
                               top: "4%"
                             }}
                           >
-                            {strip.multi}
+                            {strip.extText}
                           </Text>
                           <Text
                             style={{
@@ -92,7 +99,7 @@ export class StripSetPDF extends Component {
                               fontSize: "36pt"
                             }}
                           >
-                            {strip.price}
+                            ${strip.price}
                           </Text>
                           <Text
                             style={{

@@ -49,6 +49,7 @@ class Strip extends Component {
     quantity: 1,
     price: this.props.price,
     isYellow: this.props.isYellow,
+    extText: this.props.extText,
     labelWidth: 0,
     errMessage: ""
   };
@@ -76,6 +77,7 @@ class Strip extends Component {
         this.state.cost,
         this.state.price,
         this.state.isYellow,
+        this.state.extText,
         this.state.package,
         this.state.id
       );
@@ -130,7 +132,8 @@ class Strip extends Component {
     const classes = this.props.classes;
     const {
       brands,
-      stripPackages
+      stripPackages,
+      extensions
       //width
     } = this.props;
 
@@ -208,7 +211,7 @@ class Strip extends Component {
                 className={classes.yellowCheck}
                 control={
                   <Checkbox
-                    //checked={this.state.isYellow}
+                    checked={this.state.isYellow}
                     onChange={this.handleYellowToggle}
                     value="isYellow"
                   />
@@ -216,6 +219,35 @@ class Strip extends Component {
                 label="Yellow (Promo Pricing)"
               />
             </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl variant="filled" className={classes.formSelect}>
+                <InputLabel required htmlFor="extText">
+                  Multi/Ext Text
+                </InputLabel>
+                <Select
+                  value={
+                    this.state.extText.length > 0 ? this.state.extText : " "
+                  }
+                  onChange={this.handleChange}
+                  IconComponent={KeyboardArrowDownRounded}
+                  input={
+                    <OutlinedInput
+                      labelWidth={this.state.labelWidth}
+                      className={classes.input}
+                      name="extText"
+                    />
+                  }
+                >
+                  {extensions &&
+                    extensions.map(ext => (
+                      <MenuItem key={ext.id} value={ext.name}>
+                        {ext.name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6} />
             <Grid item xs={12} sm={6}>
               <TextField
                 required
@@ -316,7 +348,8 @@ const mapStateToProps = state => {
   console.log(state);
   return {
     brands: state.firestore.ordered.brands,
-    stripPackages: state.firestore.ordered.stripPackges
+    stripPackages: state.firestore.ordered.stripPackges,
+    extensions: state.firestore.ordered.stripExt
   };
 };
 
@@ -324,7 +357,8 @@ export default compose(
   connect(mapStateToProps),
   firestoreConnect([
     { collection: "brands", orderBy: ["seq", "asc"] },
-    { collection: "stripPackges", orderBy: ["seq", "asc"] }
+    { collection: "stripPackges", orderBy: ["seq", "asc"] },
+    { collection: "stripExt", orderBy: ["seq", "asc"] }
   ]),
   withWidth()
 )(styledStrip);
