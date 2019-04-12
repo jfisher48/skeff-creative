@@ -21,6 +21,10 @@ const styles = theme => ({
       float: "right",
       marginLeft: "10px"
     }
+  },
+  yellowCheck: {
+    float: "right",
+    marginRight: "0"
   }
 });
 

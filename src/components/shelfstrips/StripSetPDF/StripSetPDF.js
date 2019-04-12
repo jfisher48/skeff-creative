@@ -71,7 +71,7 @@ export class StripSetPDF extends Component {
                       {strip.multi && strip.multi.length > 0 ? (
                         <View
                           style={
-                            !strip.yellow
+                            !strip.isYellow
                               ? styles.stripText
                               : styles.stripTextYellow
                           }
@@ -109,7 +109,7 @@ export class StripSetPDF extends Component {
                       ) : (
                         <View
                           style={
-                            !strip.yellow
+                            !strip.isYellow
                               ? styles.stripText
                               : styles.stripTextYellow
                           }

@@ -101,13 +101,14 @@ class CreateStripSet extends Component {
   addStrip = e => {
     e.preventDefault();
     const newStrip = {
-      editing: true,
-      new: true,
+      //editing: true,
+      //new: true,
       id: this.nextId(),
       brand: "",
       brandId: "",
       quantity: "",
       price: "",
+      isYellow: "false",
       package: ""
     };
 
@@ -147,6 +148,7 @@ class CreateStripSet extends Component {
     newQuantity,
     newCost,
     newPrice,
+    newIsYellow,
     newPackage,
     newId
   ) => {
@@ -158,6 +160,7 @@ class CreateStripSet extends Component {
       newQuantity,
       newCost,
       newPrice,
+      newIsYellow,
       newPackage
     );
     this.setState(prevState => ({
@@ -172,6 +175,7 @@ class CreateStripSet extends Component {
                 quantity: newQuantity,
                 cost: newCost,
                 price: newPrice,
+                isYellow: newIsYellow,
                 package: newPackage
               }
       )
@@ -204,9 +208,9 @@ class CreateStripSet extends Component {
             ${strip.price} {strip.package}
           </Typography>
         }
-        stripCost={
+        yellowStatus={
           <Typography style={{ display: "inline-flex", marginRight: "10px" }}>
-            {strip.cost}
+            {strip.isYellow ? "Yellow (Promo Price)" : ""}
           </Typography>
         }
       />

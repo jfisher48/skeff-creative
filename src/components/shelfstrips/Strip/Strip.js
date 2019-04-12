@@ -22,7 +22,9 @@ import {
   ListItemSecondaryAction,
   ListItemAvatar,
   Avatar,
-  withWidth
+  withWidth,
+  FormControlLabel,
+  Checkbox
 } from "@material-ui/core";
 import KeyboardArrowDownRounded from "@material-ui/icons/KeyboardArrowDownRounded";
 import { compose } from "recompose";
@@ -37,8 +39,8 @@ import BrandSelect from "../../BrandSelect/BrandSelect.js";
 
 class Strip extends Component {
   state = {
-    editing: this.props.editing,
-    new: this.props.new,
+    editing: true,
+    new: true,
     id: this.props.id,
     brand: this.props.brand,
     brandId: this.props.brandId,
@@ -46,6 +48,7 @@ class Strip extends Component {
     package: this.props.package,
     quantity: 1,
     price: this.props.price,
+    isYellow: this.props.isYellow,
     labelWidth: 0,
     errMessage: ""
   };
@@ -72,6 +75,7 @@ class Strip extends Component {
         this.state.quantity,
         this.state.cost,
         this.state.price,
+        this.state.isYellow,
         this.state.package,
         this.state.id
       );
@@ -109,6 +113,10 @@ class Strip extends Component {
     });
   };
 
+  handleYellowToggle = () => {
+    this.setState({ isYellow: !this.state.isYellow });
+  };
+
   // componentDidUpdate(prevProps, prevState) {
   //   if (
   //     this.state.signSize !== prevState.signSize ||
@@ -138,117 +146,98 @@ class Strip extends Component {
         <DialogContent>
           <Grid container spacing={16}>
             <Grid item xs={12}>
-              <Grid container spacing={16}>
-                <Grid item xs={12} sm={6}>
-                  {/* <FormControl variant="filled" className={classes.formSelect}>
-                    <InputLabel shrink required htmlFor="account">
-                      Account
-                    </InputLabel>
-                    <AccountSelect
-                      accounts={accounts}
-                      onSelectAccount={this.handleAccount}
-                    />
-                  </FormControl> */}
-                  <FormControl variant="filled" className={classes.formSelect}>
-                    <InputLabel shrink required htmlFor="brand">
-                      Brand
-                    </InputLabel>
-                    {/* <Select
-                      value={this.state.brand}
-                      onChange={this.handleChange}
-                      IconComponent={KeyboardArrowDownRounded}
-                      input={
-                        <OutlinedInput
-                          labelWidth={this.state.labelWidth}
-                          className={classes.outlinedInput}
-                          name="brand"
-                        />
-                      }
-                    >
-                      {brands &&
-                        brands.map(brand => (
-                          <MenuItem key={brand.id} value={brand.name}>
-                            {brand.name}
-                          </MenuItem>
-                        ))}
-                    </Select> */}
-                    <BrandSelect
-                      value={this.state.brand}
-                      brands={brands}
-                      onSelectBrand={this.handleBrand}
-                    />
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    value={this.state.quantity}
-                    variant="outlined"
-                    name="quantity"
-                    label="Quantity"
-                    className={classNames(classes.textField, classes.dense)}
-                    fullWidth
-                    margin="normal"
-                    onChange={this.handleChange}
-                    type="number"
-                  />
-                </Grid>
-              </Grid>
+              <FormControl variant="filled" className={classes.formSelect}>
+                <InputLabel shrink required htmlFor="brand">
+                  Brand
+                </InputLabel>
+                <BrandSelect
+                  value={this.state.brand}
+                  brands={brands}
+                  onSelectBrand={this.handleBrand}
+                />
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <Grid container spacing={16}>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    required
-                    value={this.state.price}
-                    variant="outlined"
-                    name="price"
-                    label="Price"
-                    className={classNames(classes.textField, classes.dense)}
-                    margin="normal"
-                    onChange={this.handleChange}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      )
-                    }}
+              <FormControl variant="filled" className={classes.formSelect}>
+                <InputLabel required htmlFor="package">
+                  Package
+                </InputLabel>
+                <Select
+                  value={
+                    this.state.package.length > 0 ? this.state.package : " "
+                  }
+                  onChange={this.handleChange}
+                  IconComponent={KeyboardArrowDownRounded}
+                  input={
+                    <OutlinedInput
+                      labelWidth={this.state.labelWidth}
+                      className={classes.input}
+                      name="package"
+                    />
+                  }
+                >
+                  {stripPackages &&
+                    stripPackages.map(pkg => (
+                      <MenuItem key={pkg.id} value={pkg.name}>
+                        {pkg.name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                required
+                value={this.state.price}
+                variant="outlined"
+                name="price"
+                label="Price"
+                className={classNames(classes.textField, classes.dense)}
+                margin="normal"
+                onChange={this.handleChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  )
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControlLabel
+                className={classes.yellowCheck}
+                control={
+                  <Checkbox
+                    //checked={this.state.isYellow}
+                    onChange={this.handleYellowToggle}
+                    value="isYellow"
                   />
-                </Grid>
-                <Grid item xs={12} md={6} />
-                <Grid item xs={12} md={4}>
-                  <FormControl variant="filled" className={classes.formSelect}>
-                    <InputLabel required htmlFor="package">
-                      Package
-                    </InputLabel>
-                    <Select
-                      value={
-                        this.state.package.length > 0 ? this.state.package : " "
-                      }
-                      onChange={this.handleChange}
-                      IconComponent={KeyboardArrowDownRounded}
-                      input={
-                        <OutlinedInput
-                          labelWidth={this.state.labelWidth}
-                          className={classes.input}
-                          name="package"
-                        />
-                      }
-                    >
-                      {stripPackages &&
-                        stripPackages.map(pkg => (
-                          <MenuItem key={pkg.id} value={pkg.name}>
-                            {pkg.name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                  <Typography style={{ color: "red" }}>
-                    {this.state.errMessage}
-                  </Typography>
-                </Grid>
-              </Grid>
+                }
+                label="Yellow (Promo Pricing)"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                value={this.state.quantity}
+                variant="outlined"
+                name="quantity"
+                label="Quantity"
+                className={classNames(classes.textField)}
+                fullWidth
+                margin="normal"
+                onChange={this.handleChange}
+                type="number"
+                inputProps={{
+                  min: 0
+                }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} />
+            <Grid item xs={12}>
+              <Typography style={{ color: "red" }}>
+                {this.state.errMessage}
+              </Typography>
             </Grid>
           </Grid>
         </DialogContent>
@@ -299,7 +288,7 @@ class Strip extends Component {
           secondary={this.props.secondary}
         />
         <ListItemSecondaryAction>
-          {width !== "xs" ? this.props.stripCost : ""}
+          {width !== "xs" ? this.props.yellowStatus : ""}
           <IconButton onClick={this.edit}>
             <EditIcon />
           </IconButton>
