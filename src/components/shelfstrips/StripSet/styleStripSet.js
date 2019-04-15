@@ -1,6 +1,9 @@
 const styles = theme => ({
   downloadButton: {
-    boxShadow: "none"
+    boxShadow: "none",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "12px"
+    }
   }
 });
 

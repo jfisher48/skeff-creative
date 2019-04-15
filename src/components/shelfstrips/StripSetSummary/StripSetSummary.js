@@ -39,14 +39,16 @@ class StripSetSummary extends Component {
           <div className={classes.nameCell}>{this.props.orderNumber}</div>
           <div className={classes.tableCell}>{this.props.account}</div>
           <div className={classes.tableCell}>{this.props.displayName}</div>
+          <div className={classes.tableCell}>{this.props.contains}</div>
           <div className={classes.tableCell}>
             <Moment format="M/DD/YY">{this.props.date}</Moment>
           </div>
           <div className={classes.tableCell}>
-            <Moment format="M/DD/YY">{this.props.dueDate}</Moment>
+            <div className={classes.tableInner}>
+              <Moment format="M/DD/YY">{this.props.dueDate}</Moment>
+            </div>
           </div>
           <div className={classes.tableCell}>
-            {/* {this.props.contains} */}
             <StripSet key={stripset.id} stripset={this.props.stripset} />
           </div>
         </ListItem>

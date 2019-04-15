@@ -83,12 +83,13 @@ class ShelfStrips extends Component {
                             ? "Created By"
                             : "Assigned To"}
                         </div>
+                        <div className={classes.tableCell}>Strips</div>
 
-                        <div className={classes.tableCell}>Order Date</div>
+                        <div className={classes.tableCell}>Ordered</div>
 
-                        <div className={classes.tableCell}>Due Date</div>
+                        <div className={classes.tableCell}>Due</div>
 
-                        <div className={classes.tableCell}>Contains</div>
+                        <div className={classes.tableCell} />
                       </div>
                     </Hidden>
                     <StripSetList stripsets={stripsets} role={role} />

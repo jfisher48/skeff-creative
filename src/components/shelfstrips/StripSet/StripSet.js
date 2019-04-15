@@ -20,7 +20,14 @@ class StripSet extends Component {
     const date = new Date();
     console.log(this.state);
     return (
-      <div>
+      <div
+        style={{
+          display: "flex",
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
         {this.state.pdf == true ? (
           <PDFDownloadLink
             document={<StripSetPDF stripset={stripset} />}
@@ -35,25 +42,49 @@ class StripSet extends Component {
             )
               .toLowerCase()
               .replace(/\W/g, "")}
+            style={{
+              padding: 0,
+              margin: 0,
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
           >
             {({ blob, url, loading, error }) =>
               loading ? (
-                "Loading..."
+                <div
+                  style={{
+                    padding: "8px 4px",
+                    margin: 0,
+                    height: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  Loading...
+                </div>
               ) : (
                 <Button
                   className={classes.downloadButton}
-                  variant="contained"
-                  size="large"
+                  //variant="contained"
+                  //size="large"
                   color="secondary"
                 >
-                  <DownloadIcon />
+                  {/* <DownloadIcon /> */}
                   DOWNLOAD
                 </Button>
               )
             }
           </PDFDownloadLink>
         ) : (
-          <Button onClick={this.handleExport}>EXPORT PDF</Button>
+          <Button
+            className={classes.downloadButton}
+            onClick={this.handleExport}
+          >
+            CREATE PDF
+          </Button>
         )}
       </div>
     );

@@ -209,7 +209,9 @@ class CreateStripSet extends Component {
         }
         secondary={
           <Typography>
-            ${strip.price} {strip.package} {strip.extText}
+            {strip.extText && strip.extText.includes("for")
+              ? strip.extText + " $" + strip.price + " " + strip.package
+              : "$" + strip.price + " " + strip.package + " " + strip.extText}
           </Typography>
         }
         yellowStatus={

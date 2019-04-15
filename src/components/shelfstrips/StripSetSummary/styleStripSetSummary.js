@@ -21,6 +21,12 @@ const styles = theme => ({
       fontSize: "12px"
     }
   },
+  tableInner: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%"
+  },
   nameCell: {
     display: "table-cell",
     padding: "16px 4px 16px 20px",
