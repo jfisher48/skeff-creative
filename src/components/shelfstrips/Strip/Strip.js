@@ -108,6 +108,13 @@ class Strip extends Component {
     console.log(this.state);
   };
 
+  handleChangeNumber = e => {
+    this.setState({
+      [e.target.name]: parseInt(e.target.value, 10)
+    });
+    console.log(this.state);
+  };
+
   handleBrand = (value, label) => {
     this.setState({
       brand: label,
@@ -258,11 +265,11 @@ class Strip extends Component {
                 className={classNames(classes.textField)}
                 fullWidth
                 margin="normal"
-                onChange={this.handleChange}
+                onChange={this.handleChangeNumber}
                 type="number"
-                inputProps={{
-                  min: 0
-                }}
+                // inputProps={{
+                //   min: 0
+                // }}
               />
             </Grid>
             <Grid item xs={12} sm={6} />

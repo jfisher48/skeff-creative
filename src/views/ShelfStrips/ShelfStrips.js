@@ -76,8 +76,7 @@ class ShelfStrips extends Component {
                   <div className={classes.table}>
                     <Hidden xsDown className={classes.tableHead}>
                       <div className={classes.tableRow}>
-                        <div className={classes.nameCell}>Order Id#</div>
-                        <div className={classes.tableCell}>Account</div>
+                        <div className={classes.nameCell}>Project</div>
                         <div className={classes.tableCell}>
                           {profile.role !== "sales"
                             ? "Created By"

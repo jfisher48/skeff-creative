@@ -38,8 +38,10 @@ class CreateStripSet extends Component {
     orderType: "Shelf Strips",
     accountId: "",
     cost: 0,
+    count: 0,
     comments: "",
     isRush: false,
+    description: "",
     assignedTo: "unassigned",
     assignedToName: "",
     assignedToEmail: "skeffgraphics@gmail.com",
@@ -72,6 +74,14 @@ class CreateStripSet extends Component {
       total += strips[i].cost;
     }
     return total;
+  };
+
+  figureCount = strips => {
+    var stripCount = 0;
+    for (var i = 0; i < strips.length; i++) {
+      stripCount += strips[i].quantity;
+    }
+    return stripCount;
   };
 
   handleChange = e => {
@@ -234,7 +244,8 @@ class CreateStripSet extends Component {
       console.log(this.state);
     }
     if (this.state.strips !== prevState.strips) {
-      this.setState({ cost: this.figureCost(this.state.strips) });
+      console.log(this.state.strips);
+      this.setState({ count: this.figureCount(this.state.strips) });
     }
   }
 
@@ -247,9 +258,12 @@ class CreateStripSet extends Component {
   render() {
     const classes = this.props.classes;
     const { auth, users, accounts } = this.props;
-    const { account, assignedTo, strips } = this.state;
+    const { account, assignedTo, strips, description } = this.state;
     const isEnabled =
-      account.length > 0 && assignedTo !== "unassigned" && strips.length > 0;
+      account.length > 0 &&
+      description.length > 0 &&
+      assignedTo !== "unassigned" &&
+      strips.length > 0;
     if (!auth.uid) return <Redirect to="/login" />;
 
     return (
@@ -290,6 +304,18 @@ class CreateStripSet extends Component {
                       onSelectAccount={this.handleAccount}
                     />
                   </FormControl>
+                </Grid>
+                <Grid item xs={12} xl={6}>
+                  <TextField
+                    name="description"
+                    variant="outlined"
+                    label="Description"
+                    required
+                    className={classes.textField}
+                    fullWidth
+                    //margin="normal"
+                    onChange={this.handleChange}
+                  />
                 </Grid>
                 <Grid item xs={12} xl={6}>
                   <FormControl variant="filled" className={classes.formSelect}>

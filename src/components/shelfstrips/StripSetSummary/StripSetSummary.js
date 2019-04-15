@@ -36,8 +36,12 @@ class StripSetSummary extends Component {
           key={this.props.id}
           className={classes.tableRow}
         >
-          <div className={classes.nameCell}>{this.props.orderNumber}</div>
-          <div className={classes.tableCell}>{this.props.account}</div>
+          <div className={classes.nameCell}>
+            {this.props.account}{" "}
+            {this.props.description && this.props.description.length > 0
+              ? this.props.description
+              : ""}
+          </div>
           <div className={classes.tableCell}>{this.props.displayName}</div>
           <div className={classes.tableCell}>{this.props.contains}</div>
           <div className={classes.tableCell}>

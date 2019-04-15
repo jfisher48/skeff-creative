@@ -19,6 +19,7 @@ const StripSetList = ({ stripsets, role }) => {
               heldAt={stripset.heldAt && stripset.heldAt.toDate()}
               orderNumber={stripset.stripsetNumber}
               account={stripset.account}
+              description={stripset.description}
               strips={stripset.strips}
               comments={stripset.comments}
               orderType={stripset.orderType}
@@ -29,7 +30,7 @@ const StripSetList = ({ stripsets, role }) => {
                     stripset.requesterLastName
                   : stripset.assignedToName
               }
-              contains={stripset.strips.length}
+              contains={stripset.count && stripset.count}
               link={"/shelfstrips/" + stripset.id}
               date={stripset.createdAt.toDate()}
               dueDate={stripset.dueDate.toDate()}
