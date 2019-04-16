@@ -369,8 +369,24 @@ class CreateWorkOrder extends Component {
 
   render() {
     const classes = this.props.classes;
-    const { auth, users, accounts } = this.props;
+    const { auth, users, accounts, profile } = this.props;
     const { account, assignedTo, items } = this.state;
+
+    if (profile.role === "sales") {
+      var myAccounts =
+        accounts &&
+        accounts.filter(account => {
+          return (
+            (account.routeNumber &&
+              account.routeNumber === profile.routeNumber) ||
+            (!account.routeNumber &&
+              (account.team === profile.team || account.team === "all"))
+          );
+        });
+    } else {
+      myAccounts = accounts;
+    }
+
     const isEnabled =
       account.length > 0 && assignedTo !== "unassigned" && items.length > 0;
     if (!auth.uid) return <Redirect to="/login" />;
@@ -409,7 +425,7 @@ class CreateWorkOrder extends Component {
                       Account
                     </InputLabel>
                     <AccountSelect
-                      accounts={accounts}
+                      accounts={myAccounts}
                       onSelectAccount={this.handleAccount}
                     />
                   </FormControl>
@@ -506,7 +522,8 @@ const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
     users: state.firestore.ordered.users,
-    accounts: state.firestore.ordered.accounts
+    accounts: state.firestore.ordered.accounts,
+    profile: state.firebase.profile
   };
 };
 
@@ -547,7 +564,7 @@ export default compose(
   firestoreConnect(props => {
     if (!props.auth.uid) return [];
     return [
-      { collection: "accounts", where: [["userId", "==", props.auth.uid]] },
+      { collection: "accounts" },
       { collection: "users", where: ["role", "==", "graphics"] }
     ];
   }),

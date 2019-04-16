@@ -8,11 +8,10 @@ export const createStripSet = stripset => {
 
     firestore
       .collection("stripsets")
-      .doc(profile.routeNumber + ("0000000" + newCount).slice(-7) + "SS")
+      .doc(profile.routeNumber + ("0000000" + newCount).slice(-7))
       .set({
         ...stripset,
-        stripsetNumber:
-          profile.routeNumber + ("0000000" + newCount).slice(-7) + "SS",
+        stripsetNumber: profile.routeNumber + ("0000000" + newCount).slice(-7),
         requesterFirstName: profile.firstName,
         requesterLastName: profile.lastName,
         requesterId: authorId,
@@ -40,7 +39,8 @@ export const createStripSet = stripset => {
           .set(
             {
               name: stripset.account,
-              userId: authorId
+              team: profile.team,
+              addedBy: profile.firstName + " " + profile.lastName
             },
             { merge: true }
           )

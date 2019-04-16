@@ -39,7 +39,8 @@ export const createWorkorder = workorder => {
           .set(
             {
               name: workorder.account,
-              userId: authorId
+              team: profile.team,
+              addedBy: profile.firstName + " " + profile.lastName
             },
             { merge: true }
           )

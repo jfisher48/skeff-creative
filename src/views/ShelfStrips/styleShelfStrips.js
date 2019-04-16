@@ -34,6 +34,38 @@ const styles = theme => ({
     [theme.breakpoints.down("lg")]: {
       fontSize: "12px"
     }
+  },
+  widgetHeader: {
+    padding: "16px 26px",
+    lineHeight: "33.06px",
+    backgroundColor: "rgba(229,239,247,1)"
+  },
+  widgetContent: {
+    padding: "24px 26px"
+  },
+  widgetTitle: {
+    fontSize: "1.5em",
+    fontWeight: "500",
+    lineHeight: "33.06px",
+    color: "#4e5262"
+  },
+  widgetList: {
+    padding: "0"
+  },
+  widgetListItem: {
+    padding: "0",
+    marginBottom: "10px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start"
+  },
+  notificationUser: {
+    fontWeight: "500"
+  },
+  notificationTime: {
+    paddingLeft: "10px",
+    color: "grey",
+    fontSize: "16px"
   }
 });
 

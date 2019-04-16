@@ -8,17 +8,28 @@ import styles from "./styleShelfStrips";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "recompose";
-import { ModalContainer, ModalRoute } from "react-router-modal";
+//import { ModalContainer, ModalRoute } from "react-router-modal";
 import Button from "@material-ui/core/Button";
-import DownloadIcon from "@material-ui/icons/SaveAlt";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+//import DownloadIcon from "@material-ui/icons/SaveAlt";
+//import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Redirect } from "react-router-dom";
-import { StripSetPDF } from "../../components/shelfstrips/StripSetPDF/StripSetPDF.js";
-import { Hidden, Grid, Paper } from "@material-ui/core";
+//import { StripSetPDF } from "../../components/shelfstrips/StripSetPDF/StripSetPDF.js";
+import {
+  Hidden,
+  Grid,
+  Paper,
+  Card,
+  CardHeader,
+  CardContent,
+  Typography,
+  List,
+  ListItem
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { withRouter } from "react-router-dom";
 import StripSetList from "../../components/shelfstrips/StripSetList.js";
 import StripSetDetail from "../../components/shelfstrips/StripSetDetail/StripSetDetail.js";
+import Moment from "react-moment";
 
 class ShelfStrips extends Component {
   state = {};
@@ -68,48 +79,49 @@ class ShelfStrips extends Component {
             ""
           )}
         </PageHeading>
-        <Grid item xs={12} lg={8}>
-          <Grid container spacing={16}>
-            {this.props.location.pathname !== "/shelfstrips/create" ? (
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <div className={classes.table}>
-                    <Hidden xsDown className={classes.tableHead}>
-                      <div className={classes.tableRow}>
-                        <div className={classes.nameCell}>Project</div>
-                        <div className={classes.tableCell}>
-                          {profile.role !== "sales"
-                            ? "Created By"
-                            : "Assigned To"}
+        <Grid container spacing={16}>
+          <Grid item xs={12} lg={8}>
+            <Grid container spacing={16}>
+              {this.props.location.pathname !== "/shelfstrips/create" ? (
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <div className={classes.table}>
+                      <Hidden xsDown className={classes.tableHead}>
+                        <div className={classes.tableRow}>
+                          <div className={classes.nameCell}>Project</div>
+                          <div className={classes.tableCell}>
+                            {profile.role !== "sales"
+                              ? "Created By"
+                              : "Assigned To"}
+                          </div>
+                          <div className={classes.tableCell}>Strips</div>
+
+                          <div className={classes.tableCell}>Ordered</div>
+
+                          <div className={classes.tableCell}>Due</div>
+
+                          <div className={classes.tableCell} />
                         </div>
-                        <div className={classes.tableCell}>Strips</div>
-
-                        <div className={classes.tableCell}>Ordered</div>
-
-                        <div className={classes.tableCell}>Due</div>
-
-                        <div className={classes.tableCell} />
-                      </div>
-                    </Hidden>
-                    <StripSetList stripsets={stripsets} role={role} />
-                  </div>
-                </Paper>
-              </Grid>
-            ) : (
-              ""
-            )}
-            <Switch>
-              <Route
-                exact
-                path="/shelfstrips/create"
-                component={CreateStripSet}
-              />
-              <Route
-                path="/shelfstrips/:id"
-                //parentPath="/shelfstrips"
-                component={StripSetDetail}
-              />
-              {/* <Route
+                      </Hidden>
+                      <StripSetList stripsets={stripsets} role={role} />
+                    </div>
+                  </Paper>
+                </Grid>
+              ) : (
+                ""
+              )}
+              <Switch>
+                <Route
+                  exact
+                  path="/shelfstrips/create"
+                  component={CreateStripSet}
+                />
+                <Route
+                  path="/shelfstrips/:id"
+                  //parentPath="/shelfstrips"
+                  component={StripSetDetail}
+                />
+                {/* <Route
                   exact
                   path="/workorders/view"
                   render={() => (
@@ -119,7 +131,56 @@ class ShelfStrips extends Component {
                     />
                   )}
                 /> */}
-            </Switch>
+              </Switch>
+            </Grid>
+          </Grid>
+          <Grid item xs={12} lg={4}>
+            <Grid container spacing={16}>
+              <Grid item xs={12} sm={6} lg={12}>
+                {/* when i move this to its own component, remember to pass props down */}
+                <Card className={classes.card}>
+                  <CardHeader
+                    className={classes.widgetHeader}
+                    disableTypography
+                    title={
+                      <Typography
+                        color="textSecondary"
+                        className={classes.widgetTitle}
+                      >
+                        Notifications
+                      </Typography>
+                    }
+                  />
+                  <CardContent className={classes.widgetContent}>
+                    <List className={classes.widgetList}>
+                      {notifications &&
+                        notifications.map(item => {
+                          return (
+                            <ListItem
+                              className={classes.widgetListItem}
+                              key={item.id}
+                            >
+                              <Typography variant="subtitle2">
+                                <span className={classes.notificationUser}>
+                                  {item.user}{" "}
+                                </span>
+                                <span className={classes.notificationContent}>
+                                  {item.content}{" "}
+                                </span>
+                              </Typography>
+                              <div className={classes.notificationTime}>
+                                <Typography variant="body2">
+                                  <Moment fromNow>{item.time.toDate()}</Moment>
+                                </Typography>
+                              </div>
+                            </ListItem>
+                          );
+                        })}
+                    </List>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
 
@@ -143,7 +204,7 @@ class ShelfStrips extends Component {
             )
           }
         </PDFDownloadLink> */}
-        <ModalContainer />
+        {/* <ModalContainer /> */}
       </div>
     );
   }
