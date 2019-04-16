@@ -166,6 +166,13 @@ class Item extends Component {
     console.log(this.state);
   };
 
+  handleChangeNumber = e => {
+    this.setState({
+      [e.target.name]: parseInt(e.target.value, 10)
+    });
+    console.log(this.state);
+  };
+
   handleBrand = (value, label) => {
     this.setState({
       brand: label
@@ -371,7 +378,7 @@ class Item extends Component {
                     className={classNames(classes.textField, classes.dense)}
                     fullWidth
                     margin="normal"
-                    onChange={this.handleChange}
+                    onChange={this.handleChangeNumber}
                     type="number"
                   />
                 </Grid>

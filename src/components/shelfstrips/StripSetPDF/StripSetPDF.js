@@ -29,8 +29,6 @@ export class StripSetPDF extends Component {
     console.log(expandedStrips);
     console.log(stripset);
     return (
-      // <PDFViewer width="100%" height="800">
-
       <Document>
         <Page
           key={stripset.id}
@@ -47,6 +45,8 @@ export class StripSetPDF extends Component {
               }}
             >
               {stripset.account +
+                " " +
+                stripset.description +
                 " - " +
                 stripset.requesterFirstName +
                 " " +
@@ -146,46 +146,7 @@ export class StripSetPDF extends Component {
                   </View>
                 );
               })}
-            {/* <View style={styles.stripContainer}>
-              <View style={styles.strip}>
-                <View style={styles.logo}>
-                  <Image src={require("../../../assets/budweiser.jpg")} />
-                </View>
-                <View style={styles.stripText}>
-                  <Text
-                    style={{
-                      fontSize: "15pt",
-                      position: "absolute",
-                      top: "4%"
-                    }}
-                  >
-                    2 for
-                  </Text>
-                  <Text
-                    style={{
-                      position: "absolute",
-                      top: "15%",
-                      fontSize: "36pt"
-                    }}
-                  >
-                    $4.00
-                  </Text>
-                  <Text
-                    style={{
-                      position: "absolute",
-                      bottom: "6%",
-                      fontSize: "12pt",
-                      textTransform: "uppercase",
-                      flexWrap: "nowrap"
-                    }}
-                  >
-                    25oz Cans
-                  </Text>
-                </View>
-              </View>
-            </View> */}
           </View>
-
           <Text
             style={styles.pageNumber}
             render={({ pageNumber, totalPages }) =>
@@ -195,7 +156,6 @@ export class StripSetPDF extends Component {
           />
         </Page>
       </Document>
-      // </PDFViewer>
     );
   }
 }

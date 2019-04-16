@@ -148,6 +148,45 @@ class CreateStripSet extends Component {
     console.log(this.state.strips);
   };
 
+  copyStrip = prevId => {
+    const newStrip = {
+      //editing: true,
+      //new: true,
+      id: this.nextId(),
+      brand: this.state.strips[prevId].brand,
+      brandId: this.state.strips[prevId].brandId,
+      quantity: this.state.strips[prevId].quantity,
+      price: this.state.strips[prevId].price,
+      isYellow: this.state.strips[prevId].isYellow,
+      extText: this.state.strips[prevId].extText,
+      package: this.state.strips[prevId].package
+    };
+
+    console.log(newStrip);
+    const strips = [...this.state.strips, newStrip];
+    this.setState(
+      {
+        strips: strips
+      },
+      () => {
+        console.log(this.state.strips);
+        return (
+          <Strip
+            {...this.state.strips[newStrip.id]}
+            //key={newStrip.id}
+            //index={newStrip.id}
+            onChange={this.update}
+          >
+            {newStrip.brand}
+            {newStrip.quantity} ${newStrip.price}
+            {newStrip.package} {newStrip.extText} {newStrip.isYellow}
+          </Strip>
+        );
+      }
+    );
+    console.log(this.state.strips);
+  };
+
   nextId = () => {
     this.uniqueId = this.uniqueId || 0;
     return this.uniqueId++;
@@ -211,6 +250,7 @@ class CreateStripSet extends Component {
         index={i}
         onChange={this.update}
         removeStrip={this.removeStrip}
+        copyStrip={this.copyStrip}
         primary={
           <React.Fragment>
             {strip.brand}{" "}

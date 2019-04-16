@@ -20,8 +20,6 @@ export class WorkOrderPDF extends Component {
     const { workorders } = this.props;
     console.log(workorders);
     return (
-      // <PDFViewer width="100%" height="800">
-
       <Document>
         {workorders &&
           workorders.sort(compareValues("dueDate", "asc")).map(workorder => {
@@ -167,7 +165,6 @@ export class WorkOrderPDF extends Component {
             );
           })}
       </Document>
-      // </PDFViewer>
     );
   }
 }

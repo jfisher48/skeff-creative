@@ -34,6 +34,7 @@ import styles from "./styleStrip.js";
 import { getFirestore } from "redux-firestore";
 import SaveIcon from "@material-ui/icons/Save";
 import EditIcon from "@material-ui/icons/Edit";
+import CopyIcon from "@material-ui/icons/AddToPhotos";
 import DeleteIcon from "@material-ui/icons/Delete";
 import BrandSelect from "../../BrandSelect/BrandSelect.js";
 
@@ -57,6 +58,10 @@ class Strip extends Component {
   edit = e => {
     e.preventDefault();
     this.setState({ editing: true });
+  };
+
+  copy = e => {
+    e.preventDefault();
   };
 
   save = e => {
@@ -330,6 +335,13 @@ class Strip extends Component {
           {width !== "xs" ? this.props.yellowStatus : ""}
           <IconButton onClick={this.edit}>
             <EditIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => {
+              this.props.copyStrip(this.props.id);
+            }}
+          >
+            <CopyIcon />
           </IconButton>
           <IconButton
             onClick={() => {

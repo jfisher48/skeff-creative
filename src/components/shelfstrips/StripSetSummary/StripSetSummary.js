@@ -48,9 +48,7 @@ class StripSetSummary extends Component {
             <Moment format="M/DD/YY">{this.props.date}</Moment>
           </div>
           <div className={classes.tableCell}>
-            <div className={classes.tableInner}>
-              <Moment format="M/DD/YY">{this.props.dueDate}</Moment>
-            </div>
+            <Moment format="M/DD/YY">{this.props.dueDate}</Moment>
           </div>
           <div className={classes.tableCell}>
             <StripSet key={stripset.id} stripset={this.props.stripset} />

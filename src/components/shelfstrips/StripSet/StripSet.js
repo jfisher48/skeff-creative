@@ -33,6 +33,7 @@ class StripSet extends Component {
             document={<StripSetPDF stripset={stripset} />}
             fileName={(
               stripset.account +
+              stripset.description +
               "_" +
               date.getMonth() +
               "_" +
