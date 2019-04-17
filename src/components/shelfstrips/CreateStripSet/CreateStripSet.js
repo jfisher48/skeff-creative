@@ -356,7 +356,7 @@ class CreateStripSet extends Component {
                       Account
                     </InputLabel>
                     <AccountSelect
-                      accounts={accounts}
+                      accounts={myAccounts}
                       onSelectAccount={this.handleAccount}
                     />
                   </FormControl>
