@@ -27,9 +27,9 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "recompose";
 import SummaryHeader from "../SummaryHeader/SummaryHeader";
 import CloseIcon from "@material-ui/icons/Close";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import DownloadIcon from "@material-ui/icons/SaveAlt";
-import { StripSetPDF } from "../StripSetPDF/StripSetPDF";
+//import { PDFDownloadLink } from "@react-pdf/renderer";
+//import DownloadIcon from "@material-ui/icons/SaveAlt";
+//import { StripSetPDF } from "../StripSetPDF/StripSetPDF";
 import styles from "./styleStripSetDetail";
 import { Redirect } from "react-router-dom";
 import StripSet from "../StripSet/StripSet";
@@ -58,7 +58,7 @@ class StripSetDetail extends Component {
 
   render() {
     const classes = this.props.classes;
-    const { stripset, auth, profile } = this.props;
+    const { stripset, auth } = this.props;
     console.log(stripset);
     const stripsetPath = "/shelfstrips/" + stripset.stripsetNumber + "/pdf";
     if (!auth.uid) return <Redirect to="/login" />;

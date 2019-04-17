@@ -9,7 +9,6 @@ import {
   //PDFViewer,
   Image
 } from "@react-pdf/renderer";
-import stripTest from "../../../data/stripTest";
 //import { connect } from "react-redux";
 //import { firestoreConnect } from "react-redux-firebase";
 //import { compose } from "recompose";
@@ -66,7 +65,7 @@ export class StripSetPDF extends Component {
                           <Image
                             src={require("../../../assets/" +
                               strip.brandId +
-                              ".jpg")}
+                              ".png")}
                           />
                         ) : (
                           <Image

@@ -31,7 +31,7 @@ import { compose } from "recompose";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import styles from "./styleStrip.js";
-import { getFirestore } from "redux-firestore";
+//import { getFirestore } from "redux-firestore";
 import SaveIcon from "@material-ui/icons/Save";
 import EditIcon from "@material-ui/icons/Edit";
 import CopyIcon from "@material-ui/icons/AddToPhotos";

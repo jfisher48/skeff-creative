@@ -1,8 +1,8 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
+//import Grid from "@material-ui/core/Grid";
 import StripSetSummary from "./StripSetSummary/StripSetSummary";
-import StripSet from "./StripSet/StripSet";
-import { List } from "@material-ui/core";
+//import StripSet from "./StripSet/StripSet";
+//import { List } from "@material-ui/core";
 
 const StripSetList = ({ stripsets, role }) => {
   return (
