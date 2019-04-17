@@ -149,17 +149,20 @@ class CreateStripSet extends Component {
   };
 
   copyStrip = prevId => {
+    const prevStrip = this.state.strips.filter(strip => {
+      return strip.id === prevId;
+    });
     const newStrip = {
       //editing: true,
       //new: true,
       id: this.nextId(),
-      brand: this.state.strips[prevId].brand,
-      brandId: this.state.strips[prevId].brandId,
-      quantity: this.state.strips[prevId].quantity,
-      price: this.state.strips[prevId].price,
-      isYellow: this.state.strips[prevId].isYellow,
-      extText: this.state.strips[prevId].extText,
-      package: this.state.strips[prevId].package
+      brand: prevStrip[0].brand,
+      brandId: prevStrip[0].brandId,
+      quantity: prevStrip[0].quantity,
+      price: prevStrip[0].price,
+      isYellow: prevStrip[0].isYellow,
+      extText: prevStrip[0].extText,
+      package: prevStrip[0].package
     };
 
     console.log(newStrip);
