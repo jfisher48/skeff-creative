@@ -6,7 +6,10 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { compose } from "recompose";
 import { connect } from "react-redux";
-import { createStripSet } from "../../../store/actions/shelfstripActions";
+import {
+  createStripSet,
+  createProject
+} from "../../../store/actions/shelfstripActions";
 import styles from "./styleCreateStripSet.js";
 import {
   Checkbox,
@@ -116,7 +119,7 @@ class CreateStripSet extends Component {
       id: this.nextId(),
       brand: "",
       brandId: "",
-      quantity: "",
+      quantity: 1,
       price: "",
       isYellow: false,
       extText: "",
@@ -287,15 +290,43 @@ class CreateStripSet extends Component {
       console.log(this.state);
     }
     if (this.state.strips !== prevState.strips) {
-      console.log(this.state.strips);
       this.setState({ count: this.figureCount(this.state.strips) });
+      if (this.state.count > 0 && this.state.count % 10 === 0) {
+        this.saveProject();
+      }
     }
   }
 
   handleSubmit = e => {
     e.preventDefault();
     this.props.createStripSet(this.state);
+    //this.saveProject()
     this.props.history.push("/shelfstrips");
+  };
+
+  saveProject = () => {
+    const firestore = getFirestore();
+
+    let newCount = this.props.profile.createdProjectCount + 1;
+    if (this.state.projectId) {
+      this.props.createProject(this.state);
+      console.log("updated project " + this.state.projectId);
+    } else {
+      this.setState(
+        { projectId: this.props.profile.routeNumber + "-" + newCount },
+        () => {
+          console.log("created project " + this.state.projectId);
+          this.props.createProject(this.state);
+          firestore
+            .collection("users")
+            .doc(this.props.auth.uid)
+            .update({
+              createdProjectCount: newCount
+            });
+          //this.props.history.push("/shelfstrips/projects/" + this.state.projectId)
+        }
+      );
+    }
   };
 
   render() {
@@ -425,15 +456,19 @@ class CreateStripSet extends Component {
                   ""
                 )}
                 <Grid item xs={12}>
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    onClick={this.addStrip}
-                    className={classes.addButton}
-                  >
-                    <AddIcon className={classes.addIcon} />
-                    New Strip
-                  </Button>
+                  {this.state.accountId && this.state.accountId.length > 0 ? (
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      onClick={this.addStrip}
+                      className={classes.addButton}
+                    >
+                      <AddIcon className={classes.addIcon} />
+                      New Strip
+                    </Button>
+                  ) : (
+                    ""
+                  )}
                 </Grid>
                 <Grid item xs={12}>
                   <Button
@@ -475,7 +510,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createStripSet: stripset => dispatch(createStripSet(stripset))
+    createStripSet: stripset => dispatch(createStripSet(stripset)),
+    createProject: stripset => dispatch(createProject(stripset))
   };
 };
 

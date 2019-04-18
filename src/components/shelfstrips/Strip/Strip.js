@@ -47,7 +47,7 @@ class Strip extends Component {
     brandId: this.props.brandId,
     cost: 0,
     package: this.props.package,
-    quantity: 1,
+    quantity: this.props.quantity,
     price: this.props.price,
     isYellow: this.props.isYellow,
     extText: this.props.extText,
@@ -364,7 +364,7 @@ class Strip extends Component {
 const styledStrip = withStyles(styles)(Strip);
 
 const mapStateToProps = state => {
-  console.log(state);
+  //console.log(state);
   return {
     brands: state.firestore.ordered.brands,
     stripPackages: state.firestore.ordered.stripPackges,

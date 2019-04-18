@@ -48,6 +48,51 @@ export const createStripSet = stripset => {
   };
 };
 
+export const createProject = stripset => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    const profile = getState().firebase.profile;
+    const authorId = getState().firebase.auth.uid;
+
+    //let newCount = profile.createdOrderCount + 1;
+
+    firestore
+      .collection("projects")
+      .doc(stripset.projectId)
+      .set(
+        {
+          ...stripset,
+          //stripsetNumber: profile.routeNumber + ("0000000" + newCount).slice(-7),
+          //requesterFirstName: profile.firstName,
+          //requesterLastName: profile.lastName,
+          requesterId: authorId
+          //requesterEmail: profile.email,
+          //createdAt: new Date()
+        },
+        { merge: true }
+      )
+      .then(() => {
+        dispatch({ type: "CREATE_PROJECT", stripset });
+      })
+      .catch(err => {
+        dispatch({ type: "CREATE_PROJECT_ERROR", err });
+      })
+      .then(
+        firestore
+          .collection("accounts")
+          .doc(stripset.accountId)
+          .set(
+            {
+              name: stripset.account,
+              team: profile.team,
+              addedBy: profile.firstName + " " + profile.lastName
+            },
+            { merge: true }
+          )
+      );
+  };
+};
+
 //   export const completeWorkorder = (workorder, id) => {
 //     return (dispatch, getState, { getFirebase, getFirestore }) => {
 //       const firestore = getFirestore();

@@ -117,7 +117,7 @@ class ShelfStrips extends Component {
                   component={CreateStripSet}
                 />
                 <Route
-                  path="/shelfstrips/:id"
+                  path="/shelfstrips/orders/:id"
                   //parentPath="/shelfstrips"
                   component={StripSetDetail}
                 />

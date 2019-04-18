@@ -8,6 +8,12 @@ const shelfstripReducer = (state = initState, action) => {
     case "CREATE_STRIPSET_ERROR":
       console.log("create stripset error", action.err);
       return state;
+    case "CREATE_PROJECT":
+      console.log("created project", action.stripset);
+      return state;
+    case "CREATE_PROJECT_ERROR":
+      console.log("create project error", action.err);
+      return state;
     // case "COMPLETE_WORKORDER":
     //   console.log("complete workorder", action.workorder);
     //   return state;
