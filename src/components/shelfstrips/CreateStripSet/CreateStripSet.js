@@ -41,7 +41,8 @@ class CreateStripSet extends Component {
     orderType: "Shelf Strips",
     accountId: "",
     cost: 0,
-    count: 0,
+    lineCount: 0,
+    stripCount: 0,
     comments: "",
     isRush: false,
     description: "",
@@ -79,10 +80,18 @@ class CreateStripSet extends Component {
     return total;
   };
 
-  figureCount = strips => {
+  figureStripCount = strips => {
     var stripCount = 0;
     for (var i = 0; i < strips.length; i++) {
       stripCount += strips[i].quantity;
+    }
+    return stripCount;
+  };
+
+  figureLineCount = strips => {
+    var stripCount = 0;
+    for (var i = 0; i < strips.length; i++) {
+      stripCount += 1;
     }
     return stripCount;
   };
@@ -290,8 +299,11 @@ class CreateStripSet extends Component {
       console.log(this.state);
     }
     if (this.state.strips !== prevState.strips) {
-      this.setState({ count: this.figureCount(this.state.strips) });
-      if (this.state.count > 0 && this.state.count % 10 === 0) {
+      this.setState({
+        stripCount: this.figureStripCount(this.state.strips),
+        lineCount: this.figureLineCount(this.state.strips)
+      });
+      if (this.state.lineCount > 0 && this.state.lineCount % 10 === 0) {
         this.saveProject();
       }
     }

@@ -45,7 +45,10 @@ export const signUp = newUser => {
             initials: newUser.firstName[0] + newUser.lastName[0],
             email: newUser.email,
             createdOrderCount: 0,
-            role: "undefined"
+            createdProjectCount: 0,
+            role: "undefined",
+            routeNumber: "undefined",
+            team: "all"
           });
       })
       .then(() => {

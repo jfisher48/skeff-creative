@@ -12,16 +12,19 @@ const styles = theme => ({
   //   },
   tableHead: {
     display: "table-header-group"
+    //borderBottom: "1px solid black"
   },
   tableRow: {
     display: "table-row",
-    width: "100%"
+    width: "100%",
+    backgroundColor: "rgba(229,239,247,0.15)"
   },
   tableCell: {
     display: "table-cell",
     padding: "16px 4px",
     color: "#4e5262",
-    backgroundColor: "rgba(229,239,247,1)",
+    fontWeight: "bold",
+    //backgroundColor: "rgba(229,239,247,1)",
     [theme.breakpoints.down("lg")]: {
       fontSize: "12px"
     }
@@ -30,7 +33,8 @@ const styles = theme => ({
     display: "table-cell",
     padding: "16px 4px 16px 20px",
     color: "#4e5262",
-    backgroundColor: "rgba(229,239,247,1)",
+    fontWeight: "bold",
+    //backgroundColor: "rgba(229,239,247,1)",
     [theme.breakpoints.down("lg")]: {
       fontSize: "12px"
     }

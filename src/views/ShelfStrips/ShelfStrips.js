@@ -84,11 +84,23 @@ class ShelfStrips extends Component {
             <Grid container spacing={16}>
               {this.props.location.pathname !== "/shelfstrips/create" ? (
                 <Grid item xs={12}>
-                  <Paper className={classes.paper}>
+                  <Card className={classes.paper}>
+                    <CardHeader
+                      className={classes.widgetHeader}
+                      disableTypography
+                      title={
+                        <Typography
+                          color="textSecondary"
+                          className={classes.widgetTitle}
+                        >
+                          Open Shelf Strip Orders
+                        </Typography>
+                      }
+                    />
                     <div className={classes.table}>
                       <Hidden xsDown className={classes.tableHead}>
                         <div className={classes.tableRow}>
-                          <div className={classes.nameCell}>Project</div>
+                          <div className={classes.nameCell}>Description</div>
                           <div className={classes.tableCell}>
                             {profile.role !== "sales"
                               ? "Created By"
@@ -105,7 +117,7 @@ class ShelfStrips extends Component {
                       </Hidden>
                       <StripSetList stripsets={stripsets} role={role} />
                     </div>
-                  </Paper>
+                  </Card>
                 </Grid>
               ) : (
                 ""
@@ -258,7 +270,7 @@ export default compose(
         //   collection: "held_workorders",
         //   where: [["requesterId", "==", props.auth.uid]]
         // },
-        { collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
+        { collection: "notifications", limit: 6, orderBy: ["time", "desc"] }
       ];
   }),
   withRouter

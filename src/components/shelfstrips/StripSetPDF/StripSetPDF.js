@@ -20,6 +20,14 @@ export class StripSetPDF extends Component {
     //const classes = this.props.classes;
     const { stripset } = this.props;
 
+    const tryRequire = file => {
+      try {
+        return require("../../../assets/" + file + ".png");
+      } catch (err) {
+        return require("../../../assets/needlogo.jpg");
+      }
+    };
+
     var expandedStrips = [];
 
     stripset.strips.forEach(strip => {
@@ -62,11 +70,7 @@ export class StripSetPDF extends Component {
                     <View style={styles.strip}>
                       <View style={styles.logo}>
                         {strip.brand.length > 0 ? (
-                          <Image
-                            src={require("../../../assets/" +
-                              strip.brandId +
-                              ".png")}
-                          />
+                          <Image src={tryRequire(strip.brandId)} />
                         ) : (
                           <Image
                             src={require("../../../assets/needlogo.jpg")}

@@ -360,7 +360,7 @@ export default compose(
           collection: "held_workorders",
           where: [["requesterId", "==", props.auth.uid]]
         },
-        { collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
+        { collection: "notifications", limit: 6, orderBy: ["time", "desc"] }
       ];
   }),
   withRouter
