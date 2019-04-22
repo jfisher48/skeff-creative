@@ -1,3 +1,26 @@
+function setDueDate(check) {
+  var dueDate;
+  var d = new Date();
+  var n = d.getDay();
+  if ((n === 1 || n === 2 || n === 3) && check === false) {
+    dueDate = new Date(Date.now() + 172800000);
+  } else if ((n === 4 || n === 5 || n === 6) && check === false) {
+    dueDate = new Date(Date.now() + 345600000);
+  } else if (n === 0 && check === false) {
+    dueDate = new Date(Date.now() + 259200000);
+  } else if (n === 0 && check === true) {
+    dueDate = new Date(Date.now() + 172800000);
+  } else if (n === 5 && check === true) {
+    dueDate = new Date(Date.now() + 345600000);
+  } else if (n === 6 && check === true) {
+    dueDate = new Date(Date.now() + 259200000);
+  } else {
+    dueDate = new Date(Date.now() + 86400000);
+  }
+
+  return dueDate;
+}
+
 export const createStripSet = stripset => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
@@ -16,7 +39,8 @@ export const createStripSet = stripset => {
         requesterLastName: profile.lastName,
         requesterId: authorId,
         requesterEmail: profile.email,
-        createdAt: new Date()
+        createdAt: new Date(),
+        dueDate: setDueDate(stripset.isRush)
       })
       .then(() => {
         dispatch({ type: "CREATE_STRIPSET", stripset });
@@ -53,6 +77,12 @@ export const createProject = stripset => {
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
     const authorId = getState().firebase.auth.uid;
+    var created;
+    if (stripset.created) {
+      created = stripset.created;
+    } else {
+      created = new Date();
+    }
 
     //let newCount = profile.createdOrderCount + 1;
 
@@ -62,6 +92,8 @@ export const createProject = stripset => {
       .set(
         {
           ...stripset,
+          lastSaved: new Date(),
+          created: created,
           //stripsetNumber: profile.routeNumber + ("0000000" + newCount).slice(-7),
           //requesterFirstName: profile.firstName,
           //requesterLastName: profile.lastName,
@@ -76,6 +108,57 @@ export const createProject = stripset => {
       })
       .catch(err => {
         dispatch({ type: "CREATE_PROJECT_ERROR", err });
+      })
+      .then(
+        firestore
+          .collection("accounts")
+          .doc(stripset.accountId)
+          .set(
+            {
+              name: stripset.account,
+              team: profile.team,
+              addedBy: profile.firstName + " " + profile.lastName
+            },
+            { merge: true }
+          )
+      )
+      .then(
+        firestore
+          .collection("drafts")
+          .doc(stripset.projectId)
+          .delete()
+      );
+  };
+};
+
+export const createDraft = stripset => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    const profile = getState().firebase.profile;
+    const authorId = getState().firebase.auth.uid;
+
+    //let newCount = profile.createdOrderCount + 1;
+
+    firestore
+      .collection("drafts")
+      .doc(stripset.projectId)
+      .set(
+        {
+          ...stripset,
+          //stripsetNumber: profile.routeNumber + ("0000000" + newCount).slice(-7),
+          //requesterFirstName: profile.firstName,
+          //requesterLastName: profile.lastName,
+          requesterId: authorId
+          //requesterEmail: profile.email,
+          //createdAt: new Date()
+        },
+        { merge: true }
+      )
+      .then(() => {
+        dispatch({ type: "CREATE_DRAFT", stripset });
+      })
+      .catch(err => {
+        dispatch({ type: "CREATE_DRAFT_ERROR", err });
       })
       .then(
         firestore

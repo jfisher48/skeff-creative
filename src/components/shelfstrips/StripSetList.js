@@ -32,8 +32,8 @@ const StripSetList = ({ stripsets, role }) => {
               }
               contains={stripset.stripCount && stripset.stripCount}
               link={"/shelfstrips/" + stripset.id}
-              date={stripset.createdAt.toDate()}
-              dueDate={stripset.dueDate.toDate()}
+              date={stripset.createdAt && stripset.createdAt.toDate()}
+              dueDate={stripset.dueDate && stripset.dueDate.toDate()}
               isRush={stripset.isRush}
               assignedToName={stripset.assignedToName}
               requesterName={

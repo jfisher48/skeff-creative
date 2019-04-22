@@ -344,7 +344,7 @@ export default compose(
           collection: "held_workorders",
           where: [["assignedTo", "==", props.auth.uid]]
         },
-        { collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
+        { collection: "notifications", limit: 6, orderBy: ["time", "desc"] }
       ];
     } else
       return [

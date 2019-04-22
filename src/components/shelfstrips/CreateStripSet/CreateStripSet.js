@@ -8,7 +8,8 @@ import { compose } from "recompose";
 import { connect } from "react-redux";
 import {
   createStripSet,
-  createProject
+  createProject,
+  createDraft
 } from "../../../store/actions/shelfstripActions";
 import styles from "./styleCreateStripSet.js";
 import {
@@ -50,7 +51,7 @@ class CreateStripSet extends Component {
     assignedToName: "",
     assignedToEmail: "skeffgraphics@gmail.com",
     strips: [],
-    dueDate: setDueDate(this.isRush),
+    //dueDate: setDueDate(this.isRush),
     labelWidth: 0
   };
 
@@ -295,7 +296,7 @@ class CreateStripSet extends Component {
     ) {
       console.log(this.state.account);
       this.setAssignedToName(this.state.assignedTo);
-      this.setState({ dueDate: setDueDate(this.state.isRush) });
+      //this.setState({ dueDate: setDueDate(this.state.isRush) });
       console.log(this.state);
     }
     if (this.state.strips !== prevState.strips) {
@@ -304,7 +305,7 @@ class CreateStripSet extends Component {
         lineCount: this.figureLineCount(this.state.strips)
       });
       if (this.state.lineCount > 0 && this.state.lineCount % 10 === 0) {
-        this.saveProject();
+        this.saveDraft();
       }
     }
   }
@@ -314,6 +315,30 @@ class CreateStripSet extends Component {
     this.props.createStripSet(this.state);
     //this.saveProject()
     this.props.history.push("/shelfstrips");
+  };
+
+  saveDraft = () => {
+    const firestore = getFirestore();
+
+    let newCount = this.props.profile.createdProjectCount + 1;
+    if (this.state.projectId) {
+      this.props.createProject(this.state);
+      console.log("updated project " + this.state.projectId);
+    } else {
+      this.setState(
+        { projectId: this.props.profile.routeNumber + "-" + newCount },
+        () => {
+          console.log("created project " + this.state.projectId);
+          this.props.createDraft(this.state);
+          firestore
+            .collection("users")
+            .doc(this.props.auth.uid)
+            .update({
+              createdProjectCount: newCount
+            });
+        }
+      );
+    }
   };
 
   saveProject = () => {
@@ -335,7 +360,6 @@ class CreateStripSet extends Component {
             .update({
               createdProjectCount: newCount
             });
-          //this.props.history.push("/shelfstrips/projects/" + this.state.projectId)
         }
       );
     }
@@ -490,7 +514,17 @@ class CreateStripSet extends Component {
                     color="secondary"
                     className={classes.createButton}
                   >
-                    Submit
+                    Submit Order
+                  </Button>
+                  <Button
+                    disabled={!isEnabled}
+                    variant="contained"
+                    className={classes.createButton}
+                    onClick={() => {
+                      this.saveProject();
+                    }}
+                  >
+                    Save Project
                   </Button>
                   <Button
                     variant="contained"
@@ -523,7 +557,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     createStripSet: stripset => dispatch(createStripSet(stripset)),
-    createProject: stripset => dispatch(createProject(stripset))
+    createProject: stripset => dispatch(createProject(stripset)),
+    createDraft: stripset => dispatch(createDraft(stripset))
   };
 };
 

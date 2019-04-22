@@ -14,6 +14,12 @@ const shelfstripReducer = (state = initState, action) => {
     case "CREATE_PROJECT_ERROR":
       console.log("create project error", action.err);
       return state;
+    case "CREATE_DRAFT":
+      console.log("created draft", action.stripset);
+      return state;
+    case "CREATE_DRAFT_ERROR":
+      console.log("create draft error", action.err);
+      return state;
     // case "COMPLETE_WORKORDER":
     //   console.log("complete workorder", action.workorder);
     //   return state;

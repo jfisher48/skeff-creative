@@ -35,7 +35,14 @@ class ShelfStrips extends Component {
   state = {};
   render() {
     const classes = this.props.classes;
-    const { auth, stripsets, notifications, profile } = this.props;
+    const {
+      auth,
+      stripsets,
+      drafts,
+      projects,
+      notifications,
+      profile
+    } = this.props;
     const role = profile.role;
     if (!auth.uid) return <Redirect to="/login" />;
     return (
@@ -81,8 +88,8 @@ class ShelfStrips extends Component {
         </PageHeading>
         <Grid container spacing={16}>
           <Grid item xs={12} lg={8}>
-            <Grid container spacing={16}>
-              {this.props.location.pathname !== "/shelfstrips/create" ? (
+            {this.props.location.pathname !== "/shelfstrips/create" ? (
+              <Grid container spacing={16}>
                 <Grid item xs={12}>
                   <Card className={classes.paper}>
                     <CardHeader
@@ -119,32 +126,58 @@ class ShelfStrips extends Component {
                     </div>
                   </Card>
                 </Grid>
-              ) : (
-                ""
-              )}
-              <Switch>
-                <Route
-                  exact
-                  path="/shelfstrips/create"
-                  component={CreateStripSet}
-                />
-                <Route
-                  path="/shelfstrips/orders/:id"
-                  //parentPath="/shelfstrips"
-                  component={StripSetDetail}
-                />
-                {/* <Route
-                  exact
-                  path="/workorders/view"
-                  render={() => (
-                    <WorkOrderPDF
-                      style={{ width: "100%" }}
-                      workorders={workorders}
+                <Grid item xs={12}>
+                  <Card className={classes.paper}>
+                    <CardHeader
+                      className={classes.widgetHeader}
+                      disableTypography
+                      title={
+                        <Typography
+                          color="textSecondary"
+                          className={classes.widgetTitle}
+                        >
+                          My Saved Projects
+                        </Typography>
+                      }
                     />
-                  )}
-                /> */}
-              </Switch>
-            </Grid>
+                    <div className={classes.table}>
+                      <Hidden xsDown className={classes.tableHead}>
+                        <div className={classes.tableRow}>
+                          <div className={classes.nameCell}>Description</div>
+                          <div className={classes.tableCell}>
+                            {profile.role !== "sales"
+                              ? "Created By"
+                              : "Assigned To"}
+                          </div>
+                          <div className={classes.tableCell}>Strips</div>
+
+                          <div className={classes.tableCell}>Ordered</div>
+
+                          <div className={classes.tableCell}>Due</div>
+
+                          <div className={classes.tableCell} />
+                        </div>
+                      </Hidden>
+                      <StripSetList stripsets={projects} role={role} />
+                    </div>
+                  </Card>
+                </Grid>
+              </Grid>
+            ) : (
+              ""
+            )}
+            <Switch>
+              <Route
+                exact
+                path="/shelfstrips/create"
+                component={CreateStripSet}
+              />
+              <Route
+                path="/shelfstrips/orders/:id"
+                //parentPath="/shelfstrips"
+                component={StripSetDetail}
+              />
+            </Switch>
           </Grid>
           <Grid item xs={12} lg={4}>
             <Grid container spacing={16}>
@@ -226,6 +259,8 @@ const mapStateToProps = state => {
   //console.log(state);
   return {
     stripsets: state.firestore.ordered.stripsets,
+    projects: state.firestore.ordered.projects,
+    drafts: state.firestore.ordered.drafts,
     //completedWorkorders: state.firestore.ordered.completed_workorders,
     //heldWorkorders: state.firestore.ordered.held_workorders,
     auth: state.firebase.auth,
@@ -254,12 +289,20 @@ export default compose(
         //   collection: "held_workorders",
         //   where: [["assignedTo", "==", props.auth.uid]]
         // },
-        { collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
+        { collection: "notifications", limit: 6, orderBy: ["time", "desc"] }
       ];
     } else
       return [
         {
           collection: "stripsets",
+          where: [["requesterId", "==", props.auth.uid]]
+        },
+        {
+          collection: "projects",
+          where: [["requesterId", "==", props.auth.uid]]
+        },
+        {
+          collection: "drafts",
           where: [["requesterId", "==", props.auth.uid]]
         },
         // {
