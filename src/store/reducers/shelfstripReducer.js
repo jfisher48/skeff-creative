@@ -20,12 +20,12 @@ const shelfstripReducer = (state = initState, action) => {
     case "CREATE_DRAFT_ERROR":
       console.log("create draft error", action.err);
       return state;
-    // case "COMPLETE_WORKORDER":
-    //   console.log("complete workorder", action.workorder);
-    //   return state;
-    // case "COMPLETE_WORKORDER_ERROR":
-    //   console.log("complete workorder error", action.err);
-    //   return state;
+    case "COMPLETE_STRIPORDER":
+      console.log("complete striporder", action.stripset);
+      return state;
+    case "COMPLETE_STRIPORDER_ERROR":
+      console.log("complete striporder error", action.err);
+      return state;
     // case "RECREATE_WORKORDER":
     //   console.log("recreate workorder", action.workorder);
     //   return state;
@@ -38,12 +38,12 @@ const shelfstripReducer = (state = initState, action) => {
     // case "RESTORE_WORKORDER_ERROR":
     //   console.log("recreate workorder error", action.err);
     //   return state;
-    // case "DELETE_WORKORDER":
-    //   console.log("delete workorder", action.id);
-    //   return state;
-    // case "DELETE_WORKORDER_ERROR":
-    //   console.log("delete workorder error", action.err);
-    //   return state;
+    case "DELETE_STRIPORDER":
+      console.log("delete striporder", action.id);
+      return state;
+    case "DELETE_STRIPORDER_ERROR":
+      console.log("delete striporder error", action.err);
+      return state;
     // case "HOLD_WORKORDER":
     //   console.log("hold workorder", action.workorder);
     //   return state;

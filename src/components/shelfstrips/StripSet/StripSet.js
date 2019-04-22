@@ -21,12 +21,12 @@ class StripSet extends Component {
     console.log(this.state);
     return (
       <div
-        style={{
-          display: "flex",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
+      // style={{
+      //   display: "flex",
+      //   height: "100%",
+      //   alignItems: "center",
+      //   justifyContent: "center"
+      // }}
       >
         {this.state.pdf === true ? (
           <PDFDownloadLink
@@ -35,7 +35,7 @@ class StripSet extends Component {
               stripset.account +
               stripset.description +
               "_" +
-              date.getMonth() +
+              (date.getMonth() + 1) +
               "_" +
               date.getDate() +
               "_" +

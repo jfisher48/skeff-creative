@@ -38,6 +38,7 @@ class ShelfStrips extends Component {
     const {
       auth,
       stripsets,
+      completedStripOrders,
       drafts,
       projects,
       notifications,
@@ -90,43 +91,90 @@ class ShelfStrips extends Component {
           <Grid item xs={12} lg={8}>
             {this.props.location.pathname !== "/shelfstrips/create" ? (
               <Grid container spacing={16}>
-                <Grid item xs={12}>
-                  <Card className={classes.paper}>
-                    <CardHeader
-                      className={classes.widgetHeader}
-                      disableTypography
-                      title={
-                        <Typography
-                          color="textSecondary"
-                          className={classes.widgetTitle}
-                        >
-                          Open Shelf Strip Orders
-                        </Typography>
-                      }
-                    />
-                    <div className={classes.table}>
-                      <Hidden xsDown className={classes.tableHead}>
-                        <div className={classes.tableRow}>
-                          <div className={classes.nameCell}>Description</div>
-                          <div className={classes.tableCell}>
-                            {profile.role !== "sales"
-                              ? "Created By"
-                              : "Assigned To"}
+                {stripsets && stripsets.length > 0 ? (
+                  <Grid item xs={12}>
+                    <Card className={classes.paper}>
+                      <CardHeader
+                        className={classes.widgetHeader}
+                        disableTypography
+                        title={
+                          <Typography
+                            color="textSecondary"
+                            className={classes.widgetTitle}
+                          >
+                            Open Shelf Strip Orders
+                          </Typography>
+                        }
+                      />
+                      <div className={classes.table}>
+                        <Hidden xsDown className={classes.tableHead}>
+                          <div className={classes.tableRow}>
+                            <div className={classes.nameCell}>Description</div>
+                            <div className={classes.tableCell}>
+                              {profile.role !== "sales"
+                                ? "Created By"
+                                : "Assigned To"}
+                            </div>
+                            <div className={classes.tableCell}>Strips</div>
+
+                            <div className={classes.tableCell}>Ordered</div>
+
+                            <div className={classes.tableCell}>Due</div>
+
+                            <div className={classes.tableCell} />
                           </div>
-                          <div className={classes.tableCell}>Strips</div>
+                        </Hidden>
+                        <StripSetList stripsets={stripsets} role={role} />
+                      </div>
+                    </Card>
+                  </Grid>
+                ) : (
+                  ""
+                )}
+                {completedStripOrders && completedStripOrders.length > 0 ? (
+                  <Grid item xs={12}>
+                    <Card className={classes.paper}>
+                      <CardHeader
+                        className={classes.widgetHeader}
+                        disableTypography
+                        title={
+                          <Typography
+                            color="textSecondary"
+                            className={classes.widgetTitle}
+                          >
+                            Recently Completed Orders
+                          </Typography>
+                        }
+                      />
+                      <div className={classes.table}>
+                        <Hidden xsDown className={classes.tableHead}>
+                          <div className={classes.tableRow}>
+                            <div className={classes.nameCell}>Description</div>
+                            <div className={classes.tableCell}>
+                              {profile.role !== "sales"
+                                ? "Created By"
+                                : "Assigned To"}
+                            </div>
+                            <div className={classes.tableCell}>Strips</div>
 
-                          <div className={classes.tableCell}>Ordered</div>
+                            <div className={classes.tableCell}>Ordered</div>
 
-                          <div className={classes.tableCell}>Due</div>
+                            <div className={classes.tableCell}>Completed</div>
 
-                          <div className={classes.tableCell} />
-                        </div>
-                      </Hidden>
-                      <StripSetList stripsets={stripsets} role={role} />
-                    </div>
-                  </Card>
-                </Grid>
-                <Grid item xs={12}>
+                            <div className={classes.tableCell} />
+                          </div>
+                        </Hidden>
+                        <StripSetList
+                          stripsets={completedStripOrders}
+                          role={role}
+                        />
+                      </div>
+                    </Card>
+                  </Grid>
+                ) : (
+                  ""
+                )}
+                {/* <Grid item xs={12}>
                   <Card className={classes.paper}>
                     <CardHeader
                       className={classes.widgetHeader}
@@ -151,9 +199,9 @@ class ShelfStrips extends Component {
                           </div>
                           <div className={classes.tableCell}>Strips</div>
 
-                          <div className={classes.tableCell}>Ordered</div>
+                          <div className={classes.tableCell}>Created</div>
 
-                          <div className={classes.tableCell}>Due</div>
+                          <div className={classes.tableCell}>Updated</div>
 
                           <div className={classes.tableCell} />
                         </div>
@@ -161,7 +209,7 @@ class ShelfStrips extends Component {
                       <StripSetList stripsets={projects} role={role} />
                     </div>
                   </Card>
-                </Grid>
+                </Grid> */}
               </Grid>
             ) : (
               ""
@@ -261,7 +309,7 @@ const mapStateToProps = state => {
     stripsets: state.firestore.ordered.stripsets,
     projects: state.firestore.ordered.projects,
     drafts: state.firestore.ordered.drafts,
-    //completedWorkorders: state.firestore.ordered.completed_workorders,
+    completedStripOrders: state.firestore.ordered.completed_striporders,
     //heldWorkorders: state.firestore.ordered.held_workorders,
     auth: state.firebase.auth,
     notifications: state.firestore.ordered.notifications,
@@ -281,10 +329,11 @@ export default compose(
           collection: "stripsets",
           where: [["assignedTo", "==", props.auth.uid]]
         },
-        // {
-        //   collection: "completed_workorders",
-        //   where: [["assignedTo", "==", props.auth.uid]]
-        // },
+        {
+          collection: "completed_striporders",
+          limit: 10,
+          where: [["assignedTo", "==", props.auth.uid]]
+        },
         // {
         //   collection: "held_workorders",
         //   where: [["assignedTo", "==", props.auth.uid]]
@@ -305,10 +354,10 @@ export default compose(
           collection: "drafts",
           where: [["requesterId", "==", props.auth.uid]]
         },
-        // {
-        //   collection: "completed_workorders",
-        //   where: [["requesterId", "==", props.auth.uid]]
-        // },
+        {
+          collection: "completed_striporders",
+          where: [["requesterId", "==", props.auth.uid]]
+        },
         // {
         //   collection: "held_workorders",
         //   where: [["requesterId", "==", props.auth.uid]]

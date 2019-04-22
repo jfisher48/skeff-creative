@@ -33,7 +33,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import styles from "./styleStripSetDetail";
 import { Redirect } from "react-router-dom";
 import StripSet from "../StripSet/StripSet";
-//import { completeWorkorder } from "../../../store/actions/workorderActions";
+// import { completeStripOrder } from "../../../store/actions/shelfstripActions";
 //import { holdWorkorder } from "../../../store/actions/workorderActions";
 //import { deleteWorkorder } from "../../../store/actions/workorderActions";
 

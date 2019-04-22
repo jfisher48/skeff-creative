@@ -176,48 +176,45 @@ export const createDraft = stripset => {
   };
 };
 
-//   export const completeWorkorder = (workorder, id) => {
-//     return (dispatch, getState, { getFirebase, getFirestore }) => {
-//       const firestore = getFirestore();
-//       const profile = getState().firebase.profile;
-//       //const authorId = getState().firebase.auth.uid;
+export const completeStripOrder = stripset => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    const profile = getState().firebase.profile;
 
-//       //let newCount = profile.createdOrderCount + 1;
+    firestore
+      .collection("completed_striporders")
+      .doc(stripset.id)
+      .set({
+        ...stripset,
+        completedAt: new Date(),
+        completedByFirst: profile.firstName,
+        completedByLast: profile.lastName
+      })
+      .then(() => {
+        dispatch({ type: "COMPLETE_STRIPORDER", stripset });
+      })
+      .catch(err => {
+        dispatch({ type: "COMPLETE_STRIPORDER_ERROR", err });
+      });
+  };
+};
 
-//       firestore
-//         .collection("completed_workorders")
-//         .doc(id)
-//         .set({
-//           ...workorder,
-//           completedAt: new Date(),
-//           completedByFirst: profile.firstName,
-//           completedByLast: profile.lastName
-//         })
-//         .then(() => {
-//           dispatch({ type: "COMPLETE_WORKORDER", workorder });
-//         })
-//         .catch(err => {
-//           dispatch({ type: "COMPLETE_WORKORDER_ERROR", err });
-//         });
-//     };
-//   };
+export const deleteStripOrder = (collection, id) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
 
-//   export const deleteWorkorder = (collection, id) => {
-//     return (dispatch, getState, { getFirebase, getFirestore }) => {
-//       const firestore = getFirestore();
-
-//       firestore
-//         .collection(collection)
-//         .doc(id)
-//         .delete()
-//         .then(() => {
-//           dispatch({ type: "DELETE_WORKORDER", id });
-//         })
-//         .catch(err => {
-//           dispatch({ type: "DELETE_WORKORDER_ERROR", err });
-//         });
-//     };
-//   };
+    firestore
+      .collection(collection)
+      .doc(id)
+      .delete()
+      .then(() => {
+        dispatch({ type: "DELETE_STRIPORDER", id });
+      })
+      .catch(err => {
+        dispatch({ type: "DELETE_STRIPORDER_ERROR", err });
+      });
+  };
+};
 
 //   export const recreateWorkorder = (workorder, id) => {
 //     return (dispatch, getState, { getFirebase, getFirestore }) => {

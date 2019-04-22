@@ -27,6 +27,12 @@ const styles = theme => ({
     justifyContent: "center",
     height: "100%"
   },
+  buttonCell: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+    height: "100%"
+  },
   nameCell: {
     display: "table-cell",
     padding: "16px 4px 16px 20px",
