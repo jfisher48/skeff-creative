@@ -4,49 +4,51 @@ import StripSetSummary from "./StripSetSummary/StripSetSummary";
 //import StripSet from "./StripSet/StripSet";
 //import { List } from "@material-ui/core";
 
-const StripSetList = ({ stripsets, role }) => {
+const StripSetList = ({ stripsets, role, sortField, sortDirection }) => {
   return (
     <div style={{ display: "table-row-group" }}>
       {stripsets &&
-        stripsets.sort(compareValues("dueDate", "asc")).map(stripset => {
-          return (
-            <StripSetSummary
-              stripset={stripset}
-              key={stripset.id}
-              completedAt={
-                stripset.completedAt && stripset.completedAt.toDate()
-              }
-              heldAt={stripset.heldAt && stripset.heldAt.toDate()}
-              orderNumber={stripset.stripsetNumber}
-              account={stripset.account}
-              description={stripset.description}
-              strips={stripset.strips}
-              comments={stripset.comments}
-              orderType={stripset.orderType}
-              displayName={
-                role && role !== "sales"
-                  ? stripset.requesterFirstName +
-                    " " +
-                    stripset.requesterLastName
-                  : stripset.assignedToName
-              }
-              contains={stripset.stripCount && stripset.stripCount}
-              link={"/shelfstrips/" + stripset.id}
-              date={stripset.createdAt && stripset.createdAt.toDate()}
-              dueDate={
-                !stripset.completedAt
-                  ? stripset.dueDate.toDate()
-                  : stripset.completedAt.toDate()
-              }
-              isRush={stripset.isRush}
-              assignedToName={stripset.assignedToName}
-              requesterName={
-                stripset.requesterFirstName + " " + stripset.requesterLastName
-              }
-              cost={"$" + stripset.cost}
-            />
-          );
-        })}
+        stripsets
+          .sort(compareValues(sortField, sortDirection))
+          .map(stripset => {
+            return (
+              <StripSetSummary
+                stripset={stripset}
+                key={stripset.id}
+                completedAt={
+                  stripset.completedAt && stripset.completedAt.toDate()
+                }
+                heldAt={stripset.heldAt && stripset.heldAt.toDate()}
+                orderNumber={stripset.stripsetNumber}
+                account={stripset.account}
+                description={stripset.description}
+                strips={stripset.strips}
+                comments={stripset.comments}
+                orderType={stripset.orderType}
+                displayName={
+                  role && role !== "sales"
+                    ? stripset.requesterFirstName +
+                      " " +
+                      stripset.requesterLastName
+                    : stripset.assignedToName
+                }
+                contains={stripset.stripCount && stripset.stripCount}
+                link={"/shelfstrips/" + stripset.id}
+                date={stripset.createdAt && stripset.createdAt.toDate()}
+                dueDate={
+                  !stripset.completedAt
+                    ? stripset.dueDate.toDate()
+                    : stripset.completedAt.toDate()
+                }
+                isRush={stripset.isRush}
+                assignedToName={stripset.assignedToName}
+                requesterName={
+                  stripset.requesterFirstName + " " + stripset.requesterLastName
+                }
+                cost={"$" + stripset.cost}
+              />
+            );
+          })}
     </div>
   );
 

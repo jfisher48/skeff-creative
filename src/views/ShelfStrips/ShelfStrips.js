@@ -124,7 +124,12 @@ class ShelfStrips extends Component {
                             <div className={classes.tableCell} />
                           </div>
                         </Hidden>
-                        <StripSetList stripsets={stripsets} role={role} />
+                        <StripSetList
+                          stripsets={stripsets}
+                          role={role}
+                          sortField="dueDate"
+                          sortDirection="asc"
+                        />
                       </div>
                     </Card>
                   </Grid>
@@ -167,6 +172,8 @@ class ShelfStrips extends Component {
                         <StripSetList
                           stripsets={completedStripOrders}
                           role={role}
+                          sortField="createdAt"
+                          sortDirection="asc"
                         />
                       </div>
                     </Card>
