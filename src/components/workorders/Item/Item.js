@@ -219,6 +219,12 @@ class Item extends Component {
         );
       });
 
+    const activeBrands =
+      brands &&
+      brands.filter(brand => {
+        return brand.isActive;
+      });
+
     const sizeSelect =
       sizes.length > 0 &&
       sizes.map((size, i) => {
@@ -277,7 +283,7 @@ class Item extends Component {
                     </Select> */}
                     <BrandSelect
                       value={this.state.brand}
-                      brands={brands}
+                      brands={activeBrands}
                       onSelectBrand={this.handleBrand}
                     />
                   </FormControl>

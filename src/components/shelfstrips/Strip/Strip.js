@@ -149,6 +149,12 @@ class Strip extends Component {
       //width
     } = this.props;
 
+    const activeBrands =
+      brands &&
+      brands.filter(brand => {
+        return brand.isActive;
+      });
+
     return (
       <Dialog
         open={this.state.editing}
@@ -167,7 +173,7 @@ class Strip extends Component {
                 </InputLabel>
                 <BrandSelect
                   value={this.state.brand}
-                  brands={brands}
+                  brands={activeBrands}
                   onSelectBrand={this.handleBrand}
                 />
               </FormControl>
