@@ -59,6 +59,12 @@ const theme = createMuiTheme({
       }
     },
     MuiTab: {
+      root: {
+        minHeight: 0
+      },
+      labelContainer: {
+        padding: "5px 12px"
+      },
       textColorPrimary: {
         color: "#4e5262",
         "&$selected": {
@@ -74,6 +80,9 @@ const theme = createMuiTheme({
       },
       subheader: {
         float: "right"
+      },
+      action: {
+        marginTop: 0
       }
     },
     MuiDrawer: {
@@ -116,6 +125,11 @@ const theme = createMuiTheme({
       body: {
         whiteSpace: "nowrap",
         fontSize: "1em"
+      }
+    },
+    MuiTabs: {
+      root: {
+        minHeight: 0
       }
     }
   }

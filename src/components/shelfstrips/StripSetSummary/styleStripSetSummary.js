@@ -16,6 +16,7 @@ const styles = theme => ({
   },
   tableCell: {
     display: "table-cell",
+    textAlign: "center",
     padding: "16px 4px",
     [theme.breakpoints.down("lg")]: {
       fontSize: "12px"

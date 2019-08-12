@@ -24,6 +24,8 @@ const styles = theme => ({
     padding: "16px 4px",
     color: "#4e5262",
     fontWeight: "bold",
+    alignItems: "center",
+    textAlign: "center",
     //backgroundColor: "rgba(229,239,247,1)",
     [theme.breakpoints.down("lg")]: {
       fontSize: "12px"

@@ -23,22 +23,49 @@ import {
   CardContent,
   Typography,
   List,
-  ListItem
+  ListItem,
+  Tabs,
+  Tab,
+  MenuItem
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { withRouter } from "react-router-dom";
 import StripSetList from "../../components/shelfstrips/StripSetList.js";
 import StripSetDetail from "../../components/shelfstrips/StripSetDetail/StripSetDetail.js";
 import Moment from "react-moment";
+import moment from "moment";
 
 class ShelfStrips extends Component {
-  state = {};
+  state = {
+    listView: "open"
+  };
+
+  handleChangeView = (e, value) => {
+    e.preventDefault();
+    this.setState({ listView: value });
+  };
+
+  handleOpenView = e => {
+    e.preventDefault();
+    this.setState({ listView: "open" });
+  };
+
+  handleCompletedView = e => {
+    e.preventDefault();
+    this.setState({ listView: "completed" });
+  };
+
+  handleHeldView = e => {
+    e.preventDefault();
+    this.setState({ listView: "held" });
+  };
   render() {
     const classes = this.props.classes;
     const {
       auth,
       stripsets,
       completedStripOrders,
+      heldStripOrders,
       drafts,
       projects,
       notifications,
@@ -91,97 +118,7 @@ class ShelfStrips extends Component {
           <Grid item xs={12} lg={8}>
             {this.props.location.pathname !== "/shelfstrips/create" ? (
               <Grid container spacing={16}>
-                {stripsets && stripsets.length > 0 ? (
-                  <Grid item xs={12}>
-                    <Card className={classes.paper}>
-                      <CardHeader
-                        className={classes.widgetHeader}
-                        disableTypography
-                        title={
-                          <Typography
-                            color="textSecondary"
-                            className={classes.widgetTitle}
-                          >
-                            Open Shelf Strip Orders
-                          </Typography>
-                        }
-                      />
-                      <div className={classes.table}>
-                        <Hidden xsDown className={classes.tableHead}>
-                          <div className={classes.tableRow}>
-                            <div className={classes.nameCell}>Description</div>
-                            <div className={classes.tableCell}>
-                              {profile.role !== "sales"
-                                ? "Created By"
-                                : "Assigned To"}
-                            </div>
-                            <div className={classes.tableCell}>Strips</div>
-
-                            <div className={classes.tableCell}>Ordered</div>
-
-                            <div className={classes.tableCell}>Due</div>
-
-                            <div className={classes.tableCell} />
-                          </div>
-                        </Hidden>
-                        <StripSetList
-                          stripsets={stripsets}
-                          role={role}
-                          sortField="dueDate"
-                          sortDirection="asc"
-                        />
-                      </div>
-                    </Card>
-                  </Grid>
-                ) : (
-                  ""
-                )}
-                {completedStripOrders && completedStripOrders.length > 0 ? (
-                  <Grid item xs={12}>
-                    <Card className={classes.paper}>
-                      <CardHeader
-                        className={classes.widgetHeader}
-                        disableTypography
-                        title={
-                          <Typography
-                            color="textSecondary"
-                            className={classes.widgetTitle}
-                          >
-                            Recently Completed Orders
-                          </Typography>
-                        }
-                      />
-                      <div className={classes.table}>
-                        <Hidden xsDown className={classes.tableHead}>
-                          <div className={classes.tableRow}>
-                            <div className={classes.nameCell}>Description</div>
-                            <div className={classes.tableCell}>
-                              {profile.role !== "sales"
-                                ? "Created By"
-                                : "Assigned To"}
-                            </div>
-                            <div className={classes.tableCell}>Strips</div>
-
-                            <div className={classes.tableCell}>Ordered</div>
-
-                            <div className={classes.tableCell}>Completed</div>
-
-                            <div className={classes.tableCell} />
-                          </div>
-                        </Hidden>
-                        <StripSetList
-                          stripsets={completedStripOrders}
-                          role={role}
-                          sortField="createdAt"
-                          sortDirection="asc"
-                        />
-                      </div>
-                    </Card>
-                  </Grid>
-                ) : (
-                  ""
-                )}
-                {/* <Grid item xs={12}>
+                <Grid item xs={12}>
                   <Card className={classes.paper}>
                     <CardHeader
                       className={classes.widgetHeader}
@@ -191,32 +128,168 @@ class ShelfStrips extends Component {
                           color="textSecondary"
                           className={classes.widgetTitle}
                         >
-                          My Saved Projects
+                          Shelf Strip Orders
+                        </Typography>
+                      }
+                      action={
+                        <Tabs
+                          value={this.state.listView}
+                          onChange={this.handleChangeView}
+                          indicatorColor="secondary"
+                          textColor="primary"
+                          fullWidth
+                        >
+                          <Tab label="Open" value="open" />
+                          <Tab label="Recently Completed" value="completed" />
+                          <Tab label="Held" value="held" />
+                        </Tabs>
+                      }
+                    />
+                    <div>
+                      {this.state.listView === "open" ? (
+                        <div className={classes.table}>
+                          <Hidden xsDown className={classes.tableHead}>
+                            <div className={classes.tableRow}>
+                              <div className={classes.nameCell}>
+                                Description
+                              </div>
+                              <div className={classes.tableCell}>
+                                {profile.role !== "sales"
+                                  ? "Created By"
+                                  : "Assigned To"}
+                              </div>
+                              <div className={classes.tableCell}>Strips</div>
+
+                              <div className={classes.tableCell}>Ordered</div>
+
+                              <div className={classes.tableCell}>Due</div>
+
+                              <div className={classes.tableCell}>Actions</div>
+                            </div>
+                          </Hidden>
+                          {stripsets && stripsets.length > 0 ? (
+                            <StripSetList
+                              stripsets={stripsets}
+                              role={role}
+                              sortField="dueDate"
+                              sortDirection="asc"
+                            />
+                          ) : (
+                            <div className={classes.nameCell}>
+                              Nothing to show here
+                            </div>
+                          )}
+                        </div>
+                      ) : this.state.listView === "completed" ? (
+                        <div className={classes.table}>
+                          <Hidden xsDown className={classes.tableHead}>
+                            <div className={classes.tableRow}>
+                              <div className={classes.nameCell}>
+                                Description
+                              </div>
+                              <div className={classes.tableCell}>
+                                {profile.role !== "sales"
+                                  ? "Created By"
+                                  : "Assigned To"}
+                              </div>
+                              <div className={classes.tableCell}>Strips</div>
+
+                              <div className={classes.tableCell}>Ordered</div>
+
+                              <div className={classes.tableCell}>Completed</div>
+
+                              <div className={classes.tableCell}>Actions</div>
+                            </div>
+                          </Hidden>
+                          {completedStripOrders &&
+                          completedStripOrders.length > 0 ? (
+                            <StripSetList
+                              stripsets={completedStripOrders}
+                              role={role}
+                              sortField="createdAt"
+                              sortDirection="asc"
+                            />
+                          ) : (
+                            <div className={classes.nameCell}>
+                              Nothing to show here
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <div className={classes.table}>
+                          <Hidden xsDown className={classes.tableHead}>
+                            <div className={classes.tableRow}>
+                              <div className={classes.nameCell}>
+                                Description
+                              </div>
+                              <div className={classes.tableCell}>
+                                {profile.role !== "sales"
+                                  ? "Created By"
+                                  : "Assigned To"}
+                              </div>
+                              <div className={classes.tableCell}>Strips</div>
+
+                              <div className={classes.tableCell}>Ordered</div>
+
+                              <div className={classes.tableCell}>Completed</div>
+
+                              <div className={classes.tableCell}>Actions</div>
+                            </div>
+                          </Hidden>
+                          {heldStripOrders && heldStripOrders.length > 0 ? (
+                            <StripSetList
+                              stripsets={heldStripOrders}
+                              role={role}
+                              sortField="createdAt"
+                              sortDirection="asc"
+                            />
+                          ) : (
+                            <div className={classes.nameCell}>
+                              Nothing to show here
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </Card>
+                </Grid>
+                <Grid item xs={12}>
+                  <Card className={classes.paper}>
+                    <CardHeader
+                      className={classes.widgetHeader}
+                      disableTypography
+                      title={
+                        <Typography
+                          color="textSecondary"
+                          className={classes.widgetTitle}
+                        >
+                          Saved Projects
                         </Typography>
                       }
                     />
-                    <div className={classes.table}>
-                      <Hidden xsDown className={classes.tableHead}>
-                        <div className={classes.tableRow}>
-                          <div className={classes.nameCell}>Description</div>
-                          <div className={classes.tableCell}>
-                            {profile.role !== "sales"
-                              ? "Created By"
-                              : "Assigned To"}
-                          </div>
-                          <div className={classes.tableCell}>Strips</div>
-
-                          <div className={classes.tableCell}>Created</div>
-
-                          <div className={classes.tableCell}>Updated</div>
-
-                          <div className={classes.tableCell} />
-                        </div>
-                      </Hidden>
-                      <StripSetList stripsets={projects} role={role} />
-                    </div>
+                    <CardContent>
+                      <Grid container spacing={16}>
+                        {projects &&
+                          projects.map(project => {
+                            var lastSaved = project.lastSaved.toDate();
+                            var lastSavedMoment = moment(lastSaved).format(
+                              "M/DD/YY h:mmA"
+                            );
+                            return (
+                              <Grid item xs={12} sm={6} md={4} key={project.id}>
+                                <Button>
+                                  <span>
+                                    {project.account} {project.description}
+                                  </span>
+                                  <span>{lastSavedMoment}</span>
+                                </Button>
+                              </Grid>
+                            );
+                          })}
+                      </Grid>
+                    </CardContent>
                   </Card>
-                </Grid> */}
+                </Grid>
               </Grid>
             ) : (
               ""
@@ -317,7 +390,7 @@ const mapStateToProps = state => {
     projects: state.firestore.ordered.projects,
     drafts: state.firestore.ordered.drafts,
     completedStripOrders: state.firestore.ordered.completed_striporders,
-    //heldWorkorders: state.firestore.ordered.held_workorders,
+    heldStripOrders: state.firestore.ordered.held_striporders,
     auth: state.firebase.auth,
     notifications: state.firestore.ordered.notifications,
     profile: state.firebase.profile
@@ -341,10 +414,10 @@ export default compose(
           limit: 10,
           where: [["assignedTo", "==", props.auth.uid]]
         },
-        // {
-        //   collection: "held_workorders",
-        //   where: [["assignedTo", "==", props.auth.uid]]
-        // },
+        {
+          collection: "held_striporders",
+          where: [["assignedTo", "==", props.auth.uid]]
+        },
         { collection: "notifications", limit: 6, orderBy: ["time", "desc"] }
       ];
     } else
@@ -365,10 +438,10 @@ export default compose(
           collection: "completed_striporders",
           where: [["requesterId", "==", props.auth.uid]]
         },
-        // {
-        //   collection: "held_workorders",
-        //   where: [["requesterId", "==", props.auth.uid]]
-        // },
+        {
+          collection: "held_striporders",
+          where: [["requesterId", "==", props.auth.uid]]
+        },
         { collection: "notifications", limit: 6, orderBy: ["time", "desc"] }
       ];
   }),
