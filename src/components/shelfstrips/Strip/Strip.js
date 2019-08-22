@@ -49,6 +49,7 @@ class Strip extends Component {
     package: this.props.package,
     quantity: this.props.quantity,
     price: this.props.price,
+    singlePrice: this.props.singlePrice,
     isYellow: this.props.isYellow,
     extText: this.props.extText,
     labelWidth: 0,
@@ -81,6 +82,7 @@ class Strip extends Component {
         this.state.quantity,
         this.state.cost,
         this.state.price,
+        this.state.singlePrice,
         this.state.isYellow,
         this.state.extText,
         this.state.package,
@@ -265,7 +267,27 @@ class Strip extends Component {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={6} />
+            {this.state.extText && this.state.extText.includes("for") ? (
+              <Grid item xs={12} md={6}>
+                <TextField
+                  fullWidth
+                  value={this.state.singlePrice}
+                  variant="outlined"
+                  name="singlePrice"
+                  label="Single Price (Optional)"
+                  className={classNames(classes.textField, classes.dense)}
+                  margin="normal"
+                  onChange={this.handleChange}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">$</InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+            ) : (
+              <Grid item xs={12} sm={6} />
+            )}
             <Grid item xs={12} sm={6}>
               <TextField
                 required

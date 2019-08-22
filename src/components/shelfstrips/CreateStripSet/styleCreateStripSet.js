@@ -21,7 +21,7 @@ const styles = theme => ({
     paddingTop: "12px",
     paddingBottom: "12px",
     boxShadow: "none",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       width: "100%",
       marginTop: "10px"
     }
@@ -66,11 +66,11 @@ const styles = theme => ({
     paddingTop: "12px",
     paddingBottom: "12px",
     boxShadow: "none",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       width: "100%",
       marginTop: "10px"
     },
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       float: "right",
       marginLeft: "10px"
     }

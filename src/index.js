@@ -113,6 +113,14 @@ const theme = createMuiTheme({
         "&$focused $notchedOutline": {
           borderColor: "#0091ea"
         }
+      },
+      adornedStart: {
+        paddingLeft: 0
+      }
+    },
+    MuiInputAdornment: {
+      positionStart: {
+        marginLeft: "14px"
       }
     },
     MuiTableCell: {

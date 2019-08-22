@@ -190,7 +190,7 @@ class WorkOrders extends Component {
                   onChange={this.handleChangeView}
                   indicatorColor="secondary"
                   textColor="primary"
-                  fullWidth
+                  variant="fullWidth"
                 >
                   <Tab label="Open" value="open" />
                   <Tab label="Completed" value="completed" />

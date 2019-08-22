@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 //import DownloadIcon from "@material-ui/icons/SaveAlt";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { StripSetPDF } from "../StripSetPDF/StripSetPDF";
+import { GPMStripSetPDF } from "../GPMStripSetPDF/GPMStripSetPDF";
 
 class StripSet extends Component {
   state = {
@@ -30,7 +31,13 @@ class StripSet extends Component {
       >
         {this.state.pdf === true ? (
           <PDFDownloadLink
-            document={<StripSetPDF stripset={stripset} />}
+            document={
+              stripset.format === "gpm" ? (
+                <GPMStripSetPDF stripset={stripset} />
+              ) : (
+                <StripSetPDF stripset={stripset} />
+              )
+            }
             fileName={(
               stripset.account +
               stripset.description +

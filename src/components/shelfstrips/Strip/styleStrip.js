@@ -1,7 +1,8 @@
 const styles = theme => ({
   formSelect: {
     width: "100%",
-    marginTop: "8px"
+    marginTop: "16px",
+    marginBottom: "8px"
   },
   formTitle: {
     fontSize: "1.5em",

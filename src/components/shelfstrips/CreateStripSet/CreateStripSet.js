@@ -40,6 +40,7 @@ class CreateStripSet extends Component {
   state = {
     account: "",
     orderType: "Shelf Strips",
+    format: "standard",
     accountId: "",
     cost: 0,
     lineCount: 0,
@@ -131,6 +132,7 @@ class CreateStripSet extends Component {
       brandId: "",
       quantity: 1,
       price: "",
+      singlePrice: "",
       isYellow: false,
       extText: "",
       package: ""
@@ -152,7 +154,7 @@ class CreateStripSet extends Component {
             onChange={this.update}
           >
             {newStrip.brand}
-            {newStrip.quantity} ${newStrip.price}
+            {newStrip.quantity} ${newStrip.price} {newStrip.singlePrice}
             {newStrip.package} {newStrip.extText} {newStrip.isYellow}
           </Strip>
         );
@@ -173,6 +175,7 @@ class CreateStripSet extends Component {
       brandId: prevStrip[0].brandId,
       quantity: prevStrip[0].quantity,
       price: prevStrip[0].price,
+      singlePrice: prevStrip[0].singlePrice,
       isYellow: prevStrip[0].isYellow,
       extText: prevStrip[0].extText,
       package: prevStrip[0].package
@@ -194,7 +197,7 @@ class CreateStripSet extends Component {
             onChange={this.update}
           >
             {newStrip.brand}
-            {newStrip.quantity} ${newStrip.price}
+            {newStrip.quantity} ${newStrip.price} {newStrip.singlePrice}
             {newStrip.package} {newStrip.extText} {newStrip.isYellow}
           </Strip>
         );
@@ -214,6 +217,7 @@ class CreateStripSet extends Component {
     newQuantity,
     newCost,
     newPrice,
+    newSinglePrice,
     newIsYellow,
     newExtText,
     newPackage,
@@ -227,6 +231,7 @@ class CreateStripSet extends Component {
       newQuantity,
       newCost,
       newPrice,
+      newSinglePrice,
       newIsYellow,
       newExtText,
       newPackage
@@ -243,6 +248,7 @@ class CreateStripSet extends Component {
                 quantity: newQuantity,
                 cost: newCost,
                 price: newPrice,
+                singlePrice: newSinglePrice,
                 isYellow: newIsYellow,
                 extText: newExtText,
                 package: newPackage
@@ -276,7 +282,14 @@ class CreateStripSet extends Component {
         secondary={
           <Typography>
             {strip.extText && strip.extText.includes("for")
-              ? strip.extText + " $" + strip.price + " " + strip.package
+              ? strip.extText +
+                " $" +
+                strip.price +
+                " " +
+                strip.package +
+                " ($" +
+                strip.singlePrice +
+                " singles)"
               : "$" + strip.price + " " + strip.package + " " + strip.extText}
           </Typography>
         }
@@ -367,8 +380,10 @@ class CreateStripSet extends Component {
 
   render() {
     const classes = this.props.classes;
-    const { auth, users, accounts, profile } = this.props;
-    const { account, assignedTo, strips, description } = this.state;
+    const { auth, users, accounts, profile, formats } = this.props;
+    const { account, assignedTo, strips, description, format } = this.state;
+
+    console.log(formats);
 
     if (profile.role === "sales") {
       var myAccounts =
@@ -420,7 +435,7 @@ class CreateStripSet extends Component {
                     label="Rush Order"
                   />
                 </Grid>
-                <Grid item xs={12} xl={6}>
+                <Grid item xs={12} sm={6}>
                   <FormControl variant="filled" className={classes.formSelect}>
                     <InputLabel shrink required htmlFor="account">
                       Account
@@ -431,7 +446,7 @@ class CreateStripSet extends Component {
                     />
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} xl={6}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     name="description"
                     variant="outlined"
@@ -443,7 +458,7 @@ class CreateStripSet extends Component {
                     onChange={this.handleChange}
                   />
                 </Grid>
-                <Grid item xs={12} xl={6}>
+                <Grid item xs={12} sm={6}>
                   <FormControl variant="filled" className={classes.formSelect}>
                     <InputLabel required htmlFor="assignedTo">
                       Assign To
@@ -464,6 +479,32 @@ class CreateStripSet extends Component {
                         users.map(user => (
                           <MenuItem key={user.id} value={user.id}>
                             {user.firstName} {user.lastName}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl variant="filled" className={classes.formSelect}>
+                    <InputLabel required htmlFor="format">
+                      Format
+                    </InputLabel>
+                    <Select
+                      value={this.state.format}
+                      onChange={this.handleChange}
+                      IconComponent={KeyboardArrowDownRounded}
+                      input={
+                        <OutlinedInput
+                          className={classes.input}
+                          labelWidth={this.state.labelWidth}
+                          name="format"
+                        />
+                      }
+                    >
+                      {formats &&
+                        formats.map(format => (
+                          <MenuItem key={format.id} value={format.id}>
+                            {format.name}
                           </MenuItem>
                         ))}
                     </Select>
@@ -550,6 +591,7 @@ const mapStateToProps = state => {
     auth: state.firebase.auth,
     users: state.firestore.ordered.users,
     accounts: state.firestore.ordered.accounts,
+    formats: state.firestore.ordered.strip_formats,
     profile: state.firebase.profile
   };
 };
@@ -594,7 +636,8 @@ export default compose(
     if (!props.auth.uid) return [];
     return [
       { collection: "accounts" },
-      { collection: "users", where: ["role", "==", "graphics"] }
+      { collection: "users", where: ["role", "==", "graphics"] },
+      { collection: "strip_formats" }
     ];
   }),
   withWidth()
