@@ -114,10 +114,10 @@ export class GPMStripSetPDF extends Component {
   }
 }
 
-Font.register("http://localhost:3001/fonts/arialbd.ttf", {
+Font.register("http://localhost:3000/fonts/arialbd.ttf", {
   family: "Arial-Bold"
 });
-Font.register("http://localhost:3001/fonts/arial.ttf", { family: "Arial" });
+Font.register("http://localhost:3000/fonts/arial.ttf", { family: "Arial" });
 
 const styledGPMStripSetPDF = withStyles(styles)(GPMStripSetPDF);
 
